@@ -1,4 +1,4 @@
-package anynotes.olyalya.pelipets.com.anynotes;
+package anynotes.olyalya.pelipets.com.anynotes.activities;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -12,6 +12,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import anynotes.olyalya.pelipets.com.anynotes.R;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
