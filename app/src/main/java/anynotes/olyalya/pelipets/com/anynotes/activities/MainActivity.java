@@ -1,10 +1,10 @@
 package anynotes.olyalya.pelipets.com.anynotes.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.view.View;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -12,11 +12,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import anynotes.olyalya.pelipets.com.anynotes.R;
+import anynotes.olyalya.pelipets.com.anynotes.utils.Constants;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private static final int NOTE_REQUEST_CODE = 100;
 
     private FloatingActionButton fab;
 
@@ -31,8 +35,10 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Add new note", Snackbar.LENGTH_LONG)
-                        .setAction("Add new note", null).show();
+                //new note creating
+                Intent intent = new Intent(MainActivity.this, NoteActivity.class);
+                intent.putExtra(Constants.EXTRA_ACTION_TYPE, Constants.EXTRA_ACTION_NEW_NOTE);
+                startActivityForResult(intent, NOTE_REQUEST_CODE);
             }
         });
 
@@ -88,6 +94,20 @@ public class MainActivity extends AppCompatActivity
             default:
                 return false;
         }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode==NOTE_REQUEST_CODE){
+            if (resultCode==RESULT_OK){
+                Snackbar.make(fab, "Result OK", Snackbar.LENGTH_LONG)
+                        .setAction("Result OK", null).show();
+            }else{
+                Snackbar.make(fab, "Result CANCEL", Snackbar.LENGTH_LONG)
+                        .setAction("Result CANCEL", null).show();
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     @SuppressWarnings("StatementWithEmptyBody")

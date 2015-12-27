@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import anynotes.olyalya.pelipets.com.anynotes.models.Note;
+import anynotes.olyalya.pelipets.com.anynotes.utils.Utils;
 
 /**
  * Created by Olga on 26.12.2015.
@@ -22,22 +23,26 @@ public class NotesRepository {
     }
 
     public boolean insert(Note note) {
+        if (note==null)return false;
         ContentValues cv = new ContentValues();
         cv.put(DBSchema.CREATING, note.getCreating());
         cv.put(DBSchema.LAST_SAVING, note.getLastSaving());
         cv.put(DBSchema.PRE_LAST_SAVING, note.getPreLastSaving());
+        cv.put(DBSchema.TITLE, note.getTitle());
         cv.put(DBSchema.TEXT, note.getText());
 
         long insert = db.insert(DBSchema.TABLE, null, cv);
-        Log.d(TAG, "insert note " + insert);
+        Utils.log("insert to DB note " + insert);
         return true;
     }
 
     public boolean update(Note note) {
+        if (note==null)return false;
         ContentValues cv = new ContentValues();
         cv.put(DBSchema.CREATING, note.getCreating());
         cv.put(DBSchema.LAST_SAVING, note.getLastSaving());
         cv.put(DBSchema.PRE_LAST_SAVING, note.getPreLastSaving());
+        cv.put(DBSchema.TITLE, note.getTitle());
         cv.put(DBSchema.TEXT, note.getText());
 
         int update = db.update(DBSchema.TABLE, cv, DBSchema.ID + "=" + note.getId(), null);
@@ -46,6 +51,7 @@ public class NotesRepository {
     }
 
     public boolean delete(Note note) {
+        if (note==null)return false;
         int delete = db.delete(DBSchema.TABLE, DBSchema.ID + "=" + note.getId(), null);
         Log.d(TAG, "delete note" + delete);
         return true;
@@ -61,6 +67,7 @@ public class NotesRepository {
             note.setCreating(cursor.getLong(cursor.getColumnIndex(DBSchema.CREATING)));
             note.setLastSaving(cursor.getLong(cursor.getColumnIndex(DBSchema.LAST_SAVING)));
             note.setPreLastSaving(cursor.getLong(cursor.getColumnIndex(DBSchema.PRE_LAST_SAVING)));
+            note.setTitle(cursor.getString(cursor.getColumnIndex(DBSchema.TITLE)));
             note.setText(cursor.getString(cursor.getColumnIndex(DBSchema.TEXT)));
         }
         return note;
@@ -76,6 +83,7 @@ public class NotesRepository {
             note.setCreating(cursor.getLong(cursor.getColumnIndex(DBSchema.CREATING)));
             note.setLastSaving(cursor.getLong(cursor.getColumnIndex(DBSchema.LAST_SAVING)));
             note.setPreLastSaving(cursor.getLong(cursor.getColumnIndex(DBSchema.PRE_LAST_SAVING)));
+            note.setTitle(cursor.getString(cursor.getColumnIndex(DBSchema.TITLE)));
             note.setText(cursor.getString(cursor.getColumnIndex(DBSchema.TEXT)));
         }
         return note;
@@ -91,6 +99,7 @@ public class NotesRepository {
                 note.setCreating(cursor.getLong(cursor.getColumnIndex(DBSchema.CREATING)));
                 note.setLastSaving(cursor.getLong(cursor.getColumnIndex(DBSchema.LAST_SAVING)));
                 note.setPreLastSaving(cursor.getLong(cursor.getColumnIndex(DBSchema.PRE_LAST_SAVING)));
+                note.setTitle(cursor.getString(cursor.getColumnIndex(DBSchema.TITLE)));
                 note.setText(cursor.getString(cursor.getColumnIndex(DBSchema.TEXT)));
                 items.add(note);
             } while (cursor.moveToNext());

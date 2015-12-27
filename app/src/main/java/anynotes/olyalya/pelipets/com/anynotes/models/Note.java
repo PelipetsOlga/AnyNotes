@@ -8,6 +8,7 @@ public class Note {
     private long creating;
     private long lastSaving;
     private long preLastSaving;
+    private String title;
     private String text;
 
     public long getId() {
@@ -20,6 +21,14 @@ public class Note {
 
     public long getCreating() {
         return creating;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public void setCreating(long creating) {

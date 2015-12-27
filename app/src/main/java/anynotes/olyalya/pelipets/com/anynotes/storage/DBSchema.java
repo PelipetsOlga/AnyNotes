@@ -11,6 +11,7 @@ public class DBSchema {
     public static final String LAST_SAVING = "last_saving";
     public static final String PRE_LAST_SAVING = "pre_last_saving";
     public static final String TEXT = "text";
+    public static final String TITLE = "title";
 
 
     public static final String CREATE_SCREAPT = "CREATE TABLE IF NOT EXISTS " + TABLE + "("
@@ -18,6 +19,7 @@ public class DBSchema {
             + CREATING + " integer, "
             + LAST_SAVING + " integer, "
             + PRE_LAST_SAVING + " integer, "
+            + TITLE + " text, "
             + TEXT + " text);";
 
 }

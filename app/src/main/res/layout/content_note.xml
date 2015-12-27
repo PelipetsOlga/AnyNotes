@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="anynotes.olyalya.pelipets.com.anynotes.activities.NoteActivity"
+    tools:showIn="@layout/activity_note">
+
+    <EditText
+        android:id="@+id/et_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:gravity="center"
+        android:imeOptions="actionNext"
+        android:background="@android:color/transparent"
+        android:hint="@string/new_note_hint_title" />
+
+    <EditText
+        android:id="@+id/et_text"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/et_title"
+        android:imeOptions="actionDone"
+        android:gravity="left|top"
+        android:layout_marginTop="80dp"
+        android:background="@android:color/transparent"
+        android:hint="@string/new_note_hint_text">
+
+        <requestFocus />
+    </EditText>
+
+
+</RelativeLayout>
