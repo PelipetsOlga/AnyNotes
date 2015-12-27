@@ -52,13 +52,6 @@ public class NoteActivity extends AppCompatActivity {
         }
         initViews();
 
-        if (type_operation == Constants.EXTRA_ACTION_NEW_NOTE) {
-            getSupportActionBar().setTitle(getResources().getString(R.string.title_new_note));
-        } else {
-            getSupportActionBar().setTitle(getResources().getString(R.string.title_edit_note));
-        }
-
-
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -142,6 +135,7 @@ public class NoteActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
         fab = (FloatingActionButton) findViewById(R.id.fab);
         etTitle = (EditText) findViewById(R.id.et_title);
         etText = (EditText) findViewById(R.id.et_text);

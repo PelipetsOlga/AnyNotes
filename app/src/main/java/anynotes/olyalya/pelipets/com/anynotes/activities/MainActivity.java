@@ -9,12 +9,24 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.format.DateFormat;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
 
 import anynotes.olyalya.pelipets.com.anynotes.R;
+import anynotes.olyalya.pelipets.com.anynotes.application.NotesApplication;
+import anynotes.olyalya.pelipets.com.anynotes.models.Note;
+import anynotes.olyalya.pelipets.com.anynotes.storage.NotesRepository;
 import anynotes.olyalya.pelipets.com.anynotes.utils.Constants;
 
 public class MainActivity extends AppCompatActivity
@@ -23,26 +35,60 @@ public class MainActivity extends AppCompatActivity
     private static final int NOTE_REQUEST_CODE = 100;
 
     private FloatingActionButton fab;
+    private DrawerLayout drawer;
+    private RecyclerView recyclerView;
+    private RecyclerView.Adapter adapter;
+    private RecyclerView.LayoutManager layoutManager;
+    private NotesRepository repository;
+    private List<Note> notes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        initViews();
 
-        fab = (FloatingActionButton) findViewById(R.id.fab);
+        notes = new ArrayList<Note>();
+        repository = ((NotesApplication) getApplication()).getDaoSession().getRepository();
+
+
+        adapter = new NotesAdapter(notes);
+        recyclerView.setAdapter(adapter);
+
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //new note creating
                 Intent intent = new Intent(MainActivity.this, NoteActivity.class);
                 intent.putExtra(Constants.EXTRA_ACTION_TYPE, Constants.EXTRA_ACTION_NEW_NOTE);
                 startActivityForResult(intent, NOTE_REQUEST_CODE);
             }
         });
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        notes.addAll(repository.loadAll());
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        notes.clear();
+    }
+
+    private void initViews() {
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        fab = (FloatingActionButton) findViewById(R.id.fab);
+        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        recyclerView = (RecyclerView) findViewById(R.id.list);
+        layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        recyclerView.setLayoutManager(layoutManager);
+
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
@@ -98,11 +144,11 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode==NOTE_REQUEST_CODE){
-            if (resultCode==RESULT_OK){
+        if (requestCode == NOTE_REQUEST_CODE) {
+            if (resultCode == RESULT_OK) {
                 Snackbar.make(fab, "Result OK", Snackbar.LENGTH_LONG)
                         .setAction("Result OK", null).show();
-            }else{
+            } else {
                 Snackbar.make(fab, "Result CANCEL", Snackbar.LENGTH_LONG)
                         .setAction("Result CANCEL", null).show();
             }
@@ -133,5 +179,50 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private static class NotesAdapter extends RecyclerView.Adapter<NoteViewHolder> {
+
+        private List<Note> items;
+
+        public NotesAdapter(List<Note> items) {
+            this.items = items;
+        }
+
+        @Override
+        public NoteViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            View view = View.inflate(parent.getContext(),
+                    R.layout.item_note_rec_view, null);
+            return new NoteViewHolder(view);
+        }
+
+        @Override
+        public void onBindViewHolder(NoteViewHolder holder, int position) {
+            Note note = items.get(position);
+            holder.tvTitle.setText(note.getTitle());
+            holder.tvText.setText(note.getTitle());
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTimeInMillis(note.getLastSaving());
+            holder.tvLastSaving.setText(DateFormat.format("yyyy-MM-dd hh:mm", new java.util.Date()));
+        }
+
+        @Override
+        public int getItemCount() {
+            return items.size();
+        }
+    }
+
+    private static class NoteViewHolder extends RecyclerView.ViewHolder {
+
+        private final TextView tvTitle;
+        private final TextView tvLastSaving;
+        private final TextView tvText;
+
+        public NoteViewHolder(View itemView) {
+            super(itemView);
+            tvTitle = (TextView) itemView.findViewById(R.id.tv_title);
+            tvLastSaving = (TextView) itemView.findViewById(R.id.tv_lastsaving);
+            tvText = (TextView) itemView.findViewById(R.id.tv_text);
+        }
     }
 }
