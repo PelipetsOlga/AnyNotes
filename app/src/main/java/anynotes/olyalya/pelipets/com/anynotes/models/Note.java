@@ -7,7 +7,7 @@ public class Note {
     private long id;
     private long creating;
     private long lastSaving;
-    private long preLastSaving;
+    private int status;
     private String title;
     private String text;
 
@@ -43,12 +43,12 @@ public class Note {
         this.lastSaving = lastSaving;
     }
 
-    public long getPreLastSaving() {
-        return preLastSaving;
+    public int getStatus() {
+        return status;
     }
 
-    public void setPreLastSaving(long preLastSaving) {
-        this.preLastSaving = preLastSaving;
+    public void setStatus(int status) {
+        this.status = status;
     }
 
     public String getText() {

@@ -27,7 +27,7 @@ public class NotesRepository {
         ContentValues cv = new ContentValues();
         cv.put(DBSchema.CREATING, note.getCreating());
         cv.put(DBSchema.LAST_SAVING, note.getLastSaving());
-        cv.put(DBSchema.PRE_LAST_SAVING, note.getPreLastSaving());
+        cv.put(DBSchema.STATUS, note.getStatus());
         cv.put(DBSchema.TITLE, note.getTitle());
         cv.put(DBSchema.TEXT, note.getText());
 
@@ -41,7 +41,7 @@ public class NotesRepository {
         ContentValues cv = new ContentValues();
         cv.put(DBSchema.CREATING, note.getCreating());
         cv.put(DBSchema.LAST_SAVING, note.getLastSaving());
-        cv.put(DBSchema.PRE_LAST_SAVING, note.getPreLastSaving());
+        cv.put(DBSchema.STATUS, note.getStatus());
         cv.put(DBSchema.TITLE, note.getTitle());
         cv.put(DBSchema.TEXT, note.getText());
 
@@ -66,7 +66,7 @@ public class NotesRepository {
             note.setId(cursor.getLong(cursor.getColumnIndex(DBSchema.ID)));
             note.setCreating(cursor.getLong(cursor.getColumnIndex(DBSchema.CREATING)));
             note.setLastSaving(cursor.getLong(cursor.getColumnIndex(DBSchema.LAST_SAVING)));
-            note.setPreLastSaving(cursor.getLong(cursor.getColumnIndex(DBSchema.PRE_LAST_SAVING)));
+            note.setStatus(cursor.getInt(cursor.getColumnIndex(DBSchema.STATUS)));
             note.setTitle(cursor.getString(cursor.getColumnIndex(DBSchema.TITLE)));
             note.setText(cursor.getString(cursor.getColumnIndex(DBSchema.TEXT)));
         }
@@ -82,7 +82,7 @@ public class NotesRepository {
             note.setId(cursor.getLong(cursor.getColumnIndex(DBSchema.ID)));
             note.setCreating(cursor.getLong(cursor.getColumnIndex(DBSchema.CREATING)));
             note.setLastSaving(cursor.getLong(cursor.getColumnIndex(DBSchema.LAST_SAVING)));
-            note.setPreLastSaving(cursor.getLong(cursor.getColumnIndex(DBSchema.PRE_LAST_SAVING)));
+            note.setStatus(cursor.getInt(cursor.getColumnIndex(DBSchema.STATUS)));
             note.setTitle(cursor.getString(cursor.getColumnIndex(DBSchema.TITLE)));
             note.setText(cursor.getString(cursor.getColumnIndex(DBSchema.TEXT)));
         }
@@ -98,7 +98,7 @@ public class NotesRepository {
                 note.setId(cursor.getLong(cursor.getColumnIndex(DBSchema.ID)));
                 note.setCreating(cursor.getLong(cursor.getColumnIndex(DBSchema.CREATING)));
                 note.setLastSaving(cursor.getLong(cursor.getColumnIndex(DBSchema.LAST_SAVING)));
-                note.setPreLastSaving(cursor.getLong(cursor.getColumnIndex(DBSchema.PRE_LAST_SAVING)));
+                note.setStatus(cursor.getInt(cursor.getColumnIndex(DBSchema.STATUS)));
                 note.setTitle(cursor.getString(cursor.getColumnIndex(DBSchema.TITLE)));
                 note.setText(cursor.getString(cursor.getColumnIndex(DBSchema.TEXT)));
                 items.add(note);

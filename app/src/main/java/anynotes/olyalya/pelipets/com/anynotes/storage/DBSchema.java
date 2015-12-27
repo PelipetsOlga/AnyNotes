@@ -9,16 +9,15 @@ public class DBSchema {
     public static final String ID = "_id";
     public static final String CREATING = "creating";
     public static final String LAST_SAVING = "last_saving";
-    public static final String PRE_LAST_SAVING = "pre_last_saving";
+    public static final String STATUS = "status";
     public static final String TEXT = "text";
     public static final String TITLE = "title";
-
 
     public static final String CREATE_SCREAPT = "CREATE TABLE IF NOT EXISTS " + TABLE + "("
             + ID + " integer primary key autoincrement, "
             + CREATING + " integer, "
             + LAST_SAVING + " integer, "
-            + PRE_LAST_SAVING + " integer, "
+            + STATUS + " integer, "
             + TITLE + " text, "
             + TEXT + " text);";
 

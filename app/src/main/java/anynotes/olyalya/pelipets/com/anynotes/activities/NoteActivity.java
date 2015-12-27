@@ -44,9 +44,12 @@ public class NoteActivity extends AppCompatActivity {
 
         repository = ((NotesApplication) getApplication()).getDaoSession().getRepository();
 
-        creating = Calendar.getInstance().getTimeInMillis();
-        Utils.log("creating in OnCreate = " + creating);
-
+        if (type_operation == Constants.EXTRA_ACTION_NEW_NOTE) {
+            creating = Calendar.getInstance().getTimeInMillis();
+            Utils.log("creating in OnCreate = " + creating);
+        } else {
+            //todo read from intent
+        }
         initViews();
 
         if (type_operation == Constants.EXTRA_ACTION_NEW_NOTE) {
@@ -61,8 +64,12 @@ public class NoteActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (type_operation == Constants.EXTRA_ACTION_NEW_NOTE) {
                     Note note = readNoteFromTextFields();
-                    repository.insert(note);
-                    setResult(RESULT_OK);
+                    if (note == null) {
+                        setResult(RESULT_CANCELED);
+                    } else {
+                        saveActual(note, creating);
+                        setResult(RESULT_OK);
+                    }
                     finish();
                 } else {
                     Snackbar.make(view, "Save", Snackbar.LENGTH_LONG)
@@ -72,6 +79,26 @@ public class NoteActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        goBack();
+        super.onBackPressed();
+    }
+
+    private void saveActual(Note note, long cr) {
+        note.setCreating(cr);
+        note.setLastSaving(Calendar.getInstance().getTimeInMillis());
+        note.setStatus(Constants.STATUS_ACTUAL);
+        repository.insert(note);
+    }
+
+    private void saveDraft(Note note, long cr) {
+        note.setCreating(cr);
+        note.setLastSaving(Calendar.getInstance().getTimeInMillis());
+        note.setStatus(Constants.STATUS_DRAFT);
+        repository.insert(note);
     }
 
     @Override
@@ -107,8 +134,6 @@ public class NoteActivity extends AppCompatActivity {
             }
         }
         note.setTitle(title);
-        note.setCreating(creating);
-        note.setLastSaving(Calendar.getInstance().getTimeInMillis());
         return note;
     }
 
@@ -132,8 +157,7 @@ public class NoteActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem menuItem) {
         switch (menuItem.getItemId()) {
             case android.R.id.home:
-                setResult(RESULT_CANCELED);
-                finish();
+                goBack();
                 return true;
             case R.id.action_alarm:
                 Snackbar.make(fab, "Alarm clicked", Snackbar.LENGTH_LONG)
@@ -149,6 +173,15 @@ public class NoteActivity extends AppCompatActivity {
                 return true;
         }
         return (super.onOptionsItemSelected(menuItem));
+    }
+
+    private void goBack() {
+        Note note = readNoteFromTextFields();
+        if (note != null) {
+            saveDraft(note, creating);
+        }
+        setResult(RESULT_CANCELED);
+        finish();
     }
 
 }
