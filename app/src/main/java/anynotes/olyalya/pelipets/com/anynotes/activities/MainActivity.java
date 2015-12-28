@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.text.format.DateFormat;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -40,7 +41,7 @@ public class MainActivity extends AppCompatActivity
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     private NotesRepository repository;
-    private List<Note> notes;
+    private static List<Note> notes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,8 +53,26 @@ public class MainActivity extends AppCompatActivity
         repository = ((NotesApplication) getApplication()).getDaoSession().getRepository();
 
 
-        adapter = new NotesAdapter(notes);
+        adapter = new NotesAdapter();
         recyclerView.setAdapter(adapter);
+
+        ItemTouchHelper.SimpleCallback simpleItemTouchCallback =
+                new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+                    @Override
+                    public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+                        return false;
+                    }
+
+                    @Override
+                    public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
+                        int removedPosition = viewHolder.getAdapterPosition();
+                        notes.remove(removedPosition);
+                        adapter.notifyItemRemoved(removedPosition);
+                        //TODO change db
+                    }
+                };
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleItemTouchCallback);
+        itemTouchHelper.attachToRecyclerView(recyclerView);
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,6 +107,7 @@ public class MainActivity extends AppCompatActivity
         recyclerView = (RecyclerView) findViewById(R.id.list);
         layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
+
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -183,11 +203,6 @@ public class MainActivity extends AppCompatActivity
 
     private static class NotesAdapter extends RecyclerView.Adapter<NoteViewHolder> {
 
-        private List<Note> items;
-
-        public NotesAdapter(List<Note> items) {
-            this.items = items;
-        }
 
         @Override
         public NoteViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -198,7 +213,7 @@ public class MainActivity extends AppCompatActivity
 
         @Override
         public void onBindViewHolder(NoteViewHolder holder, int position) {
-            Note note = items.get(position);
+            Note note = notes.get(position);
             holder.tvTitle.setText(note.getTitle());
             holder.tvText.setText(note.getTitle());
             Calendar calendar = Calendar.getInstance();
@@ -208,11 +223,12 @@ public class MainActivity extends AppCompatActivity
 
         @Override
         public int getItemCount() {
-            return items.size();
+            return notes.size();
         }
+
     }
 
-    private static class NoteViewHolder extends RecyclerView.ViewHolder {
+    private static class NoteViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private final TextView tvTitle;
         private final TextView tvLastSaving;
@@ -223,6 +239,15 @@ public class MainActivity extends AppCompatActivity
             tvTitle = (TextView) itemView.findViewById(R.id.tv_title);
             tvLastSaving = (TextView) itemView.findViewById(R.id.tv_lastsaving);
             tvText = (TextView) itemView.findViewById(R.id.tv_text);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            int position = getLayoutPosition(); // gets item position
+            Note note = notes.get(position);
+            Snackbar.make(v, "View.OnClickListener item#" + position + " " + note.getTitle(), Snackbar.LENGTH_LONG)
+                    .setAction("View.OnClickListener", null).show();
         }
     }
 }
