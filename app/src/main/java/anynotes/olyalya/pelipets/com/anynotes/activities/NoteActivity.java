@@ -19,7 +19,7 @@ import anynotes.olyalya.pelipets.com.anynotes.application.NotesApplication;
 import anynotes.olyalya.pelipets.com.anynotes.models.Note;
 import anynotes.olyalya.pelipets.com.anynotes.storage.NotesRepository;
 import anynotes.olyalya.pelipets.com.anynotes.utils.Constants;
-import anynotes.olyalya.pelipets.com.anynotes.utils.Utils;
+import anynotes.olyalya.pelipets.com.anynotes.utils.NoteUtils;
 
 public class NoteActivity extends AppCompatActivity {
     private static final int TITLE_LENGTH = 100;
@@ -46,7 +46,7 @@ public class NoteActivity extends AppCompatActivity {
 
         if (type_operation == Constants.EXTRA_ACTION_NEW_NOTE) {
             creating = Calendar.getInstance().getTimeInMillis();
-            Utils.log("creating in OnCreate = " + creating);
+            NoteUtils.log("creating in OnCreate = " + creating);
         } else {
             //todo read from intent
         }
@@ -97,7 +97,7 @@ public class NoteActivity extends AppCompatActivity {
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         outState.putLong(TAG_CREATING, creating);
-        Utils.log("creating in onSaveInstanceState = " + creating);
+        NoteUtils.log("creating in onSaveInstanceState = " + creating);
         super.onSaveInstanceState(outState);
     }
 
@@ -105,7 +105,7 @@ public class NoteActivity extends AppCompatActivity {
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         if (savedInstanceState != null) {
             creating = savedInstanceState.getLong(TAG_CREATING);
-            Utils.log("creating in onRestoreInstanceState = " + creating);
+            NoteUtils.log("creating in onRestoreInstanceState = " + creating);
         }
         super.onRestoreInstanceState(savedInstanceState);
     }

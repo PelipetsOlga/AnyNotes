@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import anynotes.olyalya.pelipets.com.anynotes.models.Note;
-import anynotes.olyalya.pelipets.com.anynotes.utils.Utils;
+import anynotes.olyalya.pelipets.com.anynotes.utils.NoteUtils;
 
 /**
  * Created by Olga on 26.12.2015.
@@ -32,7 +32,7 @@ public class NotesRepository {
         cv.put(DBSchema.TEXT, note.getText());
 
         long insert = db.insert(DBSchema.TABLE, null, cv);
-        Utils.log("insert to DB note " + insert);
+        NoteUtils.log("insert to DB note " + insert);
         return true;
     }
 

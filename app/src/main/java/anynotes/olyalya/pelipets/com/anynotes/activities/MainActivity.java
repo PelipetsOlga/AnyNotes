@@ -218,7 +218,7 @@ public class MainActivity extends AppCompatActivity
             holder.tvText.setText(note.getTitle());
             Calendar calendar = Calendar.getInstance();
             calendar.setTimeInMillis(note.getLastSaving());
-            holder.tvLastSaving.setText(DateFormat.format("yyyy-MM-dd hh:mm", new java.util.Date()));
+            holder.tvLastSaving.setText(DateFormat.format("yyyy-MM-dd HH:mm", calendar));
         }
 
         @Override
