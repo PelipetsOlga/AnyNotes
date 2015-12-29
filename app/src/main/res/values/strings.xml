@@ -1,6 +1,13 @@
 <resources>
     <string name="app_name">AnyNotes</string>
 
+    <string name="menu_all">All notes</string>
+    <string name="menu_actual">Actual notes</string>
+    <string name="menu_important">Important notes</string>
+    <string name="menu_drafts">Drafts</string>
+    <string name="menu_deleted">Deleted notes</string>
+    <string name="menu_alarms">Notes with alarm</string>
+
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 

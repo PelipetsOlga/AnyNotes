@@ -1,5 +1,6 @@
 package anynotes.olyalya.pelipets.com.anynotes.activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -42,6 +43,13 @@ public class MainActivity extends AppCompatActivity
     private RecyclerView.LayoutManager layoutManager;
     private NotesRepository repository;
     private static List<Note> notes;
+    private static int mode;
+
+    private static final int MODE_ALL=23;
+    private static final int MODE_ACTUAL=2;
+    private static final int MODE_IMPORTANT=3;
+    private static final int MODE_DRAFT=1;
+    private static final int MODE_DELETED=4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,19 +91,8 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
+        notes.addAll(repository.loadAll(mode));
 
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        notes.addAll(repository.loadAll());
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        notes.clear();
     }
 
     private void initViews() {
@@ -166,11 +163,9 @@ public class MainActivity extends AppCompatActivity
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == NOTE_REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
-                Snackbar.make(fab, "Result OK", Snackbar.LENGTH_LONG)
-                        .setAction("Result OK", null).show();
-            } else {
-                Snackbar.make(fab, "Result CANCEL", Snackbar.LENGTH_LONG)
-                        .setAction("Result CANCEL", null).show();
+                notes.clear();
+                notes.addAll(repository.loadAll(mode));
+                adapter.notifyDataSetChanged();
             }
         }
         super.onActivityResult(requestCode, resultCode, data);
@@ -182,7 +177,7 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+      /*  if (id == R.id.nav_camera) {
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
 
@@ -194,7 +189,7 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_send) {
 
-        }
+        }*/
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -216,6 +211,7 @@ public class MainActivity extends AppCompatActivity
             Note note = notes.get(position);
             holder.tvTitle.setText(note.getTitle());
             holder.tvText.setText(note.getTitle());
+            holder.tvStatus.setText(note.getStatus() + "");
             Calendar calendar = Calendar.getInstance();
             calendar.setTimeInMillis(note.getLastSaving());
             holder.tvLastSaving.setText(DateFormat.format("yyyy-MM-dd HH:mm", calendar));
@@ -230,12 +226,17 @@ public class MainActivity extends AppCompatActivity
 
     private static class NoteViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
+        private final Context context;
+
+        private final TextView tvStatus;
         private final TextView tvTitle;
         private final TextView tvLastSaving;
         private final TextView tvText;
 
         public NoteViewHolder(View itemView) {
             super(itemView);
+            context = itemView.getContext();
+            tvStatus = (TextView) itemView.findViewById(R.id.status);
             tvTitle = (TextView) itemView.findViewById(R.id.tv_title);
             tvLastSaving = (TextView) itemView.findViewById(R.id.tv_lastsaving);
             tvText = (TextView) itemView.findViewById(R.id.tv_text);
@@ -244,10 +245,12 @@ public class MainActivity extends AppCompatActivity
 
         @Override
         public void onClick(View v) {
-            int position = getLayoutPosition(); // gets item position
+            int position = getLayoutPosition();
             Note note = notes.get(position);
-            Snackbar.make(v, "View.OnClickListener item#" + position + " " + note.getTitle(), Snackbar.LENGTH_LONG)
-                    .setAction("View.OnClickListener", null).show();
+            Intent intent = new Intent(context, NoteActivity.class);
+            intent.putExtra(Constants.EXTRA_ACTION_TYPE, Constants.EXTRA_ACTION_EDIT_NOTE);
+            intent.putExtra(Constants.EXTRA_NOTE, note);
+            ((MainActivity) context).startActivityForResult(intent, NOTE_REQUEST_CODE);
         }
     }
 }

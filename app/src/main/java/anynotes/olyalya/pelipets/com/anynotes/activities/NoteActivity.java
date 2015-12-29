@@ -33,6 +33,7 @@ public class NoteActivity extends AppCompatActivity {
     private NotesRepository repository;
     private Toolbar toolbar;
     private long creating;
+    private Note startNote;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +42,9 @@ public class NoteActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         type_operation = intent.getIntExtra(Constants.EXTRA_ACTION_TYPE, Constants.EXTRA_ACTION_NEW_NOTE);
+        if (type_operation == Constants.EXTRA_ACTION_EDIT_NOTE) {
+            startNote = (Note) intent.getSerializableExtra(Constants.EXTRA_NOTE);
+        }
 
         repository = ((NotesApplication) getApplication()).getDaoSession().getRepository();
 
@@ -48,26 +52,37 @@ public class NoteActivity extends AppCompatActivity {
             creating = Calendar.getInstance().getTimeInMillis();
             NoteUtils.log("creating in OnCreate = " + creating);
         } else {
-            //todo read from intent
+            creating = startNote.getCreating();
+            NoteUtils.log("creating from startNote = " + creating);
         }
         initViews();
+
+        if (type_operation == Constants.EXTRA_ACTION_EDIT_NOTE) {
+            etTitle.setText(startNote.getTitle());
+            etText.setText(startNote.getText());
+        }
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (type_operation == Constants.EXTRA_ACTION_NEW_NOTE) {
-                    Note note = readNoteFromTextFields();
-                    if (note == null) {
-                        setResult(RESULT_CANCELED);
-                    } else {
-                        saveActual(note, creating);
-                        setResult(RESULT_OK);
-                    }
-                    finish();
+                Note note = readNoteFromTextFields();
+                if (note == null) {
+                    setResult(RESULT_CANCELED);
                 } else {
-                    Snackbar.make(view, "Save", Snackbar.LENGTH_LONG)
-                            .setAction("Save", null).show();
+                    if (type_operation == Constants.EXTRA_ACTION_NEW_NOTE) {
+                        save(Constants.STATUS_ACTUAL, note, creating);
+                        setResult(RESULT_OK);
+                    } else {
+                        if (startNote.getStatus() == Constants.STATUS_IMPORTANT) {
+                            update(Constants.STATUS_IMPORTANT, note, creating);
+                            setResult(RESULT_OK);
+                        } else {
+                            update(Constants.STATUS_ACTUAL, note, creating);
+                            setResult(RESULT_OK);
+                        }
+                    }
                 }
+                finish();
             }
         });
 
@@ -80,18 +95,18 @@ public class NoteActivity extends AppCompatActivity {
         super.onBackPressed();
     }
 
-    private void saveActual(Note note, long cr) {
+    private void save(int status, Note note, long cr) {
         note.setCreating(cr);
         note.setLastSaving(Calendar.getInstance().getTimeInMillis());
-        note.setStatus(Constants.STATUS_ACTUAL);
+        note.setStatus(status);
         repository.insert(note);
     }
 
-    private void saveDraft(Note note, long cr) {
+    private void update(int status, Note note, long cr) {
         note.setCreating(cr);
         note.setLastSaving(Calendar.getInstance().getTimeInMillis());
-        note.setStatus(Constants.STATUS_DRAFT);
-        repository.insert(note);
+        note.setStatus(status);
+        repository.update(note);
     }
 
     @Override
@@ -170,9 +185,11 @@ public class NoteActivity extends AppCompatActivity {
     }
 
     private void goBack() {
-        Note note = readNoteFromTextFields();
-        if (note != null) {
-            saveDraft(note, creating);
+       if (type_operation == Constants.EXTRA_ACTION_NEW_NOTE) {
+            Note note = readNoteFromTextFields();
+            if (note != null) {
+                save(Constants.STATUS_DRAFT, note, creating);
+            }
         }
         setResult(RESULT_CANCELED);
         finish();

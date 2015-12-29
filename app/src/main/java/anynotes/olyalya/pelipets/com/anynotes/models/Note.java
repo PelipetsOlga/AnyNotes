@@ -1,9 +1,11 @@
 package anynotes.olyalya.pelipets.com.anynotes.models;
 
+import java.io.Serializable;
+
 /**
  * Created by Olga on 26.12.2015.
  */
-public class Note {
+public class Note implements Serializable{
     private long id;
     private long creating;
     private long lastSaving;

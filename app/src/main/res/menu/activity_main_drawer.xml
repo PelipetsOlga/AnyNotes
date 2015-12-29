@@ -3,34 +3,31 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_camera"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Import" />
+            android:id="@+id/all_notes"
+            android:icon="@android:drawable/ic_notification_clear_all"
+            android:title="@string/menu_all" />
         <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Gallery" />
+            android:id="@+id/important_notes"
+            android:icon="@android:drawable/btn_star_big_off"
+            android:title="@string/menu_important" />
         <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
-        <item
-            android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" />
-    </group>
+            android:id="@+id/actual_notes"
+            android:icon="@android:drawable/sym_action_call"
+            android:title="@string/menu_actual" />
 
-    <item android:title="Communicate">
-        <menu>
-            <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
-            <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
-        </menu>
-    </item>
+        <item
+            android:id="@+id/drafts"
+            android:icon="@android:drawable/btn_dropdown"
+            android:title="@string/menu_drafts" />
+        <item
+            android:id="@+id/deleted"
+            android:icon="@android:drawable/ic_delete"
+            android:title="@string/menu_deleted" />
+
+        <item
+            android:id="@+id/alarms"
+            android:icon="@android:drawable/btn_dropdown"
+            android:title="@string/menu_alarms" />
+    </group>
 
 </menu>

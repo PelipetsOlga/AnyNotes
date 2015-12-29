@@ -45,7 +45,7 @@ public class NotesRepository {
         cv.put(DBSchema.TITLE, note.getTitle());
         cv.put(DBSchema.TEXT, note.getText());
 
-        int update = db.update(DBSchema.TABLE, cv, DBSchema.ID + "=" + note.getId(), null);
+        int update = db.update(DBSchema.TABLE, cv, DBSchema.CREATING + "=" + note.getCreating(), null);
         Log.d(TAG, "update note " + update);
         return true;
     }
@@ -89,7 +89,8 @@ public class NotesRepository {
         return note;
     }
 
-    public List<Note> loadAll() {
+    public List<Note> loadAll(int mode) {
+        //TODO
         Cursor cursor = db.query(DBSchema.TABLE, null, null, null, null, null, null);
         List<Note> items = new ArrayList<Note>();
         if (cursor.moveToFirst()) {
