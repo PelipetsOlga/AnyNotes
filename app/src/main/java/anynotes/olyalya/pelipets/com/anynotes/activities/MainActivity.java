@@ -19,6 +19,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -43,13 +45,13 @@ public class MainActivity extends AppCompatActivity
     private RecyclerView.LayoutManager layoutManager;
     private NotesRepository repository;
     private static List<Note> notes;
-    private static int mode;
+    //  private static int mode;
 
-    private static final int MODE_ALL=23;
-    private static final int MODE_ACTUAL=2;
-    private static final int MODE_IMPORTANT=3;
-    private static final int MODE_DRAFT=1;
-    private static final int MODE_DELETED=4;
+    //private static final int MODE_ALL = 23;
+    //private static final int MODE_ACTUAL = 2;
+    //private static final int MODE_IMPORTANT = 3;
+    //private static final int MODE_DRAFT = 1;
+    //private static final int MODE_DELETED = 4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,8 +76,25 @@ public class MainActivity extends AppCompatActivity
                     @Override
                     public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
                         int removedPosition = viewHolder.getAdapterPosition();
-                        notes.remove(removedPosition);
-                        adapter.notifyItemRemoved(removedPosition);
+                        Note note = notes.get(removedPosition);
+                        if (note != null) {
+                            int status = note.getStatus();
+                            if (status == Constants.STATUS_ACTUAL
+                                    || status == Constants.STATUS_IMPORTANT) {
+                                note.setStatus(Constants.STATUS_DELETED);
+                                repository.update(note);
+                                notes.remove(removedPosition);
+                                adapter.notifyItemRemoved(removedPosition);
+                            } else if (status == Constants.STATUS_DRAFT
+                                    || status == Constants.STATUS_DELETED) {
+                                note.setStatus(Constants.STATUS_DRAFT_DELETED);
+                                repository.update(note);
+                                notes.remove(removedPosition);
+                                adapter.notifyItemRemoved(removedPosition);
+                            }
+                        }
+
+
                         //TODO change db
                     }
                 };
@@ -91,7 +110,7 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-        notes.addAll(repository.loadAll(mode));
+        notes.addAll(repository.loadAll());
 
     }
 
@@ -163,8 +182,9 @@ public class MainActivity extends AppCompatActivity
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == NOTE_REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
+                repository.setModeSort(Constants.MODE_SORT_ALL);
                 notes.clear();
-                notes.addAll(repository.loadAll(mode));
+                notes.addAll(repository.loadAll());
                 adapter.notifyDataSetChanged();
             }
         }
@@ -174,25 +194,27 @@ public class MainActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-      /*  if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
-        }*/
+        if (id == R.id.all_notes) {
+            repository.setModeSort(Constants.MODE_SORT_ALL);
+        } else if (id == R.id.important_notes) {
+            repository.setModeSort(Constants.MODE_SORT_IMPORTANTS);
+        } else if (id == R.id.actual_notes) {
+            repository.setModeSort(Constants.MODE_SORT_ACTUALS);
+        } else if (id == R.id.drafts) {
+            repository.setModeSort(Constants.MODE_SORT_DRAFTS);
+        } else if (id == R.id.deleted) {
+            repository.setModeSort(Constants.MODE_SORT_DELETED);
+        } //else if (id == R.id.alarms) {
+        //}
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
+
+        notes.clear();
+        notes.addAll(repository.loadAll());
+        adapter.notifyDataSetChanged();
         return true;
     }
 
@@ -210,11 +232,40 @@ public class MainActivity extends AppCompatActivity
         public void onBindViewHolder(NoteViewHolder holder, int position) {
             Note note = notes.get(position);
             holder.tvTitle.setText(note.getTitle());
-            holder.tvText.setText(note.getTitle());
+            holder.tvText.setText(note.getText());
             holder.tvStatus.setText(note.getStatus() + "");
             Calendar calendar = Calendar.getInstance();
             calendar.setTimeInMillis(note.getLastSaving());
-            holder.tvLastSaving.setText(DateFormat.format("yyyy-MM-dd HH:mm", calendar));
+            holder.tvLastSaving.setText(DateFormat.format("yyyy-MM-dd HH:mm:ss", calendar));
+            int status = note.getStatus();
+            switch (status) {
+                case Constants.STATUS_ACTUAL:
+                    holder.ivImportant.setVisibility(View.VISIBLE);
+                    holder.ivActual.setVisibility(View.GONE);
+                    holder.ivUndeleted.setVisibility(View.GONE);
+                    break;
+                case Constants.STATUS_IMPORTANT:
+                    holder.ivImportant.setVisibility(View.GONE);
+                    holder.ivActual.setVisibility(View.VISIBLE);
+                    holder.ivUndeleted.setVisibility(View.GONE);
+                    break;
+                case Constants.STATUS_DELETED:
+                    holder.ivImportant.setVisibility(View.GONE);
+                    holder.ivActual.setVisibility(View.GONE);
+                    holder.ivUndeleted.setVisibility(View.VISIBLE);
+                    break;
+                case Constants.STATUS_DRAFT:
+                    holder.ivImportant.setVisibility(View.GONE);
+                    holder.ivActual.setVisibility(View.GONE);
+                    holder.ivUndeleted.setVisibility(View.GONE);
+                    break;
+                case Constants.STATUS_DRAFT_DELETED:
+                    holder.ivImportant.setVisibility(View.GONE);
+                    holder.ivActual.setVisibility(View.GONE);
+                    holder.ivUndeleted.setVisibility(View.GONE);
+                    break;
+            }
+
         }
 
         @Override
@@ -232,6 +283,10 @@ public class MainActivity extends AppCompatActivity
         private final TextView tvTitle;
         private final TextView tvLastSaving;
         private final TextView tvText;
+        private final ImageView ivImportant;
+        private final ImageView ivActual;
+        private final ImageView ivUndeleted;
+        private final LinearLayout llContent;
 
         public NoteViewHolder(View itemView) {
             super(itemView);
@@ -240,17 +295,35 @@ public class MainActivity extends AppCompatActivity
             tvTitle = (TextView) itemView.findViewById(R.id.tv_title);
             tvLastSaving = (TextView) itemView.findViewById(R.id.tv_lastsaving);
             tvText = (TextView) itemView.findViewById(R.id.tv_text);
-            itemView.setOnClickListener(this);
+            ivImportant = (ImageView) itemView.findViewById(R.id.iv_important);
+            ivActual = (ImageView) itemView.findViewById(R.id.iv_actual);
+            ivUndeleted = (ImageView) itemView.findViewById(R.id.iv_undelete);
+            llContent= (LinearLayout) itemView.findViewById(R.id.ll_content);
+            llContent.setOnClickListener(this);
+            ivImportant.setOnClickListener(this);
+            ivActual.setOnClickListener(this);
+            ivUndeleted.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
-            int position = getLayoutPosition();
-            Note note = notes.get(position);
-            Intent intent = new Intent(context, NoteActivity.class);
-            intent.putExtra(Constants.EXTRA_ACTION_TYPE, Constants.EXTRA_ACTION_EDIT_NOTE);
-            intent.putExtra(Constants.EXTRA_NOTE, note);
-            ((MainActivity) context).startActivityForResult(intent, NOTE_REQUEST_CODE);
+            switch (v.getId()) {
+                case R.id.iv_important:
+
+                    break;
+                case R.id.iv_actual:
+                    break;
+                case R.id.iv_undelete:
+                    break;
+                default:
+                    int position = getLayoutPosition();
+                    Note note = notes.get(position);
+                    Intent intent = new Intent(context, NoteActivity.class);
+                    intent.putExtra(Constants.EXTRA_ACTION_TYPE, Constants.EXTRA_ACTION_EDIT_NOTE);
+                    intent.putExtra(Constants.EXTRA_NOTE, note);
+                    ((MainActivity) context).startActivityForResult(intent, NOTE_REQUEST_CODE);
+                    break;
+            }
         }
     }
 }
