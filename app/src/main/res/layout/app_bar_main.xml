@@ -28,10 +28,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:layout_marginTop="@dimen/fab_margin"
         android:layout_marginBottom="@dimen/fab_margin_under_ad"
         android:layout_marginLeft="@dimen/fab_margin"
         android:layout_marginRight="@dimen/fab_margin"
-        android:src="@android:drawable/ic_menu_add" />
+        android:layout_marginTop="@dimen/fab_margin"
+        android:src="@mipmap/ic_add_white_24dp" />
 
 </android.support.design.widget.CoordinatorLayout>
