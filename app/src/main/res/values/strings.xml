@@ -22,6 +22,8 @@
 
     <string name="title_activity_note">NoteActivity</string>
 
+    <string name="chooser_title_share">Share note</string>
+
 
     <string name="new_note_hint_title">Note title</string>
     <string name="new_note_hint_text">Let\'s write your idea</string>

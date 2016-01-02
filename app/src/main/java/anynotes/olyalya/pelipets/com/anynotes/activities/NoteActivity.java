@@ -253,8 +253,14 @@ public class NoteActivity extends AppCompatActivity {
                 finish();
                 return true;
             case R.id.action_share:
-                Snackbar.make(fab, "Share clicked", Snackbar.LENGTH_LONG)
-                        .setAction("Share clicked", null).show();
+                Note sharedNote = readNoteFromTextFields();
+                if (sharedNote != null) {
+                    String sharedText = sharedNote.getTitle() + ":\n" + sharedNote.getText();
+                    Intent share = new Intent(Intent.ACTION_SEND);
+                    share.setType("text/plain");
+                    share.putExtra(Intent.EXTRA_TEXT, sharedText);
+                    startActivity(Intent.createChooser(share, getResources().getString(R.string.chooser_title_share)));
+                }
                 return true;
         }
         return (super.onOptionsItemSelected(menuItem));
