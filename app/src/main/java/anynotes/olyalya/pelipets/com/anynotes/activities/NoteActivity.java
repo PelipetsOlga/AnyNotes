@@ -2,6 +2,7 @@ package anynotes.olyalya.pelipets.com.anynotes.activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -42,12 +43,17 @@ public class NoteActivity extends AppCompatActivity {
     private int modeFab = 1;
     private static final int MODE_FAB_SAVE = 1;
     private static final int MODE_FAB_EDIT = 2;
+    private SharedPreferences sPref;
+    private int bright;
+    private int size;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_note);
+
+        loadSettings();
 
         AdView mAdView = (AdView) findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder()
@@ -136,6 +142,13 @@ public class NoteActivity extends AppCompatActivity {
 
     }
 
+    public void loadSettings() {
+        sPref = getSharedPreferences(Constants.PREFS_NAME, AppCompatActivity.MODE_PRIVATE);
+        bright = sPref.getInt(Constants.PREF_BRIGHTNESS, Constants.BRIGHTNESS);
+        size = sPref.getInt(Constants.PREF_FONT_SIZE, Constants.SIZE_FONT);
+        NoteUtils.setBrightness(bright, this);
+    }
+
     @Override
     public void onBackPressed() {
         goBack();
@@ -201,6 +214,8 @@ public class NoteActivity extends AppCompatActivity {
         fab = (FloatingActionButton) findViewById(R.id.fab);
         etTitle = (EditText) findViewById(R.id.et_title);
         etText = (EditText) findViewById(R.id.et_text);
+        etTitle.setTextSize(size);
+        etText.setTextSize(size);
     }
 
     @Override
