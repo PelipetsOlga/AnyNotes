@@ -34,6 +34,7 @@ import java.util.List;
 
 import anynotes.olyalya.pelipets.com.anynotes.R;
 import anynotes.olyalya.pelipets.com.anynotes.application.NotesApplication;
+import anynotes.olyalya.pelipets.com.anynotes.fragments.SortDialogFragment;
 import anynotes.olyalya.pelipets.com.anynotes.interfaces.RefreshListListener;
 import anynotes.olyalya.pelipets.com.anynotes.models.Note;
 import anynotes.olyalya.pelipets.com.anynotes.storage.NotesRepository;
@@ -188,9 +189,9 @@ public class MainActivity extends AppCompatActivity
                         .parse("market://details?id=anynotes.olyalya.pelipets.com.anynotes"));
                 startActivity(intentEstimate);
                 return true;
-            case R.id.action_help:
-                Snackbar.make(fab, "Help clicked", Snackbar.LENGTH_LONG)
-                        .setAction("Help clicked", null).show();
+            case R.id.action_sort:
+                SortDialogFragment fragment=new SortDialogFragment();
+                fragment.show(getSupportFragmentManager(), null);
                 return true;
             case R.id.action_exit:
                 finish();

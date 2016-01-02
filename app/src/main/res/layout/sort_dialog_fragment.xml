@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:padding="16dp"
+    android:layout_marginBottom="40dp">
+
+    <ImageView
+        android:id="@+id/iv_unsort"
+        style="@style/ordered_style"
+        android:src="@mipmap/fa_sort" />
+
+    <ImageView
+        android:id="@+id/iv_sort_alpha_asc"
+        style="@style/ordered_style"
+        android:src="@mipmap/fa_sort_alpha_asc" />
+
+    <ImageView
+        android:id="@+id/iv_sort_alpha_desc"
+        style="@style/ordered_style"
+        android:src="@mipmap/fa_sort_alpha_desc" />
+
+    <ImageView
+        android:id="@+id/iv_sort_date_asc"
+        style="@style/ordered_style"
+        android:src="@mipmap/fa_sort_amount_asc" />
+
+    <ImageView
+        android:id="@+id/iv_sort_date_desc"
+        style="@style/ordered_style"
+        android:src="@mipmap/fa_sort_amount_desc" />
+
+</LinearLayout>

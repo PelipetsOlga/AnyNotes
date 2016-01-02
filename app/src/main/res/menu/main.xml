@@ -2,6 +2,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
+        android:id="@+id/action_sort"
+        android:orderInCategory="100"
+        android:icon="@mipmap/fa_sort_white"
+        android:title="@string/action_sort"
+        app:showAsAction="always" />
+    <item
         android:id="@+id/action_search"
         android:orderInCategory="100"
         android:title="@string/action_search"
@@ -17,11 +23,7 @@
         android:orderInCategory="100"
         android:title="@string/action_estimate"
         app:showAsAction="never" />
-    <item
-        android:id="@+id/action_help"
-        android:orderInCategory="100"
-        android:title="@string/action_help"
-        app:showAsAction="never" />
+
     <item
         android:id="@+id/action_exit"
         android:orderInCategory="100"

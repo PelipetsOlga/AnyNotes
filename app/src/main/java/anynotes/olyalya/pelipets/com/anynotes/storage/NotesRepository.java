@@ -19,10 +19,15 @@ import anynotes.olyalya.pelipets.com.anynotes.utils.NoteUtils;
 public class NotesRepository {
     private final SQLiteDatabase db;
     String TAG = NotesRepository.class.getSimpleName();
-    private int MODE_SORT = Constants.MODE_SORT_ALL;
+    private int modeSort = Constants.MODE_SORT_ALL;
+    private int modeOrdered = Constants.MODE_ORDERED_UNSORTED;
+
+    public void setModeOrdered(int modeOrdered) {
+        this.modeOrdered = modeOrdered;
+    }
 
     public void setModeSort(int modeSort) {
-        MODE_SORT = modeSort;
+        this.modeSort = modeSort;
     }
 
     public NotesRepository(SQLiteDatabase db) {
@@ -99,7 +104,7 @@ public class NotesRepository {
     public List<Note> loadAll() {
         //TODO
         String selections = null;
-        switch (MODE_SORT) {
+        switch (modeSort) {
             case Constants.MODE_SORT_ALL:
                 selections = DBSchema.STATUS + "=" + Constants.STATUS_ACTUAL + " OR " + DBSchema.STATUS + "=" + Constants.STATUS_IMPORTANT;
                 break;
@@ -116,7 +121,27 @@ public class NotesRepository {
                 selections = DBSchema.STATUS + "=" + Constants.STATUS_DELETED;
                 break;
         }
-        Cursor cursor = db.query(DBSchema.TABLE, null, selections, null, null, null, null);
+
+        String ordered=null;
+        switch (modeOrdered){
+            case Constants.MODE_ORDERED_UNSORTED:
+                ordered=DBSchema.CREATING+" ASC";
+                break;
+            case Constants.MODE_ORDERED_SORT_ALPHA_ASC:
+                ordered=DBSchema.TITLE+" ASC";
+                break;
+            case Constants.MODE_ORDERED_SORT_ALPHA_DESC:
+                ordered=DBSchema.TITLE+" DESC";
+                break;
+            case Constants.MODE_ORDERED_SORT_DATE_ASC:
+                ordered=DBSchema.LAST_SAVING+" ASC";
+                break;
+            case Constants.MODE_ORDERED_SORT_DATE_DESC:
+                ordered=DBSchema.LAST_SAVING+" DESC";
+                break;
+        }
+
+        Cursor cursor = db.query(DBSchema.TABLE, null, selections, null, null, null, ordered);
         List<Note> items = new ArrayList<Note>();
         if (cursor.moveToFirst()) {
             do {
