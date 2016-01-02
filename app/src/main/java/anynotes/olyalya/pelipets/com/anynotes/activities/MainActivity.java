@@ -29,12 +29,13 @@ import java.util.List;
 
 import anynotes.olyalya.pelipets.com.anynotes.R;
 import anynotes.olyalya.pelipets.com.anynotes.application.NotesApplication;
+import anynotes.olyalya.pelipets.com.anynotes.interfaces.RefreshListListener;
 import anynotes.olyalya.pelipets.com.anynotes.models.Note;
 import anynotes.olyalya.pelipets.com.anynotes.storage.NotesRepository;
 import anynotes.olyalya.pelipets.com.anynotes.utils.Constants;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, RefreshListListener {
 
     private static final int NOTE_REQUEST_CODE = 100;
 
@@ -43,27 +44,22 @@ public class MainActivity extends AppCompatActivity
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
-    private NotesRepository repository;
+    private static NotesRepository repository;
     private static List<Note> notes;
-    //  private static int mode;
-
-    //private static final int MODE_ALL = 23;
-    //private static final int MODE_ACTUAL = 2;
-    //private static final int MODE_IMPORTANT = 3;
-    //private static final int MODE_DRAFT = 1;
-    //private static final int MODE_DELETED = 4;
+    private RefreshListListener refreshListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        refreshListener = this;
         initViews();
 
         notes = new ArrayList<Note>();
         repository = ((NotesApplication) getApplication()).getDaoSession().getRepository();
 
 
-        adapter = new NotesAdapter();
+        adapter = new NotesAdapter(refreshListener);
         recyclerView.setAdapter(adapter);
 
         ItemTouchHelper.SimpleCallback simpleItemTouchCallback =
@@ -183,12 +179,16 @@ public class MainActivity extends AppCompatActivity
         if (requestCode == NOTE_REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
                 repository.setModeSort(Constants.MODE_SORT_ALL);
-                notes.clear();
-                notes.addAll(repository.loadAll());
-                adapter.notifyDataSetChanged();
+                refreshList();
             }
         }
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    public void refreshList() {
+        notes.clear();
+        notes.addAll(repository.loadAll());
+        adapter.notifyDataSetChanged();
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
@@ -212,20 +212,23 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
 
-        notes.clear();
-        notes.addAll(repository.loadAll());
-        adapter.notifyDataSetChanged();
+        refreshList();
         return true;
     }
 
     private static class NotesAdapter extends RecyclerView.Adapter<NoteViewHolder> {
+        private RefreshListListener listener;
 
+        public NotesAdapter(RefreshListListener listener) {
+            super();
+            this.listener = listener;
+        }
 
         @Override
         public NoteViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View view = View.inflate(parent.getContext(),
                     R.layout.item_note_rec_view, null);
-            return new NoteViewHolder(view);
+            return new NoteViewHolder(view, listener);
         }
 
         @Override
@@ -276,9 +279,8 @@ public class MainActivity extends AppCompatActivity
     }
 
     private static class NoteViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-
+        private RefreshListListener listener;
         private final Context context;
-
         private final TextView tvStatus;
         private final TextView tvTitle;
         private final TextView tvLastSaving;
@@ -288,8 +290,9 @@ public class MainActivity extends AppCompatActivity
         private final ImageView ivUndeleted;
         private final LinearLayout llContent;
 
-        public NoteViewHolder(View itemView) {
+        public NoteViewHolder(View itemView, RefreshListListener listener) {
             super(itemView);
+            this.listener = listener;
             context = itemView.getContext();
             tvStatus = (TextView) itemView.findViewById(R.id.status);
             tvTitle = (TextView) itemView.findViewById(R.id.tv_title);
@@ -298,7 +301,7 @@ public class MainActivity extends AppCompatActivity
             ivImportant = (ImageView) itemView.findViewById(R.id.iv_important);
             ivActual = (ImageView) itemView.findViewById(R.id.iv_actual);
             ivUndeleted = (ImageView) itemView.findViewById(R.id.iv_undelete);
-            llContent= (LinearLayout) itemView.findViewById(R.id.ll_content);
+            llContent = (LinearLayout) itemView.findViewById(R.id.ll_content);
             llContent.setOnClickListener(this);
             ivImportant.setOnClickListener(this);
             ivActual.setOnClickListener(this);
@@ -307,17 +310,34 @@ public class MainActivity extends AppCompatActivity
 
         @Override
         public void onClick(View v) {
+            int position = getLayoutPosition();
+            Note note = notes.get(position);
             switch (v.getId()) {
                 case R.id.iv_important:
-
+                    ivImportant.setVisibility(View.GONE);
+                    ivActual.setVisibility(View.VISIBLE);
+                    ivUndeleted.setVisibility(View.GONE);
+                    note.setStatus(Constants.STATUS_IMPORTANT);
+                    repository.update(note);
+                    listener.refreshList();
                     break;
                 case R.id.iv_actual:
+                    ivImportant.setVisibility(View.VISIBLE);
+                    ivActual.setVisibility(View.GONE);
+                    ivUndeleted.setVisibility(View.GONE);
+                    note.setStatus(Constants.STATUS_ACTUAL);
+                    repository.update(note);
+                    listener.refreshList();
                     break;
                 case R.id.iv_undelete:
+                    ivImportant.setVisibility(View.VISIBLE);
+                    ivActual.setVisibility(View.GONE);
+                    ivUndeleted.setVisibility(View.GONE);
+                    note.setStatus(Constants.STATUS_ACTUAL);
+                    repository.update(note);
+                    listener.refreshList();
                     break;
                 default:
-                    int position = getLayoutPosition();
-                    Note note = notes.get(position);
                     Intent intent = new Intent(context, NoteActivity.class);
                     intent.putExtra(Constants.EXTRA_ACTION_TYPE, Constants.EXTRA_ACTION_EDIT_NOTE);
                     intent.putExtra(Constants.EXTRA_NOTE, note);
