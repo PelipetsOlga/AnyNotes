@@ -1,0 +1,124 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="?attr/actionBarSize"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/tv_title_example"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="@string/example_title"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_lastsaving_example"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:text="@string/example_date"
+                android:textColor="@color/colorAccent"
+                android:textStyle="italic" />
+
+            <TextView
+                android:id="@+id/tv_text_example"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:text="@string/example_text" />
+
+        </LinearLayout>
+    </ScrollView>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorPrimary" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|left"
+                    android:paddingRight="16dp"
+                    android:src="@mipmap/icomoon_font_size" />
+
+                <org.adw.library.widgets.discreteseekbar.DiscreteSeekBar
+
+                    android:id="@+id/seekbar_size_font"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+
+                    android:paddingTop="46dp"
+                    app:dsb_indicatorColor="@color/colorPrimary"
+                    app:dsb_max="40"
+                    app:dsb_min="10"
+                    app:dsb_progressColor="@color/colorPrimary"
+                    app:dsb_trackColor="@color/colorAccent" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|left"
+                    android:paddingRight="16dp"
+                    android:src="@mipmap/lsf_brightness" />
+
+                <org.adw.library.widgets.discreteseekbar.DiscreteSeekBar
+
+                    android:id="@+id/seekbar_brightness"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:paddingTop="56dp"
+                    app:dsb_indicatorColor="@color/colorPrimary"
+                    app:dsb_max="255"
+                    app:dsb_min="1"
+                    app:dsb_progressColor="@color/colorPrimary"
+                    app:dsb_trackColor="@color/colorAccent" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+
+</LinearLayout>

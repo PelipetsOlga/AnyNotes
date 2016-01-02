@@ -2,6 +2,7 @@ package anynotes.olyalya.pelipets.com.anynotes.activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -37,11 +38,13 @@ import anynotes.olyalya.pelipets.com.anynotes.interfaces.RefreshListListener;
 import anynotes.olyalya.pelipets.com.anynotes.models.Note;
 import anynotes.olyalya.pelipets.com.anynotes.storage.NotesRepository;
 import anynotes.olyalya.pelipets.com.anynotes.utils.Constants;
+import anynotes.olyalya.pelipets.com.anynotes.utils.NoteUtils;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, RefreshListListener {
 
     private static final int NOTE_REQUEST_CODE = 100;
+    private static final int SETTINGS_REQUEST_CODE = 200;
 
     private FloatingActionButton fab;
     private DrawerLayout drawer;
@@ -51,11 +54,15 @@ public class MainActivity extends AppCompatActivity
     private static NotesRepository repository;
     private static List<Note> notes;
     private RefreshListListener refreshListener;
+    private SharedPreferences mPref;
+    private int bright;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        loadSettings();
 
         AdView mAdView = (AdView) findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder()
@@ -103,9 +110,6 @@ public class MainActivity extends AppCompatActivity
                                 adapter.notifyItemRemoved(removedPosition);
                             }
                         }
-
-
-                        //TODO change db
                     }
                 };
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleItemTouchCallback);
@@ -122,6 +126,13 @@ public class MainActivity extends AppCompatActivity
 
         notes.addAll(repository.loadAll());
 
+    }
+
+
+    public void loadSettings() {
+        mPref = getSharedPreferences(Constants.PREFS_NAME, MODE_PRIVATE);
+        bright = mPref.getInt(Constants.PREF_BRIGHTNESS, Constants.BRIGHTNESS);
+        NoteUtils.setBrightness(bright, this);
     }
 
     private void initViews() {
@@ -168,8 +179,8 @@ public class MainActivity extends AppCompatActivity
                         .setAction("Search clicked", null).show();
                 return true;
             case R.id.action_settings:
-                Snackbar.make(fab, "Settings clicked", Snackbar.LENGTH_LONG)
-                        .setAction("Settings clicked", null).show();
+                Intent settings = new Intent(this, SettingsActivity.class);
+                startActivityForResult(settings, SETTINGS_REQUEST_CODE);
                 return true;
             case R.id.action_estimate:
                 Intent intentEstimate = new Intent(Intent.ACTION_VIEW);
@@ -197,6 +208,8 @@ public class MainActivity extends AppCompatActivity
                 getSupportActionBar().setTitle(R.string.menu_all);
             }
             refreshListener.refreshList();
+        } else if (requestCode == SETTINGS_REQUEST_CODE) {
+            refreshSettings();
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
@@ -235,6 +248,19 @@ public class MainActivity extends AppCompatActivity
 
         refreshList();
         return true;
+    }
+
+  /*  @Override
+    protected void onResume() {
+        super.onResume();
+        NoteUtils.log("onResume MainActivity");
+        refreshSettings();
+    }*/
+
+    private void refreshSettings() {
+        loadSettings();
+        adapter = new NotesAdapter(refreshListener);
+        recyclerView.setAdapter(adapter);
     }
 
     private static class NotesAdapter extends RecyclerView.Adapter<NoteViewHolder> {
@@ -331,6 +357,11 @@ public class MainActivity extends AppCompatActivity
             ivImportant.setOnClickListener(this);
             ivActual.setOnClickListener(this);
             ivUndeleted.setOnClickListener(this);
+            SharedPreferences sPref = context.getSharedPreferences(Constants.PREFS_NAME, AppCompatActivity.MODE_PRIVATE);
+            int fontSize = sPref.getInt(Constants.PREF_FONT_SIZE, Constants.SIZE_FONT);
+            tvTitle.setTextSize(fontSize);
+            tvLastSaving.setTextSize(fontSize);
+            tvText.setTextSize(fontSize);
         }
 
         @Override

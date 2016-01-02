@@ -9,6 +9,7 @@ public class Constants {
     public static final String EXTRA_NOTE="note";
     public static final int EXTRA_ACTION_NEW_NOTE=33;
     public static final int EXTRA_ACTION_EDIT_NOTE=66;
+    public static final String EXTRA_LISTENER="listener";
 
     public static final int STATUS_DRAFT = 1;
     public static final int STATUS_DRAFT_DELETED = 5;
@@ -29,4 +30,9 @@ public class Constants {
     public static final String TEST_DEVICE_D="C47B0844075E4129BF541BE3792DCD3D";//lenovo tab2
     public static final String TEST_DEVICE_E="B686CDA2AA5466E0F4C9B63DE9E8B368";//nexus5
 
+    public static final String PREF_FONT_SIZE="font_size";
+    public static final String PREF_BRIGHTNESS="brightness";
+    public static final String PREFS_NAME = "anynotes_prefs";
+    public static final int BRIGHTNESS = 200;
+    public static final int SIZE_FONT = 18;
 }
