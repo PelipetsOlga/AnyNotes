@@ -249,33 +249,37 @@ public class MainActivity extends AppCompatActivity
             Note note = notes.get(position);
             holder.tvTitle.setText(note.getTitle());
             holder.tvText.setText(note.getText());
-            holder.tvStatus.setText(note.getStatus() + "");
             Calendar calendar = Calendar.getInstance();
             calendar.setTimeInMillis(note.getLastSaving());
             holder.tvLastSaving.setText(DateFormat.format("yyyy-MM-dd HH:mm:ss", calendar));
             int status = note.getStatus();
             switch (status) {
                 case Constants.STATUS_ACTUAL:
+                    holder.ivIcon.setImageResource(R.mipmap.pe_7s_star_ffffff_none);
                     holder.ivImportant.setVisibility(View.VISIBLE);
                     holder.ivActual.setVisibility(View.GONE);
                     holder.ivUndeleted.setVisibility(View.GONE);
                     break;
                 case Constants.STATUS_IMPORTANT:
+                    holder.ivIcon.setImageResource(R.mipmap.oi_star_ffffff_none);
                     holder.ivImportant.setVisibility(View.GONE);
                     holder.ivActual.setVisibility(View.VISIBLE);
                     holder.ivUndeleted.setVisibility(View.GONE);
                     break;
                 case Constants.STATUS_DELETED:
+                    holder.ivIcon.setImageResource(R.mipmap.delete_white);
                     holder.ivImportant.setVisibility(View.GONE);
                     holder.ivActual.setVisibility(View.GONE);
                     holder.ivUndeleted.setVisibility(View.VISIBLE);
                     break;
                 case Constants.STATUS_DRAFT:
+                    holder.ivIcon.setImageResource(R.mipmap.draft_white);
                     holder.ivImportant.setVisibility(View.GONE);
                     holder.ivActual.setVisibility(View.GONE);
                     holder.ivUndeleted.setVisibility(View.GONE);
                     break;
                 case Constants.STATUS_DRAFT_DELETED:
+                    holder.ivIcon.setImageResource(R.mipmap.fa_sticky_note);
                     holder.ivImportant.setVisibility(View.GONE);
                     holder.ivActual.setVisibility(View.GONE);
                     holder.ivUndeleted.setVisibility(View.GONE);
@@ -294,26 +298,26 @@ public class MainActivity extends AppCompatActivity
     private static class NoteViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private RefreshListListener listener;
         private final Context context;
-        private final TextView tvStatus;
         private final TextView tvTitle;
         private final TextView tvLastSaving;
         private final TextView tvText;
         private final ImageView ivImportant;
         private final ImageView ivActual;
         private final ImageView ivUndeleted;
+        private final ImageView ivIcon;
         private final LinearLayout llContent;
 
         public NoteViewHolder(View itemView, RefreshListListener listener) {
             super(itemView);
             this.listener = listener;
             context = itemView.getContext();
-            tvStatus = (TextView) itemView.findViewById(R.id.status);
             tvTitle = (TextView) itemView.findViewById(R.id.tv_title);
             tvLastSaving = (TextView) itemView.findViewById(R.id.tv_lastsaving);
             tvText = (TextView) itemView.findViewById(R.id.tv_text);
             ivImportant = (ImageView) itemView.findViewById(R.id.iv_important);
             ivActual = (ImageView) itemView.findViewById(R.id.iv_actual);
             ivUndeleted = (ImageView) itemView.findViewById(R.id.iv_undelete);
+            ivIcon = (ImageView) itemView.findViewById(R.id.iv_icon);
             llContent = (LinearLayout) itemView.findViewById(R.id.ll_content);
             llContent.setOnClickListener(this);
             ivImportant.setOnClickListener(this);
