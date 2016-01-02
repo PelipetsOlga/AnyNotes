@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".activities.MainActivity"
-        tools:showIn="@layout/app_bar_main">
+    tools:showIn="@layout/app_bar_main">
 
     <com.google.android.gms.ads.AdView
         android:id="@+id/adView"
@@ -17,7 +17,7 @@
         android:layout_centerHorizontal="true"
         android:layout_gravity="center_horizontal"
         ads:adSize="SMART_BANNER"
-        ads:adUnitId="@string/banner_ad_unit_id"></com.google.android.gms.ads.AdView>
+        ads:adUnitId="@string/banner_ad_unit_id" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/list"

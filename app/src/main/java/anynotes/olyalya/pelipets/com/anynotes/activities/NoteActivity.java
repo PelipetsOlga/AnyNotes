@@ -1,5 +1,6 @@
 package anynotes.olyalya.pelipets.com.anynotes.activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -10,7 +11,11 @@ import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 
 import java.util.Calendar;
 
@@ -34,11 +39,24 @@ public class NoteActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private long creating;
     private Note startNote;
+    private int modeFab = 1;
+    private static final int MODE_FAB_SAVE = 1;
+    private static final int MODE_FAB_EDIT = 2;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_note);
+
+        AdView mAdView = (AdView) findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder()
+                .addTestDevice(Constants.TEST_DEVICE_A)
+                .addTestDevice(Constants.TEST_DEVICE_B)
+                .addTestDevice(Constants.TEST_DEVICE_C)
+                .addTestDevice(Constants.TEST_DEVICE_D)
+                .addTestDevice(Constants.TEST_DEVICE_E).build();
+        mAdView.loadAd(adRequest);
 
         Intent intent = getIntent();
         type_operation = intent.getIntExtra(Constants.EXTRA_ACTION_TYPE, Constants.EXTRA_ACTION_NEW_NOTE);
@@ -62,27 +80,56 @@ public class NoteActivity extends AppCompatActivity {
             etText.setText(startNote.getText());
         }
 
+        if (type_operation == Constants.EXTRA_ACTION_NEW_NOTE) {
+            modeFab = MODE_FAB_SAVE;
+            fab.setImageResource(R.mipmap.ic_check_white_24dp);
+            etText.setFocusable(true);
+            etTitle.setFocusable(true);
+            etText.setFocusableInTouchMode(true);
+            etText.requestFocus();
+            final InputMethodManager inputMethodManager =
+                    (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            inputMethodManager.showSoftInput(etText, InputMethodManager.SHOW_IMPLICIT);
+        } else if (type_operation == Constants.EXTRA_ACTION_EDIT_NOTE) {
+            modeFab = MODE_FAB_EDIT;
+            fab.setImageResource(R.mipmap.icomoon_pencil);
+            etText.setFocusable(false);
+            etTitle.setFocusable(false);
+        }
+
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Note note = readNoteFromTextFields();
-                if (note == null) {
-                    setResult(RESULT_CANCELED);
+                if (modeFab == MODE_FAB_EDIT) {
+                    modeFab=MODE_FAB_SAVE;
+                    fab.setImageResource(R.mipmap.ic_check_white_24dp);
+                    etTitle.setFocusable(true);
+                    etText.setFocusable(true);
+                    etText.setFocusableInTouchMode(true);
+                    etText.requestFocus();
+                    final InputMethodManager inputMethodManager =
+                            (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    inputMethodManager.showSoftInput(etText, InputMethodManager.SHOW_IMPLICIT);
                 } else {
-                    if (type_operation == Constants.EXTRA_ACTION_NEW_NOTE) {
-                        save(Constants.STATUS_ACTUAL, note, creating);
-                        setResult(RESULT_OK);
+                    Note note = readNoteFromTextFields();
+                    if (note == null) {
+                        setResult(RESULT_CANCELED);
                     } else {
-                        if (startNote.getStatus() == Constants.STATUS_IMPORTANT) {
-                            update(Constants.STATUS_IMPORTANT, note, creating);
+                        if (type_operation == Constants.EXTRA_ACTION_NEW_NOTE) {
+                            save(Constants.STATUS_ACTUAL, note, creating);
                             setResult(RESULT_OK);
                         } else {
-                            update(Constants.STATUS_ACTUAL, note, creating);
-                            setResult(RESULT_OK);
+                            if (startNote.getStatus() == Constants.STATUS_IMPORTANT) {
+                                update(Constants.STATUS_IMPORTANT, note, creating);
+                                setResult(RESULT_OK);
+                            } else {
+                                update(Constants.STATUS_ACTUAL, note, creating);
+                                setResult(RESULT_OK);
+                            }
                         }
                     }
+                    finish();
                 }
-                finish();
             }
         });
 
@@ -185,7 +232,7 @@ public class NoteActivity extends AppCompatActivity {
     }
 
     private void goBack() {
-       if (type_operation == Constants.EXTRA_ACTION_NEW_NOTE) {
+        if (type_operation == Constants.EXTRA_ACTION_NEW_NOTE) {
             Note note = readNoteFromTextFields();
             if (note != null) {
                 save(Constants.STATUS_DRAFT, note, creating);
