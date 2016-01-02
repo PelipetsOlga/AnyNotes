@@ -19,11 +19,18 @@
         ads:adSize="SMART_BANNER"
         ads:adUnitId="@string/banner_ad_unit_id" />
 
-    <android.support.v7.widget.RecyclerView
+    <anynotes.olyalya.pelipets.com.anynotes.views.RecyclerViewEmptySupport
         android:id="@+id/list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/adView"
         android:layout_alignParentTop="true" />
+
+    <TextView
+        android:id="@+id/list_empty"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="@string/empty_list"/>
 
 </RelativeLayout>

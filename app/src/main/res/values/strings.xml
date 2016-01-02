@@ -29,6 +29,7 @@
     <string name="example_text">There is a note content... There is a note content... There is a note content... There is a note content... There is a note content...</string>
 
     <string name="chooser_title_share">Share note</string>
+    <string name="empty_list">No notes yet. Add new note.</string>
 
 
     <string name="new_note_hint_title">Note title</string>

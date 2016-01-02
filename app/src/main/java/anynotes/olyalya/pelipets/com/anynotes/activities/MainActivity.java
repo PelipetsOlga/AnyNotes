@@ -40,6 +40,7 @@ import anynotes.olyalya.pelipets.com.anynotes.models.Note;
 import anynotes.olyalya.pelipets.com.anynotes.storage.NotesRepository;
 import anynotes.olyalya.pelipets.com.anynotes.utils.Constants;
 import anynotes.olyalya.pelipets.com.anynotes.utils.NoteUtils;
+import anynotes.olyalya.pelipets.com.anynotes.views.RecyclerViewEmptySupport;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, RefreshListListener {
@@ -49,7 +50,7 @@ public class MainActivity extends AppCompatActivity
 
     private FloatingActionButton fab;
     private DrawerLayout drawer;
-    private RecyclerView recyclerView;
+    private RecyclerViewEmptySupport recyclerView;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     private static NotesRepository repository;
@@ -57,6 +58,7 @@ public class MainActivity extends AppCompatActivity
     private RefreshListListener refreshListener;
     private SharedPreferences mPref;
     private int bright;
+    private TextView empty;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,12 +105,15 @@ public class MainActivity extends AppCompatActivity
                                 repository.update(note);
                                 notes.remove(removedPosition);
                                 adapter.notifyItemRemoved(removedPosition);
+                                recyclerView.refresh();
+
                             } else if (status == Constants.STATUS_DRAFT
                                     || status == Constants.STATUS_DELETED) {
                                 note.setStatus(Constants.STATUS_DRAFT_DELETED);
                                 repository.update(note);
                                 notes.remove(removedPosition);
                                 adapter.notifyItemRemoved(removedPosition);
+                                recyclerView.refresh();
                             }
                         }
                     }
@@ -125,8 +130,7 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-        notes.addAll(repository.loadAll());
-
+       refreshList();
     }
 
 
@@ -142,9 +146,11 @@ public class MainActivity extends AppCompatActivity
 
         fab = (FloatingActionButton) findViewById(R.id.fab);
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        recyclerView = (RecyclerView) findViewById(R.id.list);
+        empty = (TextView) findViewById(R.id.list_empty);
+        recyclerView = (RecyclerViewEmptySupport) findViewById(R.id.list);
         layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setEmptyView(empty);
 
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -190,7 +196,7 @@ public class MainActivity extends AppCompatActivity
                 startActivity(intentEstimate);
                 return true;
             case R.id.action_sort:
-                SortDialogFragment fragment=new SortDialogFragment();
+                SortDialogFragment fragment = new SortDialogFragment();
                 fragment.show(getSupportFragmentManager(), null);
                 return true;
             case R.id.action_exit:
@@ -219,6 +225,7 @@ public class MainActivity extends AppCompatActivity
         notes.clear();
         notes.addAll(repository.loadAll());
         adapter.notifyDataSetChanged();
+        recyclerView.refresh();
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
@@ -251,14 +258,7 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-  /*  @Override
-    protected void onResume() {
-        super.onResume();
-        NoteUtils.log("onResume MainActivity");
-        refreshSettings();
-    }*/
-
-    private void refreshSettings() {
+      private void refreshSettings() {
         loadSettings();
         adapter = new NotesAdapter(refreshListener);
         recyclerView.setAdapter(adapter);
@@ -284,11 +284,11 @@ public class MainActivity extends AppCompatActivity
             Note note = notes.get(position);
             holder.tvTitle.setText(note.getTitle());
 
-            int length=note.getText().trim().length();
-            if (length<=Constants.LENGTH_TEXT){
+            int length = note.getText().trim().length();
+            if (length <= Constants.LENGTH_TEXT) {
                 holder.tvText.setText(note.getText());
-            }else{
-                holder.tvText.setText(note.getText().substring(0,Constants.LENGTH_TEXT-1)+"...");
+            } else {
+                holder.tvText.setText(note.getText().substring(0, Constants.LENGTH_TEXT - 1) + "...");
             }
 
             Calendar calendar = Calendar.getInstance();
@@ -362,6 +362,7 @@ public class MainActivity extends AppCompatActivity
             ivIcon = (ImageView) itemView.findViewById(R.id.iv_icon);
             llContent = (LinearLayout) itemView.findViewById(R.id.ll_content);
             llContent.setOnClickListener(this);
+            tvText.setOnClickListener(this);
             ivImportant.setOnClickListener(this);
             ivActual.setOnClickListener(this);
             ivUndeleted.setOnClickListener(this);
