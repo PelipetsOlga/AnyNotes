@@ -23,4 +23,10 @@ public class Constants {
     public static final int MODE_SORT_DELETED = 5;
     public static final int MODE_SORT_ALARMS = 6;
 
+    public static final String TEST_DEVICE_A="B605DFC1B0C341FC81584E6AED7DE278";//7562
+    public static final String TEST_DEVICE_B="EC974FC89B02C966F878083846A7AE5B"; //5110
+    public static final String TEST_DEVICE_C="DB2A12672D0ED448B37FCB499FFF50B7"; //M700
+    public static final String TEST_DEVICE_D="C47B0844075E4129BF541BE3792DCD3D";//lenovo tab2
+    public static final String TEST_DEVICE_E="B686CDA2AA5466E0F4C9B63DE9E8B368";//nexus5
+
 }

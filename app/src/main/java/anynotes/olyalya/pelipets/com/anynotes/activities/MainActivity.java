@@ -23,6 +23,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -52,6 +55,16 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        AdView mAdView = (AdView) findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder()
+                .addTestDevice(Constants.TEST_DEVICE_A)
+                .addTestDevice(Constants.TEST_DEVICE_B)
+                .addTestDevice(Constants.TEST_DEVICE_C)
+                .addTestDevice(Constants.TEST_DEVICE_D)
+                .addTestDevice(Constants.TEST_DEVICE_E).build();
+        mAdView.loadAd(adRequest);
+
         refreshListener = this;
         initViews();
 
