@@ -5,14 +5,14 @@
     <item
         android:id="@+id/action_alarm"
         android:orderInCategory="100"
-        android:icon="@android:drawable/ic_lock_idle_alarm"
+        android:icon="@mipmap/alarm_white"
         android:title="@string/action_settings"
         app:showAsAction="always" />
 
     <item
         android:id="@+id/action_delete"
         android:orderInCategory="100"
-        android:icon="@android:drawable/ic_menu_delete"
+        android:icon="@mipmap/delete_white"
         android:title="@string/action_help"
         app:showAsAction="always" />
     <item
