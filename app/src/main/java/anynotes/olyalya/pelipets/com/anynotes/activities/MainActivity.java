@@ -2,6 +2,7 @@ package anynotes.olyalya.pelipets.com.anynotes.activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -171,16 +172,17 @@ public class MainActivity extends AppCompatActivity
                         .setAction("Settings clicked", null).show();
                 return true;
             case R.id.action_estimate:
-                Snackbar.make(fab, "Rate us clicked", Snackbar.LENGTH_LONG)
-                        .setAction("Rate us clicked", null).show();
+                Intent intentEstimate = new Intent(Intent.ACTION_VIEW);
+                intentEstimate.setData(Uri
+                        .parse("market://details?id=anynotes.olyalya.pelipets.com.anynotes"));
+                startActivity(intentEstimate);
                 return true;
             case R.id.action_help:
                 Snackbar.make(fab, "Help clicked", Snackbar.LENGTH_LONG)
                         .setAction("Help clicked", null).show();
                 return true;
             case R.id.action_exit:
-                Snackbar.make(fab, "Exit clicked", Snackbar.LENGTH_LONG)
-                        .setAction("Exit clicked", null).show();
+                finish();
                 return true;
             default:
                 return false;
@@ -192,8 +194,9 @@ public class MainActivity extends AppCompatActivity
         if (requestCode == NOTE_REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
                 repository.setModeSort(Constants.MODE_SORT_ALL);
-                refreshList();
+                getSupportActionBar().setTitle(R.string.menu_all);
             }
+            refreshListener.refreshList();
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
@@ -210,14 +213,19 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.all_notes) {
+            getSupportActionBar().setTitle(R.string.menu_all);
             repository.setModeSort(Constants.MODE_SORT_ALL);
         } else if (id == R.id.important_notes) {
+            getSupportActionBar().setTitle(R.string.menu_important);
             repository.setModeSort(Constants.MODE_SORT_IMPORTANTS);
         } else if (id == R.id.actual_notes) {
+            getSupportActionBar().setTitle(R.string.menu_actual);
             repository.setModeSort(Constants.MODE_SORT_ACTUALS);
         } else if (id == R.id.drafts) {
+            getSupportActionBar().setTitle(R.string.menu_drafts);
             repository.setModeSort(Constants.MODE_SORT_DRAFTS);
         } else if (id == R.id.deleted) {
+            getSupportActionBar().setTitle(R.string.menu_deleted);
             repository.setModeSort(Constants.MODE_SORT_DELETED);
         } //else if (id == R.id.alarms) {
         //}

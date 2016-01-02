@@ -101,7 +101,7 @@ public class NoteActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (modeFab == MODE_FAB_EDIT) {
-                    modeFab=MODE_FAB_SAVE;
+                    modeFab = MODE_FAB_SAVE;
                     fab.setImageResource(R.mipmap.ic_check_white_24dp);
                     etTitle.setFocusable(true);
                     etText.setFocusable(true);
@@ -220,8 +220,37 @@ public class NoteActivity extends AppCompatActivity {
                         .setAction("Alarm clicked", null).show();
                 return true;
             case R.id.action_delete:
-                Snackbar.make(fab, "Delete clicked", Snackbar.LENGTH_LONG)
-                        .setAction("Delete clicked", null).show();
+                if (type_operation == Constants.EXTRA_ACTION_NEW_NOTE) {
+                    Note note = readNoteFromTextFields();
+                    if (note != null) {
+                        save(Constants.STATUS_DRAFT_DELETED, note, creating);
+                    }
+                } else if (type_operation == Constants.EXTRA_ACTION_EDIT_NOTE) {
+                    if (modeFab == MODE_FAB_EDIT) {
+                        if (startNote.getStatus() == Constants.STATUS_ACTUAL ||
+                                startNote.getStatus() == Constants.STATUS_IMPORTANT) {
+                            update(Constants.STATUS_DELETED, startNote, creating);
+                        } else if (startNote.getStatus() == Constants.STATUS_DELETED ||
+                                startNote.getStatus() == Constants.STATUS_DRAFT) {
+                            update(Constants.STATUS_DRAFT_DELETED, startNote, creating);
+                        }
+
+                    } else if (modeFab == MODE_FAB_SAVE) {
+                        Note note = readNoteFromTextFields();
+                        if (note != null) {
+                            if (startNote.getStatus() == Constants.STATUS_ACTUAL ||
+                                    startNote.getStatus() == Constants.STATUS_IMPORTANT) {
+                                update(Constants.STATUS_DELETED, note, creating);
+                            } else if (startNote.getStatus() == Constants.STATUS_DELETED ||
+                                    startNote.getStatus() == Constants.STATUS_DRAFT) {
+                                update(Constants.STATUS_DRAFT_DELETED, note, creating);
+                            }
+                        }
+                    }
+
+                }
+                setResult(RESULT_CANCELED);
+                finish();
                 return true;
             case R.id.action_share:
                 Snackbar.make(fab, "Share clicked", Snackbar.LENGTH_LONG)
