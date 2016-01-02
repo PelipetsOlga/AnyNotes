@@ -35,4 +35,6 @@ public class Constants {
     public static final String PREFS_NAME = "anynotes_prefs";
     public static final int BRIGHTNESS = 200;
     public static final int SIZE_FONT = 18;
+    public static final int LENGTH_TEXT = 300;
+    public static final int TITLE_LENGTH = 80;
 }

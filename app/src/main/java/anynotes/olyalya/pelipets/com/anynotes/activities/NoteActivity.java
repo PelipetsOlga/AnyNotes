@@ -28,7 +28,6 @@ import anynotes.olyalya.pelipets.com.anynotes.utils.Constants;
 import anynotes.olyalya.pelipets.com.anynotes.utils.NoteUtils;
 
 public class NoteActivity extends AppCompatActivity {
-    private static final int TITLE_LENGTH = 100;
     private static final String TAG_CREATING = "creating";
 
     private int type_operation = Constants.EXTRA_ACTION_NEW_NOTE;
@@ -112,6 +111,7 @@ public class NoteActivity extends AppCompatActivity {
                     etTitle.setFocusable(true);
                     etText.setFocusable(true);
                     etText.setFocusableInTouchMode(true);
+                    etTitle.setFocusableInTouchMode(true);
                     etText.requestFocus();
                     final InputMethodManager inputMethodManager =
                             (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -195,10 +195,10 @@ public class NoteActivity extends AppCompatActivity {
         }
         String title = etTitle.getText().toString().trim();
         if (TextUtils.isEmpty(title)) {
-            if (content.length() <= TITLE_LENGTH) {
+            if (content.length() <= Constants.TITLE_LENGTH) {
                 title = content;
             } else {
-                title = content.substring(0, TITLE_LENGTH) + "...";
+                title = content.substring(0, Constants.TITLE_LENGTH) + "...";
             }
         }
         note.setTitle(title);

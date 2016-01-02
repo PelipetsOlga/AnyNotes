@@ -282,7 +282,14 @@ public class MainActivity extends AppCompatActivity
         public void onBindViewHolder(NoteViewHolder holder, int position) {
             Note note = notes.get(position);
             holder.tvTitle.setText(note.getTitle());
-            holder.tvText.setText(note.getText());
+
+            int length=note.getText().trim().length();
+            if (length<=Constants.LENGTH_TEXT){
+                holder.tvText.setText(note.getText());
+            }else{
+                holder.tvText.setText(note.getText().substring(0,Constants.LENGTH_TEXT-1)+"...");
+            }
+
             Calendar calendar = Calendar.getInstance();
             calendar.setTimeInMillis(note.getLastSaving());
             holder.tvLastSaving.setText(DateFormat.format("yyyy-MM-dd HH:mm:ss", calendar));
