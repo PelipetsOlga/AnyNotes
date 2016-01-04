@@ -60,7 +60,8 @@ public class NoteActivity extends AppCompatActivity {
                 .addTestDevice(Constants.TEST_DEVICE_B)
                 .addTestDevice(Constants.TEST_DEVICE_C)
                 .addTestDevice(Constants.TEST_DEVICE_D)
-                .addTestDevice(Constants.TEST_DEVICE_E).build();
+                .addTestDevice(Constants.TEST_DEVICE_E)
+                .addTestDevice(Constants.TEST_DEVICE_G).build();
         mAdView.loadAd(adRequest);
 
         Intent intent = getIntent();

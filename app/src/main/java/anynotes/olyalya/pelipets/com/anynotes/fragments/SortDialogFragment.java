@@ -5,6 +5,7 @@ import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.ImageView;
 
 import anynotes.olyalya.pelipets.com.anynotes.R;
@@ -38,6 +39,8 @@ public class SortDialogFragment extends DialogFragment implements View.OnClickLi
         repository = ((NotesApplication) getActivity().getApplication()).getDaoSession().getRepository();
 
         View rootView = inflater.inflate(R.layout.sort_dialog_fragment, container, false);
+
+        getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
 
         ImageView ivUnsort = (ImageView) rootView.findViewById(R.id.iv_unsort);
         ImageView ivSortAlphaAsc = (ImageView) rootView.findViewById(R.id.iv_sort_alpha_asc);

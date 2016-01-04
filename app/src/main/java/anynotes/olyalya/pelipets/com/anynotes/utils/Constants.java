@@ -35,6 +35,9 @@ public class Constants {
     public static final String TEST_DEVICE_C="DB2A12672D0ED448B37FCB499FFF50B7"; //M700
     public static final String TEST_DEVICE_D="C47B0844075E4129BF541BE3792DCD3D";//lenovo tab2
     public static final String TEST_DEVICE_E="B686CDA2AA5466E0F4C9B63DE9E8B368";//nexus5
+    public static final String TEST_DEVICE_G="86D72F707C2EDC7D0A97028DC211974B";//samsung G360H
+
+
 
     public static final String PREF_FONT_SIZE="font_size";
     public static final String PREF_BRIGHTNESS="brightness";
