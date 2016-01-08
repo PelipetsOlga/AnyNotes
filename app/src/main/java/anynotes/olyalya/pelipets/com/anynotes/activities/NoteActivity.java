@@ -53,6 +53,7 @@ public class NoteActivity extends AppCompatActivity {
     private int bright;
     private int size;
     private static final int REQUEST_CODE = 1234;
+    private boolean hasMicrophone = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +78,18 @@ public class NoteActivity extends AppCompatActivity {
             startNote = (Note) intent.getSerializableExtra(Constants.EXTRA_NOTE);
         }
 
+        initViews();
+
+        if (setMicrophoneEnabled()) {
+            hasMicrophone = true;
+            ivMicrophone.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startVoiceRecognitionActivity();
+                }
+            });
+        }
+
         repository = ((NotesApplication) getApplication()).getDaoSession().getRepository();
 
         if (type_operation == Constants.EXTRA_ACTION_NEW_NOTE) {
@@ -86,16 +99,7 @@ public class NoteActivity extends AppCompatActivity {
             creating = startNote.getCreating();
             NoteUtils.log("creating from startNote = " + creating);
         }
-        initViews();
 
-        if (setMicrophoneEnabled()) {
-            ivMicrophone.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    startVoiceRecognitionActivity();
-                }
-            });
-        }
 
         if (type_operation == Constants.EXTRA_ACTION_EDIT_NOTE) {
             etTitle.setText(startNote.getTitle());
@@ -105,6 +109,7 @@ public class NoteActivity extends AppCompatActivity {
         if (type_operation == Constants.EXTRA_ACTION_NEW_NOTE) {
             modeFab = MODE_FAB_SAVE;
             fab.setImageResource(R.mipmap.ic_check_white_24dp);
+            ivMicrophone.setVisibility(View.VISIBLE);
             etText.setFocusable(true);
             etTitle.setFocusable(true);
             etText.setFocusableInTouchMode(true);
@@ -114,6 +119,7 @@ public class NoteActivity extends AppCompatActivity {
             inputMethodManager.showSoftInput(etText, InputMethodManager.SHOW_IMPLICIT);
         } else if (type_operation == Constants.EXTRA_ACTION_EDIT_NOTE) {
             modeFab = MODE_FAB_EDIT;
+            ivMicrophone.setVisibility(View.INVISIBLE);
             fab.setImageResource(R.mipmap.icomoon_pencil);
             etText.setFocusable(false);
             etTitle.setFocusable(false);
@@ -124,6 +130,7 @@ public class NoteActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (modeFab == MODE_FAB_EDIT) {
                     modeFab = MODE_FAB_SAVE;
+                    ivMicrophone.setVisibility(View.VISIBLE);
                     fab.setImageResource(R.mipmap.ic_check_white_24dp);
                     etTitle.setFocusable(true);
                     etText.setFocusable(true);
@@ -172,23 +179,30 @@ public class NoteActivity extends AppCompatActivity {
     }
 
     private void startVoiceRecognitionActivity() {
+        ivMicrophone.setImageResource(R.mipmap.fa_microphone_84816d_none);
         Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
                 RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
         String direction = getResources().getString(R.string.voice_direction);
         intent.putExtra(RecognizerIntent.EXTRA_PROMPT, direction);
         startActivityForResult(intent, REQUEST_CODE);
+
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode==REQUEST_CODE){
+            ivMicrophone.setImageResource(R.mipmap.fa_microphone);
+        }
         if (requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
             ArrayList<String> matches = data.getStringArrayListExtra(
                     RecognizerIntent.EXTRA_RESULTS);
             if (matches != null && matches.size() != 0) {
-                etText.setText(matches.get(0));
-            } else {
-                etText.setText("");
+                String textToInsert=matches.get(0);
+                int start = Math.max(etText.getSelectionStart(), 0);
+                int end = Math.max(etText.getSelectionEnd(), 0);
+                etText.getText().replace(Math.min(start, end), Math.max(start, end),
+                        textToInsert, 0, textToInsert.length());
             }
         }
         super.onActivityResult(requestCode, resultCode, data);
