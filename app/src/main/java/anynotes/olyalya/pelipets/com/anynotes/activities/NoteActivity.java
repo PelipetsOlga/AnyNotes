@@ -210,7 +210,7 @@ public class NoteActivity extends AppCompatActivity {
                 }
 
                 int start = Math.max(replacedEditText.getSelectionStart(), 0);
-                int end = Math.max(replacedEditText.getSelectionEnd(), 0);
+                int end = Math.max(replacedEditText .getSelectionEnd(), 0);
                 replacedEditText.getText().replace(Math.min(start, end), Math.max(start, end),
                         textToInsert, 0, textToInsert.length());
             }
