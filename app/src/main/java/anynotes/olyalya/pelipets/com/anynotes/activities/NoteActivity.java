@@ -3,7 +3,10 @@ package anynotes.olyalya.pelipets.com.anynotes.activities;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.os.Bundle;
+import android.speech.RecognizerIntent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -14,11 +17,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import anynotes.olyalya.pelipets.com.anynotes.R;
 import anynotes.olyalya.pelipets.com.anynotes.application.NotesApplication;
@@ -34,6 +40,7 @@ public class NoteActivity extends AppCompatActivity {
 
     private EditText etTitle;
     private EditText etText;
+    private ImageView ivMicrophone;
     private FloatingActionButton fab;
     private NotesRepository repository;
     private Toolbar toolbar;
@@ -45,7 +52,7 @@ public class NoteActivity extends AppCompatActivity {
     private SharedPreferences sPref;
     private int bright;
     private int size;
-
+    private static final int REQUEST_CODE = 1234;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +87,15 @@ public class NoteActivity extends AppCompatActivity {
             NoteUtils.log("creating from startNote = " + creating);
         }
         initViews();
+
+        if (setMicrophoneEnabled()) {
+            ivMicrophone.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startVoiceRecognitionActivity();
+                }
+            });
+        }
 
         if (type_operation == Constants.EXTRA_ACTION_EDIT_NOTE) {
             etTitle.setText(startNote.getTitle());
@@ -141,6 +157,41 @@ public class NoteActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    private boolean setMicrophoneEnabled() {
+        PackageManager pm = getPackageManager();
+        List<ResolveInfo> activities = pm.queryIntentActivities(
+                new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH), 0);
+        if (activities.size() == 0) {
+            ivMicrophone.setVisibility(View.GONE);
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    private void startVoiceRecognitionActivity() {
+        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+                RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+        String direction = getResources().getString(R.string.voice_direction);
+        intent.putExtra(RecognizerIntent.EXTRA_PROMPT, direction);
+        startActivityForResult(intent, REQUEST_CODE);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
+            ArrayList<String> matches = data.getStringArrayListExtra(
+                    RecognizerIntent.EXTRA_RESULTS);
+            if (matches != null && matches.size() != 0) {
+                etText.setText(matches.get(0));
+            } else {
+                etText.setText("");
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     public void loadSettings() {
@@ -217,6 +268,7 @@ public class NoteActivity extends AppCompatActivity {
         etText = (EditText) findViewById(R.id.et_text);
         etTitle.setTextSize(size);
         etText.setTextSize(size);
+        ivMicrophone = (ImageView) findViewById(R.id.iv_microphone);
     }
 
     @Override

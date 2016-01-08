@@ -31,6 +31,8 @@
     <string name="chooser_title_share">Share note</string>
     <string name="empty_list">No notes yet. Add new note.</string>
 
+    <string name="voice_direction">Говорите</string>
+
 
     <string name="new_note_hint_title">Note title</string>
     <string name="new_note_hint_text">Let\'s write your idea</string>
