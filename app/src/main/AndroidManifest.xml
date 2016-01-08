@@ -39,7 +39,12 @@
         <receiver
             android:name=".receivers.TimeNotification"
             android:enabled="true"
-            android:exported="true"></receiver>
+            android:exported="true" />
+
+        <activity
+            android:name=".activities.ReminderActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:label="@string/reminder_toolbar_title"/>
     </application>
 
 </manifest>

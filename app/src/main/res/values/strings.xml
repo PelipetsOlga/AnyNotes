@@ -31,14 +31,14 @@
     <string name="chooser_title_share">Share note</string>
     <string name="empty_list">No notes yet. Add new note.</string>
 
-    <string name="voice_direction">Говорите</string>
+    <string name="voice_direction">Speak</string>
+    <string name="reminder_toolbar_title">Reminder</string>
 
 
     <string name="new_note_hint_title">Note title</string>
     <string name="new_note_hint_text">Let\'s write your idea</string>
     <string name="banner_ad_unit_id">ca-app-pub-6973932400636393/3338064660</string>
     <string name="banner_inner_ad_unit_id">ca-app-pub-6973932400636393/4278244269</string>
-
 
 
 </resources>

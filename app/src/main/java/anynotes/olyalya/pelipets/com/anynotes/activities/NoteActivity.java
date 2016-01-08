@@ -8,7 +8,6 @@ import android.content.pm.ResolveInfo;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
@@ -18,6 +17,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -52,7 +52,8 @@ public class NoteActivity extends AppCompatActivity {
     private SharedPreferences sPref;
     private int bright;
     private int size;
-    private static final int REQUEST_CODE = 1234;
+    private static final int REQUEST_CODE_VOICE = 1234;
+    private static final int REQUEST_CODE_ALARM = 5678;
     private boolean hasMicrophone = false;
 
     @Override
@@ -185,34 +186,40 @@ public class NoteActivity extends AppCompatActivity {
                 RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
         String direction = getResources().getString(R.string.voice_direction);
         intent.putExtra(RecognizerIntent.EXTRA_PROMPT, direction);
-        startActivityForResult(intent, REQUEST_CODE);
+        startActivityForResult(intent, REQUEST_CODE_VOICE);
 
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode==REQUEST_CODE){
+        if (requestCode == REQUEST_CODE_VOICE) {
             ivMicrophone.setImageResource(R.mipmap.fa_microphone);
-        }
-        if (requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
-            ArrayList<String> matches = data.getStringArrayListExtra(
-                    RecognizerIntent.EXTRA_RESULTS);
-            if (matches != null && matches.size() != 0) {
-                String textToInsert=matches.get(0);
+            if (resultCode == RESULT_OK) {
+                ArrayList<String> matches = data.getStringArrayListExtra(
+                        RecognizerIntent.EXTRA_RESULTS);
+                if (matches != null && matches.size() != 0) {
+                    String textToInsert = matches.get(0);
 
-                EditText replacedEditText=etText;
+                    EditText replacedEditText = etText;
 
-                EditText currentFocus=(EditText)getWindow().getCurrentFocus();
-                if (currentFocus!=null){
-                    if (currentFocus.getId()==R.id.et_title){
-                        replacedEditText=etTitle;
+                    EditText currentFocus = (EditText) getWindow().getCurrentFocus();
+                    if (currentFocus != null) {
+                        if (currentFocus.getId() == R.id.et_title) {
+                            replacedEditText = etTitle;
+                        }
                     }
-                }
 
-                int start = Math.max(replacedEditText.getSelectionStart(), 0);
-                int end = Math.max(replacedEditText .getSelectionEnd(), 0);
-                replacedEditText.getText().replace(Math.min(start, end), Math.max(start, end),
-                        textToInsert, 0, textToInsert.length());
+                    int start = Math.max(replacedEditText.getSelectionStart(), 0);
+                    int end = Math.max(replacedEditText.getSelectionEnd(), 0);
+                    replacedEditText.getText().replace(Math.min(start, end), Math.max(start, end),
+                            textToInsert, 0, textToInsert.length());
+                }
+            }
+        } else if (requestCode == REQUEST_CODE_ALARM) {
+            if (resultCode == RESULT_OK) {
+                Toast.makeText(this, "ALARM RESULT OK", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "ALARM RESULT CANCEL", Toast.LENGTH_SHORT).show();
             }
         }
         super.onActivityResult(requestCode, resultCode, data);
@@ -308,8 +315,8 @@ public class NoteActivity extends AppCompatActivity {
                 goBack();
                 return true;
             case R.id.action_alarm:
-                Snackbar.make(fab, "Alarm clicked", Snackbar.LENGTH_LONG)
-                        .setAction("Alarm clicked", null).show();
+                Intent alarmIntent = new Intent(this, ReminderActivity.class);
+                startActivityForResult(alarmIntent, REQUEST_CODE_ALARM);
                 return true;
             case R.id.action_delete:
                 if (type_operation == Constants.EXTRA_ACTION_NEW_NOTE) {
