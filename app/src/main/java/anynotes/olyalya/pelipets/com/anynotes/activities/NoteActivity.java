@@ -199,9 +199,19 @@ public class NoteActivity extends AppCompatActivity {
                     RecognizerIntent.EXTRA_RESULTS);
             if (matches != null && matches.size() != 0) {
                 String textToInsert=matches.get(0);
-                int start = Math.max(etText.getSelectionStart(), 0);
-                int end = Math.max(etText.getSelectionEnd(), 0);
-                etText.getText().replace(Math.min(start, end), Math.max(start, end),
+
+                EditText replacedEditText=etText;
+
+                EditText currentFocus=(EditText)getWindow().getCurrentFocus();
+                if (currentFocus!=null){
+                    if (currentFocus.getId()==R.id.et_title){
+                        replacedEditText=etTitle;
+                    }
+                }
+
+                int start = Math.max(replacedEditText.getSelectionStart(), 0);
+                int end = Math.max(replacedEditText.getSelectionEnd(), 0);
+                replacedEditText.getText().replace(Math.min(start, end), Math.max(start, end),
                         textToInsert, 0, textToInsert.length());
             }
         }
