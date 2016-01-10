@@ -43,25 +43,30 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_margin="8dp"
-                android:paddingRight="24dp"
-                android:button="@drawable/checkbox_alarm_clock" />
+                android:button="@drawable/checkbox_alarm_clock"
+                android:paddingRight="24dp" />
 
             <TextView
                 android:id="@+id/tv_clock"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="data"
                 android:layout_gravity="center_vertical|left"
+                android:text="data"
                 android:textColor="@color/grayInactive" />
 
         </LinearLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/grayInactive" />
 
         <LinearLayout
             android:id="@+id/ll_repeat"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="24dp">
+            android:layout_marginTop="24dp"
+            android:orientation="horizontal">
 
             <CheckBox
                 android:id="@+id/check_repeat"
@@ -69,21 +74,145 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_margin="8dp"
-                android:paddingRight="24dp"
-                android:button="@drawable/checkbox_alarm_repeat" />
+                android:button="@drawable/checkbox_alarm_repeat"
+                android:paddingRight="24dp" />
 
             <TextView
                 android:id="@+id/tv_repeat"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="repeat"
                 android:layout_gravity="center_vertical|left"
+                android:text="repeat"
                 android:textColor="@color/grayInactive" />
 
         </LinearLayout>
 
-    </LinearLayout>
+        <LinearLayout
+            android:id="@+id/grid_repeat"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="24dp"
+            android:orientation="vertical"
+            android:stretchMode="columnWidth"
+            android:visibility="visible">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/repeat_1hour"
+                    style="@style/repeat_unity"
+                    android:text="@string/repeat_1_hour" />
+
+                <TextView
+                    android:id="@+id/repeat_3hour"
+                    style="@style/repeat_unity"
+                    android:text="@string/repeat_3_hour" />
+
+                <TextView
+                    android:id="@+id/repeat_6hour"
+                    style="@style/repeat_unity"
+                    android:text="@string/repeat_6_hour" />
+
+                <TextView
+                    android:id="@+id/repeat_12hour"
+                    style="@style/repeat_unity"
+                    android:text="@string/repeat_12_hour" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+
+                <TextView
+                    android:id="@+id/repeat_1day"
+                    style="@style/repeat_unity"
+                    android:text="@string/repeat_1_day" />
+
+                <TextView
+                    android:id="@+id/repeat_2day"
+                    style="@style/repeat_unity"
+                    android:text="@string/repeat_2_day" />
+
+                <TextView
+                    android:id="@+id/repeat_3day"
+                    style="@style/repeat_unity"
+                    android:text="@string/repeat_3_day" />
+
+                <TextView
+                    android:id="@+id/repeat_10day"
+                    style="@style/repeat_unity"
+                    android:text="@string/repeat_10_day" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+
+                <TextView
+                    android:id="@+id/repeat_1week"
+                    style="@style/repeat_unity"
+                    android:text="@string/repeat_1_week" />
+
+                <TextView
+                    android:id="@+id/repeat_2week"
+                    style="@style/repeat_unity"
+                    android:text="@string/repeat_2_week" />
+
+                <TextView
+                    android:id="@+id/repeat_3week"
+                    style="@style/repeat_unity"
+                    android:text="@string/repeat_3_week" />
+
+                <TextView
+                    android:id="@+id/repeat_4week"
+                    style="@style/repeat_unity"
+                    android:text="@string/repeat_4_week" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/repeat_1month"
+                    style="@style/repeat_unity"
+                    android:text="@string/repeat_1_month" />
+
+                <TextView
+                    android:id="@+id/repeat_3month"
+                    style="@style/repeat_unity"
+                    android:text="@string/repeat_3_month" />
+
+                <TextView
+                    android:id="@+id/repeat_6month"
+                    style="@style/repeat_unity"
+                    android:text="@string/repeat_6_month" />
+
+                <TextView
+                    android:id="@+id/repeat_year"
+                    style="@style/repeat_unity"
+                    android:text="@string/repeat_year" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
 
 
 </android.support.design.widget.CoordinatorLayout>

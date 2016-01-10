@@ -22,6 +22,7 @@ public class ReminderActivity extends AppCompatActivity {
     private CheckBox checkRepeat;
     private TextView tvClock;
     private TextView tvRepeat;
+    private LinearLayout gridRepeat;
     private int size;
 
     @Override
@@ -31,6 +32,9 @@ public class ReminderActivity extends AppCompatActivity {
 
         loadSettings();
         initViews();
+
+
+
     }
 
     public void loadSettings() {
@@ -47,12 +51,18 @@ public class ReminderActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
 
-        checkClock= (CheckBox) findViewById(R.id.check_clock);
-        checkRepeat= (CheckBox) findViewById(R.id.check_repeat);
-        tvClock= (TextView) findViewById(R.id.tv_clock);
-        tvRepeat= (TextView) findViewById(R.id.tv_repeat);
-        llClock= (LinearLayout) findViewById(R.id.ll_clock);
-        llRepeat= (LinearLayout) findViewById(R.id.ll_repeat);
+        checkClock = (CheckBox) findViewById(R.id.check_clock);
+        checkRepeat = (CheckBox) findViewById(R.id.check_repeat);
+        tvClock = (TextView) findViewById(R.id.tv_clock);
+        tvRepeat = (TextView) findViewById(R.id.tv_repeat);
+        llClock = (LinearLayout) findViewById(R.id.ll_clock);
+        llRepeat = (LinearLayout) findViewById(R.id.ll_repeat);
+        gridRepeat = (LinearLayout) findViewById(R.id.grid_repeat);
+        if (checkRepeat.isChecked()) {
+            gridRepeat.setVisibility(View.VISIBLE);
+        } else {
+            gridRepeat.setVisibility(View.GONE);
+        }
 
         tvClock.setTextSize(size);
         tvRepeat.setTextSize(size);
@@ -71,10 +81,12 @@ public class ReminderActivity extends AppCompatActivity {
         checkRepeat.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked){
+                if (isChecked) {
                     tvRepeat.setTextColor(getResources().getColor(R.color.colorPrimary));
-                }else{
+                     gridRepeat.setVisibility(View.VISIBLE);
+                } else {
                     tvRepeat.setTextColor(getResources().getColor(R.color.grayInactive));
+                    gridRepeat.setVisibility(View.GONE);
                 }
             }
         });
