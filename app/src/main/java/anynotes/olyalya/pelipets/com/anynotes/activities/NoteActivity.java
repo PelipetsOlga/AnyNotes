@@ -84,12 +84,13 @@ public class NoteActivity extends AppCompatActivity {
 
         if (setMicrophoneEnabled()) {
             hasMicrophone = true;
-            ivMicrophone.setOnClickListener(new View.OnClickListener() {
+            //// TODO: 10.01.2016
+           /* ivMicrophone.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     startVoiceRecognitionActivity();
                 }
-            });
+            });*/
         }
 
         repository = ((NotesApplication) getApplication()).getDaoSession().getRepository();
@@ -111,7 +112,14 @@ public class NoteActivity extends AppCompatActivity {
         if (type_operation == Constants.EXTRA_ACTION_NEW_NOTE) {
             modeFab = MODE_FAB_SAVE;
             fab.setImageResource(R.mipmap.ic_check_white_24dp);
-            ivMicrophone.setVisibility(View.VISIBLE);
+            //ivMicrophone.setVisibility(View.VISIBLE);
+            ivMicrophone.setImageResource(R.mipmap.fa_microphone);
+            ivMicrophone.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startVoiceRecognitionActivity();
+                }
+            });
             etText.setFocusable(true);
             etTitle.setFocusable(true);
             etText.setFocusableInTouchMode(true);
@@ -121,7 +129,15 @@ public class NoteActivity extends AppCompatActivity {
             inputMethodManager.showSoftInput(etText, InputMethodManager.SHOW_IMPLICIT);
         } else if (type_operation == Constants.EXTRA_ACTION_EDIT_NOTE) {
             modeFab = MODE_FAB_EDIT;
-            ivMicrophone.setVisibility(View.INVISIBLE);
+            //ivMicrophone.setVisibility(View.INVISIBLE);
+            ivMicrophone.setImageResource(R.mipmap.fa_volume_up);
+            ivMicrophone.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //todo speech
+                    Toast.makeText(NoteActivity.this, "speech", Toast.LENGTH_SHORT).show();
+                }
+            });
             fab.setImageResource(R.mipmap.icomoon_pencil);
             etText.setFocusable(false);
             etTitle.setFocusable(false);
@@ -132,7 +148,14 @@ public class NoteActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (modeFab == MODE_FAB_EDIT) {
                     modeFab = MODE_FAB_SAVE;
-                    ivMicrophone.setVisibility(View.VISIBLE);
+                    //ivMicrophone.setVisibility(View.VISIBLE);
+                    ivMicrophone.setImageResource(R.mipmap.fa_microphone);
+                    ivMicrophone.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            startVoiceRecognitionActivity();
+                        }
+                    });
                     fab.setImageResource(R.mipmap.ic_check_white_24dp);
                     etTitle.setFocusable(true);
                     etText.setFocusable(true);
