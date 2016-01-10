@@ -55,6 +55,7 @@ public class NoteActivity extends AppCompatActivity {
     private static final int REQUEST_CODE_VOICE = 1234;
     private static final int REQUEST_CODE_ALARM = 5678;
     private boolean hasMicrophone = false;
+    private MenuItem menuAlarm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -161,6 +162,7 @@ public class NoteActivity extends AppCompatActivity {
                     }
                     finish();
                 }
+                invalidateOptionsMenu();
             }
         });
 
@@ -305,6 +307,17 @@ public class NoteActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.note_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        menuAlarm = menu.findItem(R.id.action_alarm);
+        if (modeFab==MODE_FAB_EDIT){
+            menuAlarm.setVisible(false);
+        }else if (modeFab==MODE_FAB_SAVE){
+            menuAlarm.setVisible(true);
+        }
         return true;
     }
 
