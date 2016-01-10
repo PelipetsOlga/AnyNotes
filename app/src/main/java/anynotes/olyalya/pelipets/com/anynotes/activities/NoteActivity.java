@@ -84,13 +84,6 @@ public class NoteActivity extends AppCompatActivity {
 
         if (setMicrophoneEnabled()) {
             hasMicrophone = true;
-            //// TODO: 10.01.2016
-           /* ivMicrophone.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    startVoiceRecognitionActivity();
-                }
-            });*/
         }
 
         repository = ((NotesApplication) getApplication()).getDaoSession().getRepository();
@@ -129,7 +122,6 @@ public class NoteActivity extends AppCompatActivity {
             inputMethodManager.showSoftInput(etText, InputMethodManager.SHOW_IMPLICIT);
         } else if (type_operation == Constants.EXTRA_ACTION_EDIT_NOTE) {
             modeFab = MODE_FAB_EDIT;
-            //ivMicrophone.setVisibility(View.INVISIBLE);
             ivMicrophone.setImageResource(R.mipmap.fa_volume_up);
             ivMicrophone.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -148,7 +140,6 @@ public class NoteActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (modeFab == MODE_FAB_EDIT) {
                     modeFab = MODE_FAB_SAVE;
-                    //ivMicrophone.setVisibility(View.VISIBLE);
                     ivMicrophone.setImageResource(R.mipmap.fa_microphone);
                     ivMicrophone.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -205,14 +196,15 @@ public class NoteActivity extends AppCompatActivity {
     }
 
     private void startVoiceRecognitionActivity() {
-        ivMicrophone.setImageResource(R.mipmap.fa_microphone_84816d_none);
-        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
-                RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
-        String direction = getResources().getString(R.string.voice_direction);
-        intent.putExtra(RecognizerIntent.EXTRA_PROMPT, direction);
-        startActivityForResult(intent, REQUEST_CODE_VOICE);
-
+        if (hasMicrophone) {
+            ivMicrophone.setImageResource(R.mipmap.fa_microphone_84816d_none);
+            Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+            intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+                    RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+            String direction = getResources().getString(R.string.voice_direction);
+            intent.putExtra(RecognizerIntent.EXTRA_PROMPT, direction);
+            startActivityForResult(intent, REQUEST_CODE_VOICE);
+        }
     }
 
     @Override
@@ -336,9 +328,9 @@ public class NoteActivity extends AppCompatActivity {
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         menuAlarm = menu.findItem(R.id.action_alarm);
-        if (modeFab==MODE_FAB_EDIT){
+        if (modeFab == MODE_FAB_EDIT) {
             menuAlarm.setVisible(false);
-        }else if (modeFab==MODE_FAB_SAVE){
+        } else if (modeFab == MODE_FAB_SAVE) {
             menuAlarm.setVisible(true);
         }
         return true;
