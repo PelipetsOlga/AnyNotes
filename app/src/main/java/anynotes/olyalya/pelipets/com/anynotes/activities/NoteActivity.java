@@ -238,7 +238,7 @@ public class NoteActivity extends AppCompatActivity {
                 if (data != null) {
                     alarm = (Date) data.getSerializableExtra(Constants.EXTRA_TIME_DATE);
                     repeat = data.getLongExtra(Constants.EXTRA_REPEAT, 0);
-                    Toast.makeText(this, "ALARM " + alarm + ", repeat " + repeat, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "ALARM " + alarm + ", repeat " + repeat, Toast.LENGTH_LONG).show();
                 }
             } else {
                 Toast.makeText(this, "ALARM RESULT CANCEL", Toast.LENGTH_SHORT).show();
