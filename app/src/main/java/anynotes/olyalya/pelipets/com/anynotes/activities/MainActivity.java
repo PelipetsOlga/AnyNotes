@@ -16,6 +16,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.text.TextUtils;
 import android.text.format.DateFormat;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -131,7 +132,7 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-       refreshList();
+        refreshList();
     }
 
 
@@ -259,7 +260,7 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-      private void refreshSettings() {
+    private void refreshSettings() {
         loadSettings();
         adapter = new NotesAdapter(refreshListener);
         recyclerView.setAdapter(adapter);
@@ -292,6 +293,13 @@ public class MainActivity extends AppCompatActivity
                 holder.tvText.setText(note.getText().substring(0, Constants.LENGTH_TEXT - 1) + "...");
             }
 
+            String alarm=note.getAlarm();
+            if (alarm==null || TextUtils.isEmpty(alarm)){
+                holder.ivAlarm.setVisibility(View.INVISIBLE);
+            }else{
+                holder.ivAlarm.setVisibility(View.VISIBLE);
+            }
+
             Calendar calendar = Calendar.getInstance();
             calendar.setTimeInMillis(note.getLastSaving());
             holder.tvLastSaving.setText(DateFormat.format("yyyy-MM-dd HH:mm:ss", calendar));
@@ -299,33 +307,18 @@ public class MainActivity extends AppCompatActivity
             switch (status) {
                 case Constants.STATUS_ACTUAL:
                     holder.ivIcon.setImageResource(R.mipmap.pe_7s_star_ffffff_none);
-                    holder.ivImportant.setVisibility(View.VISIBLE);
-                    holder.ivActual.setVisibility(View.GONE);
-                    holder.ivUndeleted.setVisibility(View.GONE);
                     break;
                 case Constants.STATUS_IMPORTANT:
                     holder.ivIcon.setImageResource(R.mipmap.oi_star_ffffff_none);
-                    holder.ivImportant.setVisibility(View.GONE);
-                    holder.ivActual.setVisibility(View.VISIBLE);
-                    holder.ivUndeleted.setVisibility(View.GONE);
                     break;
                 case Constants.STATUS_DELETED:
                     holder.ivIcon.setImageResource(R.mipmap.delete_white);
-                    holder.ivImportant.setVisibility(View.GONE);
-                    holder.ivActual.setVisibility(View.GONE);
-                    holder.ivUndeleted.setVisibility(View.VISIBLE);
                     break;
                 case Constants.STATUS_DRAFT:
                     holder.ivIcon.setImageResource(R.mipmap.draft_white);
-                    holder.ivImportant.setVisibility(View.GONE);
-                    holder.ivActual.setVisibility(View.GONE);
-                    holder.ivUndeleted.setVisibility(View.GONE);
                     break;
                 case Constants.STATUS_DRAFT_DELETED:
                     holder.ivIcon.setImageResource(R.mipmap.fa_sticky_note);
-                    holder.ivImportant.setVisibility(View.GONE);
-                    holder.ivActual.setVisibility(View.GONE);
-                    holder.ivUndeleted.setVisibility(View.GONE);
                     break;
             }
 
@@ -344,10 +337,8 @@ public class MainActivity extends AppCompatActivity
         private final TextView tvTitle;
         private final TextView tvLastSaving;
         private final TextView tvText;
-        private final ImageView ivImportant;
-        private final ImageView ivActual;
-        private final ImageView ivUndeleted;
         private final ImageView ivIcon;
+        private final ImageView ivAlarm;
         private final LinearLayout llContent;
 
         public NoteViewHolder(View itemView, RefreshListListener listener) {
@@ -357,16 +348,12 @@ public class MainActivity extends AppCompatActivity
             tvTitle = (TextView) itemView.findViewById(R.id.tv_title);
             tvLastSaving = (TextView) itemView.findViewById(R.id.tv_lastsaving);
             tvText = (TextView) itemView.findViewById(R.id.tv_text);
-            ivImportant = (ImageView) itemView.findViewById(R.id.iv_important);
-            ivActual = (ImageView) itemView.findViewById(R.id.iv_actual);
-            ivUndeleted = (ImageView) itemView.findViewById(R.id.iv_undelete);
             ivIcon = (ImageView) itemView.findViewById(R.id.iv_icon);
+            ivAlarm= (ImageView) itemView.findViewById(R.id.iv_alarm);
             llContent = (LinearLayout) itemView.findViewById(R.id.ll_content);
+            ivIcon.setOnClickListener(this);
             llContent.setOnClickListener(this);
             tvText.setOnClickListener(this);
-            ivImportant.setOnClickListener(this);
-            ivActual.setOnClickListener(this);
-            ivUndeleted.setOnClickListener(this);
             SharedPreferences sPref = context.getSharedPreferences(Constants.PREFS_NAME, AppCompatActivity.MODE_PRIVATE);
             int fontSize = sPref.getInt(Constants.PREF_FONT_SIZE, Constants.SIZE_FONT);
             tvTitle.setTextSize(fontSize);
@@ -379,30 +366,28 @@ public class MainActivity extends AppCompatActivity
             int position = getLayoutPosition();
             Note note = notes.get(position);
             switch (v.getId()) {
-                case R.id.iv_important:
-                    ivImportant.setVisibility(View.GONE);
-                    ivActual.setVisibility(View.VISIBLE);
-                    ivUndeleted.setVisibility(View.GONE);
-                    note.setStatus(Constants.STATUS_IMPORTANT);
-                    repository.update(note);
-                    listener.refreshList();
+                case R.id.iv_speech:
+                    //// TODO: 10.01.2016
                     break;
-                case R.id.iv_actual:
-                    ivImportant.setVisibility(View.VISIBLE);
-                    ivActual.setVisibility(View.GONE);
-                    ivUndeleted.setVisibility(View.GONE);
-                    note.setStatus(Constants.STATUS_ACTUAL);
-                    repository.update(note);
-                    listener.refreshList();
+                case R.id.iv_icon:
+                    int oldStatus = note.getStatus();
+                    switch (oldStatus) {
+                        case Constants.STATUS_ACTUAL:
+                            note.setStatus(Constants.STATUS_IMPORTANT);
+                            repository.update(note);
+                            listener.refreshList();
+                            break;
+                        case Constants.STATUS_IMPORTANT:
+                        case Constants.STATUS_DELETED:
+                            note.setStatus(Constants.STATUS_ACTUAL);
+                            repository.update(note);
+                            listener.refreshList();
+                            break;
+                        default:
+                            break;
+                    }
                     break;
-                case R.id.iv_undelete:
-                    ivImportant.setVisibility(View.VISIBLE);
-                    ivActual.setVisibility(View.GONE);
-                    ivUndeleted.setVisibility(View.GONE);
-                    note.setStatus(Constants.STATUS_ACTUAL);
-                    repository.update(note);
-                    listener.refreshList();
-                    break;
+
                 default:
                     Intent intent = new Intent(context, NoteActivity.class);
                     intent.putExtra(Constants.EXTRA_ACTION_TYPE, Constants.EXTRA_ACTION_EDIT_NOTE);
