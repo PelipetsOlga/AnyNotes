@@ -35,7 +35,7 @@ public class ReminderActivity extends AppCompatActivity {
     private final static int REQUEST_CODE_PICKER = 456;
     private boolean timeSet = false;
     private Date alarm;
-    private SimpleDateFormat dateFormat = new SimpleDateFormat("d/M/yyyy, HH:mm");
+    private SimpleDateFormat dateFormat = new SimpleDateFormat(Constants.FORMAT_ALARM);
 
     private class RepeatTumbler {
         boolean isChecked;

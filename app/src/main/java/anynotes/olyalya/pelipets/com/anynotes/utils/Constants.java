@@ -48,4 +48,5 @@ public class Constants {
     public static final int SIZE_FONT = 18;
     public static final int LENGTH_TEXT = 300;
     public static final int TITLE_LENGTH = 80;
+    public static final String FORMAT_ALARM="d/M/yyyy, HH:mm";
 }
