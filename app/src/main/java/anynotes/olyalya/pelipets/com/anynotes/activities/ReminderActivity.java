@@ -61,37 +61,28 @@ public class ReminderActivity extends AppCompatActivity {
         Intent inIntent = getIntent();
         alarmNote = inIntent.getStringExtra(Constants.EXTRA_TIME_DATE);
         repeatAlarm = inIntent.getLongExtra(Constants.EXTRA_REPEAT, 0);
-    }
 
-    public void loadSettings() {
-        SharedPreferences sPref = getSharedPreferences(Constants.PREFS_NAME, AppCompatActivity.MODE_PRIVATE);
-        int bright = sPref.getInt(Constants.PREF_BRIGHTNESS, Constants.BRIGHTNESS);
-        size = sPref.getInt(Constants.PREF_FONT_SIZE, Constants.SIZE_FONT);
-        NoteUtils.setBrightness(bright, this);
-    }
-
-    private void initViews() {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setHomeButtonEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowTitleEnabled(true);
-
-        checkClock = (CheckBox) findViewById(R.id.check_clock);
-        checkRepeat = (CheckBox) findViewById(R.id.check_repeat);
-        tvClock = (TextView) findViewById(R.id.tv_clock);
-        tvRepeat = (TextView) findViewById(R.id.tv_repeat);
-        llClock = (LinearLayout) findViewById(R.id.ll_clock);
-        llRepeat = (LinearLayout) findViewById(R.id.ll_repeat);
-        gridRepeat = (LinearLayout) findViewById(R.id.grid_repeat);
-        if (checkRepeat.isChecked()) {
-            gridRepeat.setVisibility(View.VISIBLE);
+        if (alarmNote != null) {
+            tvClock.setText(alarmNote);
+            checkClock.setChecked(true);
+            tvClock.setTextColor(getResources().getColor(R.color.colorPrimary));
+            if (repeatAlarm!=0){
+                checkRepeat.setChecked(true);
+                //todo
+                tvRepeat.setTextColor(getResources().getColor(R.color.colorPrimary));
+                gridRepeat.setVisibility(View.VISIBLE);
+                TextView savedRepeat=search(repeatAlarm);
+                if (savedRepeat!=null){
+                    savedRepeat.setTextColor(getResources().getColor(R.color.colorPrimary));
+                    savedRepeat.setBackgroundDrawable(getResources().getDrawable(R.drawable.big_circle_active));
+                    lastRepeat=savedRepeat;
+                    tvRepeat.setText(savedRepeat.getText());
+                }
+            }
         } else {
-            gridRepeat.setVisibility(View.GONE);
+            String now = dateFormat.format(new Date());
+            tvClock.setText(now);
         }
-
-        tvClock.setTextSize(size);
-        tvRepeat.setTextSize(size);
 
         checkClock.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -128,6 +119,46 @@ public class ReminderActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private TextView search(long repeatAlarm) {
+        for (TextView tv: listRepeat.keySet()){
+            if (listRepeat.get(tv).repeatTime==repeatAlarm){
+                return tv;
+            }
+        }
+        return null;
+    }
+
+    public void loadSettings() {
+        SharedPreferences sPref = getSharedPreferences(Constants.PREFS_NAME, AppCompatActivity.MODE_PRIVATE);
+        int bright = sPref.getInt(Constants.PREF_BRIGHTNESS, Constants.BRIGHTNESS);
+        size = sPref.getInt(Constants.PREF_FONT_SIZE, Constants.SIZE_FONT);
+        NoteUtils.setBrightness(bright, this);
+    }
+
+    private void initViews() {
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(true);
+
+        checkClock = (CheckBox) findViewById(R.id.check_clock);
+        checkRepeat = (CheckBox) findViewById(R.id.check_repeat);
+        tvClock = (TextView) findViewById(R.id.tv_clock);
+        tvRepeat = (TextView) findViewById(R.id.tv_repeat);
+        llClock = (LinearLayout) findViewById(R.id.ll_clock);
+        llRepeat = (LinearLayout) findViewById(R.id.ll_repeat);
+        gridRepeat = (LinearLayout) findViewById(R.id.grid_repeat);
+        if (checkRepeat.isChecked()) {
+            gridRepeat.setVisibility(View.VISIBLE);
+        } else {
+            gridRepeat.setVisibility(View.GONE);
+        }
+
+        tvClock.setTextSize(size);
+        tvRepeat.setTextSize(size);
 
         llClock.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -214,7 +245,10 @@ public class ReminderActivity extends AppCompatActivity {
             case android.R.id.home:
                 Intent intent = new Intent();
                 if (checkClock.isChecked()) {
-                    intent.putExtra(Constants.EXTRA_TIME_DATE, alarm);
+                    if (alarm!=null){
+                        alarmNote=dateFormat.format(alarm);
+                    }
+                    intent.putExtra(Constants.EXTRA_TIME_DATE, alarmNote);
                     if (checkRepeat.isChecked()) {
                         if (lastRepeat != null) {
                             intent.putExtra(Constants.EXTRA_REPEAT, listRepeat.get(lastRepeat).repeatTime);
@@ -222,6 +256,7 @@ public class ReminderActivity extends AppCompatActivity {
                             intent.putExtra(Constants.EXTRA_REPEAT, 0);
                         }
                     } else {
+                        intent.putExtra(Constants.EXTRA_TIME_DATE, "");
                         intent.putExtra(Constants.EXTRA_REPEAT, 0);
                     }
                 }

@@ -25,7 +25,6 @@ import com.google.android.gms.ads.AdView;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import anynotes.olyalya.pelipets.com.anynotes.R;
@@ -52,7 +51,7 @@ public class NoteActivity extends AppCompatActivity {
     private int bright;
     private int size;
     private boolean hasMicrophone = false;
-    private Date alarm;
+    // private Date alarm;
     private long repeat;
     private SimpleDateFormat dateFormat = new SimpleDateFormat(Constants.FORMAT_ALARM);
 
@@ -241,11 +240,9 @@ public class NoteActivity extends AppCompatActivity {
         } else if (requestCode == REQUEST_CODE_ALARM) {
             if (resultCode == RESULT_OK) {
                 if (data != null) {
-                    alarm = (Date) data.getSerializableExtra(Constants.EXTRA_TIME_DATE);
                     repeat = data.getLongExtra(Constants.EXTRA_REPEAT, 0);
-                    alarmNote = dateFormat.format(alarm);
-                    repeatAlarm=repeat;
-                    Toast.makeText(this, "ALARM " + alarm + ", repeat " + repeat, Toast.LENGTH_LONG).show();
+                    alarmNote = data.getStringExtra(Constants.EXTRA_TIME_DATE);
+                    repeatAlarm = repeat;
                 }
             }
         }
@@ -312,7 +309,7 @@ public class NoteActivity extends AppCompatActivity {
             }
         }
         note.setTitle(title);
-        if (alarmNote!=null){
+        if (alarmNote != null) {
             note.setAlarm(alarmNote);
             note.setRepeat(repeatAlarm);
         }
