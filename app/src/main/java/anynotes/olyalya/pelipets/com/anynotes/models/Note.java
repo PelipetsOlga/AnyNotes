@@ -12,6 +12,24 @@ public class Note implements Serializable{
     private int status;
     private String title;
     private String text;
+    private String alarm;
+    private long repeat;
+
+    public String getAlarm() {
+        return alarm;
+    }
+
+    public void setAlarm(String alarm) {
+        this.alarm = alarm;
+    }
+
+    public long getRepeat() {
+        return repeat;
+    }
+
+    public void setRepeat(long repeat) {
+        this.repeat = repeat;
+    }
 
     public long getId() {
         return id;

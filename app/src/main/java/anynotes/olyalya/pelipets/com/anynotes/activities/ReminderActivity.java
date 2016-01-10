@@ -33,7 +33,7 @@ public class ReminderActivity extends AppCompatActivity {
     private HashMap<TextView, RepeatTumbler> listRepeat;
     private TextView lastRepeat;
     private final static int REQUEST_CODE_PICKER = 456;
-    private boolean timeSet = false;
+    //private boolean timeSet = false;
     private Date alarm;
     private SimpleDateFormat dateFormat = new SimpleDateFormat(Constants.FORMAT_ALARM);
 
@@ -207,11 +207,17 @@ public class ReminderActivity extends AppCompatActivity {
         switch (menuItem.getItemId()) {
             case android.R.id.home:
                 Intent intent = new Intent();
-                intent.putExtra(Constants.EXTRA_TIME_DATE, alarm);
-                if (lastRepeat != null) {
-                    intent.putExtra(Constants.EXTRA_REPEAT, listRepeat.get(lastRepeat).repeatTime);
-                } else {
-                    intent.putExtra(Constants.EXTRA_REPEAT, 0);
+                if (checkClock.isChecked()) {
+                    intent.putExtra(Constants.EXTRA_TIME_DATE, alarm);
+                    if (checkRepeat.isChecked()) {
+                        if (lastRepeat != null) {
+                            intent.putExtra(Constants.EXTRA_REPEAT, listRepeat.get(lastRepeat).repeatTime);
+                        } else {
+                            intent.putExtra(Constants.EXTRA_REPEAT, 0);
+                        }
+                    } else {
+                        intent.putExtra(Constants.EXTRA_REPEAT, 0);
+                    }
                 }
                 setResult(RESULT_OK, intent);
                 finish();

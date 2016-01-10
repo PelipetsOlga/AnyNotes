@@ -41,6 +41,8 @@ public class NotesRepository {
         cv.put(DBSchema.LAST_SAVING, note.getLastSaving());
         cv.put(DBSchema.STATUS, note.getStatus());
         cv.put(DBSchema.TITLE, note.getTitle());
+        cv.put(DBSchema.ALARM, note.getAlarm());
+        cv.put(DBSchema.REPEAT, note.getRepeat());
         cv.put(DBSchema.TEXT, note.getText());
 
         long insert = db.insert(DBSchema.TABLE, null, cv);
@@ -55,6 +57,8 @@ public class NotesRepository {
         cv.put(DBSchema.LAST_SAVING, Calendar.getInstance().getTimeInMillis());
         cv.put(DBSchema.STATUS, note.getStatus());
         cv.put(DBSchema.TITLE, note.getTitle());
+        cv.put(DBSchema.ALARM, note.getAlarm());
+        cv.put(DBSchema.REPEAT, note.getRepeat());
         cv.put(DBSchema.TEXT, note.getText());
 
         int update = db.update(DBSchema.TABLE, cv, DBSchema.CREATING + "=" + note.getCreating(), null);
@@ -80,6 +84,8 @@ public class NotesRepository {
             note.setLastSaving(cursor.getLong(cursor.getColumnIndex(DBSchema.LAST_SAVING)));
             note.setStatus(cursor.getInt(cursor.getColumnIndex(DBSchema.STATUS)));
             note.setTitle(cursor.getString(cursor.getColumnIndex(DBSchema.TITLE)));
+            note.setAlarm(cursor.getString(cursor.getColumnIndex(DBSchema.ALARM)));
+            note.setRepeat(cursor.getLong(cursor.getColumnIndex(DBSchema.REPEAT)));
             note.setText(cursor.getString(cursor.getColumnIndex(DBSchema.TEXT)));
         }
         return note;
@@ -96,6 +102,8 @@ public class NotesRepository {
             note.setLastSaving(cursor.getLong(cursor.getColumnIndex(DBSchema.LAST_SAVING)));
             note.setStatus(cursor.getInt(cursor.getColumnIndex(DBSchema.STATUS)));
             note.setTitle(cursor.getString(cursor.getColumnIndex(DBSchema.TITLE)));
+            note.setAlarm(cursor.getString(cursor.getColumnIndex(DBSchema.ALARM)));
+            note.setRepeat(cursor.getLong(cursor.getColumnIndex(DBSchema.REPEAT)));
             note.setText(cursor.getString(cursor.getColumnIndex(DBSchema.TEXT)));
         }
         return note;
@@ -151,6 +159,8 @@ public class NotesRepository {
                 note.setLastSaving(cursor.getLong(cursor.getColumnIndex(DBSchema.LAST_SAVING)));
                 note.setStatus(cursor.getInt(cursor.getColumnIndex(DBSchema.STATUS)));
                 note.setTitle(cursor.getString(cursor.getColumnIndex(DBSchema.TITLE)));
+                note.setAlarm(cursor.getString(cursor.getColumnIndex(DBSchema.ALARM)));
+                note.setRepeat(cursor.getLong(cursor.getColumnIndex(DBSchema.REPEAT)));
                 note.setText(cursor.getString(cursor.getColumnIndex(DBSchema.TEXT)));
                 items.add(note);
             } while (cursor.moveToNext());

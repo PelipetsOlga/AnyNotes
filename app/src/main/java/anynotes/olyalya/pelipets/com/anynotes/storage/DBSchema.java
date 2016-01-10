@@ -12,6 +12,9 @@ public class DBSchema {
     public static final String STATUS = "status";
     public static final String TEXT = "text";
     public static final String TITLE = "title";
+    public static final String ALARM = "alarm";
+    public static final String REPEAT = "repeat";
+
 
     public static final String CREATE_SCREAPT = "CREATE TABLE IF NOT EXISTS " + TABLE + "("
             + ID + " integer primary key autoincrement, "
@@ -19,6 +22,8 @@ public class DBSchema {
             + LAST_SAVING + " integer, "
             + STATUS + " integer, "
             + TITLE + " text, "
+            + ALARM + " text, "
+            + REPEAT + " integer, "
             + TEXT + " text);";
 
 }
