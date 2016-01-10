@@ -22,6 +22,7 @@ import android.widget.Toast;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -36,8 +37,24 @@ import anynotes.olyalya.pelipets.com.anynotes.utils.NoteUtils;
 
 public class NoteActivity extends AppCompatActivity {
     private static final String TAG_CREATING = "creating";
+    private static final int REQUEST_CODE_VOICE = 1234;
+    private static final int REQUEST_CODE_ALARM = 5678;
+    private static final int MODE_FAB_SAVE = 1;
+    private static final int MODE_FAB_EDIT = 2;
 
     private int type_operation = Constants.EXTRA_ACTION_NEW_NOTE;
+    private long creating;
+    private String alarmNote;
+    private long repeatAlarm = 0;
+    private Note startNote;
+    private int modeFab = 1;
+    private SharedPreferences sPref;
+    private int bright;
+    private int size;
+    private boolean hasMicrophone = false;
+    private Date alarm;
+    private long repeat;
+    private SimpleDateFormat dateFormat = new SimpleDateFormat(Constants.FORMAT_ALARM);
 
     private EditText etTitle;
     private EditText etText;
@@ -45,20 +62,7 @@ public class NoteActivity extends AppCompatActivity {
     private FloatingActionButton fab;
     private NotesRepository repository;
     private Toolbar toolbar;
-    private long creating;
-    private Note startNote;
-    private int modeFab = 1;
-    private static final int MODE_FAB_SAVE = 1;
-    private static final int MODE_FAB_EDIT = 2;
-    private SharedPreferences sPref;
-    private int bright;
-    private int size;
-    private static final int REQUEST_CODE_VOICE = 1234;
-    private static final int REQUEST_CODE_ALARM = 5678;
-    private boolean hasMicrophone = false;
     private MenuItem menuAlarm;
-    private Date alarm;
-    private long repeat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,10 +97,12 @@ public class NoteActivity extends AppCompatActivity {
 
         if (type_operation == Constants.EXTRA_ACTION_NEW_NOTE) {
             creating = Calendar.getInstance().getTimeInMillis();
-            NoteUtils.log("creating in OnCreate = " + creating);
+            alarmNote = null;
+            repeatAlarm = 0;
         } else {
             creating = startNote.getCreating();
-            NoteUtils.log("creating from startNote = " + creating);
+            alarmNote = startNote.getAlarm();
+            repeatAlarm = startNote.getRepeat();
         }
 
 
@@ -108,7 +114,6 @@ public class NoteActivity extends AppCompatActivity {
         if (type_operation == Constants.EXTRA_ACTION_NEW_NOTE) {
             modeFab = MODE_FAB_SAVE;
             fab.setImageResource(R.mipmap.ic_check_white_24dp);
-            //ivMicrophone.setVisibility(View.VISIBLE);
             ivMicrophone.setImageResource(R.mipmap.fa_microphone);
             ivMicrophone.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -238,11 +243,10 @@ public class NoteActivity extends AppCompatActivity {
                 if (data != null) {
                     alarm = (Date) data.getSerializableExtra(Constants.EXTRA_TIME_DATE);
                     repeat = data.getLongExtra(Constants.EXTRA_REPEAT, 0);
-
+                    alarmNote = dateFormat.format(alarm);
+                    repeatAlarm=repeat;
                     Toast.makeText(this, "ALARM " + alarm + ", repeat " + repeat, Toast.LENGTH_LONG).show();
                 }
-            } else {
-                Toast.makeText(this, "ALARM RESULT CANCEL", Toast.LENGTH_SHORT).show();
             }
         }
         super.onActivityResult(requestCode, resultCode, data);
@@ -308,6 +312,10 @@ public class NoteActivity extends AppCompatActivity {
             }
         }
         note.setTitle(title);
+        if (alarmNote!=null){
+            note.setAlarm(alarmNote);
+            note.setRepeat(repeatAlarm);
+        }
         return note;
     }
 
@@ -350,6 +358,10 @@ public class NoteActivity extends AppCompatActivity {
                 return true;
             case R.id.action_alarm:
                 Intent alarmIntent = new Intent(this, ReminderActivity.class);
+                if (alarmNote != null) {
+                    alarmIntent.putExtra(Constants.EXTRA_TIME_DATE, alarmNote);
+                    alarmIntent.putExtra(Constants.EXTRA_REPEAT, repeatAlarm);
+                }
                 startActivityForResult(alarmIntent, REQUEST_CODE_ALARM);
                 return true;
             case R.id.action_delete:

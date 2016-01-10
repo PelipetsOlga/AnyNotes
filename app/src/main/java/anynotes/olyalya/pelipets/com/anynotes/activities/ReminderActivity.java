@@ -33,9 +33,10 @@ public class ReminderActivity extends AppCompatActivity {
     private HashMap<TextView, RepeatTumbler> listRepeat;
     private TextView lastRepeat;
     private final static int REQUEST_CODE_PICKER = 456;
-    //private boolean timeSet = false;
     private Date alarm;
     private SimpleDateFormat dateFormat = new SimpleDateFormat(Constants.FORMAT_ALARM);
+    private String alarmNote;
+    private long repeatAlarm = 0;
 
     private class RepeatTumbler {
         boolean isChecked;
@@ -57,7 +58,9 @@ public class ReminderActivity extends AppCompatActivity {
         loadSettings();
         initViews();
 
-
+        Intent inIntent = getIntent();
+        alarmNote = inIntent.getStringExtra(Constants.EXTRA_TIME_DATE);
+        repeatAlarm = inIntent.getLongExtra(Constants.EXTRA_REPEAT, 0);
     }
 
     public void loadSettings() {
@@ -96,6 +99,9 @@ public class ReminderActivity extends AppCompatActivity {
                 if (isChecked) {
                     tvClock.setTextColor(getResources().getColor(R.color.colorPrimary));
                     Intent pickerIntent = new Intent(ReminderActivity.this, TimeDatePickerActivity.class);
+                    if (alarmNote != null) {
+                        pickerIntent.putExtra(Constants.EXTRA_TIME_DATE, alarmNote);
+                    }
                     startActivityForResult(pickerIntent, REQUEST_CODE_PICKER);
                 } else {
                     tvClock.setTextColor(getResources().getColor(R.color.grayInactive));
@@ -234,6 +240,7 @@ public class ReminderActivity extends AppCompatActivity {
                     String result = data.getStringExtra(Constants.EXTRA_TIME_DATE);
                     if (result != null) {
                         try {
+                            //alarmNote=result;
                             alarm = dateFormat.parse(result);
                             tvClock.setText(dateFormat.format(alarm));
                         } catch (ParseException e) {
