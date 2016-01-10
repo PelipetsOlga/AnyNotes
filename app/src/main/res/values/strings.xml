@@ -49,6 +49,7 @@
     <string name="repeat_3_month">3 months</string>
     <string name="repeat_6_month">6 months</string>
     <string name="repeat_year">year</string>
+    <string name="repeat_none">Not repeating</string>
 
 
     <string name="new_note_hint_title">Note title</string>

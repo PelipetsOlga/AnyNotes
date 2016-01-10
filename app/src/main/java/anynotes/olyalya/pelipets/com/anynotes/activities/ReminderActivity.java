@@ -32,10 +32,12 @@ public class ReminderActivity extends AppCompatActivity {
     private class RepeatTumbler {
         boolean isChecked;
         long repeatTime;
+        String repeatText;
 
-        public RepeatTumbler(boolean isChecked, long repeatTime) {
+        public RepeatTumbler(boolean isChecked, long repeatTime, String repeatText) {
             this.isChecked = isChecked;
             this.repeatTime = repeatTime;
+            this.repeatText = repeatText;
         }
     }
 
@@ -99,8 +101,9 @@ public class ReminderActivity extends AppCompatActivity {
                     gridRepeat.setVisibility(View.VISIBLE);
                 } else {
                     tvRepeat.setTextColor(getResources().getColor(R.color.grayInactive));
+                    tvRepeat.setText(getResources().getString(R.string.repeat_none));
                     gridRepeat.setVisibility(View.GONE);
-                    if (lastRepeat != null || listRepeat != null) {
+                    if (lastRepeat != null && listRepeat != null) {
                         lastRepeat.setBackgroundDrawable(ReminderActivity.this.getResources().getDrawable(R.drawable.big_circle_inactive));
                         lastRepeat.setTextColor(ReminderActivity.this.getResources().getColor(R.color.grayInactive));
                         listRepeat.get(lastRepeat).isChecked = false;
@@ -125,22 +128,38 @@ public class ReminderActivity extends AppCompatActivity {
         });
 
         listRepeat = new HashMap<TextView, RepeatTumbler>();
-        listRepeat.put((TextView) findViewById(R.id.repeat_1hour), new RepeatTumbler(false, (long) (60 * 60 * 1000)));
-        listRepeat.put((TextView) findViewById(R.id.repeat_3hour), new RepeatTumbler(false, (long) (3 * 60 * 60 * 1000)));
-        listRepeat.put((TextView) findViewById(R.id.repeat_6hour), new RepeatTumbler(false, (long) (6 * 60 * 60 * 1000)));
-        listRepeat.put((TextView) findViewById(R.id.repeat_12hour), new RepeatTumbler(false, (long) (12 * 60 * 60 * 1000)));
-        listRepeat.put((TextView) findViewById(R.id.repeat_1day), new RepeatTumbler(false, (long) (24 * 60 * 60 * 1000)));
-        listRepeat.put((TextView) findViewById(R.id.repeat_2day), new RepeatTumbler(false, (long) (2 * 24 * 60 * 60 * 1000)));
-        listRepeat.put((TextView) findViewById(R.id.repeat_3day), new RepeatTumbler(false, (long) (3 * 24 * 60 * 60 * 1000)));
-        listRepeat.put((TextView) findViewById(R.id.repeat_10day), new RepeatTumbler(false, (long) (10 * 24 * 60 * 60 * 1000)));
-        listRepeat.put((TextView) findViewById(R.id.repeat_1week), new RepeatTumbler(false, (long) (7 * 24 * 60 * 60 * 1000)));
-        listRepeat.put((TextView) findViewById(R.id.repeat_2week), new RepeatTumbler(false, (long) (2 * 7 * 24 * 60 * 60 * 1000)));
-        listRepeat.put((TextView) findViewById(R.id.repeat_3week), new RepeatTumbler(false, (long) (3 * 7 * 24 * 60 * 60 * 1000)));
-        listRepeat.put((TextView) findViewById(R.id.repeat_4week), new RepeatTumbler(false, (long) (4 * 7 * 24 * 60 * 60 * 1000)));
-        listRepeat.put((TextView) findViewById(R.id.repeat_1month), new RepeatTumbler(false, (long) (30 * 24 * 60 * 60 * 1000)));
-        listRepeat.put((TextView) findViewById(R.id.repeat_3month), new RepeatTumbler(false, (long) (3 * 30 * 24 * 60 * 60 * 1000)));
-        listRepeat.put((TextView) findViewById(R.id.repeat_6month), new RepeatTumbler(false, (long) (6 * 30 * 24 * 60 * 60 * 1000)));
-        listRepeat.put((TextView) findViewById(R.id.repeat_year), new RepeatTumbler(false, (long) (365 * 24 * 60 * 60 * 1000)));
+        listRepeat.put((TextView) findViewById(R.id.repeat_1hour), new RepeatTumbler(false, (long) (60 * 60 * 1000),
+                getResources().getString(R.string.repeat_1_hour)));
+        listRepeat.put((TextView) findViewById(R.id.repeat_3hour), new RepeatTumbler(false, (long) (3 * 60 * 60 * 1000),
+                getResources().getString(R.string.repeat_3_hour)));
+        listRepeat.put((TextView) findViewById(R.id.repeat_6hour), new RepeatTumbler(false, (long) (6 * 60 * 60 * 1000),
+                getResources().getString(R.string.repeat_6_hour)));
+        listRepeat.put((TextView) findViewById(R.id.repeat_12hour), new RepeatTumbler(false, (long) (12 * 60 * 60 * 1000),
+                getResources().getString(R.string.repeat_12_hour)));
+        listRepeat.put((TextView) findViewById(R.id.repeat_1day), new RepeatTumbler(false, (long) (24 * 60 * 60 * 1000),
+                getResources().getString(R.string.repeat_1_day)));
+        listRepeat.put((TextView) findViewById(R.id.repeat_2day), new RepeatTumbler(false, (long) (2 * 24 * 60 * 60 * 1000),
+                getResources().getString(R.string.repeat_2_day)));
+        listRepeat.put((TextView) findViewById(R.id.repeat_3day), new RepeatTumbler(false, (long) (3 * 24 * 60 * 60 * 1000),
+                getResources().getString(R.string.repeat_3_day)));
+        listRepeat.put((TextView) findViewById(R.id.repeat_10day), new RepeatTumbler(false, (long) (10 * 24 * 60 * 60 * 1000),
+                getResources().getString(R.string.repeat_10_day)));
+        listRepeat.put((TextView) findViewById(R.id.repeat_1week), new RepeatTumbler(false, (long) (7 * 24 * 60 * 60 * 1000),
+                getResources().getString(R.string.repeat_1_week)));
+        listRepeat.put((TextView) findViewById(R.id.repeat_2week), new RepeatTumbler(false, (long) (2 * 7 * 24 * 60 * 60 * 1000),
+                getResources().getString(R.string.repeat_2_week)));
+        listRepeat.put((TextView) findViewById(R.id.repeat_3week), new RepeatTumbler(false, (long) (3 * 7 * 24 * 60 * 60 * 1000),
+                getResources().getString(R.string.repeat_3_week)));
+        listRepeat.put((TextView) findViewById(R.id.repeat_4week), new RepeatTumbler(false, (long) (4 * 7 * 24 * 60 * 60 * 1000),
+                getResources().getString(R.string.repeat_4_week)));
+        listRepeat.put((TextView) findViewById(R.id.repeat_1month), new RepeatTumbler(false, (long) (30 * 24 * 60 * 60 * 1000),
+                getResources().getString(R.string.repeat_1_month)));
+        listRepeat.put((TextView) findViewById(R.id.repeat_3month), new RepeatTumbler(false, (long) (3 * 30 * 24 * 60 * 60 * 1000),
+                getResources().getString(R.string.repeat_3_month)));
+        listRepeat.put((TextView) findViewById(R.id.repeat_6month), new RepeatTumbler(false, (long) (6 * 30 * 24 * 60 * 60 * 1000),
+                getResources().getString(R.string.repeat_6_month)));
+        listRepeat.put((TextView) findViewById(R.id.repeat_year), new RepeatTumbler(false, (long) (365 * 24 * 60 * 60 * 1000),
+                getResources().getString(R.string.repeat_year)));
         for (TextView tv : listRepeat.keySet()) {
             tv.setOnClickListener(new RepeatTumblerListener());
         }
@@ -155,11 +174,14 @@ public class ReminderActivity extends AppCompatActivity {
                 tumbler.isChecked = false;
                 tv.setBackgroundDrawable(ReminderActivity.this.getResources().getDrawable(R.drawable.big_circle_inactive));
                 tv.setTextColor(ReminderActivity.this.getResources().getColor(R.color.grayInactive));
+                tvRepeat.setText(getResources().getString(R.string.repeat_none));
+                tvRepeat.setTextColor(getResources().getColor(R.color.grayInactive));
                 lastRepeat = tv;
             } else {
                 tumbler.isChecked = true;
                 tv.setBackgroundDrawable(ReminderActivity.this.getResources().getDrawable(R.drawable.big_circle_active));
                 tv.setTextColor(ReminderActivity.this.getResources().getColor(R.color.colorPrimary));
+                tvRepeat.setText(tumbler.repeatText);
                 if (lastRepeat != null) {
                     lastRepeat.setBackgroundDrawable(ReminderActivity.this.getResources().getDrawable(R.drawable.big_circle_inactive));
                     lastRepeat.setTextColor(ReminderActivity.this.getResources().getColor(R.color.grayInactive));
