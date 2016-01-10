@@ -24,6 +24,7 @@ import com.google.android.gms.ads.AdView;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import anynotes.olyalya.pelipets.com.anynotes.R;
@@ -56,6 +57,8 @@ public class NoteActivity extends AppCompatActivity {
     private static final int REQUEST_CODE_ALARM = 5678;
     private boolean hasMicrophone = false;
     private MenuItem menuAlarm;
+    private Date alarm;
+    private long repeat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -179,8 +182,6 @@ public class NoteActivity extends AppCompatActivity {
                 invalidateOptionsMenu();
             }
         });
-
-
     }
 
     private boolean setMicrophoneEnabled() {
@@ -234,7 +235,11 @@ public class NoteActivity extends AppCompatActivity {
             }
         } else if (requestCode == REQUEST_CODE_ALARM) {
             if (resultCode == RESULT_OK) {
-                Toast.makeText(this, "ALARM RESULT OK", Toast.LENGTH_SHORT).show();
+                if (data != null) {
+                    alarm = (Date) data.getSerializableExtra(Constants.EXTRA_TIME_DATE);
+                    repeat = data.getLongExtra(Constants.EXTRA_REPEAT, 0);
+                    Toast.makeText(this, "ALARM " + alarm + ", repeat " + repeat, Toast.LENGTH_SHORT).show();
+                }
             } else {
                 Toast.makeText(this, "ALARM RESULT CANCEL", Toast.LENGTH_SHORT).show();
             }

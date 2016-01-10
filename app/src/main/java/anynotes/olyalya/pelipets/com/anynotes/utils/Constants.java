@@ -10,6 +10,8 @@ public class Constants {
     public static final int EXTRA_ACTION_NEW_NOTE=33;
     public static final int EXTRA_ACTION_EDIT_NOTE=66;
     public static final String EXTRA_LISTENER="listener";
+    public static final String EXTRA_TIME_DATE="time_date";
+    public static final String EXTRA_REPEAT="repeat";
 
     public static final int STATUS_DRAFT = 1;
     public static final int STATUS_DRAFT_DELETED = 5;

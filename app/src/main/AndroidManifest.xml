@@ -43,8 +43,11 @@
 
         <activity
             android:name=".activities.ReminderActivity"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:label="@string/reminder_toolbar_title"/>
+            android:label="@string/reminder_toolbar_title"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activities.TimeDatePickerActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

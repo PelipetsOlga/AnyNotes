@@ -1,5 +1,6 @@
 package anynotes.olyalya.pelipets.com.anynotes.activities;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +12,9 @@ import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 
 import anynotes.olyalya.pelipets.com.anynotes.R;
@@ -28,6 +32,10 @@ public class ReminderActivity extends AppCompatActivity {
     private int size;
     private HashMap<TextView, RepeatTumbler> listRepeat;
     private TextView lastRepeat;
+    private final static int REQUEST_CODE_PICKER = 456;
+    private boolean timeSet = false;
+    private Date alarm;
+    private SimpleDateFormat dateFormat = new SimpleDateFormat("d/M/yyyy, HH:mm");
 
     private class RepeatTumbler {
         boolean isChecked;
@@ -87,6 +95,8 @@ public class ReminderActivity extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
                     tvClock.setTextColor(getResources().getColor(R.color.colorPrimary));
+                    Intent pickerIntent = new Intent(ReminderActivity.this, TimeDatePickerActivity.class);
+                    startActivityForResult(pickerIntent, REQUEST_CODE_PICKER);
                 } else {
                     tvClock.setTextColor(getResources().getColor(R.color.grayInactive));
                 }
@@ -196,11 +206,38 @@ public class ReminderActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem menuItem) {
         switch (menuItem.getItemId()) {
             case android.R.id.home:
-                setResult(RESULT_OK);
+                Intent intent = new Intent();
+                intent.putExtra(Constants.EXTRA_TIME_DATE, alarm);
+                if (lastRepeat != null) {
+                    intent.putExtra(Constants.EXTRA_REPEAT, listRepeat.get(lastRepeat).repeatTime);
+                } else {
+                    intent.putExtra(Constants.EXTRA_REPEAT, 0);
+                }
+                setResult(RESULT_OK, intent);
                 finish();
                 return true;
         }
         return (super.onOptionsItemSelected(menuItem));
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_CODE_PICKER) {
+            if (resultCode == RESULT_OK) {
+                if (data != null) {
+                    String result = data.getStringExtra(Constants.EXTRA_TIME_DATE);
+                    if (result != null) {
+                        try {
+                            alarm = dateFormat.parse(result);
+                            tvClock.setText(dateFormat.format(alarm));
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                }
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
 }
