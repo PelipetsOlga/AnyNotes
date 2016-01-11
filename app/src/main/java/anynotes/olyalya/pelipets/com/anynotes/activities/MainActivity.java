@@ -3,6 +3,7 @@ package anynotes.olyalya.pelipets.com.anynotes.activities;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -374,7 +375,6 @@ public class MainActivity extends AppCompatActivity
                     //// TODO: 10.01.2016
                     break;
                 case R.id.iv_alarm:
-                    //  Snackbar.make(ivAlarm, note.getAlarm(),Snackbar.LENGTH_SHORT).show();
                     displayPopupWindow(v, note);
                     break;
                 case R.id.iv_icon:
@@ -417,6 +417,7 @@ public class MainActivity extends AppCompatActivity
             popup.setWidth(WindowManager.LayoutParams.WRAP_CONTENT);
             popup.setOutsideTouchable(true);
             popup.setFocusable(true);
+            popup.setBackgroundDrawable(new BitmapDrawable());
             popup.showAsDropDown(anchorView);
         }
     }
