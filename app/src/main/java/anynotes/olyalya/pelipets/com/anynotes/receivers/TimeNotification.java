@@ -6,7 +6,10 @@ import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
+import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 
 import anynotes.olyalya.pelipets.com.anynotes.R;
 import anynotes.olyalya.pelipets.com.anynotes.activities.MainActivity;
@@ -18,6 +21,9 @@ public class TimeNotification extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
+        SharedPreferences sPref = context.getSharedPreferences(Constants.PREFS_NAME, AppCompatActivity.MODE_PRIVATE);
+        String ringtone = sPref.getString(Constants.PREF_RINGTONE, " ");
+
         long noteCreating = intent.getLongExtra(Constants.EXTRA_CREATING, 0);
         String noteTitle = intent.getStringExtra(Constants.EXTRA_NOTE_TITLE);
         String noteText = intent.getStringExtra(Constants.EXTRA_NOTE_CONTENT);
@@ -25,19 +31,17 @@ public class TimeNotification extends BroadcastReceiver {
         builder.setSmallIcon(R.mipmap.ic_launcher);
         builder.setContentTitle(noteTitle);
         builder.setContentText(noteText);
+       /* if (TextUtils.isEmpty(ringtone.trim())) {
+            //default sound
+            Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+            builder.setSound(alarmSound);
+        }*/
+
     /*
         long[] pattern = {500,500,500,500,500,500,500,500,500};
         builder.setVibrate(pattern);
         builder.setStyle(new NotificationCompat.InboxStyle());*/
 
-        /*SharedPreferences sPref = context.getSharedPreferences(Constants.PREFS_NAME, AppCompatActivity.MODE_PRIVATE);
-        bright = sPref.getInt(Constants.PREF_BRIGHTNESS, Constants.BRIGHTNESS);*/
-
-
-       /*
-       //default sound
-       Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-        builder.setSound(alarmSound);*/
 
         builder.setAutoCancel(true);
 
@@ -53,9 +57,19 @@ public class TimeNotification extends BroadcastReceiver {
             notification = builder.build();
         }
         if (notification != null) {
-            notification.defaults |= Notification.DEFAULT_VIBRATE;
-            notification.sound = Uri.parse("android.resource://"
-                    + context.getPackageName() + "/" + R.raw.ringtone1);
+            //notification.defaults |= Notification.DEFAULT_VIBRATE;
+            long[] vibrate = {500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500,500};
+            notification.vibrate = vibrate;
+
+            if (TextUtils.isEmpty(ringtone.trim())) {
+                notification.defaults |= Notification.DEFAULT_SOUND;
+            } else {
+                int ringId=context.getResources().getIdentifier(ringtone,"raw",context.getPackageName());
+                notification.sound = Uri.parse("android.resource://"
+                        + context.getPackageName() + "/" + ringId);
+            }
+
+
         }
 
         NotificationManager nManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
