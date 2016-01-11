@@ -70,6 +70,9 @@ public class NotesRepository {
 
     private void setAlarm(Note note) {
         Intent intent = new Intent(context, TimeNotification.class);
+        intent.putExtra(Constants.EXTRA_CREATING, note.getCreating());
+        intent.putExtra(Constants.EXTRA_NOTE_TITLE, note.getTitle());
+        intent.putExtra(Constants.EXTRA_NOTE_CONTENT, note.getText());
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0,
                 intent, PendingIntent.FLAG_CANCEL_CURRENT);
         am.cancel(pendingIntent);
