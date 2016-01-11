@@ -1,15 +1,24 @@
 package anynotes.olyalya.pelipets.com.anynotes.storage;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.ContentValues;
+import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.text.TextUtils;
 import android.util.Log;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import anynotes.olyalya.pelipets.com.anynotes.models.Note;
+import anynotes.olyalya.pelipets.com.anynotes.receivers.TimeNotification;
 import anynotes.olyalya.pelipets.com.anynotes.utils.Constants;
 import anynotes.olyalya.pelipets.com.anynotes.utils.NoteUtils;
 
@@ -18,6 +27,10 @@ import anynotes.olyalya.pelipets.com.anynotes.utils.NoteUtils;
  */
 public class NotesRepository {
     private final SQLiteDatabase db;
+    private final Context context;
+    private final AlarmManager am;
+    private SimpleDateFormat dateFormat = new SimpleDateFormat(Constants.FORMAT_ALARM);
+
     String TAG = NotesRepository.class.getSimpleName();
     private int modeSort = Constants.MODE_SORT_ALL;
     private int modeOrdered = Constants.MODE_ORDERED_UNSORTED;
@@ -30,8 +43,10 @@ public class NotesRepository {
         this.modeSort = modeSort;
     }
 
-    public NotesRepository(SQLiteDatabase db) {
+    public NotesRepository(SQLiteDatabase db, Context context) {
         this.db = db;
+        this.context = context;
+        am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
     }
 
     public boolean insert(Note note) {
@@ -47,7 +62,23 @@ public class NotesRepository {
 
         long insert = db.insert(DBSchema.TABLE, null, cv);
         NoteUtils.log("insert to DB note " + insert);
+        if (note.getAlarm() != null && !TextUtils.isEmpty(note.getAlarm())) {
+            setAlarm(note);
+        }
         return true;
+    }
+
+    private void setAlarm(Note note) {
+        Intent intent = new Intent(context, TimeNotification.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0,
+                intent, PendingIntent.FLAG_CANCEL_CURRENT);
+        am.cancel(pendingIntent);
+        try {
+            Date date = dateFormat.parse(note.getAlarm());
+            am.set(AlarmManager.RTC_WAKEUP,date.getTime(), pendingIntent);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 
     public boolean update(Note note) {
@@ -130,22 +161,22 @@ public class NotesRepository {
                 break;
         }
 
-        String ordered=null;
-        switch (modeOrdered){
+        String ordered = null;
+        switch (modeOrdered) {
             case Constants.MODE_ORDERED_UNSORTED:
-                ordered=DBSchema.CREATING+" ASC";
+                ordered = DBSchema.CREATING + " ASC";
                 break;
             case Constants.MODE_ORDERED_SORT_ALPHA_ASC:
-                ordered=DBSchema.TITLE+" ASC";
+                ordered = DBSchema.TITLE + " ASC";
                 break;
             case Constants.MODE_ORDERED_SORT_ALPHA_DESC:
-                ordered=DBSchema.TITLE+" DESC";
+                ordered = DBSchema.TITLE + " DESC";
                 break;
             case Constants.MODE_ORDERED_SORT_DATE_ASC:
-                ordered=DBSchema.LAST_SAVING+" ASC";
+                ordered = DBSchema.LAST_SAVING + " ASC";
                 break;
             case Constants.MODE_ORDERED_SORT_DATE_DESC:
-                ordered=DBSchema.LAST_SAVING+" DESC";
+                ordered = DBSchema.LAST_SAVING + " DESC";
                 break;
         }
 

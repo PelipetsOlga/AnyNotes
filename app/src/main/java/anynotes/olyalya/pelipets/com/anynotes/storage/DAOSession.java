@@ -13,7 +13,7 @@ public class DAOSession {
     public DAOSession(Context context) {
         DBHelper helper = new DBHelper(context);
         SQLiteDatabase db = helper.getWritableDatabase();
-        repository = new NotesRepository(db);
+        repository = new NotesRepository(db, context);
     }
 
     public NotesRepository getRepository() {

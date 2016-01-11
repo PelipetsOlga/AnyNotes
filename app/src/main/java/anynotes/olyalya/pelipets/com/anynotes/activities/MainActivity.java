@@ -18,12 +18,15 @@ import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.text.TextUtils;
 import android.text.format.DateFormat;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.google.android.gms.ads.AdRequest;
@@ -293,10 +296,10 @@ public class MainActivity extends AppCompatActivity
                 holder.tvText.setText(note.getText().substring(0, Constants.LENGTH_TEXT - 1) + "...");
             }
 
-            String alarm=note.getAlarm();
-            if (alarm==null || TextUtils.isEmpty(alarm)){
+            String alarm = note.getAlarm();
+            if (alarm == null || TextUtils.isEmpty(alarm)) {
                 holder.ivAlarm.setVisibility(View.INVISIBLE);
-            }else{
+            } else {
                 holder.ivAlarm.setVisibility(View.VISIBLE);
             }
 
@@ -349,9 +352,10 @@ public class MainActivity extends AppCompatActivity
             tvLastSaving = (TextView) itemView.findViewById(R.id.tv_lastsaving);
             tvText = (TextView) itemView.findViewById(R.id.tv_text);
             ivIcon = (ImageView) itemView.findViewById(R.id.iv_icon);
-            ivAlarm= (ImageView) itemView.findViewById(R.id.iv_alarm);
+            ivAlarm = (ImageView) itemView.findViewById(R.id.iv_alarm);
             llContent = (LinearLayout) itemView.findViewById(R.id.ll_content);
             ivIcon.setOnClickListener(this);
+            ivAlarm.setOnClickListener(this);
             llContent.setOnClickListener(this);
             tvText.setOnClickListener(this);
             SharedPreferences sPref = context.getSharedPreferences(Constants.PREFS_NAME, AppCompatActivity.MODE_PRIVATE);
@@ -368,6 +372,10 @@ public class MainActivity extends AppCompatActivity
             switch (v.getId()) {
                 case R.id.iv_speech:
                     //// TODO: 10.01.2016
+                    break;
+                case R.id.iv_alarm:
+                    //  Snackbar.make(ivAlarm, note.getAlarm(),Snackbar.LENGTH_SHORT).show();
+                    displayPopupWindow(v, note);
                     break;
                 case R.id.iv_icon:
                     int oldStatus = note.getStatus();
@@ -395,6 +403,21 @@ public class MainActivity extends AppCompatActivity
                     ((MainActivity) context).startActivityForResult(intent, NOTE_REQUEST_CODE);
                     break;
             }
+        }
+
+        private void displayPopupWindow(View anchorView, Note note) {
+            Context ctx = anchorView.getContext();
+            PopupWindow popup = new PopupWindow(ctx);
+            LayoutInflater inflater = (LayoutInflater) ctx.getSystemService(LAYOUT_INFLATER_SERVICE);
+            View popupView = inflater.inflate(R.layout.popup_alarm, null);
+            popup.setContentView(popupView);
+            TextView tvPopup = (TextView) popupView.findViewById(R.id.tv_popup);
+            tvPopup.setText(note.getAlarm());
+            popup.setHeight(WindowManager.LayoutParams.WRAP_CONTENT);
+            popup.setWidth(WindowManager.LayoutParams.WRAP_CONTENT);
+            popup.setOutsideTouchable(true);
+            popup.setFocusable(true);
+            popup.showAsDropDown(anchorView);
         }
     }
 }

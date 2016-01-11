@@ -256,7 +256,7 @@ public class ReminderActivity extends AppCompatActivity {
                             intent.putExtra(Constants.EXTRA_REPEAT, 0);
                         }
                     } else {
-                        intent.putExtra(Constants.EXTRA_TIME_DATE, "");
+                        //intent.putExtra(Constants.EXTRA_TIME_DATE, "");
                         intent.putExtra(Constants.EXTRA_REPEAT, 0);
                     }
                 }

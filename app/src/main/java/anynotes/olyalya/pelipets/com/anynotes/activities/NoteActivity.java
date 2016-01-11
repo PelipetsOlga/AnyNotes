@@ -51,7 +51,6 @@ public class NoteActivity extends AppCompatActivity {
     private int bright;
     private int size;
     private boolean hasMicrophone = false;
-    // private Date alarm;
     private long repeat;
     private SimpleDateFormat dateFormat = new SimpleDateFormat(Constants.FORMAT_ALARM);
 
