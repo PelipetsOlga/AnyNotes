@@ -1,6 +1,7 @@
 package anynotes.olyalya.pelipets.com.anynotes.activities;
 
 import android.content.SharedPreferences;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -12,7 +13,9 @@ import android.widget.TextView;
 
 import org.adw.library.widgets.discreteseekbar.DiscreteSeekBar;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import anynotes.olyalya.pelipets.com.anynotes.R;
@@ -32,6 +35,7 @@ public class SettingsActivity extends AppCompatActivity {
     private boolean changes = false;
     private Map<RadioButton, String> rings = new HashMap<>();
     private String prefRingtone = " ";
+    private List<MediaPlayer>listPlayers=new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,7 +97,17 @@ public class SettingsActivity extends AppCompatActivity {
                         ed.putString(Constants.PREF_RINGTONE, fileName);
                         ed.commit();
                         if (!TextUtils.isEmpty(fileName.trim())) {
+
+                            if (listPlayers.size()!=0){
+                                MediaPlayer lastPlayer=listPlayers.get(listPlayers.size()-1);
+                                lastPlayer.stop();
+                                listPlayers.remove(lastPlayer);
+                            }
                             //todo play sound
+                            int ringId=SettingsActivity.this.getResources().getIdentifier(fileName,"raw",getPackageName());
+                            MediaPlayer mPlayer = MediaPlayer.create(SettingsActivity.this, ringId);
+                            mPlayer.start();
+                            listPlayers.add(mPlayer);
                         }
                     }
                 }
@@ -167,6 +181,11 @@ public class SettingsActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
+        if (listPlayers.size()!=0){
+            MediaPlayer lastPlayer=listPlayers.get(listPlayers.size()-1);
+            lastPlayer.stop();
+            listPlayers.remove(lastPlayer);
+        }
         if (changes) {
             setResult(RESULT_OK);
         } else {
