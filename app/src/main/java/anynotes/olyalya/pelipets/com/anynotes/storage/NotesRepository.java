@@ -69,22 +69,30 @@ public class NotesRepository {
     }
 
     private void setAlarm(Note note) {
-        Intent intent = new Intent(context, TimeNotification.class);
-        intent.putExtra(Constants.EXTRA_CREATING, note.getCreating());
-        intent.putExtra(Constants.EXTRA_NOTE_TITLE, note.getTitle());
-        intent.putExtra(Constants.EXTRA_NOTE_CONTENT, note.getText());
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0,
-                intent, PendingIntent.FLAG_CANCEL_CURRENT);
+        PendingIntent pendingIntent = getPendingIntent(note);
         am.cancel(pendingIntent);
         try {
             Date date = dateFormat.parse(note.getAlarm());
-            am.set(AlarmManager.RTC_WAKEUP,date.getTime(), pendingIntent);
+            am.set(AlarmManager.RTC_WAKEUP, date.getTime(), pendingIntent);
         } catch (ParseException e) {
             e.printStackTrace();
         }
     }
 
+    private PendingIntent getPendingIntent(Note note) {
+        Intent intent = new Intent(context, TimeNotification.class);
+        intent.putExtra(Constants.EXTRA_CREATING, note.getCreating());
+        intent.putExtra(Constants.EXTRA_NOTE_TITLE, note.getTitle());
+        intent.putExtra(Constants.EXTRA_NOTE_CONTENT, note.getText());
+        intent.putExtra(Constants.EXTRA_REPEAT, note.getRepeat());
+        return PendingIntent.getBroadcast(context, 0,
+                intent, PendingIntent.FLAG_CANCEL_CURRENT);
+    }
+
     public boolean update(Note note) {
+        Note oldNote = findByKey(note.getCreating());
+        deleteAlarm(oldNote);
+
         if (note == null) return false;
         ContentValues cv = new ContentValues();
         cv.put(DBSchema.CREATING, note.getCreating());
@@ -97,13 +105,26 @@ public class NotesRepository {
 
         int update = db.update(DBSchema.TABLE, cv, DBSchema.CREATING + "=" + note.getCreating(), null);
         Log.d(TAG, "update note " + update);
+        if (note.getAlarm() != null && !TextUtils.isEmpty(note.getAlarm())) {
+            setAlarm(note);
+        }
         return true;
+    }
+
+    private void deleteAlarm(Note oldNote) {
+        if (oldNote != null) {
+            if (!TextUtils.isEmpty(oldNote.getAlarm().trim())) {
+                PendingIntent oldPendingIntent = getPendingIntent(oldNote);
+                oldPendingIntent.cancel();
+            }
+        }
     }
 
     public boolean delete(Note note) {
         if (note == null) return false;
         int delete = db.delete(DBSchema.TABLE, DBSchema.ID + "=" + note.getId(), null);
         Log.d(TAG, "delete note" + delete);
+        deleteAlarm(note);
         return true;
     }
 
