@@ -43,7 +43,7 @@ public class Constants {
     public static final String TEST_DEVICE_G="86D72F707C2EDC7D0A97028DC211974B";//samsung G360H
 
 
-
+    public static final String PREF_RINGTONE="ringtone";
     public static final String PREF_FONT_SIZE="font_size";
     public static final String PREF_BRIGHTNESS="brightness";
     public static final String PREFS_NAME = "anynotes_prefs";

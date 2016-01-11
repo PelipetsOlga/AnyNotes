@@ -51,6 +51,14 @@
     <string name="repeat_year">year</string>
     <string name="repeat_none">Not repeating</string>
 
+    <string name="rington_default">Default</string>
+    <string name="rington_1">Ringtone 1</string>
+    <string name="rington_2">Ringtone 2</string>
+    <string name="rington_3">Ringtone 3</string>
+    <string name="rington_4">Ringtone 4</string>
+    <string name="rington_5">Ringtone 5</string>
+    <string name="rington_6">Ringtone 6</string>
+
     <string name="new_note_hint_title">Note title</string>
     <string name="new_note_hint_text">Let\'s write your idea</string>
     <string name="banner_ad_unit_id">ca-app-pub-6973932400636393/3338064660</string>

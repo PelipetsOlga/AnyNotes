@@ -4,10 +4,16 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.MenuItem;
+import android.widget.CompoundButton;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 import org.adw.library.widgets.discreteseekbar.DiscreteSeekBar;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import anynotes.olyalya.pelipets.com.anynotes.R;
 import anynotes.olyalya.pelipets.com.anynotes.utils.Constants;
@@ -24,7 +30,8 @@ public class SettingsActivity extends AppCompatActivity {
     private TextView tvLastsaving;
     private TextView tvText;
     private boolean changes = false;
-
+    private Map<RadioButton, String> rings = new HashMap<>();
+    private String prefRingtone = " ";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +50,7 @@ public class SettingsActivity extends AppCompatActivity {
         sPref = getSharedPreferences(Constants.PREFS_NAME, AppCompatActivity.MODE_PRIVATE);
         bright = sPref.getInt(Constants.PREF_BRIGHTNESS, Constants.BRIGHTNESS);
         size = sPref.getInt(Constants.PREF_FONT_SIZE, Constants.SIZE_FONT);
+        prefRingtone = sPref.getString(Constants.PREF_RINGTONE, " ");
     }
 
     private void initViews() {
@@ -59,6 +67,38 @@ public class SettingsActivity extends AppCompatActivity {
         seekSize.setProgress(size);
         seekBright = (DiscreteSeekBar) findViewById(R.id.seekbar_brightness);
         seekBright.setProgress(bright);
+
+        rings.put((RadioButton) findViewById(R.id.rb_ring_default), " ");
+        rings.put((RadioButton) findViewById(R.id.rb_ring1), "ringtone1");
+        rings.put((RadioButton) findViewById(R.id.rb_ring2), "ringtone2");
+        rings.put((RadioButton) findViewById(R.id.rb_ring3), "ringtone3");
+        rings.put((RadioButton) findViewById(R.id.rb_ring4), "ringtone4");
+        rings.put((RadioButton) findViewById(R.id.rb_rin5), "ringtone5");
+        rings.put((RadioButton) findViewById(R.id.rb_ring6), "ringtone6");
+
+
+        for (RadioButton rb : rings.keySet()) {
+            if (((String) rings.get(rb)).equalsIgnoreCase(prefRingtone)) {
+                rb.setChecked(true);
+            }
+        }
+
+        for (RadioButton rb : rings.keySet()) {
+            rb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    if (isChecked) {
+                        String fileName = rings.get(buttonView);
+                        SharedPreferences.Editor ed = sPref.edit();
+                        ed.putString(Constants.PREF_RINGTONE, fileName);
+                        ed.commit();
+                        if (!TextUtils.isEmpty(fileName.trim())) {
+                            //todo play sound
+                        }
+                    }
+                }
+            });
+        }
     }
 
     public void setFontSizeConrol() {
