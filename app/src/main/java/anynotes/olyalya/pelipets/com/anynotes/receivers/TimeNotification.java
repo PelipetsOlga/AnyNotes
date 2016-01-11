@@ -16,13 +16,16 @@ import anynotes.olyalya.pelipets.com.anynotes.activities.MainActivity;
 import anynotes.olyalya.pelipets.com.anynotes.utils.Constants;
 
 public class TimeNotification extends BroadcastReceiver {
+    private String ringtone;
+    private boolean vibro;
+
+
     public TimeNotification() {
     }
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        SharedPreferences sPref = context.getSharedPreferences(Constants.PREFS_NAME, AppCompatActivity.MODE_PRIVATE);
-        String ringtone = sPref.getString(Constants.PREF_RINGTONE, " ");
+        loadSettings(context);
 
         long noteCreating = intent.getLongExtra(Constants.EXTRA_CREATING, 0);
         String noteTitle = intent.getStringExtra(Constants.EXTRA_NOTE_TITLE);
@@ -57,14 +60,19 @@ public class TimeNotification extends BroadcastReceiver {
             notification = builder.build();
         }
         if (notification != null) {
+            if (vibro) {
+                long[] vibrate = {500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500};
+                notification.vibrate = vibrate;
+            }
+
             //notification.defaults |= Notification.DEFAULT_VIBRATE;
-            long[] vibrate = {500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500,500};
-            notification.vibrate = vibrate;
+            // long[] vibrate = {500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500,500};
+            //notification.vibrate = vibrate;
 
             if (TextUtils.isEmpty(ringtone.trim())) {
                 notification.defaults |= Notification.DEFAULT_SOUND;
             } else {
-                int ringId=context.getResources().getIdentifier(ringtone,"raw",context.getPackageName());
+                int ringId = context.getResources().getIdentifier(ringtone, "raw", context.getPackageName());
                 notification.sound = Uri.parse("android.resource://"
                         + context.getPackageName() + "/" + ringId);
             }
@@ -74,5 +82,11 @@ public class TimeNotification extends BroadcastReceiver {
 
         NotificationManager nManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         nManager.notify(100, notification);
+    }
+
+    private void loadSettings(Context context) {
+        SharedPreferences sPref = context.getSharedPreferences(Constants.PREFS_NAME, AppCompatActivity.MODE_PRIVATE);
+        ringtone = sPref.getString(Constants.PREF_RINGTONE, " ");
+        vibro = sPref.getBoolean(Constants.PREF_VIBRO, true);
     }
 }

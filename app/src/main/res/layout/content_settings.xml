@@ -149,39 +149,71 @@
 
                     <RadioButton
                         android:id="@+id/rb_ring_default"
-                        android:text="@string/rington_default"
-                        style="@style/rb_ringtone" />
+                        style="@style/rb_ringtone"
+                        android:text="@string/rington_default" />
+
                     <RadioButton
                         android:id="@+id/rb_ring1"
-                        android:text="@string/rington_1"
-                        style="@style/rb_ringtone" />
+                        style="@style/rb_ringtone"
+                        android:text="@string/rington_1" />
+
                     <RadioButton
                         android:id="@+id/rb_ring2"
-                        android:text="@string/rington_2"
-                        style="@style/rb_ringtone" />
+                        style="@style/rb_ringtone"
+                        android:text="@string/rington_2" />
+
                     <RadioButton
                         android:id="@+id/rb_ring3"
-                        android:text="@string/rington_3"
-                        style="@style/rb_ringtone" />
+                        style="@style/rb_ringtone"
+                        android:text="@string/rington_3" />
+
                     <RadioButton
                         android:id="@+id/rb_ring4"
-                        android:text="@string/rington_4"
-                        style="@style/rb_ringtone" />
+                        style="@style/rb_ringtone"
+                        android:text="@string/rington_4" />
+
                     <RadioButton
                         android:id="@+id/rb_rin5"
-                        android:text="@string/rington_5"
-                        style="@style/rb_ringtone" />
+                        style="@style/rb_ringtone"
+                        android:text="@string/rington_5" />
+
                     <RadioButton
                         android:id="@+id/rb_ring6"
-                        android:text="@string/rington_6"
-                        style="@style/rb_ringtone" />
-
-
-
+                        style="@style/rb_ringtone"
+                        android:text="@string/rington_6" />
 
                 </RadioGroup>
             </LinearLayout>
 
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/colorPrimary" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="16dp">
+
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|left"
+                    android:paddingRight="32dp"
+                    android:paddingTop="8dp"
+                    android:src="@mipmap/ion_radio_waves" />
+
+                <Switch
+                    android:id="@+id/switch_vibro"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:checked="true" />
+
+
+            </LinearLayout>
 
         </LinearLayout>
 

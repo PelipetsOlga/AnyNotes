@@ -1,14 +1,17 @@
 package anynotes.olyalya.pelipets.com.anynotes.activities;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.MenuItem;
 import android.widget.CompoundButton;
 import android.widget.RadioButton;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import org.adw.library.widgets.discreteseekbar.DiscreteSeekBar;
@@ -35,7 +38,9 @@ public class SettingsActivity extends AppCompatActivity {
     private boolean changes = false;
     private Map<RadioButton, String> rings = new HashMap<>();
     private String prefRingtone = " ";
+    private boolean prefVibro;
     private List<MediaPlayer>listPlayers=new ArrayList<>();
+    private Switch switchVibro;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +60,7 @@ public class SettingsActivity extends AppCompatActivity {
         bright = sPref.getInt(Constants.PREF_BRIGHTNESS, Constants.BRIGHTNESS);
         size = sPref.getInt(Constants.PREF_FONT_SIZE, Constants.SIZE_FONT);
         prefRingtone = sPref.getString(Constants.PREF_RINGTONE, " ");
+        prefVibro=sPref.getBoolean(Constants.PREF_VIBRO, true);
     }
 
     private void initViews() {
@@ -103,7 +109,6 @@ public class SettingsActivity extends AppCompatActivity {
                                 lastPlayer.stop();
                                 listPlayers.remove(lastPlayer);
                             }
-                            //todo play sound
                             int ringId=SettingsActivity.this.getResources().getIdentifier(fileName,"raw",getPackageName());
                             MediaPlayer mPlayer = MediaPlayer.create(SettingsActivity.this, ringId);
                             mPlayer.start();
@@ -113,6 +118,22 @@ public class SettingsActivity extends AppCompatActivity {
                 }
             });
         }
+
+        switchVibro=(Switch)findViewById(R.id.switch_vibro);
+        switchVibro.setChecked(prefVibro);
+        switchVibro.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                SharedPreferences.Editor ed = sPref.edit();
+                ed.putBoolean(Constants.PREF_VIBRO, isChecked);
+                ed.commit();
+
+                if (isChecked){
+                    Vibrator v = (Vibrator) SettingsActivity.this.getSystemService(Context.VIBRATOR_SERVICE);
+                    v.vibrate(500);
+                }
+            }
+        });
     }
 
     public void setFontSizeConrol() {
