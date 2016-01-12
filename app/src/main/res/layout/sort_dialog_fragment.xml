@@ -6,29 +6,29 @@
     android:padding="16dp"
     android:layout_marginBottom="40dp">
 
-    <ImageView
+    <CheckBox
         android:id="@+id/iv_unsort"
         style="@style/ordered_style"
-        android:src="@mipmap/fa_sort" />
+        android:button="@drawable/check_sort_unsort" />
 
-    <ImageView
+    <CheckBox
         android:id="@+id/iv_sort_alpha_asc"
         style="@style/ordered_style"
-        android:src="@mipmap/fa_sort_alpha_asc" />
+        android:button="@drawable/check_sort_al_asc" />
 
-    <ImageView
+    <CheckBox
         android:id="@+id/iv_sort_alpha_desc"
         style="@style/ordered_style"
-        android:src="@mipmap/fa_sort_alpha_desc" />
+        android:button="@drawable/check_sort_al_desc" />
 
-    <ImageView
+    <CheckBox
         android:id="@+id/iv_sort_date_asc"
         style="@style/ordered_style"
-        android:src="@mipmap/fa_sort_amount_asc" />
+        android:button="@drawable/check_sort_nu_asc" />
 
-    <ImageView
+    <CheckBox
         android:id="@+id/iv_sort_date_desc"
         style="@style/ordered_style"
-        android:src="@mipmap/fa_sort_amount_desc" />
+        android:button="@drawable/check_sort_nu_desc" />
 
 </LinearLayout>
