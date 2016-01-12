@@ -48,6 +48,13 @@ public class Constants {
     public static final String PREF_BRIGHTNESS = "brightness";
     public static final String PREFS_NAME = "anynotes_prefs";
     public static final String PREF_VIBRO = "vibro";
+    public static final String PREF_SORT = "sort";
+    public static final int PREF_SORT_UNSORT = 100;
+    public static final int PREF_SORT_AL_ASC = 101;
+    public static final int PREF_SORT_AL_DESC = 102;
+    public static final int PREF_SORT_NUM_ASC = 103;
+    public static final int PREF_SORT_NUM_DESC = 104;
+
     public static final int BRIGHTNESS = 200;
     public static final int SIZE_FONT = 18;
     public static final int LENGTH_TEXT = 300;

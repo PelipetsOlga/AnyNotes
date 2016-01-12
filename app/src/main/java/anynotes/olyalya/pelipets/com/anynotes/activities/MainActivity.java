@@ -68,6 +68,7 @@ public class MainActivity extends AppCompatActivity
     private TextView empty;
     private TextToSpeech mTTS;
     private boolean canSpeech = false;
+    private int sortPref=Constants.PREF_SORT_UNSORT;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,6 +94,23 @@ public class MainActivity extends AppCompatActivity
 
         notes = new ArrayList<Note>();
         repository = ((NotesApplication) getApplication()).getDaoSession().getRepository();
+        switch (sortPref){
+            case Constants.PREF_SORT_AL_ASC:
+                repository.setModeOrdered(Constants.MODE_ORDERED_SORT_ALPHA_ASC);
+                break;
+            case Constants.PREF_SORT_AL_DESC:
+                repository.setModeOrdered(Constants.MODE_ORDERED_SORT_ALPHA_DESC);
+                break;
+            case Constants.PREF_SORT_NUM_ASC:
+                repository.setModeOrdered(Constants.MODE_ORDERED_SORT_DATE_ASC);
+                break;
+            case Constants.PREF_SORT_NUM_DESC:
+                repository.setModeOrdered(Constants.MODE_ORDERED_SORT_DATE_DESC);
+                break;
+            default:
+                repository.setModeOrdered(Constants.MODE_ORDERED_UNSORTED);
+                break;
+        }
 
 
         adapter = new NotesAdapter(refreshListener, mTTS, canSpeech);
@@ -150,6 +168,7 @@ public class MainActivity extends AppCompatActivity
         mPref = getSharedPreferences(Constants.PREFS_NAME, MODE_PRIVATE);
         bright = mPref.getInt(Constants.PREF_BRIGHTNESS, Constants.BRIGHTNESS);
         NoteUtils.setBrightness(bright, this);
+        sortPref=mPref.getInt(Constants.PREF_SORT, Constants.PREF_SORT_UNSORT);
     }
 
     private void initViews() {
