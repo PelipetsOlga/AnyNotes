@@ -78,6 +78,7 @@
                             android:layout_marginLeft="8dp"
                             android:layout_marginRight="4dp"
                             android:layout_marginTop="4dp"
+                            android:clickable="true"
                             android:src="@mipmap/fa_volume_up" />
 
                     </LinearLayout>

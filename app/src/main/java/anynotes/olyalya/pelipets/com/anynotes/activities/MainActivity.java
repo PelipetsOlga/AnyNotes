@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
@@ -36,6 +37,7 @@ import com.google.android.gms.ads.AdView;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 import anynotes.olyalya.pelipets.com.anynotes.R;
 import anynotes.olyalya.pelipets.com.anynotes.application.NotesApplication;
@@ -48,7 +50,7 @@ import anynotes.olyalya.pelipets.com.anynotes.utils.NoteUtils;
 import anynotes.olyalya.pelipets.com.anynotes.views.RecyclerViewEmptySupport;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, RefreshListListener {
+        implements NavigationView.OnNavigationItemSelectedListener, RefreshListListener, TextToSpeech.OnInitListener {
 
     private static final int NOTE_REQUEST_CODE = 100;
     private static final int SETTINGS_REQUEST_CODE = 200;
@@ -56,7 +58,7 @@ public class MainActivity extends AppCompatActivity
     private FloatingActionButton fab;
     private DrawerLayout drawer;
     private RecyclerViewEmptySupport recyclerView;
-    private RecyclerView.Adapter adapter;
+    private NotesAdapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     private static NotesRepository repository;
     private static List<Note> notes;
@@ -64,11 +66,15 @@ public class MainActivity extends AppCompatActivity
     private SharedPreferences mPref;
     private int bright;
     private TextView empty;
+    private TextToSpeech mTTS;
+    private boolean canSpeech = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mTTS = new TextToSpeech(this, this);
 
         loadSettings();
 
@@ -89,7 +95,7 @@ public class MainActivity extends AppCompatActivity
         repository = ((NotesApplication) getApplication()).getDaoSession().getRepository();
 
 
-        adapter = new NotesAdapter(refreshListener);
+        adapter = new NotesAdapter(refreshListener, mTTS, canSpeech);
         recyclerView.setAdapter(adapter);
 
         ItemTouchHelper.SimpleCallback simpleItemTouchCallback =
@@ -266,23 +272,52 @@ public class MainActivity extends AppCompatActivity
 
     private void refreshSettings() {
         loadSettings();
-        adapter = new NotesAdapter(refreshListener);
+        adapter = new NotesAdapter(refreshListener, mTTS, canSpeech);
         recyclerView.setAdapter(adapter);
+    }
+
+    @Override
+    public void onInit(int status) {
+        if (status == TextToSpeech.SUCCESS) {
+            int result = mTTS.setLanguage(Locale.getDefault());
+
+            if (result == TextToSpeech.LANG_MISSING_DATA
+                    || result == TextToSpeech.LANG_NOT_SUPPORTED) {
+                canSpeech = false;
+            } else {
+                canSpeech = true;
+            }
+
+        } else {
+            canSpeech = false;
+        }
+        // refreshList();
+        adapter.setCanSpeech(canSpeech);
+        adapter.notifyDataSetChanged();
+
     }
 
     private static class NotesAdapter extends RecyclerView.Adapter<NoteViewHolder> {
         private RefreshListListener listener;
+        private TextToSpeech mTTS;
+        private boolean canSpeech = false;
 
-        public NotesAdapter(RefreshListListener listener) {
+        public NotesAdapter(RefreshListListener listener, TextToSpeech mTTS, boolean canSpeech) {
             super();
             this.listener = listener;
+            this.mTTS = mTTS;
+            this.canSpeech = canSpeech;
+        }
+
+        public void setCanSpeech(boolean canSpeech) {
+            this.canSpeech = canSpeech;
         }
 
         @Override
         public NoteViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View view = View.inflate(parent.getContext(),
                     R.layout.item_note_rec_view, null);
-            return new NoteViewHolder(view, listener);
+            return new NoteViewHolder(view, listener, mTTS);
         }
 
         @Override
@@ -302,6 +337,12 @@ public class MainActivity extends AppCompatActivity
                 holder.ivAlarm.setVisibility(View.INVISIBLE);
             } else {
                 holder.ivAlarm.setVisibility(View.VISIBLE);
+            }
+
+            if (canSpeech) {
+                holder.ivSpeech.setVisibility(View.VISIBLE);
+            } else {
+                holder.ivSpeech.setVisibility(View.GONE);
             }
 
             Calendar calendar = Calendar.getInstance();
@@ -342,20 +383,27 @@ public class MainActivity extends AppCompatActivity
         private final TextView tvLastSaving;
         private final TextView tvText;
         private final ImageView ivIcon;
+        private final ImageView ivSpeech;
         private final ImageView ivAlarm;
         private final LinearLayout llContent;
+        private TextToSpeech mTTS;
 
-        public NoteViewHolder(View itemView, RefreshListListener listener) {
+
+        public NoteViewHolder(View itemView, RefreshListListener listener, TextToSpeech mTTS) {
             super(itemView);
             this.listener = listener;
             context = itemView.getContext();
+            this.mTTS = mTTS;
+
             tvTitle = (TextView) itemView.findViewById(R.id.tv_title);
             tvLastSaving = (TextView) itemView.findViewById(R.id.tv_lastsaving);
             tvText = (TextView) itemView.findViewById(R.id.tv_text);
             ivIcon = (ImageView) itemView.findViewById(R.id.iv_icon);
+            ivSpeech = (ImageView) itemView.findViewById(R.id.iv_speech);
             ivAlarm = (ImageView) itemView.findViewById(R.id.iv_alarm);
             llContent = (LinearLayout) itemView.findViewById(R.id.ll_content);
             ivIcon.setOnClickListener(this);
+            ivSpeech.setOnClickListener(this);
             ivAlarm.setOnClickListener(this);
             llContent.setOnClickListener(this);
             tvText.setOnClickListener(this);
@@ -366,13 +414,22 @@ public class MainActivity extends AppCompatActivity
             tvText.setTextSize(fontSize);
         }
 
+        public void setTTS(TextToSpeech tts) {
+            this.mTTS = tts;
+        }
+
         @Override
         public void onClick(View v) {
             int position = getLayoutPosition();
             Note note = notes.get(position);
             switch (v.getId()) {
                 case R.id.iv_speech:
-                    //// TODO: 10.01.2016
+                    if (note != null) {
+                        String textToSpeech = note.getText();
+                        if (textToSpeech != null && !TextUtils.isEmpty(textToSpeech)) {
+                            mTTS.speak(textToSpeech, TextToSpeech.QUEUE_FLUSH, null);
+                        }
+                    }
                     break;
                 case R.id.iv_alarm:
                     displayPopupWindow(v, note);
@@ -420,5 +477,14 @@ public class MainActivity extends AppCompatActivity
             popup.setBackgroundDrawable(new BitmapDrawable());
             popup.showAsDropDown(anchorView);
         }
+    }
+
+    @Override
+    public void onDestroy() {
+        if (mTTS != null) {
+            mTTS.stop();
+            mTTS.shutdown();
+        }
+        super.onDestroy();
     }
 }
