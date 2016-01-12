@@ -38,9 +38,7 @@ public class SortDialogFragment extends DialogFragment implements View.OnClickLi
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         repository = ((NotesApplication) getActivity().getApplication()).getDaoSession().getRepository();
-
         sPref = getActivity().getSharedPreferences(Constants.PREFS_NAME, AppCompatActivity.MODE_PRIVATE);
 
         View rootView = inflater.inflate(R.layout.sort_dialog_fragment, container, false);
