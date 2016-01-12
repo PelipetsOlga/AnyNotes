@@ -7,6 +7,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
+import android.speech.tts.TextToSpeech;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -17,15 +18,14 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 import anynotes.olyalya.pelipets.com.anynotes.R;
 import anynotes.olyalya.pelipets.com.anynotes.application.NotesApplication;
@@ -34,7 +34,8 @@ import anynotes.olyalya.pelipets.com.anynotes.storage.NotesRepository;
 import anynotes.olyalya.pelipets.com.anynotes.utils.Constants;
 import anynotes.olyalya.pelipets.com.anynotes.utils.NoteUtils;
 
-public class NoteActivity extends AppCompatActivity {
+public class NoteActivity extends AppCompatActivity implements
+        TextToSpeech.OnInitListener {
     private static final String TAG_CREATING = "creating";
     private static final int REQUEST_CODE_VOICE = 1234;
     private static final int REQUEST_CODE_ALARM = 5678;
@@ -51,8 +52,8 @@ public class NoteActivity extends AppCompatActivity {
     private int bright;
     private int size;
     private boolean hasMicrophone = false;
+    private boolean canSpeech = false;
     private long repeat;
-    private SimpleDateFormat dateFormat = new SimpleDateFormat(Constants.FORMAT_ALARM);
 
     private EditText etTitle;
     private EditText etText;
@@ -61,6 +62,7 @@ public class NoteActivity extends AppCompatActivity {
     private NotesRepository repository;
     private Toolbar toolbar;
     private MenuItem menuAlarm;
+    private TextToSpeech mTTS;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,6 +89,8 @@ public class NoteActivity extends AppCompatActivity {
 
         initViews();
 
+        mTTS = new TextToSpeech(this, this);
+
         if (setMicrophoneEnabled()) {
             hasMicrophone = true;
         }
@@ -112,13 +116,16 @@ public class NoteActivity extends AppCompatActivity {
         if (type_operation == Constants.EXTRA_ACTION_NEW_NOTE) {
             modeFab = MODE_FAB_SAVE;
             fab.setImageResource(R.mipmap.ic_check_white_24dp);
-            ivMicrophone.setImageResource(R.mipmap.fa_microphone);
-            ivMicrophone.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    startVoiceRecognitionActivity();
-                }
-            });
+            if (hasMicrophone) {
+                ivMicrophone.setVisibility(View.VISIBLE);
+                ivMicrophone.setImageResource(R.mipmap.fa_microphone);
+                ivMicrophone.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        startVoiceRecognitionActivity();
+                    }
+                });
+            }
             etText.setFocusable(true);
             etTitle.setFocusable(true);
             etText.setFocusableInTouchMode(true);
@@ -132,10 +139,14 @@ public class NoteActivity extends AppCompatActivity {
             ivMicrophone.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    //todo speech
-                    Toast.makeText(NoteActivity.this, "speech", Toast.LENGTH_SHORT).show();
+                    String text = etText.getText().toString();
+                    if (text != null && !TextUtils.isEmpty(text)) {
+                        mTTS.speak(text, TextToSpeech.QUEUE_FLUSH, null);
+                    }
+                    // Toast.makeText(NoteActivity.this, "speech", Toast.LENGTH_SHORT).show();
                 }
             });
+
             fab.setImageResource(R.mipmap.icomoon_pencil);
             etText.setFocusable(false);
             etTitle.setFocusable(false);
@@ -146,6 +157,7 @@ public class NoteActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (modeFab == MODE_FAB_EDIT) {
                     modeFab = MODE_FAB_SAVE;
+                    ivMicrophone.setVisibility(View.VISIBLE);
                     ivMicrophone.setImageResource(R.mipmap.fa_microphone);
                     ivMicrophone.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -418,4 +430,36 @@ public class NoteActivity extends AppCompatActivity {
         finish();
     }
 
+    @Override
+    public void onInit(int status) {
+        if (status == TextToSpeech.SUCCESS) {
+            int result = mTTS.setLanguage(Locale.getDefault());
+
+            if (result == TextToSpeech.LANG_MISSING_DATA
+                    || result == TextToSpeech.LANG_NOT_SUPPORTED) {
+                canSpeech = false;
+            } else {
+                canSpeech = true;
+            }
+
+        } else {
+            canSpeech = false;
+        }
+
+        if (canSpeech) {
+            ivMicrophone.setVisibility(View.VISIBLE);
+        } else {
+            ivMicrophone.setVisibility(View.INVISIBLE);
+        }
+
+    }
+
+    @Override
+    public void onDestroy() {
+        if (mTTS != null) {
+            mTTS.stop();
+            mTTS.shutdown();
+        }
+        super.onDestroy();
+    }
 }

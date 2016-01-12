@@ -113,7 +113,8 @@ public class NotesRepository {
 
     private void deleteAlarm(Note oldNote) {
         if (oldNote != null) {
-            if (!TextUtils.isEmpty(oldNote.getAlarm().trim())) {
+            String oldAlarm=oldNote.getAlarm();
+            if (oldAlarm!=null && !TextUtils.isEmpty(oldAlarm.trim())) {
                 PendingIntent oldPendingIntent = getPendingIntent(oldNote);
                 oldPendingIntent.cancel();
             }
