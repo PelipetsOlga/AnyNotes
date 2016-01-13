@@ -9,7 +9,7 @@ public class Constants {
     public static final String EXTRA_NOTE = "note";
     public static final int EXTRA_ACTION_NEW_NOTE = 33;
     public static final int EXTRA_ACTION_EDIT_NOTE = 66;
-    public static final String EXTRA_LISTENER = "listener";
+   // public static final String EXTRA_LISTENER = "listener";
     public static final String EXTRA_CREATING = "creating";
     public static final String EXTRA_NOTE_CONTENT = "note_content";
     public static final String EXTRA_NOTE_TITLE = "note_title";

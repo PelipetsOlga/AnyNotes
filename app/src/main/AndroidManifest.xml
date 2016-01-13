@@ -51,6 +51,11 @@
         <activity
             android:name=".activities.TimeDatePickerActivity"
             android:theme="@style/AppTheme.NoActionBar" />
+
+        <service
+            android:name=".service.NotesService"
+            android:enabled="true"
+            android:exported="true"></service>
     </application>
 
 </manifest>

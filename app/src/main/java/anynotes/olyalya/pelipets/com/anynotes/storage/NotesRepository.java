@@ -166,8 +166,7 @@ public class NotesRepository {
     }
 
     public List<Note> loadAll() {
-        //TODO
-        String selections = null;
+       String selections = null;
         switch (modeSort) {
             case Constants.MODE_SORT_ALL:
             case Constants.MODE_SORT_ALARMS:

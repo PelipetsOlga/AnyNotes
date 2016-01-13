@@ -1,11 +1,14 @@
 package anynotes.olyalya.pelipets.com.anynotes.activities;
 
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.speech.tts.TextToSpeech;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -42,15 +45,19 @@ import java.util.Locale;
 import anynotes.olyalya.pelipets.com.anynotes.R;
 import anynotes.olyalya.pelipets.com.anynotes.application.NotesApplication;
 import anynotes.olyalya.pelipets.com.anynotes.fragments.SortDialogFragment;
+import anynotes.olyalya.pelipets.com.anynotes.interfaces.LoadNotesListener;
 import anynotes.olyalya.pelipets.com.anynotes.interfaces.RefreshListListener;
 import anynotes.olyalya.pelipets.com.anynotes.models.Note;
+import anynotes.olyalya.pelipets.com.anynotes.service.NotesService;
 import anynotes.olyalya.pelipets.com.anynotes.storage.NotesRepository;
 import anynotes.olyalya.pelipets.com.anynotes.utils.Constants;
 import anynotes.olyalya.pelipets.com.anynotes.utils.NoteUtils;
 import anynotes.olyalya.pelipets.com.anynotes.views.RecyclerViewEmptySupport;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, RefreshListListener, TextToSpeech.OnInitListener {
+        implements NavigationView.OnNavigationItemSelectedListener,
+        RefreshListListener,
+        TextToSpeech.OnInitListener {
 
     private static final int NOTE_REQUEST_CODE = 100;
     private static final int SETTINGS_REQUEST_CODE = 200;
@@ -68,7 +75,37 @@ public class MainActivity extends AppCompatActivity
     private TextView empty;
     private TextToSpeech mTTS;
     private boolean canSpeech = false;
-    private int sortPref=Constants.PREF_SORT_UNSORT;
+    private int sortPref = Constants.PREF_SORT_UNSORT;
+
+    private NotesService.NotesWorker worker;
+    private ServiceConnection serviceConnection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            worker = (NotesService.NotesWorker) service;
+
+            worker.loadAll(repository, new NotesLoaderListener());
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+        }
+    };
+
+    public class NotesLoaderListener implements LoadNotesListener {
+
+        @Override
+        public void onLoad(final List<Note> items) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    notes.clear();
+                    notes.addAll(items);
+                    adapter.notifyDataSetChanged();
+                    recyclerView.refresh();
+                }
+            });
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,7 +131,7 @@ public class MainActivity extends AppCompatActivity
 
         notes = new ArrayList<Note>();
         repository = ((NotesApplication) getApplication()).getDaoSession().getRepository();
-        switch (sortPref){
+        switch (sortPref) {
             case Constants.PREF_SORT_AL_ASC:
                 repository.setModeOrdered(Constants.MODE_ORDERED_SORT_ALPHA_ASC);
                 break;
@@ -160,7 +197,7 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-        refreshList();
+        bindService(new Intent(this, NotesService.class), serviceConnection, BIND_AUTO_CREATE);
     }
 
 
@@ -168,7 +205,7 @@ public class MainActivity extends AppCompatActivity
         mPref = getSharedPreferences(Constants.PREFS_NAME, MODE_PRIVATE);
         bright = mPref.getInt(Constants.PREF_BRIGHTNESS, Constants.BRIGHTNESS);
         NoteUtils.setBrightness(bright, this);
-        sortPref=mPref.getInt(Constants.PREF_SORT, Constants.PREF_SORT_UNSORT);
+        sortPref = mPref.getInt(Constants.PREF_SORT, Constants.PREF_SORT_UNSORT);
     }
 
     private void initViews() {
@@ -252,11 +289,9 @@ public class MainActivity extends AppCompatActivity
         super.onActivityResult(requestCode, resultCode, data);
     }
 
+    @Override
     public void refreshList() {
-        notes.clear();
-        notes.addAll(repository.loadAll());
-        adapter.notifyDataSetChanged();
-        recyclerView.refresh();
+        worker.loadAll(repository, new NotesLoaderListener());
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
@@ -312,7 +347,6 @@ public class MainActivity extends AppCompatActivity
         } else {
             canSpeech = false;
         }
-        // refreshList();
         adapter.setCanSpeech(canSpeech);
         adapter.notifyDataSetChanged();
 
@@ -387,7 +421,6 @@ public class MainActivity extends AppCompatActivity
                     holder.ivIcon.setImageResource(R.mipmap.fa_sticky_note);
                     break;
             }
-
         }
 
         @Override
@@ -408,7 +441,6 @@ public class MainActivity extends AppCompatActivity
         private final ImageView ivAlarm;
         private final LinearLayout llContent;
         private TextToSpeech mTTS;
-
 
         public NoteViewHolder(View itemView, RefreshListListener listener, TextToSpeech mTTS) {
             super(itemView);
@@ -433,10 +465,6 @@ public class MainActivity extends AppCompatActivity
             tvTitle.setTextSize(fontSize);
             tvLastSaving.setTextSize(fontSize);
             tvText.setTextSize(fontSize);
-        }
-
-        public void setTTS(TextToSpeech tts) {
-            this.mTTS = tts;
         }
 
         @Override
@@ -473,7 +501,6 @@ public class MainActivity extends AppCompatActivity
                             break;
                     }
                     break;
-
                 default:
                     Intent intent = new Intent(context, NoteActivity.class);
                     intent.putExtra(Constants.EXTRA_ACTION_TYPE, Constants.EXTRA_ACTION_EDIT_NOTE);
@@ -502,6 +529,14 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onDestroy() {
+        if (serviceConnection != null) {
+            try {
+                unbindService(serviceConnection);
+            } catch (IllegalArgumentException e) {
+                NoteUtils.log(e.toString());
+            }
+        }
+
         if (mTTS != null) {
             mTTS.stop();
             mTTS.shutdown();
