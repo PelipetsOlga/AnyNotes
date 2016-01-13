@@ -11,6 +11,7 @@ import android.widget.TimePicker;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import anynotes.olyalya.pelipets.com.anynotes.R;
@@ -34,13 +35,18 @@ public class TimeDatePickerActivity extends AppCompatActivity {
 
         if (alarmNote != null) {
             try {
-                Date currentDate = dateFormat.parse(alarmNote);
-                int currentDateYear = currentDate.getYear() + 1900;
-                int currentDateMonth = currentDate.getMonth();
-                int currentDateDay = currentDate.getDay();
+                Calendar currentDate = Calendar.getInstance();
+                Date date = dateFormat.parse(alarmNote);
+                currentDate.setTime(date);
+
+                int currentDateYear = currentDate.get(Calendar.YEAR);
+                int currentDateMonth = currentDate.get(Calendar.MONTH);
+                int currentDateDay = currentDate.get(Calendar.DAY_OF_MONTH);
                 datePicker.updateDate(currentDateYear, currentDateMonth, currentDateDay);
-                timePicker.setCurrentHour(currentDate.getHours());
-                timePicker.setCurrentMinute(currentDate.getMinutes());
+
+                timePicker.setCurrentHour(currentDate.get(Calendar.HOUR_OF_DAY));
+                timePicker.setCurrentMinute(currentDate.get(Calendar.MINUTE));
+
             } catch (ParseException e) {
                 e.printStackTrace();
             }
@@ -53,7 +59,6 @@ public class TimeDatePickerActivity extends AppCompatActivity {
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-
         timePicker = (TimePicker) findViewById(R.id.timepicker);
         timePicker.setIs24HourView(true);
         datePicker = (DatePicker) findViewById(R.id.datepicker);

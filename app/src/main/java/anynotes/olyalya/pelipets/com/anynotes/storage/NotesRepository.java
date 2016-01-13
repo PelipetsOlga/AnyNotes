@@ -69,11 +69,22 @@ public class NotesRepository {
     }
 
     private void setAlarm(Note note) {
+        NoteUtils.log("set first Alarm creating=" + note.getCreating() + ", time=" + note.getAlarm());
         PendingIntent pendingIntent = getPendingIntent(note);
         am.cancel(pendingIntent);
         try {
             Date date = dateFormat.parse(note.getAlarm());
-            am.set(AlarmManager.RTC_WAKEUP, date.getTime(), pendingIntent);
+            if (date.after(new Date())){
+                if (note.getRepeat() == 0) {
+                    NoteUtils.log("set not repeat Alarm creating=" + note.getCreating() + ", time=" + note.getAlarm());
+                    am.set(AlarmManager.RTC_WAKEUP, date.getTime(), pendingIntent);
+                } else {
+                    NoteUtils.log("set repeat Alarm creating=" + note.getCreating() + ", time=" + note.getAlarm());
+                    SimpleDateFormat dateFormat = new SimpleDateFormat(Constants.FORMAT_ALARM);
+                    Date dateAlarm = dateFormat.parse(note.getAlarm());
+                    am.setRepeating(AlarmManager.RTC_WAKEUP, dateAlarm.getTime(), note.getRepeat(), pendingIntent);
+                }
+            }
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -83,9 +94,12 @@ public class NotesRepository {
         Intent intent = new Intent(context, TimeNotification.class);
         intent.putExtra(Constants.EXTRA_CREATING, note.getCreating());
         intent.putExtra(Constants.EXTRA_NOTE_TITLE, note.getTitle());
+        intent.putExtra(Constants.EXTRA_STATUS, note.getStatus());
+        intent.putExtra(Constants.EXTRA_LASTSAVING, note.getLastSaving());
         intent.putExtra(Constants.EXTRA_NOTE_CONTENT, note.getText());
+        intent.putExtra(Constants.EXTRA_TIME_DATE, note.getAlarm());
         intent.putExtra(Constants.EXTRA_REPEAT, note.getRepeat());
-        return PendingIntent.getBroadcast(context, 0,
+        return PendingIntent.getBroadcast(context, (int) note.getCreating(),
                 intent, PendingIntent.FLAG_CANCEL_CURRENT);
     }
 
@@ -112,6 +126,7 @@ public class NotesRepository {
     }
 
     private void deleteAlarm(Note oldNote) {
+        NoteUtils.log("delete Alarm creating=" + oldNote.getCreating() + ", time=" + oldNote.getAlarm());
         if (oldNote != null) {
             String oldAlarm = oldNote.getAlarm();
             if (oldAlarm != null && !TextUtils.isEmpty(oldAlarm.trim())) {
@@ -121,15 +136,15 @@ public class NotesRepository {
         }
     }
 
-    public boolean delete(Note note) {
+   /* public boolean delete(Note note) {
         if (note == null) return false;
         int delete = db.delete(DBSchema.TABLE, DBSchema.ID + "=" + note.getId(), null);
         Log.d(TAG, "delete note" + delete);
         deleteAlarm(note);
         return true;
-    }
+    }*/
 
-    public Note findById(long id) {
+   /* public Note findById(long id) {
         Cursor cursor = db.query(DBSchema.TABLE, null, DBSchema.ID + "=" + id,
                 null, null, null, null);
         Note note = null;
@@ -145,7 +160,7 @@ public class NotesRepository {
             note.setText(cursor.getString(cursor.getColumnIndex(DBSchema.TEXT)));
         }
         return note;
-    }
+    }*/
 
     public Note findByKey(long creating) {
         Cursor cursor = db.query(DBSchema.TABLE, null, DBSchema.CREATING + "=" + creating,
@@ -166,7 +181,7 @@ public class NotesRepository {
     }
 
     public List<Note> loadAll() {
-       String selections = null;
+        String selections = null;
         switch (modeSort) {
             case Constants.MODE_SORT_ALL:
             case Constants.MODE_SORT_ALARMS:
@@ -220,7 +235,7 @@ public class NotesRepository {
                 note.setRepeat(cursor.getLong(cursor.getColumnIndex(DBSchema.REPEAT)));
                 note.setText(cursor.getString(cursor.getColumnIndex(DBSchema.TEXT)));
                 if (modeSort == Constants.MODE_SORT_ALARMS) {
-                    if (alarm!=null && !TextUtils.isEmpty(alarm)) {
+                    if (alarm != null && !TextUtils.isEmpty(alarm)) {
                         items.add(note);
                     }
                 } else {

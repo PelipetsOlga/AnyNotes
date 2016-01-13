@@ -13,13 +13,14 @@ import android.text.TextUtils;
 
 import anynotes.olyalya.pelipets.com.anynotes.R;
 import anynotes.olyalya.pelipets.com.anynotes.activities.MainActivity;
-import anynotes.olyalya.pelipets.com.anynotes.storage.NotesRepository;
+import anynotes.olyalya.pelipets.com.anynotes.models.Note;
 import anynotes.olyalya.pelipets.com.anynotes.utils.Constants;
+import anynotes.olyalya.pelipets.com.anynotes.utils.NoteUtils;
 
 public class TimeNotification extends BroadcastReceiver {
     private String ringtone;
     private boolean vibro;
-    private NotesRepository repository;
+   // private NotesRepository repository;
 
     public TimeNotification() {
     }
@@ -31,13 +32,29 @@ public class TimeNotification extends BroadcastReceiver {
 
         long noteCreating = intent.getLongExtra(Constants.EXTRA_CREATING, 0);
         String noteTitle = intent.getStringExtra(Constants.EXTRA_NOTE_TITLE);
+        int noteStatus= intent.getIntExtra(Constants.EXTRA_STATUS, Constants.STATUS_ACTUAL);
+        long noteLastSaving= intent.getLongExtra(Constants.EXTRA_LASTSAVING, 0);
         String noteText = intent.getStringExtra(Constants.EXTRA_NOTE_CONTENT);
+        String noteAlarm=intent.getStringExtra(Constants.EXTRA_TIME_DATE);
         long noteRepeat = intent.getIntExtra(Constants.EXTRA_REPEAT, 0);
+
+        NoteUtils.log("TimeNotification onReceive() creating=" + noteCreating);
+
+        Note note=new Note();
+        note.setCreating(noteCreating);
+        note.setTitle(noteTitle);
+        note.setText(noteText);
+        note.setStatus(noteStatus);
+        note.setLastSaving(noteLastSaving);
+        note.setAlarm(noteAlarm);
+        note.setRepeat(noteRepeat);
+
+        //Note note=repository.findByKey(noteCreating);
 
         Notification.Builder builder = new Notification.Builder(context);
         builder.setSmallIcon(R.mipmap.ic_launcher);
         builder.setContentTitle(noteTitle);
-        builder.setContentText(noteText);
+        builder.setContentText(noteAlarm);
         builder.setAutoCancel(true);
 
         Intent intentNotification = new Intent(context, MainActivity.class);
