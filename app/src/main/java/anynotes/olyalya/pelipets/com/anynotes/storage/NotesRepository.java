@@ -113,8 +113,8 @@ public class NotesRepository {
 
     private void deleteAlarm(Note oldNote) {
         if (oldNote != null) {
-            String oldAlarm=oldNote.getAlarm();
-            if (oldAlarm!=null && !TextUtils.isEmpty(oldAlarm.trim())) {
+            String oldAlarm = oldNote.getAlarm();
+            if (oldAlarm != null && !TextUtils.isEmpty(oldAlarm.trim())) {
                 PendingIntent oldPendingIntent = getPendingIntent(oldNote);
                 oldPendingIntent.cancel();
             }
@@ -170,6 +170,7 @@ public class NotesRepository {
         String selections = null;
         switch (modeSort) {
             case Constants.MODE_SORT_ALL:
+            case Constants.MODE_SORT_ALARMS:
                 selections = DBSchema.STATUS + "=" + Constants.STATUS_ACTUAL + " OR " + DBSchema.STATUS + "=" + Constants.STATUS_IMPORTANT;
                 break;
             case Constants.MODE_SORT_IMPORTANTS:
@@ -209,16 +210,23 @@ public class NotesRepository {
         List<Note> items = new ArrayList<Note>();
         if (cursor.moveToFirst()) {
             do {
+                String alarm = cursor.getString(cursor.getColumnIndex(DBSchema.ALARM));
                 Note note = new Note();
                 note.setId(cursor.getLong(cursor.getColumnIndex(DBSchema.ID)));
                 note.setCreating(cursor.getLong(cursor.getColumnIndex(DBSchema.CREATING)));
                 note.setLastSaving(cursor.getLong(cursor.getColumnIndex(DBSchema.LAST_SAVING)));
                 note.setStatus(cursor.getInt(cursor.getColumnIndex(DBSchema.STATUS)));
                 note.setTitle(cursor.getString(cursor.getColumnIndex(DBSchema.TITLE)));
-                note.setAlarm(cursor.getString(cursor.getColumnIndex(DBSchema.ALARM)));
+                note.setAlarm(alarm);
                 note.setRepeat(cursor.getLong(cursor.getColumnIndex(DBSchema.REPEAT)));
                 note.setText(cursor.getString(cursor.getColumnIndex(DBSchema.TEXT)));
-                items.add(note);
+                if (modeSort == Constants.MODE_SORT_ALARMS) {
+                    if (alarm!=null && !TextUtils.isEmpty(alarm)) {
+                        items.add(note);
+                    }
+                } else {
+                    items.add(note);
+                }
             } while (cursor.moveToNext());
         }
         Log.d(TAG, "loadAll cursor.size=" + cursor.getCount() + ", items.size=" + items.size());

@@ -279,8 +279,10 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.deleted) {
             getSupportActionBar().setTitle(R.string.menu_deleted);
             repository.setModeSort(Constants.MODE_SORT_DELETED);
-        } //else if (id == R.id.alarms) {
-        //}
+        } else if (id == R.id.alarms) {
+            getSupportActionBar().setTitle(R.string.menu_alarms);
+            repository.setModeSort(Constants.MODE_SORT_ALARMS);
+        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
