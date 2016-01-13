@@ -68,7 +68,7 @@ public class TimeNotification extends BroadcastReceiver {
         }
 
         NotificationManager nManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-        nManager.notify(100, notification);
+        if (notification != null) nManager.notify(100, notification);
     }
 
     private void loadSettings(Context context) {
