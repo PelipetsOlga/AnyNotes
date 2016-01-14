@@ -16,6 +16,7 @@ public class Constants {
     public static final String EXTRA_LASTSAVING = "last_saving";
     public static final String EXTRA_TIME_DATE = "time_date";
     public static final String EXTRA_REPEAT = "repeat";
+    public static final String EXTRA_OPEN_CURRENT_NOTE = "open_current_note";
 
     public static final int STATUS_DRAFT = 1;
     public static final int STATUS_DRAFT_DELETED = 5;
