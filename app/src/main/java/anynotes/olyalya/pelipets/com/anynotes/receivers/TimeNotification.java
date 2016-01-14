@@ -12,7 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 
 import anynotes.olyalya.pelipets.com.anynotes.R;
-import anynotes.olyalya.pelipets.com.anynotes.activities.MainActivity;
+import anynotes.olyalya.pelipets.com.anynotes.activities.NoteActivity;
 import anynotes.olyalya.pelipets.com.anynotes.models.Note;
 import anynotes.olyalya.pelipets.com.anynotes.utils.Constants;
 import anynotes.olyalya.pelipets.com.anynotes.utils.NoteUtils;
@@ -54,7 +54,7 @@ public class TimeNotification extends BroadcastReceiver {
         builder.setContentText(noteAlarm);
         builder.setAutoCancel(true);
 
-        Intent intentNotification = new Intent(context, MainActivity.class);
+        Intent intentNotification = new Intent(context, NoteActivity.class);
         intentNotification.putExtra(Constants.EXTRA_CREATING, noteCreating);
         intentNotification.putExtra(Constants.EXTRA_NOTE_TITLE, noteTitle);
         intentNotification.putExtra(Constants.EXTRA_TIME_DATE, noteAlarm);

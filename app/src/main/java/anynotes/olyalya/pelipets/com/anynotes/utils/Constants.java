@@ -62,4 +62,6 @@ public class Constants {
     public static final int LENGTH_TEXT = 300;
     public static final int TITLE_LENGTH = 80;
     public static final String FORMAT_ALARM = "dd/MM/yyyy, HH:mm";
+
+   // public static final String ACTION_SHOW_NOTE="android.intent.action.SHOW_NOTE";
    }
