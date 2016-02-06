@@ -63,6 +63,7 @@ public class NoteActivity extends AppCompatActivity implements
     private Toolbar toolbar;
     private MenuItem menuAlarm;
     private TextToSpeech mTTS;
+    private boolean openByAlarm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +71,7 @@ public class NoteActivity extends AppCompatActivity implements
         setContentView(R.layout.activity_note);
 
         loadSettings();
+        repository = ((NotesApplication) getApplication()).getDaoSession().getRepository();
 
         AdView mAdView = (AdView) findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder()
@@ -84,7 +86,12 @@ public class NoteActivity extends AppCompatActivity implements
         Intent intent = getIntent();
         type_operation = intent.getIntExtra(Constants.EXTRA_ACTION_TYPE, Constants.EXTRA_ACTION_NEW_NOTE);
         if (type_operation == Constants.EXTRA_ACTION_EDIT_NOTE) {
+            openByAlarm = intent.getBooleanExtra(Constants.EXTRA_OPEN_CURRENT_NOTE, false);
             startNote = (Note) intent.getSerializableExtra(Constants.EXTRA_NOTE);
+
+            if (openByAlarm) {
+                startNote = repository.deleteNotRepeatAlarm(startNote);
+            }
         }
 
         initViews();
@@ -94,8 +101,6 @@ public class NoteActivity extends AppCompatActivity implements
         if (setMicrophoneEnabled()) {
             hasMicrophone = true;
         }
-
-        repository = ((NotesApplication) getApplication()).getDaoSession().getRepository();
 
         if (type_operation == Constants.EXTRA_ACTION_NEW_NOTE) {
             creating = Calendar.getInstance().getTimeInMillis();
@@ -198,6 +203,25 @@ public class NoteActivity extends AppCompatActivity implements
             }
         });
     }
+
+  /*  private Note getStartNoteFromAlarm(Intent intent) {
+        long noteCreating = intent.getLongExtra(Constants.EXTRA_CREATING, 0);
+        String noteTitle = intent.getStringExtra(Constants.EXTRA_NOTE_TITLE);
+        int noteStatus = intent.getIntExtra(Constants.EXTRA_STATUS, Constants.STATUS_ACTUAL);
+        long noteLastSaving = intent.getLongExtra(Constants.EXTRA_LASTSAVING, 0);
+        String noteText = intent.getStringExtra(Constants.EXTRA_NOTE_CONTENT);
+        String noteAlarm = intent.getStringExtra(Constants.EXTRA_TIME_DATE);
+        long noteRepeat = intent.getIntExtra(Constants.EXTRA_REPEAT, 0);
+        Note note = new Note();
+        note.setCreating(noteCreating);
+        note.setTitle(noteTitle);
+        note.setText(noteText);
+        note.setStatus(noteStatus);
+        note.setLastSaving(noteLastSaving);
+        note.setAlarm(noteAlarm);
+        note.setRepeat(noteRepeat);
+        return note;
+    }*/
 
     private boolean setMicrophoneEnabled() {
         PackageManager pm = getPackageManager();
@@ -426,8 +450,14 @@ public class NoteActivity extends AppCompatActivity implements
                 save(Constants.STATUS_DRAFT, note, creating);
             }
         }
-        setResult(RESULT_CANCELED);
-        finish();
+        if (openByAlarm) {
+            startActivity(new Intent(NoteActivity.this, MainActivity.class));
+            finish();
+        } else {
+            setResult(RESULT_CANCELED);
+            finish();
+        }
+
     }
 
     @Override

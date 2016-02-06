@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity
     private TextToSpeech mTTS;
     private boolean canSpeech = false;
     private int sortPref = Constants.PREF_SORT_UNSORT;
-  //  private boolean openCurrentNote = false;
+    //  private boolean openCurrentNote = false;
     //private Note currentNote;
 
     private NotesService.NotesWorker worker;
@@ -574,5 +574,11 @@ public class MainActivity extends AppCompatActivity
             mTTS.shutdown();
         }
         super.onDestroy();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (worker != null) refreshList();
     }
 }

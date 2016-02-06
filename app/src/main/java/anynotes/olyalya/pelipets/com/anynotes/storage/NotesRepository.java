@@ -74,7 +74,7 @@ public class NotesRepository {
         am.cancel(pendingIntent);
         try {
             Date date = dateFormat.parse(note.getAlarm());
-            if (date.after(new Date())){
+            if (date.after(new Date())) {
                 if (note.getRepeat() == 0) {
                     NoteUtils.log("set not repeat Alarm creating=" + note.getCreating() + ", time=" + note.getAlarm());
                     am.set(AlarmManager.RTC_WAKEUP, date.getTime(), pendingIntent);
@@ -92,13 +92,14 @@ public class NotesRepository {
 
     private PendingIntent getPendingIntent(Note note) {
         Intent intent = new Intent(context, TimeNotification.class);
-        intent.putExtra(Constants.EXTRA_CREATING, note.getCreating());
+        intent.putExtra(Constants.EXTRA_NOTE, note);
+       /* intent.putExtra(Constants.EXTRA_CREATING, note.getCreating());
         intent.putExtra(Constants.EXTRA_NOTE_TITLE, note.getTitle());
         intent.putExtra(Constants.EXTRA_STATUS, note.getStatus());
         intent.putExtra(Constants.EXTRA_LASTSAVING, note.getLastSaving());
         intent.putExtra(Constants.EXTRA_NOTE_CONTENT, note.getText());
         intent.putExtra(Constants.EXTRA_TIME_DATE, note.getAlarm());
-        intent.putExtra(Constants.EXTRA_REPEAT, note.getRepeat());
+        intent.putExtra(Constants.EXTRA_REPEAT, note.getRepeat());*/
         return PendingIntent.getBroadcast(context, (int) note.getCreating(),
                 intent, PendingIntent.FLAG_CANCEL_CURRENT);
     }
@@ -134,6 +135,27 @@ public class NotesRepository {
                 oldPendingIntent.cancel();
             }
         }
+    }
+
+    public Note deleteNotRepeatAlarm(Note startNote) {
+        if (startNote.getRepeat() != 0) {
+            return startNote;
+        }
+        deleteAlarm(startNote);
+        startNote.setRepeat(0);
+        startNote.setAlarm(null);
+
+        ContentValues cv = new ContentValues();
+        cv.put(DBSchema.CREATING, startNote.getCreating());
+        cv.put(DBSchema.LAST_SAVING, Calendar.getInstance().getTimeInMillis());
+        cv.put(DBSchema.STATUS, startNote.getStatus());
+        cv.put(DBSchema.TITLE, startNote.getTitle());
+        cv.put(DBSchema.ALARM, "");
+        cv.put(DBSchema.REPEAT, 0);
+        cv.put(DBSchema.TEXT, startNote.getText());
+        int update = db.update(DBSchema.TABLE, cv, DBSchema.CREATING + "=" + startNote.getCreating(), null);
+        Log.d(TAG, "deleteNotRepeatAlarm " + update);
+        return startNote;
     }
 
    /* public boolean delete(Note note) {
@@ -246,6 +268,5 @@ public class NotesRepository {
         Log.d(TAG, "loadAll cursor.size=" + cursor.getCount() + ", items.size=" + items.size());
         return items;
     }
-
 }
 
