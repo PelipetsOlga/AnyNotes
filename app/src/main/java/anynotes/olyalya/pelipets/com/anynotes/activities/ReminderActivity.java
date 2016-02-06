@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
@@ -62,13 +63,12 @@ public class ReminderActivity extends AppCompatActivity {
         alarmNote = inIntent.getStringExtra(Constants.EXTRA_TIME_DATE);
         repeatAlarm = inIntent.getLongExtra(Constants.EXTRA_REPEAT, 0);
 
-        if (alarmNote != null) {
+        if (alarmNote != null && !TextUtils.isEmpty(alarmNote)) {
             tvClock.setText(alarmNote);
             checkClock.setChecked(true);
             tvClock.setTextColor(getResources().getColor(R.color.colorPrimary));
             if (repeatAlarm!=0){
                 checkRepeat.setChecked(true);
-                //todo
                 tvRepeat.setTextColor(getResources().getColor(R.color.colorPrimary));
                 gridRepeat.setVisibility(View.VISIBLE);
                 TextView savedRepeat=search(repeatAlarm);
@@ -256,7 +256,6 @@ public class ReminderActivity extends AppCompatActivity {
                             intent.putExtra(Constants.EXTRA_REPEAT, 0);
                         }
                     } else {
-                        //intent.putExtra(Constants.EXTRA_TIME_DATE, "");
                         intent.putExtra(Constants.EXTRA_REPEAT, 0);
                     }
                 }
@@ -275,7 +274,6 @@ public class ReminderActivity extends AppCompatActivity {
                     String result = data.getStringExtra(Constants.EXTRA_TIME_DATE);
                     if (result != null) {
                         try {
-                            //alarmNote=result;
                             alarm = dateFormat.parse(result);
                             tvClock.setText(dateFormat.format(alarm));
                         } catch (ParseException e) {

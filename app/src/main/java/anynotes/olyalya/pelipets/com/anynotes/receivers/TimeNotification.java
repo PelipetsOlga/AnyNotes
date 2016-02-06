@@ -13,7 +13,9 @@ import android.text.TextUtils;
 
 import anynotes.olyalya.pelipets.com.anynotes.R;
 import anynotes.olyalya.pelipets.com.anynotes.activities.NoteActivity;
+import anynotes.olyalya.pelipets.com.anynotes.application.NotesApplication;
 import anynotes.olyalya.pelipets.com.anynotes.models.Note;
+import anynotes.olyalya.pelipets.com.anynotes.storage.NotesRepository;
 import anynotes.olyalya.pelipets.com.anynotes.utils.Constants;
 
 public class TimeNotification extends BroadcastReceiver {
@@ -25,46 +27,24 @@ public class TimeNotification extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-
         loadSettings(context);
 
-       /* long noteCreating = intent.getLongExtra(Constants.EXTRA_CREATING, 0);
-        String noteTitle = intent.getStringExtra(Constants.EXTRA_NOTE_TITLE);
-        int noteStatus = intent.getIntExtra(Constants.EXTRA_STATUS, Constants.STATUS_ACTUAL);
-        long noteLastSaving = intent.getLongExtra(Constants.EXTRA_LASTSAVING, 0);
-        String noteText = intent.getStringExtra(Constants.EXTRA_NOTE_CONTENT);
-        String noteAlarm = intent.getStringExtra(Constants.EXTRA_TIME_DATE);
-        long noteRepeat = intent.getIntExtra(Constants.EXTRA_REPEAT, 0);*/
-
-       // NoteUtils.log("TimeNotification onReceive() creating=" + noteCreating);
-
-        Note note= (Note) intent.getSerializableExtra(Constants.EXTRA_NOTE);
-       /* Note note = new Note();
-        note.setCreating(noteCreating);
-        note.setTitle(noteTitle);
-        note.setText(noteText);
-        note.setStatus(noteStatus);
-        note.setLastSaving(noteLastSaving);
-        note.setAlarm(noteAlarm);
-        note.setRepeat(noteRepeat);*/
+        Note note = (Note) intent.getSerializableExtra(Constants.EXTRA_NOTE);
+        if (note.getRepeat() == 0) {
+            NotesRepository repository = ((NotesApplication) context.getApplicationContext()).getDaoSession().getRepository();
+            note.setAlarm("");
+            repository.update(note);
+        }
 
         Notification.Builder builder = new Notification.Builder(context);
         builder.setSmallIcon(R.mipmap.anynotes_origin1);
         builder.setContentTitle(note.getTitle());
         builder.setContentText(note.getText());
-        //builder.setContentTitle(noteTitle);
-        //builder.setContentText(noteAlarm);
         builder.setAutoCancel(true);
 
         Intent intentNotification = new Intent(context, NoteActivity.class);
         intentNotification.putExtra(Constants.EXTRA_NOTE, note);
-        /*intentNotification.putExtra(Constants.EXTRA_CREATING, noteCreating);
-        intentNotification.putExtra(Constants.EXTRA_NOTE_TITLE, noteTitle);
-        intentNotification.putExtra(Constants.EXTRA_TIME_DATE, noteAlarm);
-        intentNotification.putExtra(Constants.EXTRA_STATUS, noteStatus);
-        intentNotification.putExtra(Constants.EXTRA_NOTE_CONTENT, noteText);
-        intentNotification.putExtra(Constants.EXTRA_REPEAT, noteRepeat);*/
-        intentNotification.putExtra(Constants.EXTRA_OPEN_CURRENT_NOTE,true);
+        intentNotification.putExtra(Constants.EXTRA_OPEN_CURRENT_NOTE, true);
         intentNotification.putExtra(Constants.EXTRA_ACTION_TYPE, Constants.EXTRA_ACTION_EDIT_NOTE);
         PendingIntent pi = PendingIntent.getActivity(context, 0, intentNotification, 0);
 
@@ -89,7 +69,6 @@ public class TimeNotification extends BroadcastReceiver {
         }
 
         NotificationManager nManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-       // if (notification != null) nManager.notify((int) noteCreating, notification);
         if (notification != null) nManager.notify((int) note.getCreating(), notification);
     }
 

@@ -22,9 +22,6 @@ import anynotes.olyalya.pelipets.com.anynotes.receivers.TimeNotification;
 import anynotes.olyalya.pelipets.com.anynotes.utils.Constants;
 import anynotes.olyalya.pelipets.com.anynotes.utils.NoteUtils;
 
-/**
- * Created by Olga on 26.12.2015.
- */
 public class NotesRepository {
     private final SQLiteDatabase db;
     private final Context context;
@@ -93,13 +90,6 @@ public class NotesRepository {
     private PendingIntent getPendingIntent(Note note) {
         Intent intent = new Intent(context, TimeNotification.class);
         intent.putExtra(Constants.EXTRA_NOTE, note);
-       /* intent.putExtra(Constants.EXTRA_CREATING, note.getCreating());
-        intent.putExtra(Constants.EXTRA_NOTE_TITLE, note.getTitle());
-        intent.putExtra(Constants.EXTRA_STATUS, note.getStatus());
-        intent.putExtra(Constants.EXTRA_LASTSAVING, note.getLastSaving());
-        intent.putExtra(Constants.EXTRA_NOTE_CONTENT, note.getText());
-        intent.putExtra(Constants.EXTRA_TIME_DATE, note.getAlarm());
-        intent.putExtra(Constants.EXTRA_REPEAT, note.getRepeat());*/
         return PendingIntent.getBroadcast(context, (int) note.getCreating(),
                 intent, PendingIntent.FLAG_CANCEL_CURRENT);
     }
@@ -114,8 +104,14 @@ public class NotesRepository {
         cv.put(DBSchema.LAST_SAVING, Calendar.getInstance().getTimeInMillis());
         cv.put(DBSchema.STATUS, note.getStatus());
         cv.put(DBSchema.TITLE, note.getTitle());
-        cv.put(DBSchema.ALARM, note.getAlarm());
-        cv.put(DBSchema.REPEAT, note.getRepeat());
+        if (note.getStatus() == Constants.STATUS_DELETED
+                || note.getStatus() == Constants.STATUS_DRAFT_DELETED) {
+            cv.put(DBSchema.ALARM, "");
+            cv.put(DBSchema.REPEAT, 0);
+        } else {
+            cv.put(DBSchema.ALARM, note.getAlarm());
+            cv.put(DBSchema.REPEAT, note.getRepeat());
+        }
         cv.put(DBSchema.TEXT, note.getText());
 
         int update = db.update(DBSchema.TABLE, cv, DBSchema.CREATING + "=" + note.getCreating(), null);
@@ -136,53 +132,6 @@ public class NotesRepository {
             }
         }
     }
-
-    public Note deleteNotRepeatAlarm(Note startNote) {
-        if (startNote.getRepeat() != 0) {
-            return startNote;
-        }
-        deleteAlarm(startNote);
-        startNote.setRepeat(0);
-        startNote.setAlarm(null);
-
-        ContentValues cv = new ContentValues();
-        cv.put(DBSchema.CREATING, startNote.getCreating());
-        cv.put(DBSchema.LAST_SAVING, Calendar.getInstance().getTimeInMillis());
-        cv.put(DBSchema.STATUS, startNote.getStatus());
-        cv.put(DBSchema.TITLE, startNote.getTitle());
-        cv.put(DBSchema.ALARM, "");
-        cv.put(DBSchema.REPEAT, 0);
-        cv.put(DBSchema.TEXT, startNote.getText());
-        int update = db.update(DBSchema.TABLE, cv, DBSchema.CREATING + "=" + startNote.getCreating(), null);
-        Log.d(TAG, "deleteNotRepeatAlarm " + update);
-        return startNote;
-    }
-
-   /* public boolean delete(Note note) {
-        if (note == null) return false;
-        int delete = db.delete(DBSchema.TABLE, DBSchema.ID + "=" + note.getId(), null);
-        Log.d(TAG, "delete note" + delete);
-        deleteAlarm(note);
-        return true;
-    }*/
-
-   /* public Note findById(long id) {
-        Cursor cursor = db.query(DBSchema.TABLE, null, DBSchema.ID + "=" + id,
-                null, null, null, null);
-        Note note = null;
-        if (cursor.moveToFirst()) {
-            note = new Note();
-            note.setId(cursor.getLong(cursor.getColumnIndex(DBSchema.ID)));
-            note.setCreating(cursor.getLong(cursor.getColumnIndex(DBSchema.CREATING)));
-            note.setLastSaving(cursor.getLong(cursor.getColumnIndex(DBSchema.LAST_SAVING)));
-            note.setStatus(cursor.getInt(cursor.getColumnIndex(DBSchema.STATUS)));
-            note.setTitle(cursor.getString(cursor.getColumnIndex(DBSchema.TITLE)));
-            note.setAlarm(cursor.getString(cursor.getColumnIndex(DBSchema.ALARM)));
-            note.setRepeat(cursor.getLong(cursor.getColumnIndex(DBSchema.REPEAT)));
-            note.setText(cursor.getString(cursor.getColumnIndex(DBSchema.TEXT)));
-        }
-        return note;
-    }*/
 
     public Note findByKey(long creating) {
         Cursor cursor = db.query(DBSchema.TABLE, null, DBSchema.CREATING + "=" + creating,

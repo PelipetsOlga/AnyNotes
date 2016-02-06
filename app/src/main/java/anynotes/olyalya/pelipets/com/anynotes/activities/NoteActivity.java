@@ -88,10 +88,6 @@ public class NoteActivity extends AppCompatActivity implements
         if (type_operation == Constants.EXTRA_ACTION_EDIT_NOTE) {
             openByAlarm = intent.getBooleanExtra(Constants.EXTRA_OPEN_CURRENT_NOTE, false);
             startNote = (Note) intent.getSerializableExtra(Constants.EXTRA_NOTE);
-
-            if (openByAlarm) {
-                startNote = repository.deleteNotRepeatAlarm(startNote);
-            }
         }
 
         initViews();
@@ -111,7 +107,6 @@ public class NoteActivity extends AppCompatActivity implements
             alarmNote = startNote.getAlarm();
             repeatAlarm = startNote.getRepeat();
         }
-
 
         if (type_operation == Constants.EXTRA_ACTION_EDIT_NOTE) {
             etTitle.setText(startNote.getTitle());
@@ -148,7 +143,6 @@ public class NoteActivity extends AppCompatActivity implements
                     if (text != null && !TextUtils.isEmpty(text)) {
                         mTTS.speak(text, TextToSpeech.QUEUE_FLUSH, null);
                     }
-                    // Toast.makeText(NoteActivity.this, "speech", Toast.LENGTH_SHORT).show();
                 }
             });
 
@@ -203,25 +197,6 @@ public class NoteActivity extends AppCompatActivity implements
             }
         });
     }
-
-  /*  private Note getStartNoteFromAlarm(Intent intent) {
-        long noteCreating = intent.getLongExtra(Constants.EXTRA_CREATING, 0);
-        String noteTitle = intent.getStringExtra(Constants.EXTRA_NOTE_TITLE);
-        int noteStatus = intent.getIntExtra(Constants.EXTRA_STATUS, Constants.STATUS_ACTUAL);
-        long noteLastSaving = intent.getLongExtra(Constants.EXTRA_LASTSAVING, 0);
-        String noteText = intent.getStringExtra(Constants.EXTRA_NOTE_CONTENT);
-        String noteAlarm = intent.getStringExtra(Constants.EXTRA_TIME_DATE);
-        long noteRepeat = intent.getIntExtra(Constants.EXTRA_REPEAT, 0);
-        Note note = new Note();
-        note.setCreating(noteCreating);
-        note.setTitle(noteTitle);
-        note.setText(noteText);
-        note.setStatus(noteStatus);
-        note.setLastSaving(noteLastSaving);
-        note.setAlarm(noteAlarm);
-        note.setRepeat(noteRepeat);
-        return note;
-    }*/
 
     private boolean setMicrophoneEnabled() {
         PackageManager pm = getPackageManager();
@@ -424,7 +399,6 @@ public class NoteActivity extends AppCompatActivity implements
                             }
                         }
                     }
-
                 }
                 setResult(RESULT_CANCELED);
                 finish();
@@ -457,7 +431,6 @@ public class NoteActivity extends AppCompatActivity implements
             setResult(RESULT_CANCELED);
             finish();
         }
-
     }
 
     @Override
@@ -471,7 +444,6 @@ public class NoteActivity extends AppCompatActivity implements
             } else {
                 canSpeech = true;
             }
-
         } else {
             canSpeech = false;
         }

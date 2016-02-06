@@ -76,9 +76,6 @@ public class MainActivity extends AppCompatActivity
     private TextToSpeech mTTS;
     private boolean canSpeech = false;
     private int sortPref = Constants.PREF_SORT_UNSORT;
-    //  private boolean openCurrentNote = false;
-    //private Note currentNote;
-
     private NotesService.NotesWorker worker;
     private ServiceConnection serviceConnection = new ServiceConnection() {
         @Override
@@ -100,24 +97,10 @@ public class MainActivity extends AppCompatActivity
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                  /*  NoteUtils.log("runOnUiThread openCurrentNote="+openCurrentNote);
-                    if (openCurrentNote) {
-                       // repository.updateAlarm();
-                    }*/
                     notes.clear();
                     notes.addAll(items);
                     adapter.notifyDataSetChanged();
                     recyclerView.refresh();
-                 /*   if (openCurrentNote){
-                        //todo
-                        NoteUtils.log("runOnUiThread do new intent="+openCurrentNote);
-                        Intent intent = new Intent(MainActivity.this, NoteActivity.class);
-                        intent.putExtra(Constants.EXTRA_ACTION_TYPE, Constants.EXTRA_ACTION_EDIT_NOTE);
-                        intent.putExtra(Constants.EXTRA_NOTE, currentNote);
-                        MainActivity.this.startActivityForResult(intent, NOTE_REQUEST_CODE);
-                    }else{
-                        NoteUtils.log("runOnUiThread don't new intent="+openCurrentNote);
-                    }*/
                 }
             });
         }
@@ -128,24 +111,7 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-      /*  Intent inIntent = getIntent();
-        if (inIntent != null) {
-            openCurrentNote = inIntent.getBooleanExtra(Constants.EXTRA_OPEN_CURRENT_NOTE, false);
-            NoteUtils.log("openCurrentNote="+openCurrentNote);
-            if (openCurrentNote) {
-                currentNote = new Note();
-                currentNote.setCreating(inIntent.getLongExtra(Constants.EXTRA_CREATING, 0));
-                currentNote.setTitle(inIntent.getStringExtra(Constants.EXTRA_NOTE_TITLE));
-                currentNote.setText(inIntent.getStringExtra(Constants.EXTRA_NOTE_CONTENT));
-                currentNote.setLastSaving(inIntent.getLongExtra(Constants.EXTRA_LASTSAVING, 0));
-                currentNote.setStatus(inIntent.getIntExtra(Constants.EXTRA_STATUS, Constants.STATUS_ACTUAL));
-                currentNote.setAlarm(inIntent.getStringExtra(Constants.EXTRA_TIME_DATE));
-                currentNote.setRepeat(inIntent.getLongExtra(Constants.EXTRA_REPEAT, 0));
-            }
-        }*/
-
         mTTS = new TextToSpeech(this, this);
-
         loadSettings();
 
         AdView mAdView = (AdView) findViewById(R.id.adView);
@@ -180,7 +146,6 @@ public class MainActivity extends AppCompatActivity
                 repository.setModeOrdered(Constants.MODE_ORDERED_UNSORTED);
                 break;
         }
-
 
         adapter = new NotesAdapter(refreshListener, mTTS, canSpeech);
         recyclerView.setAdapter(adapter);
@@ -381,7 +346,6 @@ public class MainActivity extends AppCompatActivity
         }
         adapter.setCanSpeech(canSpeech);
         adapter.notifyDataSetChanged();
-
     }
 
     private static class NotesAdapter extends RecyclerView.Adapter<NoteViewHolder> {
