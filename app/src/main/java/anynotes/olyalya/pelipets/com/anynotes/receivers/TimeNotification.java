@@ -17,6 +17,7 @@ import anynotes.olyalya.pelipets.com.anynotes.application.NotesApplication;
 import anynotes.olyalya.pelipets.com.anynotes.models.Note;
 import anynotes.olyalya.pelipets.com.anynotes.storage.NotesRepository;
 import anynotes.olyalya.pelipets.com.anynotes.utils.Constants;
+import anynotes.olyalya.pelipets.com.anynotes.utils.NoteUtils;
 
 public class TimeNotification extends BroadcastReceiver {
     private String ringtone;
@@ -42,11 +43,15 @@ public class TimeNotification extends BroadcastReceiver {
         builder.setContentText(note.getText());
         builder.setAutoCancel(true);
 
-        Intent intentNotification = new Intent(context, NoteActivity.class);
+        Intent intentNotification =null;
+        intentNotification=new Intent(context, NoteActivity.class);
         intentNotification.putExtra(Constants.EXTRA_NOTE, note);
         intentNotification.putExtra(Constants.EXTRA_OPEN_CURRENT_NOTE, true);
         intentNotification.putExtra(Constants.EXTRA_ACTION_TYPE, Constants.EXTRA_ACTION_EDIT_NOTE);
-        PendingIntent pi = PendingIntent.getActivity(context, 0, intentNotification, 0);
+        NoteUtils.log(" intentNotification "+intentNotification);
+        PendingIntent pi = null;
+        pi=PendingIntent.getActivity(context, 0, intentNotification, PendingIntent.FLAG_CANCEL_CURRENT);
+        NoteUtils.log(" PendingIntent "+pi);
 
         builder.setContentIntent(pi);
         Notification notification = null;

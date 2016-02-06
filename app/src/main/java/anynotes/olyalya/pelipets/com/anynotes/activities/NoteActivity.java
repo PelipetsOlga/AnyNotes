@@ -84,6 +84,7 @@ public class NoteActivity extends AppCompatActivity implements
         mAdView.loadAd(adRequest);
 
         Intent intent = getIntent();
+        NoteUtils.log("NoteActivity inIntent = "+intent);
         type_operation = intent.getIntExtra(Constants.EXTRA_ACTION_TYPE, Constants.EXTRA_ACTION_NEW_NOTE);
         if (type_operation == Constants.EXTRA_ACTION_EDIT_NOTE) {
             openByAlarm = intent.getBooleanExtra(Constants.EXTRA_OPEN_CURRENT_NOTE, false);

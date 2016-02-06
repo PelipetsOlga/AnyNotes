@@ -68,6 +68,7 @@ public class NotesRepository {
     private void setAlarm(Note note) {
         NoteUtils.log("set first Alarm creating=" + note.getCreating() + ", time=" + note.getAlarm());
         PendingIntent pendingIntent = getPendingIntent(note);
+        NoteUtils.log("setAlarm pendingIntent = " + pendingIntent);
         am.cancel(pendingIntent);
         try {
             Date date = dateFormat.parse(note.getAlarm());
