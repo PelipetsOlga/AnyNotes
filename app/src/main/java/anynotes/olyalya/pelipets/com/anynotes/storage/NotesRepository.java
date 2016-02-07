@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Build;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -50,7 +51,7 @@ public class NotesRepository {
         if (note == null) return false;
         ContentValues cv = new ContentValues();
         cv.put(DBSchema.CREATING, note.getCreating());
-        cv.put(DBSchema.LAST_SAVING, note.getLastSaving());
+        cv.put(DBSchema.LAST_SAVING, Calendar.getInstance().getTimeInMillis());
         cv.put(DBSchema.STATUS, note.getStatus());
         cv.put(DBSchema.TITLE, note.getTitle());
         cv.put(DBSchema.ALARM, note.getAlarm());
@@ -72,17 +73,26 @@ public class NotesRepository {
         am.cancel(pendingIntent);
         try {
             Date date = dateFormat.parse(note.getAlarm());
-            if (date.after(new Date())) {
-                if (note.getRepeat() == 0) {
-                    NoteUtils.log("set not repeat Alarm creating=" + note.getCreating() + ", time=" + note.getAlarm());
-                    am.set(AlarmManager.RTC_WAKEUP, date.getTime(), pendingIntent);
-                } else {
-                    NoteUtils.log("set repeat Alarm creating=" + note.getCreating() + ", time=" + note.getAlarm());
-                    SimpleDateFormat dateFormat = new SimpleDateFormat(Constants.FORMAT_ALARM);
-                    Date dateAlarm = dateFormat.parse(note.getAlarm());
-                    am.setRepeating(AlarmManager.RTC_WAKEUP, dateAlarm.getTime(), note.getRepeat(), pendingIntent);
-                }
+            if (date.after(new Date())
+                    && Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                NoteUtils.log("set not repeat Alarm creating=" + note.getCreating() + ", time=" + note.getAlarm());
+                am.setExact(AlarmManager.RTC_WAKEUP, date.getTime(), pendingIntent);
             }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void reSetAlarm(Note note) {
+        try {
+            Date oldAlarmDate = dateFormat.parse(note.getAlarm());
+            long newAlarmMillis = oldAlarmDate.getTime() + note.getRepeat();
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTimeInMillis(newAlarmMillis);
+            Date newAlarmDate = calendar.getTime();
+            String newAlarmNote = dateFormat.format(newAlarmDate);
+            note.setAlarm(newAlarmNote);
+            update(note);
         } catch (ParseException e) {
             e.printStackTrace();
         }

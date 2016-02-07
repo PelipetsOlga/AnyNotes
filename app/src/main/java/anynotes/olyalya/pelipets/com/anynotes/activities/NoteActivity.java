@@ -273,16 +273,16 @@ public class NoteActivity extends AppCompatActivity implements
         super.onBackPressed();
     }
 
-    private void save(int status, Note note, long cr) {
-        note.setCreating(cr);
-        note.setLastSaving(Calendar.getInstance().getTimeInMillis());
+    private void save(int status, Note note, long creat) {
+        note.setCreating(creat);
+       // note.setLastSaving(Calendar.getInstance().getTimeInMillis());
         note.setStatus(status);
         repository.insert(note);
     }
 
-    private void update(int status, Note note, long cr) {
-        note.setCreating(cr);
-        note.setLastSaving(Calendar.getInstance().getTimeInMillis());
+    private void update(int status, Note note, long creat) {
+        note.setCreating(creat);
+        //note.setLastSaving(Calendar.getInstance().getTimeInMillis());
         note.setStatus(status);
         repository.update(note);
     }

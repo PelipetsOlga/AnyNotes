@@ -279,7 +279,6 @@ public class ReminderActivity extends AppCompatActivity {
                         } catch (ParseException e) {
                             e.printStackTrace();
                         }
-
                     }
                 }
             }

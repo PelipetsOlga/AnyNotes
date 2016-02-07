@@ -30,11 +30,13 @@ public class TimeNotification extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         loadSettings(context);
 
+        NotesRepository repository = ((NotesApplication) context.getApplicationContext()).getDaoSession().getRepository();
         Note note = (Note) intent.getSerializableExtra(Constants.EXTRA_NOTE);
         if (note.getRepeat() == 0) {
-            NotesRepository repository = ((NotesApplication) context.getApplicationContext()).getDaoSession().getRepository();
             note.setAlarm("");
             repository.update(note);
+        } else {
+            repository.reSetAlarm(note);
         }
 
         Notification.Builder builder = new Notification.Builder(context);
@@ -43,15 +45,15 @@ public class TimeNotification extends BroadcastReceiver {
         builder.setContentText(note.getText());
         builder.setAutoCancel(true);
 
-        Intent intentNotification =null;
-        intentNotification=new Intent(context, NoteActivity.class);
+        Intent intentNotification = null;
+        intentNotification = new Intent(context, NoteActivity.class);
         intentNotification.putExtra(Constants.EXTRA_NOTE, note);
         intentNotification.putExtra(Constants.EXTRA_OPEN_CURRENT_NOTE, true);
         intentNotification.putExtra(Constants.EXTRA_ACTION_TYPE, Constants.EXTRA_ACTION_EDIT_NOTE);
-        NoteUtils.log(" intentNotification "+intentNotification);
+        NoteUtils.log(" intentNotification " + intentNotification);
         PendingIntent pi = null;
-        pi=PendingIntent.getActivity(context, 0, intentNotification, PendingIntent.FLAG_CANCEL_CURRENT);
-        NoteUtils.log(" PendingIntent "+pi);
+        pi = PendingIntent.getActivity(context, 0, intentNotification, PendingIntent.FLAG_CANCEL_CURRENT);
+        NoteUtils.log(" PendingIntent " + pi);
 
         builder.setContentIntent(pi);
         Notification notification = null;
