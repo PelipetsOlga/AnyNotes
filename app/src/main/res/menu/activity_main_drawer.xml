@@ -17,7 +17,7 @@
 
         <item
             android:id="@+id/drafts"
-            android:icon="@mipmap/draft"
+            android:icon="@mipmap/fa_sticky_note_o_0_f33976_none"
             android:title="@string/menu_drafts" />
         <item
             android:id="@+id/deleted"
