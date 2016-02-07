@@ -34,6 +34,7 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
+import com.backendless.Backendless;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 
@@ -44,9 +45,12 @@ import java.util.Locale;
 
 import anynotes.olyalya.pelipets.com.anynotes.R;
 import anynotes.olyalya.pelipets.com.anynotes.application.NotesApplication;
+import anynotes.olyalya.pelipets.com.anynotes.fragments.LogInFragment;
 import anynotes.olyalya.pelipets.com.anynotes.fragments.SortDialogFragment;
 import anynotes.olyalya.pelipets.com.anynotes.interfaces.LoadNotesListener;
+import anynotes.olyalya.pelipets.com.anynotes.interfaces.LoginListener;
 import anynotes.olyalya.pelipets.com.anynotes.interfaces.RefreshListListener;
+import anynotes.olyalya.pelipets.com.anynotes.interfaces.RegistrationListener;
 import anynotes.olyalya.pelipets.com.anynotes.models.Note;
 import anynotes.olyalya.pelipets.com.anynotes.service.NotesService;
 import anynotes.olyalya.pelipets.com.anynotes.storage.NotesRepository;
@@ -57,7 +61,7 @@ import anynotes.olyalya.pelipets.com.anynotes.views.RecyclerViewEmptySupport;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
         RefreshListListener,
-        TextToSpeech.OnInitListener {
+        TextToSpeech.OnInitListener, RegistrationListener, LoginListener {
 
     private static final int NOTE_REQUEST_CODE = 100;
     private static final int SETTINGS_REQUEST_CODE = 200;
@@ -80,6 +84,10 @@ public class MainActivity extends AppCompatActivity
     private boolean canSpeech = false;
     private int sortPref = Constants.PREF_SORT_UNSORT;
     private NotesService.NotesWorker worker;
+    private boolean isRegistered = false;
+    private String login;
+    private String password;
+
     private ServiceConnection serviceConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
@@ -93,8 +101,17 @@ public class MainActivity extends AppCompatActivity
         }
     };
 
-    public class NotesLoaderListener implements LoadNotesListener {
+    @Override
+    public void register(String email, String password) {
+        //todo
+    }
 
+    @Override
+    public void logIn(String email, String password) {
+        //todo
+    }
+
+    public class NotesLoaderListener implements LoadNotesListener {
         @Override
         public void onLoad(final List<Note> items) {
             runOnUiThread(new Runnable() {
@@ -113,6 +130,9 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Backendless.initApp(this, Constants.BAAS_APP_ID,
+                Constants.BAAS_APP_SECRET, Constants.BAAS_APP_VERSION);
 
         mTTS = new TextToSpeech(this, this);
         loadSettings();
@@ -206,6 +226,9 @@ public class MainActivity extends AppCompatActivity
         bright = mPref.getInt(Constants.PREF_BRIGHTNESS, Constants.BRIGHTNESS);
         NoteUtils.setBrightness(bright, this);
         sortPref = mPref.getInt(Constants.PREF_SORT, Constants.PREF_SORT_UNSORT);
+        isRegistered = mPref.getBoolean(Constants.PREF_IS_REGISTERED, false);
+        login = mPref.getString(Constants.PREF_LOGIN, "");
+        password = mPref.getString(Constants.PREF_PASSWORD, "");
     }
 
     private void initViews() {
@@ -228,9 +251,42 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        ivSignInOut= (ImageView) navigationView.findViewById(R.id.in_out);
-        ivSync= (ImageView) navigationView.findViewById(R.id.sync);
-        tvLogin= (TextView) navigationView.findViewById(R.id.tv_login);
+
+        View headerView = navigationView.inflateHeaderView(R.layout.nav_header_main);
+        ivSignInOut = (ImageView) headerView.findViewById(R.id.in_out);
+        ivSignInOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!isRegistered) {
+                    signIn();
+                } else {
+                    signOut();
+                }
+            }
+        });
+        ivSync = (ImageView) headerView.findViewById(R.id.sync);
+        tvLogin = (TextView) headerView.findViewById(R.id.tv_login);
+        if (isRegistered) {
+            ivSignInOut.setImageResource(R.mipmap.fa_sign_out_0_ffffff_none);
+            tvLogin.setText(login);
+        } else {
+            ivSignInOut.setImageResource(R.mipmap.fa_sign_in_0_ffffff_none);
+            tvLogin.setText(R.string.app_name);
+        }
+    }
+
+    private void signOut() {
+        //todo
+    }
+
+    private void signIn() {
+        if (TextUtils.isEmpty(login)) {
+            LogInFragment fragment = LogInFragment.newInstance().newInstance();
+            fragment.show(getSupportFragmentManager(), null);
+        } else {
+            // todo signIn
+
+        }
     }
 
     @Override
@@ -516,7 +572,7 @@ public class MainActivity extends AppCompatActivity
             Context ctx = anchorView.getContext();
             PopupWindow popup = new PopupWindow(ctx);
             LayoutInflater inflater = (LayoutInflater) ctx.getSystemService(LAYOUT_INFLATER_SERVICE);
-            View popupView = inflater.inflate(R.layout.popup_alarm, null);
+            View popupView = inflater.inflate(R.layout.popup, null);
             popup.setContentView(popupView);
             TextView tvPopup = (TextView) popupView.findViewById(R.id.tv_popup);
             tvPopup.setText(note.getAlarm());

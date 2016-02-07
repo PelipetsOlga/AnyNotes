@@ -61,6 +61,8 @@
             android:name=".service.NotesService"
             android:enabled="true"
             android:exported="true"></service>
+
+        <service android:name="com.backendless.AndroidService" />
     </application>
 
 </manifest>

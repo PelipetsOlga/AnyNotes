@@ -9,11 +9,11 @@ public class Constants {
     public static final String EXTRA_NOTE = "note";
     public static final int EXTRA_ACTION_NEW_NOTE = 33;
     public static final int EXTRA_ACTION_EDIT_NOTE = 66;
-    public static final String EXTRA_CREATING = "creating";
-    public static final String EXTRA_NOTE_CONTENT = "note_content";
-    public static final String EXTRA_NOTE_TITLE = "note_title";
-    public static final String EXTRA_STATUS = "status";
-    public static final String EXTRA_LASTSAVING = "last_saving";
+  // public static final String EXTRA_CREATING = "creating";
+    //public static final String EXTRA_NOTE_CONTENT = "note_content";
+    //public static final String EXTRA_NOTE_TITLE = "note_title";
+    //public static final String EXTRA_STATUS = "status";
+    //public static final String EXTRA_LASTSAVING = "last_saving";
     public static final String EXTRA_TIME_DATE = "time_date";
     public static final String EXTRA_REPEAT = "repeat";
     public static final String EXTRA_OPEN_CURRENT_NOTE = "open_current_note";
@@ -44,6 +44,10 @@ public class Constants {
     public static final String TEST_DEVICE_E = "B686CDA2AA5466E0F4C9B63DE9E8B368";//nexus5
     public static final String TEST_DEVICE_G = "86D72F707C2EDC7D0A97028DC211974B";//samsung G360H
 
+    public static final String BAAS_APP_ID = "88936601-BFF8-0D16-FF3D-721E9334BF00";
+    public static final String BAAS_APP_SECRET = "1679EEF9-0050-E314-FFEB-38620E00EC00";
+    public static final String BAAS_APP_VERSION = "v1";
+
 
     public static final String PREF_RINGTONE = "ringtone";
     public static final String PREF_FONT_SIZE = "font_size";
@@ -51,6 +55,9 @@ public class Constants {
     public static final String PREFS_NAME = "anynotes_prefs";
     public static final String PREF_VIBRO = "vibro";
     public static final String PREF_SORT = "sort";
+    public static final String PREF_IS_REGISTERED = "is_registered";
+    public static final String PREF_LOGIN = "login";
+    public static final String PREF_PASSWORD = "password";
     public static final int PREF_SORT_UNSORT = 100;
     public static final int PREF_SORT_AL_ASC = 101;
     public static final int PREF_SORT_AL_DESC = 102;

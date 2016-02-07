@@ -50,11 +50,6 @@ public class SortDialogFragment extends DialogFragment implements CompoundButton
 
         getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
 
-     /*   CheckBox ivUnsort = (CheckBox) rootView.findViewById(R.id.iv_unsort);
-        CheckBox ivSortAlphaAsc = (CheckBox) rootView.findViewById(R.id.iv_sort_alpha_asc);
-        CheckBox ivSortAlphaDesc = (CheckBox) rootView.findViewById(R.id.iv_sort_alpha_desc);
-        CheckBox ivSortDateAsc = (CheckBox) rootView.findViewById(R.id.iv_sort_date_asc);
-        CheckBox ivSortDateDesc = (CheckBox) rootView.findViewById(R.id.iv_sort_date_desc);*/
         checks.add((CheckBox) rootView.findViewById(R.id.iv_unsort));
         checks.add((CheckBox) rootView.findViewById(R.id.iv_sort_alpha_asc));
         checks.add((CheckBox) rootView.findViewById(R.id.iv_sort_alpha_desc));
@@ -81,49 +76,12 @@ public class SortDialogFragment extends DialogFragment implements CompoundButton
                 break;
         }
 
-     /*   ivUnsort.setOnClickListener(this);
-        ivSortAlphaAsc.setOnClickListener(this);
-        ivSortAlphaDesc.setOnClickListener(this);
-        ivSortDateAsc.setOnClickListener(this);
-        ivSortDateDesc.setOnClickListener(this);
-*/
-
         for (CheckBox ch : checks) {
             ch.setOnCheckedChangeListener(this);
         }
         return rootView;
     }
 
-    /*  @Override
-      public void onClick(View v) {
-          SharedPreferences.Editor ed = sPref.edit();
-          switch (v.getId()) {
-              case R.id.iv_unsort:
-                  repository.setModeOrdered(Constants.MODE_ORDERED_UNSORTED);
-                  ed.putInt(Constants.PREF_SORT, Constants.PREF_SORT_UNSORT);
-                  break;
-              case R.id.iv_sort_alpha_asc:
-                  repository.setModeOrdered(Constants.MODE_ORDERED_SORT_ALPHA_ASC);
-                  ed.putInt(Constants.PREF_SORT, Constants.PREF_SORT_AL_ASC);
-                  break;
-              case R.id.iv_sort_alpha_desc:
-                  repository.setModeOrdered(Constants.MODE_ORDERED_SORT_ALPHA_DESC);
-                  ed.putInt(Constants.PREF_SORT, Constants.PREF_SORT_AL_DESC);
-                  break;
-              case R.id.iv_sort_date_asc:
-                  repository.setModeOrdered(Constants.MODE_ORDERED_SORT_DATE_ASC);
-                  ed.putInt(Constants.PREF_SORT, Constants.PREF_SORT_NUM_ASC);
-                  break;
-              case R.id.iv_sort_date_desc:
-                  repository.setModeOrdered(Constants.MODE_ORDERED_SORT_DATE_DESC);
-                  ed.putInt(Constants.PREF_SORT, Constants.PREF_SORT_NUM_DESC);
-                  break;
-          }
-          ed.commit();
-          ((MainActivity)getActivity()).refreshList();
-          dismiss();
-      }
-  */
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         if (isChecked) {
