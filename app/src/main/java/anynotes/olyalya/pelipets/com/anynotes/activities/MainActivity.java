@@ -74,6 +74,9 @@ public class MainActivity extends AppCompatActivity
     private int bright;
     private TextView empty;
     private TextToSpeech mTTS;
+    private ImageView ivSignInOut;
+    private ImageView ivSync;
+    private TextView tvLogin;
     private boolean canSpeech = false;
     private int sortPref = Constants.PREF_SORT_UNSORT;
     private NotesService.NotesWorker worker;
@@ -225,6 +228,9 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        ivSignInOut= (ImageView) navigationView.findViewById(R.id.in_out);
+        ivSync= (ImageView) navigationView.findViewById(R.id.sync);
+        tvLogin= (TextView) navigationView.findViewById(R.id.tv_login);
     }
 
     @Override
