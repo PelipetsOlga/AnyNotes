@@ -39,7 +39,7 @@ public class LogInFragment extends DialogFragment {
         resources = getActivity().getResources();
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.AppCompatAlertDialogStyle);
-        builder.setTitle(resources.getString(R.string.registration_dialog_title));
+        builder.setTitle(resources.getString(R.string.login_dialog_title));
         builder.setPositiveButton(resources.getString(R.string.registration_btn_ok), null);
         LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View rootView = inflater.inflate(R.layout.fragment_registration, null, false);

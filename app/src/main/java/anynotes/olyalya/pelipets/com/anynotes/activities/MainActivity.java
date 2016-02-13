@@ -1,5 +1,6 @@
 package anynotes.olyalya.pelipets.com.anynotes.activities;
 
+import android.app.ProgressDialog;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -35,6 +36,11 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.backendless.Backendless;
+import com.backendless.BackendlessCollection;
+import com.backendless.BackendlessUser;
+import com.backendless.async.callback.AsyncCallback;
+import com.backendless.exceptions.BackendlessFault;
+import com.backendless.persistence.BackendlessDataQuery;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 
@@ -84,7 +90,7 @@ public class MainActivity extends AppCompatActivity
     private boolean canSpeech = false;
     private int sortPref = Constants.PREF_SORT_UNSORT;
     private NotesService.NotesWorker worker;
-    private boolean isRegistered = false;
+    private boolean isLogined = false;
     private String login;
     private String password;
 
@@ -100,15 +106,76 @@ public class MainActivity extends AppCompatActivity
         public void onServiceDisconnected(ComponentName name) {
         }
     };
+    private ProgressDialog wait;
 
     @Override
-    public void register(String email, String password) {
-        //todo
+    public void register(final String email, final String password) {
+        if (!NoteUtils.isConnected(this)) {
+            NoteUtils.showNotNetErrorMessage(this);
+            return;
+        }
+
+        BackendlessUser user = new BackendlessUser();
+        user.setEmail(email);
+        user.setPassword(password);
+        Backendless.UserService.register(user, new AsyncCallback<BackendlessUser>() {
+            @Override
+            public void handleResponse(BackendlessUser backendlessUser) {
+                NoteUtils.log("response success" + backendlessUser);
+                saveUserToPreferenceAndUpdateViews(backendlessUser, password);
+            }
+
+            @Override
+            public void handleFault(BackendlessFault backendlessFault) {
+                NoteUtils.log("response registration failure" + backendlessFault);
+                if (Constants.BAAS_USER_EXIST_ERROR.equals(backendlessFault.getCode())) {
+                    logIn(email, password);
+                } else {
+                    NoteUtils.showErrorMessage(MainActivity.this);
+                }
+            }
+        });
+    }
+
+    private void saveUserToPreferenceAndUpdateViews(BackendlessUser backendlessUser, String password) {
+        SharedPreferences.Editor ed = mPref.edit();
+        ed.putBoolean(Constants.PREF_IS_LOGINED, true);
+        ed.putString(Constants.PREF_LOGIN, backendlessUser.getEmail());
+        ed.putString(Constants.PREF_PASSWORD, password);
+        ed.commit();
+        ivSignInOut.setImageResource(R.mipmap.fa_sign_out_0_ffffff_none);
+        tvLogin.setText(backendlessUser.getEmail());
+        isLogined = true;
+    }
+
+    private void removeUserFromPreferenceAndUpdateViews() {
+        SharedPreferences.Editor ed = mPref.edit();
+        ed.putBoolean(Constants.PREF_IS_LOGINED, false);
+        ed.putString(Constants.PREF_LOGIN, "");
+        ed.putString(Constants.PREF_PASSWORD, "");
+        ivSignInOut.setImageResource(R.mipmap.fa_sign_in_0_ffffff_none);
+        tvLogin.setText(getResources().getString(R.string.app_name));
+        isLogined = false;
     }
 
     @Override
-    public void logIn(String email, String password) {
-        //todo
+    public void logIn(String email, final String password) {
+        if (!NoteUtils.isConnected(this)) {
+            NoteUtils.showNotNetErrorMessage(this);
+            return;
+        }
+
+        Backendless.UserService.login(email, password, new AsyncCallback<BackendlessUser>() {
+            public void handleResponse(BackendlessUser user) {
+                NoteUtils.log("response success" + user);
+                saveUserToPreferenceAndUpdateViews(user, password);
+            }
+
+            public void handleFault(BackendlessFault fault) {
+                NoteUtils.log("response login failure" + fault);
+                NoteUtils.showErrorMessage(MainActivity.this);
+            }
+        }, true);
     }
 
     public class NotesLoaderListener implements LoadNotesListener {
@@ -130,9 +197,6 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        Backendless.initApp(this, Constants.BAAS_APP_ID,
-                Constants.BAAS_APP_SECRET, Constants.BAAS_APP_VERSION);
 
         mTTS = new TextToSpeech(this, this);
         loadSettings();
@@ -189,7 +253,7 @@ public class MainActivity extends AppCompatActivity
                             if (status == Constants.STATUS_ACTUAL
                                     || status == Constants.STATUS_IMPORTANT) {
                                 note.setStatus(Constants.STATUS_DELETED);
-                                repository.update(note);
+                                repository.updateByCreating(note);
                                 notes.remove(removedPosition);
                                 adapter.notifyItemRemoved(removedPosition);
                                 recyclerView.refresh();
@@ -197,7 +261,7 @@ public class MainActivity extends AppCompatActivity
                             } else if (status == Constants.STATUS_DRAFT
                                     || status == Constants.STATUS_DELETED) {
                                 note.setStatus(Constants.STATUS_DRAFT_DELETED);
-                                repository.update(note);
+                                repository.updateByCreating(note);
                                 notes.remove(removedPosition);
                                 adapter.notifyItemRemoved(removedPosition);
                                 recyclerView.refresh();
@@ -226,7 +290,7 @@ public class MainActivity extends AppCompatActivity
         bright = mPref.getInt(Constants.PREF_BRIGHTNESS, Constants.BRIGHTNESS);
         NoteUtils.setBrightness(bright, this);
         sortPref = mPref.getInt(Constants.PREF_SORT, Constants.PREF_SORT_UNSORT);
-        isRegistered = mPref.getBoolean(Constants.PREF_IS_REGISTERED, false);
+        isLogined = mPref.getBoolean(Constants.PREF_IS_LOGINED, false);
         login = mPref.getString(Constants.PREF_LOGIN, "");
         password = mPref.getString(Constants.PREF_PASSWORD, "");
     }
@@ -254,10 +318,19 @@ public class MainActivity extends AppCompatActivity
 
         View headerView = navigationView.inflateHeaderView(R.layout.nav_header_main);
         ivSignInOut = (ImageView) headerView.findViewById(R.id.in_out);
+        if (isLogined) {
+            ivSignInOut.setImageResource(R.mipmap.fa_sign_in_0_ffffff_none);
+        } else {
+            ivSignInOut.setImageResource(R.mipmap.fa_sign_out_0_ffffff_none);
+        }
         ivSignInOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!isRegistered) {
+                if (!NoteUtils.isConnected(MainActivity.this)) {
+                    NoteUtils.showNotNetErrorMessage(MainActivity.this);
+                    return;
+                }
+                if (!isLogined) {
                     signIn();
                 } else {
                     signOut();
@@ -265,8 +338,23 @@ public class MainActivity extends AppCompatActivity
             }
         });
         ivSync = (ImageView) headerView.findViewById(R.id.sync);
+        ivSync.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!NoteUtils.isConnected(MainActivity.this)) {
+                    NoteUtils.showNotNetErrorMessage(MainActivity.this);
+                    return;
+                }
+                if (isLogined) {
+                    saveAllDataToServer();
+                } else {
+                    signIn();
+                }
+            }
+        });
+
         tvLogin = (TextView) headerView.findViewById(R.id.tv_login);
-        if (isRegistered) {
+        if (isLogined) {
             ivSignInOut.setImageResource(R.mipmap.fa_sign_out_0_ffffff_none);
             tvLogin.setText(login);
         } else {
@@ -275,18 +363,145 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
+    private void saveAllDataToServer() {
+        showProgress(true);
+        if (!NoteUtils.isConnected(this)) {
+            NoteUtils.showNotNetErrorMessage(this);
+            showProgress(false);
+            return;
+        }
+
+        final long lastSynch = readLastSynchDate();
+        NoteUtils.log("lastSynch read " + lastSynch);
+        final String whereClause = "lastSaving > " + lastSynch;
+
+        Backendless.UserService.login(login, password, new AsyncCallback<BackendlessUser>() {
+            public void handleResponse(BackendlessUser user) {
+                NoteUtils.log("response success hidden login" + user);
+                //// TODO: 13.02.2016
+                BackendlessDataQuery dataQuery = new BackendlessDataQuery();
+                dataQuery.setWhereClause(whereClause);
+                Backendless.Persistence.of(Note.class).find(dataQuery,
+                        new AsyncCallback<BackendlessCollection<Note>>() {
+                            @Override
+                            public void handleResponse(BackendlessCollection<Note> response) {
+                                for (Note note : response.getData()) {
+                                    repository.insertOrUpdateLoadedNote(note);
+                                }
+                                //// TODO: 13.02.2016 send
+                                List<Note> freshNotes = repository.loadFreshNotes(lastSynch);
+                                final boolean[] perfectSaving = {true};
+                                try {
+                                    for (Note note : freshNotes) {
+                                        Backendless.Persistence.save(note, new AsyncCallback<Note>() {
+                                            public void handleResponse(Note response) {
+                                                repository.writeObjectId(response);
+                                            }
+
+                                            public void handleFault(BackendlessFault fault) {
+                                                perfectSaving[0] = false;
+                                            }
+                                        });
+                                    }
+
+                                } catch (Exception e) {
+                                    NoteUtils.showErrorMessage(MainActivity.this);
+                                } finally {
+                                    if (perfectSaving[0]) {
+                                        saveCurrentSynchDate();
+                                        MainActivity.this.refreshList();
+                                    }
+                                    showProgress(false);
+                                }
+                            }
+
+                            @Override
+                            public void handleFault(BackendlessFault fault) {
+                                NoteUtils.log("response query failure" + fault);
+                                NoteUtils.showErrorMessage(MainActivity.this);
+                                showProgress(false);
+                            }
+                        });
+            }
+
+            public void handleFault(BackendlessFault fault) {
+                NoteUtils.log("response hidden login failure" + fault);
+                NoteUtils.showErrorMessage(MainActivity.this);
+                showProgress(false);
+            }
+        }, true);
+
+        /*
+
+        BackendlessDataQuery dataQuery = new BackendlessDataQuery();
+        dataQuery.setWhereClause(whereClause);
+        BackendlessCollection<Note> loadedAllNotes = Backendless.Persistence.of(Note.class).find(dataQuery);
+        for (Note note : loadedAllNotes.getData()) {
+            repository.insertOrUpdateLoadedNote(note);
+        }
+
+        List<Note> freshNotes = repository.loadFreshNotes(lastSynch);
+        final boolean[] perfectSaving = {true};
+        try {
+            for (Note note : notes) {
+                Backendless.Persistence.save(note, new AsyncCallback<Note>() {
+                    public void handleResponse(Note response) {
+                    }
+
+                    public void handleFault(BackendlessFault fault) {
+                        perfectSaving[0] = false;
+                    }
+                });
+            }
+
+        } catch (Exception e) {
+            NoteUtils.showErrorMessage(this);
+        } finally {
+            if (perfectSaving[0]) {
+                saveCurrentSynchDate();
+            }
+            showProgress(false);
+        }
+*/
+    }
+
+    private void saveCurrentSynchDate() {
+        SharedPreferences pref = getSharedPreferences(Constants.PREFS_NAME, MODE_PRIVATE);
+        SharedPreferences.Editor ed = pref.edit();
+        long newLastSynch = Calendar.getInstance().getTimeInMillis();
+        ed.putLong(Constants.PREF_LAST_SYNCH, newLastSynch);
+        ed.commit();
+        NoteUtils.log("lastSynch write " + newLastSynch);
+    }
+
+    private long readLastSynchDate() {
+        SharedPreferences pref = getSharedPreferences(Constants.PREFS_NAME, MODE_PRIVATE);
+        return pref.getLong(Constants.PREF_LAST_SYNCH, 0);
+    }
+
     private void signOut() {
-        //todo
+        if (!NoteUtils.isConnected(this)) {
+            NoteUtils.showNotNetErrorMessage(this);
+            return;
+        }
+
+        Backendless.UserService.logout(new AsyncCallback<Void>() {
+            public void handleResponse(Void response) {
+                NoteUtils.log("response logout success");
+                removeUserFromPreferenceAndUpdateViews();
+            }
+
+            public void handleFault(BackendlessFault fault) {
+                NoteUtils.log("response logout failure" + fault);
+                NoteUtils.showErrorMessage(MainActivity.this);
+            }
+        });
+
     }
 
     private void signIn() {
-        if (TextUtils.isEmpty(login)) {
-            LogInFragment fragment = LogInFragment.newInstance().newInstance();
-            fragment.show(getSupportFragmentManager(), null);
-        } else {
-            // todo signIn
-
-        }
+        LogInFragment fragment = LogInFragment.newInstance();
+        fragment.show(getSupportFragmentManager(), null);
     }
 
     @Override
@@ -546,13 +761,13 @@ public class MainActivity extends AppCompatActivity
                     switch (oldStatus) {
                         case Constants.STATUS_ACTUAL:
                             note.setStatus(Constants.STATUS_IMPORTANT);
-                            repository.update(note);
+                            repository.updateByCreating(note);
                             listener.refreshList();
                             break;
                         case Constants.STATUS_IMPORTANT:
                         case Constants.STATUS_DELETED:
                             note.setStatus(Constants.STATUS_ACTUAL);
-                            repository.update(note);
+                            repository.updateByCreating(note);
                             listener.refreshList();
                             break;
                         default:
@@ -606,5 +821,28 @@ public class MainActivity extends AppCompatActivity
     protected void onResume() {
         super.onResume();
         if (worker != null) refreshList();
+    }
+
+    private void showProgress(boolean show) {
+        if (show) {
+            if (wait == null) {
+                wait = new ProgressDialog(this);
+                wait.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                wait.setMessage("Processing...");
+            }
+            try {
+                wait.show();
+            } catch (Throwable t) {
+            }
+
+        } else {
+            if (wait != null) {
+                try {
+                    wait.dismiss();
+                } catch (Throwable t) {
+                }
+                wait = null;
+            }
+        }
     }
 }

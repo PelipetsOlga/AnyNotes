@@ -284,7 +284,7 @@ public class NoteActivity extends AppCompatActivity implements
         note.setCreating(creat);
         //note.setLastSaving(Calendar.getInstance().getTimeInMillis());
         note.setStatus(status);
-        repository.update(note);
+        repository.updateByCreating(note);
     }
 
     @Override

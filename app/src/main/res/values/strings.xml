@@ -63,12 +63,13 @@
     <string name="new_note_hint_text">Let\'s write your idea</string>
 
     <string name="registration_dialog_title">Registration</string>
-    <string name="login_dialog_title">Sgn In</string>
-    <string name="registration_btn_ok">Ok</string>
+    <string name="login_dialog_title">Login</string>
+     <string name="registration_btn_ok">Ok</string>
     <string name="registration_btn_register">Register</string>
     <string name="registration_btn_cancel">Cancel</string>
     <string name="hint_login">E-mail</string>
     <string name="error">Error!</string>
+    <string name="error_network">Error! Check network.</string>
     <string name="hint_password">Password</string>
     <string name="hint_password_repeat">Repeat password</string>
 

@@ -48,10 +48,21 @@ public class NotesRepository {
     }
 
     public boolean insert(Note note) {
+        return insert(note, false);
+    }
+
+    public boolean insert(Note note, boolean loadedFromServer) {
         if (note == null) return false;
         ContentValues cv = new ContentValues();
         cv.put(DBSchema.CREATING, note.getCreating());
-        cv.put(DBSchema.LAST_SAVING, Calendar.getInstance().getTimeInMillis());
+        if (loadedFromServer) {
+            cv.put(DBSchema.LAST_SAVING, note.getLastSaving());
+        } else {
+            cv.put(DBSchema.LAST_SAVING, Calendar.getInstance().getTimeInMillis());
+        }
+        if (!TextUtils.isEmpty(note.getObjectId())) {
+            cv.put(DBSchema.OBJECT_ID, note.getObjectId());
+        }
         cv.put(DBSchema.STATUS, note.getStatus());
         cv.put(DBSchema.TITLE, note.getTitle());
         cv.put(DBSchema.ALARM, note.getAlarm());
@@ -92,7 +103,7 @@ public class NotesRepository {
             Date newAlarmDate = calendar.getTime();
             String newAlarmNote = dateFormat.format(newAlarmDate);
             note.setAlarm(newAlarmNote);
-            update(note);
+            updateByCreating(note);
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -105,15 +116,26 @@ public class NotesRepository {
                 intent, PendingIntent.FLAG_CANCEL_CURRENT);
     }
 
-    public boolean update(Note note) {
-        Note oldNote = findByKey(note.getCreating());
+    public boolean updateByCreating(Note note) {
+        return updateByCreating(note, false);
+    }
+
+    public boolean updateByCreating(Note note, boolean loadedFromServer) {
+        Note oldNote = findByCreating(note.getCreating());
         deleteAlarm(oldNote);
 
         if (note == null) return false;
         ContentValues cv = new ContentValues();
         cv.put(DBSchema.CREATING, note.getCreating());
-        cv.put(DBSchema.LAST_SAVING, Calendar.getInstance().getTimeInMillis());
+        if (loadedFromServer) {
+            cv.put(DBSchema.LAST_SAVING, note.getLastSaving());
+        } else {
+            cv.put(DBSchema.LAST_SAVING, Calendar.getInstance().getTimeInMillis());
+        }
         cv.put(DBSchema.STATUS, note.getStatus());
+        if (!TextUtils.isEmpty(note.getObjectId())) {
+            cv.put(DBSchema.OBJECT_ID, note.getObjectId());
+        }
         cv.put(DBSchema.TITLE, note.getTitle());
         if (note.getStatus() == Constants.STATUS_DELETED
                 || note.getStatus() == Constants.STATUS_DRAFT_DELETED) {
@@ -126,7 +148,7 @@ public class NotesRepository {
         cv.put(DBSchema.TEXT, note.getText());
 
         int update = db.update(DBSchema.TABLE, cv, DBSchema.CREATING + "=" + note.getCreating(), null);
-        Log.d(TAG, "update note " + update);
+        Log.d(TAG, "updateByCreating note " + update);
         if (note.getAlarm() != null && !TextUtils.isEmpty(note.getAlarm())) {
             setAlarm(note);
         }
@@ -134,8 +156,8 @@ public class NotesRepository {
     }
 
     private void deleteAlarm(Note oldNote) {
-        NoteUtils.log("delete Alarm creating=" + oldNote.getCreating() + ", time=" + oldNote.getAlarm());
         if (oldNote != null) {
+            NoteUtils.log("delete Alarm creating=" + oldNote.getCreating());
             String oldAlarm = oldNote.getAlarm();
             if (oldAlarm != null && !TextUtils.isEmpty(oldAlarm.trim())) {
                 PendingIntent oldPendingIntent = getPendingIntent(oldNote);
@@ -144,13 +166,17 @@ public class NotesRepository {
         }
     }
 
-    public Note findByKey(long creating) {
+    public Note findByCreating(long creating) {
         Cursor cursor = db.query(DBSchema.TABLE, null, DBSchema.CREATING + "=" + creating,
                 null, null, null, null);
         Note note = null;
         if (cursor.moveToFirst()) {
             note = new Note();
             note.setId(cursor.getLong(cursor.getColumnIndex(DBSchema.ID)));
+            String objectId = cursor.getString(cursor.getColumnIndex(DBSchema.OBJECT_ID));
+            if (!TextUtils.isEmpty(objectId)) {
+                note.setObjectId(objectId);
+            }
             note.setCreating(cursor.getLong(cursor.getColumnIndex(DBSchema.CREATING)));
             note.setLastSaving(cursor.getLong(cursor.getColumnIndex(DBSchema.LAST_SAVING)));
             note.setStatus(cursor.getInt(cursor.getColumnIndex(DBSchema.STATUS)));
@@ -209,6 +235,10 @@ public class NotesRepository {
                 String alarm = cursor.getString(cursor.getColumnIndex(DBSchema.ALARM));
                 Note note = new Note();
                 note.setId(cursor.getLong(cursor.getColumnIndex(DBSchema.ID)));
+                String objectId = cursor.getString(cursor.getColumnIndex(DBSchema.OBJECT_ID));
+                if (!TextUtils.isEmpty(objectId)) {
+                    note.setObjectId(objectId);
+                }
                 note.setCreating(cursor.getLong(cursor.getColumnIndex(DBSchema.CREATING)));
                 note.setLastSaving(cursor.getLong(cursor.getColumnIndex(DBSchema.LAST_SAVING)));
                 note.setStatus(cursor.getInt(cursor.getColumnIndex(DBSchema.STATUS)));
@@ -227,6 +257,138 @@ public class NotesRepository {
         }
         Log.d(TAG, "loadAll cursor.size=" + cursor.getCount() + ", items.size=" + items.size());
         return items;
+    }
+
+    public List<Note> loadFreshNotes(long lastSynch) {
+        String selections = DBSchema.LAST_SAVING + ">=" + lastSynch;
+        Cursor cursor = db.query(DBSchema.TABLE, null, selections, null, null, null, null);
+        List<Note> items = new ArrayList<Note>();
+        if (cursor.moveToFirst()) {
+            do {
+                Note note = new Note();
+                note.setId(cursor.getLong(cursor.getColumnIndex(DBSchema.ID)));
+                String objectId = cursor.getString(cursor.getColumnIndex(DBSchema.OBJECT_ID));
+                if (!TextUtils.isEmpty(objectId)) {
+                    note.setObjectId(objectId);
+                }
+                note.setCreating(cursor.getLong(cursor.getColumnIndex(DBSchema.CREATING)));
+                note.setLastSaving(cursor.getLong(cursor.getColumnIndex(DBSchema.LAST_SAVING)));
+                note.setStatus(cursor.getInt(cursor.getColumnIndex(DBSchema.STATUS)));
+                note.setTitle(cursor.getString(cursor.getColumnIndex(DBSchema.TITLE)));
+                note.setAlarm(cursor.getString(cursor.getColumnIndex(DBSchema.ALARM)));
+                note.setRepeat(cursor.getLong(cursor.getColumnIndex(DBSchema.REPEAT)));
+                note.setText(cursor.getString(cursor.getColumnIndex(DBSchema.TEXT)));
+                items.add(note);
+            } while (cursor.moveToNext());
+        }
+        Log.d(TAG, "loadAll fo ssynch cursor.size=" + cursor.getCount() + ", items.size=" + items.size());
+        return items;
+    }
+
+    public void insertOrUpdateLoadedNote(Note loadedNote) {
+        if (loadedNote.getObjectId() == null) return;
+        Note oldSuchNoteByObjectId = findByObjectId(loadedNote.getObjectId());
+        // if there isn't so objectId
+        if (oldSuchNoteByObjectId == null) {
+            //if there is so creating then updateByCreating else insert
+            Note oldSuchNoteByCreating = findByCreating(loadedNote.getCreating());
+            if (oldSuchNoteByCreating == null) {
+                insert(loadedNote, true);
+            } else {
+                //todo comparison
+                updateByObjectId(loadedNote, true);
+            }
+        } else {
+            // if there is so objectid then updateByCreating by lastsaving
+            // if last_saving_local<las_saving_loaded then updateByCreating else no updateByCreating
+            //todo comparison
+            updateByObjectId(loadedNote, true);
+        }
+
+
+       /* long creatingLoadedNote = loadedNote.getCreating();
+        if (creatingLoadedNote == 0) {
+            insert(loadedNote, true);
+            return;
+        }
+        Note oldSuchNote = findByCreating(creatingLoadedNote);
+        if (oldSuchNote == null) {
+            insert(loadedNote, true);
+        } else {
+            updateByCreating(loadedNote, true);
+        }*/
+    }
+
+    public Note findByObjectId(String objectId) {
+        Cursor cursor = db.query(DBSchema.TABLE, null, DBSchema.OBJECT_ID + "='" + objectId + "'",
+                null, null, null, null);
+        Note note = null;
+        if (cursor.moveToFirst()) {
+            note = new Note();
+            note.setId(cursor.getLong(cursor.getColumnIndex(DBSchema.ID)));
+            note.setObjectId(cursor.getString(cursor.getColumnIndex(DBSchema.OBJECT_ID)));
+            note.setCreating(cursor.getLong(cursor.getColumnIndex(DBSchema.CREATING)));
+            note.setLastSaving(cursor.getLong(cursor.getColumnIndex(DBSchema.LAST_SAVING)));
+            note.setStatus(cursor.getInt(cursor.getColumnIndex(DBSchema.STATUS)));
+            note.setTitle(cursor.getString(cursor.getColumnIndex(DBSchema.TITLE)));
+            note.setAlarm(cursor.getString(cursor.getColumnIndex(DBSchema.ALARM)));
+            note.setRepeat(cursor.getLong(cursor.getColumnIndex(DBSchema.REPEAT)));
+            note.setText(cursor.getString(cursor.getColumnIndex(DBSchema.TEXT)));
+        }
+        return note;
+    }
+
+    public boolean updateByObjectId(Note note) {
+        return updateByObjectId(note, false);
+    }
+
+    public boolean updateByObjectId(Note note, boolean loadedFromServer) {
+        if (note == null) return false;
+
+        Note oldNote = findByObjectId(note.getObjectId());
+        deleteAlarm(oldNote);
+
+        ContentValues cv = new ContentValues();
+        cv.put(DBSchema.CREATING, note.getCreating());
+        if (loadedFromServer) {
+            if (oldNote != null && oldNote.getLastSaving() > note.getLastSaving()) {
+                cv.put(DBSchema.LAST_SAVING, oldNote.getLastSaving());
+            } else {
+                cv.put(DBSchema.LAST_SAVING, note.getLastSaving());
+            }
+            cv.put(DBSchema.LAST_SAVING, note.getLastSaving());
+        } else {
+            cv.put(DBSchema.LAST_SAVING, Calendar.getInstance().getTimeInMillis());
+        }
+        cv.put(DBSchema.STATUS, note.getStatus());
+        if (!TextUtils.isEmpty(note.getObjectId())) {
+            cv.put(DBSchema.OBJECT_ID, note.getObjectId());
+        }
+        cv.put(DBSchema.TITLE, note.getTitle());
+        if (note.getStatus() == Constants.STATUS_DELETED
+                || note.getStatus() == Constants.STATUS_DRAFT_DELETED) {
+            cv.put(DBSchema.ALARM, "");
+            cv.put(DBSchema.REPEAT, 0);
+        } else {
+            cv.put(DBSchema.ALARM, note.getAlarm());
+            cv.put(DBSchema.REPEAT, note.getRepeat());
+        }
+        cv.put(DBSchema.TEXT, note.getText());
+
+        int update = db.update(DBSchema.TABLE, cv, DBSchema.OBJECT_ID + "='" + note.getObjectId() + "'", null);
+        Log.d(TAG, "updateByObjectId note " + update);
+        if (note.getAlarm() != null && !TextUtils.isEmpty(note.getAlarm())) {
+            setAlarm(note);
+        }
+        return true;
+    }
+
+
+    public void writeObjectId(Note response) {
+        ContentValues cv = new ContentValues();
+        cv.put(DBSchema.OBJECT_ID, response.getObjectId());
+        int update = db.update(DBSchema.TABLE, cv, DBSchema.CREATING + "=" + response.getCreating(), null);
+        Log.d(TAG, "updateByObjectId note " + update);
     }
 }
 

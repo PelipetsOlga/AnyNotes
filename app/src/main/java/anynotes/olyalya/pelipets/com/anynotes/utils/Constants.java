@@ -47,6 +47,7 @@ public class Constants {
     public static final String BAAS_APP_ID = "88936601-BFF8-0D16-FF3D-721E9334BF00";
     public static final String BAAS_APP_SECRET = "1679EEF9-0050-E314-FFEB-38620E00EC00";
     public static final String BAAS_APP_VERSION = "v1";
+    public static final String BAAS_USER_EXIST_ERROR = "3033";
 
 
     public static final String PREF_RINGTONE = "ringtone";
@@ -55,9 +56,10 @@ public class Constants {
     public static final String PREFS_NAME = "anynotes_prefs";
     public static final String PREF_VIBRO = "vibro";
     public static final String PREF_SORT = "sort";
-    public static final String PREF_IS_REGISTERED = "is_registered";
+    public static final String PREF_IS_LOGINED = "is_logined";
     public static final String PREF_LOGIN = "login";
     public static final String PREF_PASSWORD = "password";
+    public static final String PREF_LAST_SYNCH = "last_synch";
     public static final int PREF_SORT_UNSORT = 100;
     public static final int PREF_SORT_AL_ASC = 101;
     public static final int PREF_SORT_AL_DESC = 102;

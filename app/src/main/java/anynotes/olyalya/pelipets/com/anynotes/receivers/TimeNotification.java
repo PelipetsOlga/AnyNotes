@@ -34,7 +34,7 @@ public class TimeNotification extends BroadcastReceiver {
         Note note = (Note) intent.getSerializableExtra(Constants.EXTRA_NOTE);
         if (note.getRepeat() == 0) {
             note.setAlarm("");
-            repository.update(note);
+            repository.updateByCreating(note);
         } else {
             repository.reSetAlarm(note);
         }
