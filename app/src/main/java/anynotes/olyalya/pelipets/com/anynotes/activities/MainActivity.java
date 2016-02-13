@@ -59,6 +59,7 @@ import anynotes.olyalya.pelipets.com.anynotes.interfaces.RefreshListListener;
 import anynotes.olyalya.pelipets.com.anynotes.interfaces.RegistrationListener;
 import anynotes.olyalya.pelipets.com.anynotes.models.Note;
 import anynotes.olyalya.pelipets.com.anynotes.service.NotesService;
+import anynotes.olyalya.pelipets.com.anynotes.service.SynchNotesIntentService;
 import anynotes.olyalya.pelipets.com.anynotes.storage.NotesRepository;
 import anynotes.olyalya.pelipets.com.anynotes.utils.Constants;
 import anynotes.olyalya.pelipets.com.anynotes.utils.NoteUtils;
@@ -795,7 +796,14 @@ public class MainActivity extends AppCompatActivity
             mTTS.stop();
             mTTS.shutdown();
         }
+
+        runSynchService();
         super.onDestroy();
+    }
+
+    private void runSynchService() {
+        Intent intentIntentService = new Intent(this, SynchNotesIntentService.class);
+        startService(intentIntentService);
     }
 
     @Override

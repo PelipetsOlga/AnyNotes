@@ -63,6 +63,8 @@
 
         <service android:name="com.backendless.AndroidService" />
 
+        <service android:name=".service.SynchNotesIntentService" />
+
         <receiver android:name=".receivers.NoteBootReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
