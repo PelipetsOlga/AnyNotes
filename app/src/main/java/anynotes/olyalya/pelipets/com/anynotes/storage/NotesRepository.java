@@ -77,7 +77,7 @@ public class NotesRepository {
         return true;
     }
 
-    private void setAlarm(Note note) {
+    public void setAlarm(Note note) {
         NoteUtils.log("set first Alarm creating=" + note.getCreating() + ", time=" + note.getAlarm());
         PendingIntent pendingIntent = getPendingIntent(note);
         NoteUtils.log("setAlarm pendingIntent = " + pendingIntent);
@@ -288,35 +288,16 @@ public class NotesRepository {
     public void insertOrUpdateLoadedNote(Note loadedNote) {
         if (loadedNote.getObjectId() == null) return;
         Note oldSuchNoteByObjectId = findByObjectId(loadedNote.getObjectId());
-        // if there isn't so objectId
         if (oldSuchNoteByObjectId == null) {
-            //if there is so creating then updateByCreating else insert
             Note oldSuchNoteByCreating = findByCreating(loadedNote.getCreating());
             if (oldSuchNoteByCreating == null) {
                 insert(loadedNote, true);
             } else {
-                //todo comparison
                 updateByObjectId(loadedNote, true);
             }
         } else {
-            // if there is so objectid then updateByCreating by lastsaving
-            // if last_saving_local<las_saving_loaded then updateByCreating else no updateByCreating
-            //todo comparison
             updateByObjectId(loadedNote, true);
         }
-
-
-       /* long creatingLoadedNote = loadedNote.getCreating();
-        if (creatingLoadedNote == 0) {
-            insert(loadedNote, true);
-            return;
-        }
-        Note oldSuchNote = findByCreating(creatingLoadedNote);
-        if (oldSuchNote == null) {
-            insert(loadedNote, true);
-        } else {
-            updateByCreating(loadedNote, true);
-        }*/
     }
 
     public Note findByObjectId(String objectId) {
@@ -389,6 +370,40 @@ public class NotesRepository {
         cv.put(DBSchema.OBJECT_ID, response.getObjectId());
         int update = db.update(DBSchema.TABLE, cv, DBSchema.CREATING + "=" + response.getCreating(), null);
         Log.d(TAG, "updateByObjectId note " + update);
+    }
+
+    public List<Note> loadAllNotesWithAlarms() {
+        List<Note> items = new ArrayList<Note>();
+        NoteUtils.log(" public List<Note> loadAllNotesWithAlarms()");
+        Cursor cursor = db.query(DBSchema.TABLE, null, null, null, null, null, null);
+        int k = 0;
+        NoteUtils.log(" cursor=" + cursor);
+        NoteUtils.log(" cursor_size=" + cursor.getCount());
+        if (cursor.moveToFirst()) {
+            NoteUtils.log(" cursor moved to first");
+            do {
+                String alarm = cursor.getString(cursor.getColumnIndex(DBSchema.ALARM));
+                if (alarm != null  && !TextUtils.isEmpty(alarm)) {
+                    Note note = new Note();
+                    note.setId(cursor.getLong(cursor.getColumnIndex(DBSchema.ID)));
+                    String objectId = cursor.getString(cursor.getColumnIndex(DBSchema.OBJECT_ID));
+                    if (!TextUtils.isEmpty(objectId)) {
+                        note.setObjectId(objectId);
+                    }
+                    note.setCreating(cursor.getLong(cursor.getColumnIndex(DBSchema.CREATING)));
+                    note.setLastSaving(cursor.getLong(cursor.getColumnIndex(DBSchema.LAST_SAVING)));
+                    note.setStatus(cursor.getInt(cursor.getColumnIndex(DBSchema.STATUS)));
+                    note.setTitle(cursor.getString(cursor.getColumnIndex(DBSchema.TITLE)));
+                    note.setAlarm(alarm);
+                    note.setRepeat(cursor.getLong(cursor.getColumnIndex(DBSchema.REPEAT)));
+                    note.setText(cursor.getString(cursor.getColumnIndex(DBSchema.TEXT)));
+                    items.add(note);
+                    NoteUtils.log(" note with alarm #"+ (++k));
+                }
+            } while (cursor.moveToNext());
+        }
+        Log.d(TAG, "loadAll fo ssynch cursor.size=" + cursor.getCount() + ", items.size=" + items.size());
+        return items;
     }
 }
 

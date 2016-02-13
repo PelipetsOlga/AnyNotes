@@ -1,19 +1,11 @@
 package anynotes.olyalya.pelipets.com.anynotes.utils;
 
-/**
- * Created by Olga on 26.12.2015.
- */
 public class Constants {
-    public final static String TAG = "tag";
+    public final static String TAG = "anynotes_tag";
     public static final String EXTRA_ACTION_TYPE = "action_type";
     public static final String EXTRA_NOTE = "note";
     public static final int EXTRA_ACTION_NEW_NOTE = 33;
     public static final int EXTRA_ACTION_EDIT_NOTE = 66;
-  // public static final String EXTRA_CREATING = "creating";
-    //public static final String EXTRA_NOTE_CONTENT = "note_content";
-    //public static final String EXTRA_NOTE_TITLE = "note_title";
-    //public static final String EXTRA_STATUS = "status";
-    //public static final String EXTRA_LASTSAVING = "last_saving";
     public static final String EXTRA_TIME_DATE = "time_date";
     public static final String EXTRA_REPEAT = "repeat";
     public static final String EXTRA_OPEN_CURRENT_NOTE = "open_current_note";
@@ -49,7 +41,6 @@ public class Constants {
     public static final String BAAS_APP_VERSION = "v1";
     public static final String BAAS_USER_EXIST_ERROR = "3033";
 
-
     public static final String PREF_RINGTONE = "ringtone";
     public static final String PREF_FONT_SIZE = "font_size";
     public static final String PREF_BRIGHTNESS = "brightness";
@@ -71,6 +62,4 @@ public class Constants {
     public static final int LENGTH_TEXT = 300;
     public static final int TITLE_LENGTH = 80;
     public static final String FORMAT_ALARM = "dd/MM/yyyy, HH:mm";
-
-   // public static final String ACTION_SHOW_NOTE="android.intent.action.SHOW_NOTE";
-   }
+}
