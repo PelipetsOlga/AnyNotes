@@ -110,6 +110,8 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void register(final String email, final String password) {
+        this.login=email;
+        this.password=password;
         if (!NoteUtils.isConnected(this)) {
             NoteUtils.showNotNetErrorMessage(this);
             return;
@@ -122,7 +124,7 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void handleResponse(BackendlessUser backendlessUser) {
                 NoteUtils.log("response success" + backendlessUser);
-                saveUserToPreferenceAndUpdateViews(backendlessUser, password);
+                saveUserToPreferenceAndUpdateViews(backendlessUser, MainActivity.this.login, MainActivity.this.password);
             }
 
             @Override
@@ -137,10 +139,11 @@ public class MainActivity extends AppCompatActivity
         });
     }
 
-    private void saveUserToPreferenceAndUpdateViews(BackendlessUser backendlessUser, String password) {
+    private void saveUserToPreferenceAndUpdateViews(BackendlessUser backendlessUser, String login, String password) {
         SharedPreferences.Editor ed = mPref.edit();
         ed.putBoolean(Constants.PREF_IS_LOGINED, true);
         ed.putString(Constants.PREF_LOGIN, backendlessUser.getEmail());
+        ed.putString(Constants.PREF_LOGIN, login);
         ed.putString(Constants.PREF_PASSWORD, password);
         ed.commit();
         ivSignInOut.setImageResource(R.mipmap.fa_sign_out_0_ffffff_none);
@@ -160,15 +163,18 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void logIn(String email, final String password) {
+        this.login=email;
+        this.password=password;
         if (!NoteUtils.isConnected(this)) {
             NoteUtils.showNotNetErrorMessage(this);
             return;
         }
 
+        //// TODO: 13.02.2016
         Backendless.UserService.login(email, password, new AsyncCallback<BackendlessUser>() {
             public void handleResponse(BackendlessUser user) {
                 NoteUtils.log("response success" + user);
-                saveUserToPreferenceAndUpdateViews(user, password);
+                saveUserToPreferenceAndUpdateViews(user, MainActivity.this.login, MainActivity.this.password);
             }
 
             public void handleFault(BackendlessFault fault) {
@@ -290,6 +296,11 @@ public class MainActivity extends AppCompatActivity
         bright = mPref.getInt(Constants.PREF_BRIGHTNESS, Constants.BRIGHTNESS);
         NoteUtils.setBrightness(bright, this);
         sortPref = mPref.getInt(Constants.PREF_SORT, Constants.PREF_SORT_UNSORT);
+        refreshPreferences();
+    }
+
+    private void refreshPreferences(){
+        mPref = getSharedPreferences(Constants.PREFS_NAME, MODE_PRIVATE);
         isLogined = mPref.getBoolean(Constants.PREF_IS_LOGINED, false);
         login = mPref.getString(Constants.PREF_LOGIN, "");
         password = mPref.getString(Constants.PREF_PASSWORD, "");
@@ -376,9 +387,10 @@ public class MainActivity extends AppCompatActivity
         final String whereClause = "lastSaving > " + lastSynch;
 
         Backendless.UserService.login(login, password, new AsyncCallback<BackendlessUser>() {
+
             public void handleResponse(BackendlessUser user) {
                 NoteUtils.log("response success hidden login" + user);
-                //// TODO: 13.02.2016
+
                 BackendlessDataQuery dataQuery = new BackendlessDataQuery();
                 dataQuery.setWhereClause(whereClause);
                 Backendless.Persistence.of(Note.class).find(dataQuery,
@@ -388,7 +400,7 @@ public class MainActivity extends AppCompatActivity
                                 for (Note note : response.getData()) {
                                     repository.insertOrUpdateLoadedNote(note);
                                 }
-                                //// TODO: 13.02.2016 send
+                                saveCurrentSynchDate();
                                 List<Note> freshNotes = repository.loadFreshNotes(lastSynch);
                                 final boolean[] perfectSaving = {true};
                                 try {
@@ -430,39 +442,6 @@ public class MainActivity extends AppCompatActivity
                 showProgress(false);
             }
         }, true);
-
-        /*
-
-        BackendlessDataQuery dataQuery = new BackendlessDataQuery();
-        dataQuery.setWhereClause(whereClause);
-        BackendlessCollection<Note> loadedAllNotes = Backendless.Persistence.of(Note.class).find(dataQuery);
-        for (Note note : loadedAllNotes.getData()) {
-            repository.insertOrUpdateLoadedNote(note);
-        }
-
-        List<Note> freshNotes = repository.loadFreshNotes(lastSynch);
-        final boolean[] perfectSaving = {true};
-        try {
-            for (Note note : notes) {
-                Backendless.Persistence.save(note, new AsyncCallback<Note>() {
-                    public void handleResponse(Note response) {
-                    }
-
-                    public void handleFault(BackendlessFault fault) {
-                        perfectSaving[0] = false;
-                    }
-                });
-            }
-
-        } catch (Exception e) {
-            NoteUtils.showErrorMessage(this);
-        } finally {
-            if (perfectSaving[0]) {
-                saveCurrentSynchDate();
-            }
-            showProgress(false);
-        }
-*/
     }
 
     private void saveCurrentSynchDate() {
