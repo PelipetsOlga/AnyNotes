@@ -517,6 +517,18 @@ public class MainActivity extends AppCompatActivity
                         .parse("market://details?id=anynotes.olyalya.pelipets.com.anynotes"));
                 startActivity(intentEstimate);
                 return true;
+            case R.id.action_budget:
+                Intent intentBudget = new Intent(Intent.ACTION_VIEW);
+                intentBudget.setData(Uri
+                        .parse("market://details?id=com.pelipets.olyalya.budget"));
+                startActivity(intentBudget);
+                return true;
+            case R.id.action_address_phone_book:
+                Intent intentBook = new Intent(Intent.ACTION_VIEW);
+                intentBook.setData(Uri
+                        .parse("market://details?id=com.myaddressbook"));
+                startActivity(intentBook);
+                return true;
             case R.id.action_sort:
                 SortDialogFragment fragment = new SortDialogFragment();
                 fragment.show(getSupportFragmentManager(), null);

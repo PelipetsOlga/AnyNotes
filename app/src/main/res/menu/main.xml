@@ -25,6 +25,18 @@
         app:showAsAction="never" />
 
     <item
+        android:id="@+id/action_budget"
+        android:orderInCategory="100"
+        android:title="@string/action_budget"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_address_phone_book"
+        android:orderInCategory="100"
+        android:title="@string/action_phonebook"
+        app:showAsAction="never" />
+
+    <item
         android:id="@+id/action_exit"
         android:orderInCategory="100"
         android:title="@string/action_exit"

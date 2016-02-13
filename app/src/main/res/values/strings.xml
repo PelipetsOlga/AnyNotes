@@ -19,6 +19,8 @@
     <string name="action_alarm">Set alarm</string>
     <string name="action_delete">Delete</string>
     <string name="action_share">Share</string>
+    <string name="action_budget">Home Budget</string>
+    <string name="action_phonebook">AddressPhoneBook</string>
 
     <string name="title_activity_note">NoteActivity</string>
     <string name="title_activity_settings">Settings</string>
