@@ -357,8 +357,7 @@ public class MainActivity extends AppCompatActivity
                     return;
                 }
                 if (isLogined) {
-                    //// TODO: 13.02.2016
-                    saveAllDataToServer();
+                   saveAllDataToServer();
                 } else {
                     signIn();
                 }
@@ -378,7 +377,6 @@ public class MainActivity extends AppCompatActivity
     private void saveAllDataToServer() {
         showProgress(true);
 
-        //// TODO: 13.02.2016
         if (!NoteUtils.isConnected(this)) {
             NoteUtils.showNotNetErrorMessage(this);
             showProgress(false);
@@ -803,6 +801,9 @@ public class MainActivity extends AppCompatActivity
 
     private void runSynchService() {
         Intent intentIntentService = new Intent(this, SynchNotesIntentService.class);
+        intentIntentService.putExtra(Constants.PREF_IS_LOGINED, isLogined);
+        intentIntentService.putExtra(Constants.PREF_LOGIN, login);
+        intentIntentService.putExtra(Constants.PREF_PASSWORD, password);
         startService(intentIntentService);
     }
 
