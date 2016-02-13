@@ -79,6 +79,7 @@
                 android:paddingTop="10dp"
                 android:clickable="true"
                 android:text="@string/registration_btn_change_password"
+                android:visibility="gone"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textColor="@color/colorAccent" />
         </LinearLayout>

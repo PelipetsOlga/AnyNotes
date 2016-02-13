@@ -12,12 +12,18 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.backendless.Backendless;
+import com.backendless.async.callback.AsyncCallback;
+import com.backendless.exceptions.BackendlessFault;
 
 import anynotes.olyalya.pelipets.com.anynotes.R;
 import anynotes.olyalya.pelipets.com.anynotes.interfaces.LoginListener;
 import anynotes.olyalya.pelipets.com.anynotes.utils.NoteUtils;
 
 public class LogInFragment extends DialogFragment implements View.OnClickListener {
+    private final String ERROR_NO_SUCH_USER = "3020";
     private Resources resources;
     private EditText etLogin;
     private EditText etPassword;
@@ -100,6 +106,29 @@ public class LogInFragment extends DialogFragment implements View.OnClickListene
                 break;
 
             case R.id.tv_forgot_password:
+                final String email = etLogin.getText().toString().trim();
+                if (TextUtils.isEmpty(email)) {
+                    NoteUtils.setError(etLogin, getActivity());
+                    return;
+                }
+                Backendless.UserService.restorePassword(email, new AsyncCallback<Void>() {
+                    public void handleResponse(Void response) {
+                        NoteUtils.log("send new password to " + email);
+                        Toast.makeText(getActivity(), getActivity().getResources().
+                                getString(R.string.tost_send_password_to_email)+" " + email,
+                                Toast.LENGTH_LONG).show();
+                    }
+
+                    public void handleFault(BackendlessFault fault) {
+                        if (ERROR_NO_SUCH_USER.equals(fault.getCode())) {
+                            Toast.makeText(getActivity(), getActivity().getResources().
+                                    getString(R.string.tost_error_3020),
+                                    Toast.LENGTH_LONG).show();
+                        } else {
+                            NoteUtils.showErrorMessage(getActivity());
+                        }
+                    }
+                });
                 break;
             case R.id.tv_change_password:
                 break;

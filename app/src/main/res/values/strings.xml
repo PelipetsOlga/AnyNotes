@@ -77,6 +77,9 @@
 
     <string name="registration_btn_forgot_password">Forgot password</string>
     <string name="registration_btn_change_password">Change password</string>
+    <string name="tost_send_password_to_email">New password has sent to </string>
+    <string name="tost_error_3020">Unable to find user with the specified login</string>
+    <string name="tost_error_3003">Invalid login or password</string>
 
     <string name="banner_ad_unit_id">ca-app-pub-6973932400636393/3338064660</string>
     <string name="banner_inner_ad_unit_id">ca-app-pub-6973932400636393/4278244269</string>

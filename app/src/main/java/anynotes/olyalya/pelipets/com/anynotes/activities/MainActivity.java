@@ -34,6 +34,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.backendless.Backendless;
 import com.backendless.BackendlessCollection;
@@ -72,6 +73,7 @@ public class MainActivity extends AppCompatActivity
 
     private static final int NOTE_REQUEST_CODE = 100;
     private static final int SETTINGS_REQUEST_CODE = 200;
+    private final String ERROR_WRONG_LOGIN_OR_PASSWORD = "3003";
 
     private FloatingActionButton fab;
     private DrawerLayout drawer;
@@ -126,7 +128,7 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void handleResponse(BackendlessUser backendlessUser) {
                 NoteUtils.log("response success" + backendlessUser);
-                saveUserToPreferenceAndUpdateViews( MainActivity.this.login, MainActivity.this.password, backendlessUser.getObjectId());
+                saveUserToPreferenceAndUpdateViews(MainActivity.this.login, MainActivity.this.password, backendlessUser.getObjectId());
             }
 
             @Override
@@ -141,7 +143,7 @@ public class MainActivity extends AppCompatActivity
         });
     }
 
-    private void saveUserToPreferenceAndUpdateViews( String login, String password, String userObjectId) {
+    private void saveUserToPreferenceAndUpdateViews(String login, String password, String userObjectId) {
         SharedPreferences.Editor ed = mPref.edit();
         ed.putBoolean(Constants.PREF_IS_LOGINED, true);
         //ed.putString(Constants.PREF_LOGIN, backendlessUser.getEmail());
@@ -177,12 +179,18 @@ public class MainActivity extends AppCompatActivity
         Backendless.UserService.login(email, password, new AsyncCallback<BackendlessUser>() {
             public void handleResponse(BackendlessUser user) {
                 NoteUtils.log("response success" + user);
-                saveUserToPreferenceAndUpdateViews( MainActivity.this.login, MainActivity.this.password, user.getObjectId());
+                saveUserToPreferenceAndUpdateViews(MainActivity.this.login, MainActivity.this.password, user.getObjectId());
             }
 
             public void handleFault(BackendlessFault fault) {
-                NoteUtils.log("response login failure" + fault);
-                NoteUtils.showErrorMessage(MainActivity.this);
+                if (ERROR_WRONG_LOGIN_OR_PASSWORD.equals(fault.getCode())) {
+                    Toast.makeText(MainActivity.this, MainActivity.this.getResources().
+                                    getString(R.string.tost_error_3003),
+                            Toast.LENGTH_LONG).show();
+                } else {
+                    NoteUtils.log("response login failure" + fault);
+                    NoteUtils.showErrorMessage(MainActivity.this);
+                }
             }
         }, true);
     }
@@ -361,7 +369,7 @@ public class MainActivity extends AppCompatActivity
                     return;
                 }
                 if (isLogined) {
-                   saveAllDataToServer();
+                    saveAllDataToServer();
                 } else {
                     signIn();
                 }
@@ -393,17 +401,16 @@ public class MainActivity extends AppCompatActivity
         Backendless.UserService.login(login, password, new AsyncCallback<BackendlessUser>() {
 
             public void handleResponse(BackendlessUser user) {
-                //// TODO: 13.02.2016
                 NoteUtils.log("response success hidden login" + user);
-                userObjectId=user.getObjectId();
-                SharedPreferences preferences=getSharedPreferences(Constants.PREFS_NAME, MODE_PRIVATE);
-                SharedPreferences.Editor editor=preferences.edit();
+                userObjectId = user.getObjectId();
+                SharedPreferences preferences = getSharedPreferences(Constants.PREFS_NAME, MODE_PRIVATE);
+                SharedPreferences.Editor editor = preferences.edit();
                 editor.putString(Constants.PREF_USER_OBJECT_ID, userObjectId);
                 editor.commit();
 
                 //String whereClause = "lastSaving > " + lastSynch+" AND ownerId = \""+userObjectId+"\"";
-                String whereClause ="ownerId=\'"+userObjectId+"\' AND lastSaving>" + lastSynch;
-                NoteUtils.log("whereClause = "+whereClause);
+                String whereClause = "ownerId=\'" + userObjectId + "\' AND lastSaving>" + lastSynch;
+                NoteUtils.log("whereClause = " + whereClause);
                 BackendlessDataQuery dataQuery = new BackendlessDataQuery();
                 dataQuery.setWhereClause(whereClause);
                 Backendless.Persistence.of(Note.class).find(dataQuery,
