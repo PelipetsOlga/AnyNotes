@@ -110,8 +110,8 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void register(final String email, final String password) {
-        this.login=email;
-        this.password=password;
+        this.login = email;
+        this.password = password;
         if (!NoteUtils.isConnected(this)) {
             NoteUtils.showNotNetErrorMessage(this);
             return;
@@ -163,14 +163,13 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void logIn(String email, final String password) {
-        this.login=email;
-        this.password=password;
+        this.login = email;
+        this.password = password;
         if (!NoteUtils.isConnected(this)) {
             NoteUtils.showNotNetErrorMessage(this);
             return;
         }
 
-        //// TODO: 13.02.2016
         Backendless.UserService.login(email, password, new AsyncCallback<BackendlessUser>() {
             public void handleResponse(BackendlessUser user) {
                 NoteUtils.log("response success" + user);
@@ -299,7 +298,7 @@ public class MainActivity extends AppCompatActivity
         refreshPreferences();
     }
 
-    private void refreshPreferences(){
+    private void refreshPreferences() {
         mPref = getSharedPreferences(Constants.PREFS_NAME, MODE_PRIVATE);
         isLogined = mPref.getBoolean(Constants.PREF_IS_LOGINED, false);
         login = mPref.getString(Constants.PREF_LOGIN, "");
@@ -357,6 +356,7 @@ public class MainActivity extends AppCompatActivity
                     return;
                 }
                 if (isLogined) {
+                    //// TODO: 13.02.2016
                     saveAllDataToServer();
                 } else {
                     signIn();
@@ -376,6 +376,8 @@ public class MainActivity extends AppCompatActivity
 
     private void saveAllDataToServer() {
         showProgress(true);
+
+        //// TODO: 13.02.2016
         if (!NoteUtils.isConnected(this)) {
             NoteUtils.showNotNetErrorMessage(this);
             showProgress(false);
@@ -653,8 +655,8 @@ public class MainActivity extends AppCompatActivity
             }
 
             Calendar calendar = Calendar.getInstance();
-            calendar.setTimeInMillis(note.getLastSaving());
-            holder.tvLastSaving.setText(DateFormat.format("yyyy-MM-dd HH:mm:ss", calendar));
+            calendar.setTimeInMillis(note.getCreating());
+            holder.tvCreating.setText(DateFormat.format("yyyy-MM-dd HH:mm", calendar));
             int status = note.getStatus();
             switch (status) {
                 case Constants.STATUS_ACTUAL:
@@ -686,7 +688,7 @@ public class MainActivity extends AppCompatActivity
         private RefreshListListener listener;
         private final Context context;
         private final TextView tvTitle;
-        private final TextView tvLastSaving;
+        private final TextView tvCreating;
         private final TextView tvText;
         private final ImageView ivIcon;
         private final ImageView ivSpeech;
@@ -701,7 +703,7 @@ public class MainActivity extends AppCompatActivity
             this.mTTS = mTTS;
 
             tvTitle = (TextView) itemView.findViewById(R.id.tv_title);
-            tvLastSaving = (TextView) itemView.findViewById(R.id.tv_lastsaving);
+            tvCreating = (TextView) itemView.findViewById(R.id.tv_creating);
             tvText = (TextView) itemView.findViewById(R.id.tv_text);
             ivIcon = (ImageView) itemView.findViewById(R.id.iv_icon);
             ivSpeech = (ImageView) itemView.findViewById(R.id.iv_speech);
@@ -715,7 +717,7 @@ public class MainActivity extends AppCompatActivity
             SharedPreferences sPref = context.getSharedPreferences(Constants.PREFS_NAME, AppCompatActivity.MODE_PRIVATE);
             int fontSize = sPref.getInt(Constants.PREF_FONT_SIZE, Constants.SIZE_FONT);
             tvTitle.setTextSize(fontSize);
-            tvLastSaving.setTextSize(fontSize);
+            tvCreating.setTextSize(fontSize);
             tvText.setTextSize(fontSize);
         }
 
