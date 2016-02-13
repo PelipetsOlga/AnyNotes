@@ -63,6 +63,9 @@ public class NotesRepository {
         if (!TextUtils.isEmpty(note.getObjectId())) {
             cv.put(DBSchema.OBJECT_ID, note.getObjectId());
         }
+        if (!TextUtils.isEmpty(note.getOwnerId())) {
+            cv.put(DBSchema.OWNER_ID, note.getOwnerId());
+        }
         cv.put(DBSchema.STATUS, note.getStatus());
         cv.put(DBSchema.TITLE, note.getTitle());
         cv.put(DBSchema.ALARM, note.getAlarm());
@@ -136,6 +139,9 @@ public class NotesRepository {
         if (!TextUtils.isEmpty(note.getObjectId())) {
             cv.put(DBSchema.OBJECT_ID, note.getObjectId());
         }
+        if (!TextUtils.isEmpty(note.getOwnerId())) {
+            cv.put(DBSchema.OWNER_ID, note.getOwnerId());
+        }
         cv.put(DBSchema.TITLE, note.getTitle());
         if (note.getStatus() == Constants.STATUS_DELETED
                 || note.getStatus() == Constants.STATUS_DRAFT_DELETED) {
@@ -176,6 +182,10 @@ public class NotesRepository {
             String objectId = cursor.getString(cursor.getColumnIndex(DBSchema.OBJECT_ID));
             if (!TextUtils.isEmpty(objectId)) {
                 note.setObjectId(objectId);
+            }
+            String ownerId = cursor.getString(cursor.getColumnIndex(DBSchema.OWNER_ID));
+            if (!TextUtils.isEmpty(ownerId)) {
+                note.setOwnerId(ownerId);
             }
             note.setCreating(cursor.getLong(cursor.getColumnIndex(DBSchema.CREATING)));
             note.setLastSaving(cursor.getLong(cursor.getColumnIndex(DBSchema.LAST_SAVING)));
@@ -239,6 +249,10 @@ public class NotesRepository {
                 if (!TextUtils.isEmpty(objectId)) {
                     note.setObjectId(objectId);
                 }
+                String ownerId = cursor.getString(cursor.getColumnIndex(DBSchema.OWNER_ID));
+                if (!TextUtils.isEmpty(ownerId)) {
+                    note.setOwnerId(ownerId);
+                }
                 note.setCreating(cursor.getLong(cursor.getColumnIndex(DBSchema.CREATING)));
                 note.setLastSaving(cursor.getLong(cursor.getColumnIndex(DBSchema.LAST_SAVING)));
                 note.setStatus(cursor.getInt(cursor.getColumnIndex(DBSchema.STATUS)));
@@ -270,6 +284,10 @@ public class NotesRepository {
                 String objectId = cursor.getString(cursor.getColumnIndex(DBSchema.OBJECT_ID));
                 if (!TextUtils.isEmpty(objectId)) {
                     note.setObjectId(objectId);
+                }
+                String ownerId = cursor.getString(cursor.getColumnIndex(DBSchema.OWNER_ID));
+                if (!TextUtils.isEmpty(ownerId)) {
+                    note.setOwnerId(ownerId);
                 }
                 note.setCreating(cursor.getLong(cursor.getColumnIndex(DBSchema.CREATING)));
                 note.setLastSaving(cursor.getLong(cursor.getColumnIndex(DBSchema.LAST_SAVING)));
@@ -308,6 +326,7 @@ public class NotesRepository {
             note = new Note();
             note.setId(cursor.getLong(cursor.getColumnIndex(DBSchema.ID)));
             note.setObjectId(cursor.getString(cursor.getColumnIndex(DBSchema.OBJECT_ID)));
+            note.setOwnerId(cursor.getString(cursor.getColumnIndex(DBSchema.OWNER_ID)));
             note.setCreating(cursor.getLong(cursor.getColumnIndex(DBSchema.CREATING)));
             note.setLastSaving(cursor.getLong(cursor.getColumnIndex(DBSchema.LAST_SAVING)));
             note.setStatus(cursor.getInt(cursor.getColumnIndex(DBSchema.STATUS)));
@@ -345,6 +364,9 @@ public class NotesRepository {
         if (!TextUtils.isEmpty(note.getObjectId())) {
             cv.put(DBSchema.OBJECT_ID, note.getObjectId());
         }
+        if (!TextUtils.isEmpty(note.getOwnerId())) {
+            cv.put(DBSchema.OWNER_ID, note.getOwnerId());
+        }
         cv.put(DBSchema.TITLE, note.getTitle());
         if (note.getStatus() == Constants.STATUS_DELETED
                 || note.getStatus() == Constants.STATUS_DRAFT_DELETED) {
@@ -365,9 +387,10 @@ public class NotesRepository {
     }
 
 
-    public void writeObjectId(Note response) {
+    public void writeObjectIdAndOwnerId(Note response) {
         ContentValues cv = new ContentValues();
         cv.put(DBSchema.OBJECT_ID, response.getObjectId());
+        cv.put(DBSchema.OWNER_ID, response.getOwnerId());
         int update = db.update(DBSchema.TABLE, cv, DBSchema.CREATING + "=" + response.getCreating(), null);
         Log.d(TAG, "updateByObjectId note " + update);
     }
@@ -389,6 +412,10 @@ public class NotesRepository {
                     String objectId = cursor.getString(cursor.getColumnIndex(DBSchema.OBJECT_ID));
                     if (!TextUtils.isEmpty(objectId)) {
                         note.setObjectId(objectId);
+                    }
+                    String ownerId = cursor.getString(cursor.getColumnIndex(DBSchema.OWNER_ID));
+                    if (!TextUtils.isEmpty(ownerId)) {
+                        note.setOwnerId(ownerId);
                     }
                     note.setCreating(cursor.getLong(cursor.getColumnIndex(DBSchema.CREATING)));
                     note.setLastSaving(cursor.getLong(cursor.getColumnIndex(DBSchema.LAST_SAVING)));

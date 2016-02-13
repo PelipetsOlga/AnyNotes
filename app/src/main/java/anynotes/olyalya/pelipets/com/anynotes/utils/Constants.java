@@ -48,6 +48,7 @@ public class Constants {
     public static final String PREF_VIBRO = "vibro";
     public static final String PREF_SORT = "sort";
     public static final String PREF_IS_LOGINED = "is_logined";
+    public static final String PREF_USER_OBJECT_ID = "user_object_id";
     public static final String PREF_LOGIN = "login";
     public static final String PREF_PASSWORD = "password";
     public static final String PREF_LAST_SYNCH = "last_synch";

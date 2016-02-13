@@ -25,6 +25,7 @@ public class SynchNotesIntentService extends IntentService {
     private NotesApplication application;
     private NotesRepository repository;
     private boolean isLogined;
+    private String userObjectId;
     private String login;
     private String password;
 
@@ -43,10 +44,11 @@ public class SynchNotesIntentService extends IntentService {
         NoteUtils.log("onHandleIntent");
 
         isLogined = intent.getBooleanExtra(Constants.PREF_IS_LOGINED, false);
+        userObjectId = intent.getStringExtra(Constants.PREF_USER_OBJECT_ID);
         login = intent.getStringExtra(Constants.PREF_LOGIN);
         password = intent.getStringExtra(Constants.PREF_PASSWORD);
 
-        if (isLogined && !TextUtils.isEmpty(login) && !TextUtils.isEmpty(password)) {
+        if (isLogined && !TextUtils.isEmpty(login) && !TextUtils.isEmpty(userObjectId) && !TextUtils.isEmpty(password)) {
             application = NotesApplication.getInstanceApplication();
             repository = application.getDaoSession().getRepository();
             saveAllDataToServer();
@@ -62,19 +64,27 @@ public class SynchNotesIntentService extends IntentService {
 
         final long lastSynch = readLastSynchDate();
         NoteUtils.log("lastSynch read " + lastSynch);
-        final String whereClause = "lastSaving > " + lastSynch;
 
         Backendless.UserService.login(login, password, new AsyncCallback<BackendlessUser>() {
 
             public void handleResponse(BackendlessUser user) {
                 NoteUtils.log("response success hidden login" + user);
+                userObjectId=user.getObjectId();
+                SharedPreferences preferences=getSharedPreferences(Constants.PREFS_NAME, MODE_PRIVATE);
+                SharedPreferences.Editor editor=preferences.edit();
+                editor.putString(Constants.PREF_USER_OBJECT_ID, userObjectId);
+                editor.commit();
 
+                //String whereClause = "lastSaving > " + lastSynch+" AND ownerId = \""+userObjectId+"\"";
+                String whereClause ="ownerId=\'"+userObjectId+"\' AND lastSaving>" + lastSynch;
+                NoteUtils.log("whereClause = "+whereClause);
                 BackendlessDataQuery dataQuery = new BackendlessDataQuery();
                 dataQuery.setWhereClause(whereClause);
                 Backendless.Persistence.of(Note.class).find(dataQuery,
                         new AsyncCallback<BackendlessCollection<Note>>() {
                             @Override
                             public void handleResponse(BackendlessCollection<Note> response) {
+
                                 for (Note note : response.getData()) {
                                     repository.insertOrUpdateLoadedNote(note);
                                 }
@@ -85,7 +95,7 @@ public class SynchNotesIntentService extends IntentService {
                                     for (Note note : freshNotes) {
                                         Backendless.Persistence.save(note, new AsyncCallback<Note>() {
                                             public void handleResponse(Note response) {
-                                                repository.writeObjectId(response);
+                                                repository.writeObjectIdAndOwnerId(response);
                                             }
 
                                             public void handleFault(BackendlessFault fault) {

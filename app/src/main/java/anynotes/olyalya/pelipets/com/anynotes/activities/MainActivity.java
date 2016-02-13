@@ -108,6 +108,7 @@ public class MainActivity extends AppCompatActivity
         }
     };
     private ProgressDialog wait;
+    private String userObjectId;
 
     @Override
     public void register(final String email, final String password) {
@@ -125,7 +126,7 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void handleResponse(BackendlessUser backendlessUser) {
                 NoteUtils.log("response success" + backendlessUser);
-                saveUserToPreferenceAndUpdateViews(backendlessUser, MainActivity.this.login, MainActivity.this.password);
+                saveUserToPreferenceAndUpdateViews( MainActivity.this.login, MainActivity.this.password, backendlessUser.getObjectId());
             }
 
             @Override
@@ -140,15 +141,16 @@ public class MainActivity extends AppCompatActivity
         });
     }
 
-    private void saveUserToPreferenceAndUpdateViews(BackendlessUser backendlessUser, String login, String password) {
+    private void saveUserToPreferenceAndUpdateViews( String login, String password, String userObjectId) {
         SharedPreferences.Editor ed = mPref.edit();
         ed.putBoolean(Constants.PREF_IS_LOGINED, true);
-        ed.putString(Constants.PREF_LOGIN, backendlessUser.getEmail());
+        //ed.putString(Constants.PREF_LOGIN, backendlessUser.getEmail());
         ed.putString(Constants.PREF_LOGIN, login);
         ed.putString(Constants.PREF_PASSWORD, password);
+        ed.putString(Constants.PREF_USER_OBJECT_ID, userObjectId);
         ed.commit();
         ivSignInOut.setImageResource(R.mipmap.fa_sign_out_0_ffffff_none);
-        tvLogin.setText(backendlessUser.getEmail());
+        tvLogin.setText(login);
         isLogined = true;
     }
 
@@ -157,6 +159,7 @@ public class MainActivity extends AppCompatActivity
         ed.putBoolean(Constants.PREF_IS_LOGINED, false);
         ed.putString(Constants.PREF_LOGIN, "");
         ed.putString(Constants.PREF_PASSWORD, "");
+        ed.putString(Constants.PREF_USER_OBJECT_ID, "");
         ivSignInOut.setImageResource(R.mipmap.fa_sign_in_0_ffffff_none);
         tvLogin.setText(getResources().getString(R.string.app_name));
         isLogined = false;
@@ -174,7 +177,7 @@ public class MainActivity extends AppCompatActivity
         Backendless.UserService.login(email, password, new AsyncCallback<BackendlessUser>() {
             public void handleResponse(BackendlessUser user) {
                 NoteUtils.log("response success" + user);
-                saveUserToPreferenceAndUpdateViews(user, MainActivity.this.login, MainActivity.this.password);
+                saveUserToPreferenceAndUpdateViews( MainActivity.this.login, MainActivity.this.password, user.getObjectId());
             }
 
             public void handleFault(BackendlessFault fault) {
@@ -304,6 +307,7 @@ public class MainActivity extends AppCompatActivity
         isLogined = mPref.getBoolean(Constants.PREF_IS_LOGINED, false);
         login = mPref.getString(Constants.PREF_LOGIN, "");
         password = mPref.getString(Constants.PREF_PASSWORD, "");
+        userObjectId = mPref.getString(Constants.PREF_USER_OBJECT_ID, "");
     }
 
     private void initViews() {
@@ -385,13 +389,21 @@ public class MainActivity extends AppCompatActivity
 
         final long lastSynch = readLastSynchDate();
         NoteUtils.log("lastSynch read " + lastSynch);
-        final String whereClause = "lastSaving > " + lastSynch;
 
         Backendless.UserService.login(login, password, new AsyncCallback<BackendlessUser>() {
 
             public void handleResponse(BackendlessUser user) {
+                //// TODO: 13.02.2016
                 NoteUtils.log("response success hidden login" + user);
+                userObjectId=user.getObjectId();
+                SharedPreferences preferences=getSharedPreferences(Constants.PREFS_NAME, MODE_PRIVATE);
+                SharedPreferences.Editor editor=preferences.edit();
+                editor.putString(Constants.PREF_USER_OBJECT_ID, userObjectId);
+                editor.commit();
 
+                //String whereClause = "lastSaving > " + lastSynch+" AND ownerId = \""+userObjectId+"\"";
+                String whereClause ="ownerId=\'"+userObjectId+"\' AND lastSaving>" + lastSynch;
+                NoteUtils.log("whereClause = "+whereClause);
                 BackendlessDataQuery dataQuery = new BackendlessDataQuery();
                 dataQuery.setWhereClause(whereClause);
                 Backendless.Persistence.of(Note.class).find(dataQuery,
@@ -408,7 +420,7 @@ public class MainActivity extends AppCompatActivity
                                     for (Note note : freshNotes) {
                                         Backendless.Persistence.save(note, new AsyncCallback<Note>() {
                                             public void handleResponse(Note response) {
-                                                repository.writeObjectId(response);
+                                                repository.writeObjectIdAndOwnerId(response);
                                             }
 
                                             public void handleFault(BackendlessFault fault) {
@@ -814,6 +826,7 @@ public class MainActivity extends AppCompatActivity
     private void runSynchService() {
         Intent intentIntentService = new Intent(this, SynchNotesIntentService.class);
         intentIntentService.putExtra(Constants.PREF_IS_LOGINED, isLogined);
+        intentIntentService.putExtra(Constants.PREF_USER_OBJECT_ID, userObjectId);
         intentIntentService.putExtra(Constants.PREF_LOGIN, login);
         intentIntentService.putExtra(Constants.PREF_PASSWORD, password);
         startService(intentIntentService);

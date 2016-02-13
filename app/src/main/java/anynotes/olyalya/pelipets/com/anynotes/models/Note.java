@@ -12,8 +12,17 @@ public class Note implements Serializable {
     private String alarm;
     private long repeat;
     private String objectId;
+    private String ownerId;
 
     public Note() {
+    }
+
+    public String getOwnerId() {
+        return ownerId;
+    }
+
+    public void setOwnerId(String ownerId) {
+        this.ownerId = ownerId;
     }
 
     public String getObjectId() {

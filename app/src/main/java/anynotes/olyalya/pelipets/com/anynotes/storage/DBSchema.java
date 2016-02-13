@@ -8,6 +8,7 @@ public class DBSchema {
 
     public static final String ID = "_id";
     public static final String OBJECT_ID = "objectId";
+    public static final String OWNER_ID = "ownerId";
     public static final String CREATING = "creating";
     public static final String LAST_SAVING = "last_saving";
     public static final String STATUS = "status";
@@ -20,6 +21,7 @@ public class DBSchema {
     public static final String CREATE_SCREAPT = "CREATE TABLE IF NOT EXISTS " + TABLE + "("
             + ID + " integer primary key autoincrement, "
             + OBJECT_ID + " text, "
+            + OWNER_ID + " text, "
             + CREATING + " integer, "
             + LAST_SAVING + " integer, "
             + STATUS + " integer, "
