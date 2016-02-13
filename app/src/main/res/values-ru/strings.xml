@@ -1,0 +1,82 @@
+<resources>
+    <string name="app_name">Блокнот</string>
+
+    <string name="menu_all">Все заметки</string>
+    <string name="menu_actual">Актуальные заметки</string>
+    <string name="menu_important">Важные заметки</string>
+    <string name="menu_drafts">Черновики</string>
+    <string name="menu_deleted">Удаленные заметки</string>
+    <string name="menu_alarms">Заметки с напоминанием</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Настройки</string>
+    <string name="action_estimate">Оцените нас</string>
+    <string name="action_sort">Сортировать</string>
+    <string name="action_exit">Выход</string>
+    <string name="action_search">Поиск</string>
+    <string name="action_alarm">Установить будильник</string>
+    <string name="action_delete">Удалить</string>
+    <string name="action_share">Поделиться</string>
+    <string name="action_budget">Домашний бюджет</string>
+    <string name="action_phonebook">Адресная книга</string>
+
+    <string name="title_activity_note">Заметка</string>
+    <string name="title_activity_settings">Настроки</string>
+    <string name="seek_font_size">Размер шрифта:</string>
+    <string name="seek_brightness">Яркость:</string>
+    <string name="example_title">Название заметки</string>
+    <string name="example_date">Дата сохранения</string>
+    <string name="example_text">There is a note content... There is a note content... There is a note content... There is a note content... There is a note content...</string>
+
+    <string name="chooser_title_share">Поделиться заметкой</string>
+    <string name="empty_list">У вас пока нет никаких заметок. Создайте их.</string>
+
+    <string name="voice_direction">Говорите</string>
+    <string name="reminder_toolbar_title">Напоминание</string>
+    <string name="repeat_1_hour">1 час</string>
+    <string name="repeat_3_hour">3 часа</string>
+    <string name="repeat_6_hour">6 часов</string>
+    <string name="repeat_12_hour">12 часов</string>
+    <string name="repeat_1_day">1 день</string>
+    <string name="repeat_2_day">2 дня</string>
+    <string name="repeat_3_day">3 дня</string>
+    <string name="repeat_10_day">10 дней</string>
+    <string name="repeat_1_week">1 неделя</string>
+    <string name="repeat_2_week">2 недели</string>
+    <string name="repeat_3_week">3 недели</string>
+    <string name="repeat_4_week">4 недели</string>
+    <string name="repeat_1_month">1 месяц</string>
+    <string name="repeat_3_month">3 месяца</string>
+    <string name="repeat_6_month">6 месяцев</string>
+    <string name="repeat_year">год</string>
+    <string name="repeat_none">Не повторять</string>
+
+    <string name="rington_default">По умолчанию</string>
+    <string name="rington_1">Мелодия 1</string>
+    <string name="rington_2">Мелодия 2</string>
+    <string name="rington_3">Мелодия 3</string>
+    <string name="rington_4">Мелодия 4</string>
+    <string name="rington_5">Мелодия 5</string>
+    <string name="rington_6">Мелодия 6</string>
+
+    <string name="new_note_hint_title">Название</string>
+    <string name="new_note_hint_text">Давайте запишем вашу идею</string>
+
+    <string name="registration_dialog_title">Регистрация</string>
+    <string name="login_dialog_title">Вход в учетную запись</string>
+     <string name="registration_btn_ok">ОК</string>
+    <string name="registration_btn_register">Зарегистрироваться</string>
+    <string name="registration_btn_cancel">Отмена</string>
+    <string name="hint_login">E-mail</string>
+    <string name="error">Ошибка!</string>
+    <string name="error_network">Ошибка! Проверьте интернет-соединение.</string>
+    <string name="hint_password">Пароль</string>
+    <string name="hint_password_repeat">Повторите пароль</string>
+
+    <string name="banner_ad_unit_id">ca-app-pub-6973932400636393/3338064660</string>
+    <string name="banner_inner_ad_unit_id">ca-app-pub-6973932400636393/4278244269</string>
+
+
+</resources>

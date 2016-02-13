@@ -75,6 +75,9 @@
     <string name="hint_password">Password</string>
     <string name="hint_password_repeat">Repeat password</string>
 
+    <string name="registration_btn_forgot_password">Forgot password</string>
+    <string name="registration_btn_change_password">Change password</string>
+
     <string name="banner_ad_unit_id">ca-app-pub-6973932400636393/3338064660</string>
     <string name="banner_inner_ad_unit_id">ca-app-pub-6973932400636393/4278244269</string>
 
