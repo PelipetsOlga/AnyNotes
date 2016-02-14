@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Блокнот</string>
+    <string name="app_name">Заметки</string>
 
     <string name="menu_all">Все заметки</string>
     <string name="menu_actual">Актуальные заметки</string>
@@ -27,8 +27,8 @@
     <string name="seek_font_size">Размер шрифта:</string>
     <string name="seek_brightness">Яркость:</string>
     <string name="example_title">Название заметки</string>
-    <string name="example_date">Дата сохранения</string>
-    <string name="example_text">There is a note content... There is a note content... There is a note content... There is a note content... There is a note content...</string>
+    <string name="example_date">Дата создания</string>
+    <string name="example_text">Текст... Текст... Текст... Текст... Текст... Текст... Текст... Текст... Текст... Текст... Текст... Текст... </string>
 
     <string name="chooser_title_share">Поделиться заметкой</string>
     <string name="empty_list">У вас пока нет никаких заметок. Создайте их.</string>

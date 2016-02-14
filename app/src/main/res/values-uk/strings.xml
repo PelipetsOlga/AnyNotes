@@ -1,0 +1,92 @@
+<resources>
+    <string name="app_name">Блокнот</string>
+
+    <string name="menu_all">Усі нотатки</string>
+    <string name="menu_actual">Актуальні нотатки</string>
+    <string name="menu_important">Важливі нотатки</string>
+    <string name="menu_drafts">Чернетки</string>
+    <string name="menu_deleted">Видалені нотатки</string>
+    <string name="menu_alarms">Нотатки з нагадуванням</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Налаштування</string>
+    <string name="action_estimate">Оцініть нас</string>
+    <string name="action_sort">Сортирувати</string>
+    <string name="action_exit">Вихід</string>
+    <string name="action_search">Пошук</string>
+    <string name="action_alarm">Встановити нагадування</string>
+    <string name="action_delete">Видалити</string>
+    <string name="action_share">Поділитися</string>
+    <string name="action_budget">Домашній бюджет</string>
+    <string name="action_phonebook">Адресна книга</string>
+
+    <string name="title_activity_note">Нотатка</string>
+    <string name="title_activity_settings">Налаштування</string>
+    <string name="seek_font_size">Розмір шрифту:</string>
+    <string name="seek_brightness">Яскравість:</string>
+    <string name="example_title">Назва нотатки</string>
+    <string name="example_date">Дата створення</string>
+    <string name="example_text">Текст... Текст... Текст... Текст... Текст... Текст... Текст... Текст... Текст... Текст... Текст... Текст... </string>
+
+    <string name="chooser_title_share">Поділитися нотаткою</string>
+    <string name="empty_list">У вас досі немає нотаток.Створіть їх.</string>
+
+    <string name="voice_direction">Кажіть</string>
+    <string name="reminder_toolbar_title">Нагадування</string>
+    <string name="repeat_1_hour">1 год.</string>
+    <string name="repeat_3_hour">3 год.</string>
+    <string name="repeat_6_hour">6 год.</string>
+    <string name="repeat_12_hour">12 год.</string>
+    <string name="repeat_1_day">1 день</string>
+    <string name="repeat_2_day">2 дня</string>
+    <string name="repeat_3_day">3 дня</string>
+    <string name="repeat_10_day">10 дней</string>
+    <string name="repeat_1_week">1 тижд.</string>
+    <string name="repeat_2_week">2 тижд.</string>
+    <string name="repeat_3_week">3 тижд.</string>
+    <string name="repeat_4_week">4 тижд.</string>
+    <string name="repeat_1_month">1 місяць</string>
+    <string name="repeat_3_month">3 місяця</string>
+    <string name="repeat_6_month">6 місяців</string>
+    <string name="repeat_year">рік</string>
+    <string name="repeat_none">Не повторяти</string>
+
+    <string name="rington_default">Стандарт</string>
+    <string name="rington_1">Мелодія 1</string>
+    <string name="rington_2">Мелодія 2</string>
+    <string name="rington_3">Мелодія 3</string>
+    <string name="rington_4">Мелодія 4</string>
+    <string name="rington_5">Мелодія 5</string>
+    <string name="rington_6">Мелодія 6</string>
+
+    <string name="new_note_hint_title">Назва</string>
+    <string name="new_note_hint_text">Давайте запишемо вашу ідею</string>
+
+    <string name="registration_dialog_title">Регістрація</string>
+    <string name="login_dialog_title">Вхід до акаунту</string>
+     <string name="registration_btn_ok">Так</string>
+    <string name="registration_btn_register">Регістрація</string>
+    <string name="registration_btn_cancel">Назад</string>
+    <string name="hint_login">E-mail</string>
+    <string name="error">Помилка!</string>
+    <string name="error_network">Помилка! Перевірте інтернет-з\'єднання.</string>
+    <string name="hint_password">Пароль</string>
+    <string name="hint_password_repeat">Повторіть пароль</string>
+
+    <string name="registration_btn_forgot_password">Забули пароль?</string>
+    <string name="registration_btn_change_password">Змінити пароль</string>
+    <string name="tost_send_password_to_email">Новий пароль надіслано до </string>
+    <string name="tost_error_3020">Користувача з таким логіном не зареєстровано</string>
+    <string name="tost_error_3003">Невірний логін чи пароль</string>
+
+    <string name="hint_search">Ключове слово</string>
+    <string name="search_dialog_title">Ключове слово для пошуку</string>
+    <string name="menu_search">Результати пошуку</string>
+
+    <string name="banner_ad_unit_id">ca-app-pub-6973932400636393/3338064660</string>
+    <string name="banner_inner_ad_unit_id">ca-app-pub-6973932400636393/4278244269</string>
+
+
+</resources>
