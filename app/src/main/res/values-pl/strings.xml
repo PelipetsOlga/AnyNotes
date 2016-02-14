@@ -1,0 +1,93 @@
+<resources>
+    <string name="app_name">Notatnik</string>
+
+    <string name="menu_all">Wszystkie notatki</string>
+    <string name="menu_actual">Rzeczywiste notatki</string>
+    <string name="menu_important">Ważne notatki</string>
+    <string name="menu_drafts">Warcaby</string>
+    <string name="menu_deleted">Usunięte notatki</string>
+    <string name="menu_alarms">Notatki z przypomnieniem</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="example_title">Tytuł notatki</string>
+    <string name="example_date">Data Utworzenia</string>
+    <string name="example_text">Tekst... Tekst... Tekst... Tekst... Tekst... Tekst... Tekst... Tekst... Tekst... Tekst... Tekst... Tekst... Tekst... </string>
+
+    <string name="action_settings">Ustawienia</string>
+    <string name="action_estimate">Oceń nas</string>
+    <string name="action_sort">Sortować</string>
+    <string name="action_exit">Wyjście</string>
+    <string name="action_search">Poszukiwanie</string>
+    <string name="action_alarm">Nastaw budzik</string>
+    <string name="action_delete">Kasować</string>
+    <string name="action_share">Dzielić</string>
+    <string name="action_budget">Budżet domowy</string>
+    <string name="action_phonebook">AddressPhoneBook</string>
+
+    <string name="title_activity_note">NoteActivity</string>
+    <string name="title_activity_settings">Ustawienia</string>
+    <string name="seek_font_size">Rozmiar czcionki:</string>
+    <string name="seek_brightness">Jasność:</string>
+
+    <string name="chooser_title_share">Dzielić</string>
+    <string name="empty_list">Brak notatek. Dodaj nową notatkę.</string>
+
+    <string name="voice_direction">Mówić</string>
+    <string name="reminder_toolbar_title">Przypomnienie</string>
+    <string name = "repeat_1_hour">1 godzina</string>
+    <string name = "repeat_3_hour">3 godziny</string>
+    <string name = "repeat_6_hour">6 godzin</string>
+    <string name = "repeat_12_hour">12 godzin</string>
+    <string name = "repeat_1_day">1 dzień</string>
+    <string name = "repeat_2_day">2 dni</string>
+    <string name = "repeat_3_day">3 dni</string>
+    <string name = "repeat_10_day">10 dni</string>
+    <string name = "repeat_1_week">1 tydzień</string>
+    <string name = "repeat_2_week">2 tygodnie</string>
+    <string name = "repeat_3_week">3 tygodni</string>
+    <string name = "repeat_4_week">4 tygodnie</string>
+    <string name = "repeat_1_month">1 miesiąc</string>
+    <string name = "repeat_3_month">3 miesiące</string>
+    <string name = "repeat_6_month">6 miesięcy</string>
+    <string name = "repeat_year">rok</string>
+    <string name="repeat_none">Nie powtarzając</string>
+
+    <string name="rington_default">Standart</string>
+    <string name="rington_1">Dzwonek 1</string>
+    <string name="rington_2">Dzwonek 2</string>
+    <string name="rington_3">Dzwonek 3</string>
+    <string name="rington_4">Dzwonek 4</string>
+    <string name="rington_5">Dzwonek 5</string>
+    <string name="rington_6">Dzwonek 6</string>
+
+    <string name="new_note_hint_title">Tytuł notatki</string>
+    <string name="new_note_hint_text">Napiszmy swój pomysł</string>
+
+    <string name="registration_dialog_title">Rejestracja</string>
+    <string name="login_dialog_title">Zaloguj</string>
+     <string name="registration_btn_ok">Ok</string>
+    <string name="registration_btn_register">Rejestracja</string>
+    <string name="registration_btn_cancel">Anuluj</string>
+    <string name="hint_login">E-mail</string>
+    <string name="error">Błąd!</string>
+    <string name="error_network">Błąd! Sprawdź sieci.</string>
+    <string name="hint_password">Hasło</string>
+    <string name="hint_password_repeat">Powtórz hasło</string>
+
+    <string name="registration_btn_forgot_password">Zapomniałeś hasła</string>
+    <string name="registration_btn_change_password">Zmień hasło</string>
+    <string name="tost_send_password_to_email">Nowe hasło zostało wysłane do</string>
+    <string name="tost_error_3020">Nie można znaleźć użytkownika z określonym logowania</string>
+    <string name="tost_error_3003">Niepoprawny login lub hasło</string>
+
+    <string name="hint_search">Szukaj słów kluczowych</string>
+    <string name="search_dialog_title">Szukaj słów kluczowych</string>
+    <string name="menu_search">Wyniki wyszukiwania</string>
+
+    <string name="banner_ad_unit_id">ca-app-pub-6973932400636393/3338064660</string>
+    <string name="banner_inner_ad_unit_id">ca-app-pub-6973932400636393/4278244269</string>
+
+
+</resources>
