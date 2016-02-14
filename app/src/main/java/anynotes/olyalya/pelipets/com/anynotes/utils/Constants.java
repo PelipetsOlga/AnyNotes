@@ -22,6 +22,7 @@ public class Constants {
     public static final int MODE_SORT_DRAFTS = 4;
     public static final int MODE_SORT_DELETED = 5;
     public static final int MODE_SORT_ALARMS = 6;
+    public static final int MODE_SORT_SEARCH = 7;
 
     public static final int MODE_ORDERED_UNSORTED = 1;
     public static final int MODE_ORDERED_SORT_ALPHA_ASC = 2;
@@ -47,6 +48,7 @@ public class Constants {
     public static final String PREFS_NAME = "anynotes_prefs";
     public static final String PREF_VIBRO = "vibro";
     public static final String PREF_SORT = "sort";
+    public static final String PREF_SEARCH = "search";
     public static final String PREF_IS_LOGINED = "is_logined";
     public static final String PREF_USER_OBJECT_ID = "user_object_id";
     public static final String PREF_LOGIN = "login";

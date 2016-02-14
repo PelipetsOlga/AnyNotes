@@ -5,6 +5,7 @@ import android.app.PendingIntent;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
@@ -217,6 +218,11 @@ public class NotesRepository {
             case Constants.MODE_SORT_DELETED:
                 selections = DBSchema.STATUS + "=" + Constants.STATUS_DELETED;
                 break;
+            case Constants.MODE_SORT_SEARCH:
+                SharedPreferences preferences=context.getSharedPreferences(Constants.PREFS_NAME, Context.MODE_PRIVATE);
+                String keyword=preferences.getString(Constants.PREF_SEARCH, "");
+                selections=DBSchema.TEXT+" like \"%"+keyword+"%\" OR "+DBSchema.TITLE+" like \"%"+keyword+"%\"";
+                break;
         }
 
         String ordered = null;
@@ -406,7 +412,7 @@ public class NotesRepository {
             NoteUtils.log(" cursor moved to first");
             do {
                 String alarm = cursor.getString(cursor.getColumnIndex(DBSchema.ALARM));
-                if (alarm != null  && !TextUtils.isEmpty(alarm)) {
+                if (alarm != null && !TextUtils.isEmpty(alarm)) {
                     Note note = new Note();
                     note.setId(cursor.getLong(cursor.getColumnIndex(DBSchema.ID)));
                     String objectId = cursor.getString(cursor.getColumnIndex(DBSchema.OBJECT_ID));
@@ -425,7 +431,7 @@ public class NotesRepository {
                     note.setRepeat(cursor.getLong(cursor.getColumnIndex(DBSchema.REPEAT)));
                     note.setText(cursor.getString(cursor.getColumnIndex(DBSchema.TEXT)));
                     items.add(note);
-                    NoteUtils.log(" note with alarm #"+ (++k));
+                    NoteUtils.log(" note with alarm #" + (++k));
                 }
             } while (cursor.moveToNext());
         }

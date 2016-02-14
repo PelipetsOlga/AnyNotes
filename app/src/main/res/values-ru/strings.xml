@@ -75,6 +75,16 @@
     <string name="hint_password">Пароль</string>
     <string name="hint_password_repeat">Повторите пароль</string>
 
+    <string name="registration_btn_forgot_password">Забыли пароль?</string>
+    <string name="registration_btn_change_password">Изменить пароль</string>
+    <string name="tost_send_password_to_email">Новый пароль выслан на </string>
+    <string name="tost_error_3020">Пользователь с таким логином не зарегистрирован</string>
+    <string name="tost_error_3003">Неправильный логин или пароль</string>
+
+    <string name="hint_search">Ключевое слово</string>
+    <string name="search_dialog_title">Ключевое слово для поиска</string>
+    <string name="menu_search">Результаты поиска</string>
+
     <string name="banner_ad_unit_id">ca-app-pub-6973932400636393/3338064660</string>
     <string name="banner_inner_ad_unit_id">ca-app-pub-6973932400636393/4278244269</string>
 

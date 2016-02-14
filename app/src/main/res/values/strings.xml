@@ -81,6 +81,10 @@
     <string name="tost_error_3020">Unable to find user with the specified login</string>
     <string name="tost_error_3003">Invalid login or password</string>
 
+    <string name="hint_search">Search keyword</string>
+    <string name="search_dialog_title">Search keyword</string>
+    <string name="menu_search">Search results</string>
+
     <string name="banner_ad_unit_id">ca-app-pub-6973932400636393/3338064660</string>
     <string name="banner_inner_ad_unit_id">ca-app-pub-6973932400636393/4278244269</string>
 

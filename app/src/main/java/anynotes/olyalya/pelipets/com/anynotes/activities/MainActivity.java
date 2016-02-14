@@ -13,7 +13,6 @@ import android.os.IBinder;
 import android.speech.tts.TextToSpeech;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -53,11 +52,13 @@ import java.util.Locale;
 import anynotes.olyalya.pelipets.com.anynotes.R;
 import anynotes.olyalya.pelipets.com.anynotes.application.NotesApplication;
 import anynotes.olyalya.pelipets.com.anynotes.fragments.LogInFragment;
+import anynotes.olyalya.pelipets.com.anynotes.fragments.SearchDialogFragment;
 import anynotes.olyalya.pelipets.com.anynotes.fragments.SortDialogFragment;
 import anynotes.olyalya.pelipets.com.anynotes.interfaces.LoadNotesListener;
 import anynotes.olyalya.pelipets.com.anynotes.interfaces.LoginListener;
 import anynotes.olyalya.pelipets.com.anynotes.interfaces.RefreshListListener;
 import anynotes.olyalya.pelipets.com.anynotes.interfaces.RegistrationListener;
+import anynotes.olyalya.pelipets.com.anynotes.interfaces.SearchListener;
 import anynotes.olyalya.pelipets.com.anynotes.models.Note;
 import anynotes.olyalya.pelipets.com.anynotes.service.NotesService;
 import anynotes.olyalya.pelipets.com.anynotes.service.SynchNotesIntentService;
@@ -68,8 +69,8 @@ import anynotes.olyalya.pelipets.com.anynotes.views.RecyclerViewEmptySupport;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
-        RefreshListListener,
-        TextToSpeech.OnInitListener, RegistrationListener, LoginListener {
+        RefreshListListener,         TextToSpeech.OnInitListener,
+        RegistrationListener, LoginListener, SearchListener {
 
     private static final int NOTE_REQUEST_CODE = 100;
     private static final int SETTINGS_REQUEST_CODE = 200;
@@ -193,6 +194,13 @@ public class MainActivity extends AppCompatActivity
                 }
             }
         }, true);
+    }
+
+    @Override
+    public void search() {
+        getSupportActionBar().setTitle(R.string.menu_search);
+        repository.setModeSort(Constants.MODE_SORT_SEARCH);
+        refreshList();
     }
 
     public class NotesLoaderListener implements LoadNotesListener {
@@ -408,7 +416,6 @@ public class MainActivity extends AppCompatActivity
                 editor.putString(Constants.PREF_USER_OBJECT_ID, userObjectId);
                 editor.commit();
 
-                //String whereClause = "lastSaving > " + lastSynch+" AND ownerId = \""+userObjectId+"\"";
                 String whereClause = "ownerId=\'" + userObjectId + "\' AND lastSaving>" + lastSynch;
                 NoteUtils.log("whereClause = " + whereClause);
                 BackendlessDataQuery dataQuery = new BackendlessDataQuery();
@@ -523,8 +530,8 @@ public class MainActivity extends AppCompatActivity
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_search:
-                Snackbar.make(fab, "Search clicked", Snackbar.LENGTH_LONG)
-                        .setAction("Search clicked", null).show();
+                SearchDialogFragment searchFragment = new SearchDialogFragment();
+                searchFragment.show(getSupportFragmentManager(), null);
                 return true;
             case R.id.action_settings:
                 Intent settings = new Intent(this, SettingsActivity.class);

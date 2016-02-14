@@ -69,45 +69,6 @@ public class RegistrationFragment extends DialogFragment implements View.OnClick
         builder.setCancelable(true);
         return builder.create();
     }
-/*
-        final AlertDialog dialog = builder.create();
-
-        dialog.setOnShowListener(new DialogInterface.OnShowListener() {
-            @Override
-            public void onShow(DialogInterface d) {
-                Button btnOk = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
-                btnOk.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        String login = etLogin.getText().toString().trim();
-                        String password = etPassword.getText().toString().trim();
-                        String passwordRepeat = etPasswordRepeat.getText().toString().trim();
-                        if (TextUtils.isEmpty(login)) {
-                            NoteUtils.setError(etLogin, getActivity());
-                            return;
-                        }
-                        if (TextUtils.isEmpty(password)) {
-                            NoteUtils.setError(etPassword, getActivity());
-                            return;
-                        }
-                        if (TextUtils.isEmpty(passwordRepeat)) {
-                            NoteUtils.setError(etPasswordRepeat, getActivity());
-                            return;
-                        }
-                        if (!password.equals(passwordRepeat)) {
-                            NoteUtils.setError(etPassword, getActivity());
-                            return;
-                        }
-                        RegistrationListener listener = (RegistrationListener) getActivity();
-                        listener.register(login, password);
-                        dismiss();
-                    }
-                });
-            }
-        });
-
-        return dialog;
-    }*/
 
     @Override
     public void onClick(View v) {
