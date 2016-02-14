@@ -1,0 +1,94 @@
+<resources>
+    <string name="app_name">Notizbuch</string>
+
+    <string name="menu_all">Alle Noten</string>
+    <string name="menu_actual">Tatsächliche Notizen</string>
+    <string name="menu_important">Wichtige Notizen</string>
+    <string name="menu_drafts">Roogna kopis</string>
+    <string name="menu_deleted">Gelöschte Notizen</string>
+    <string name="menu_alarms">Alarm</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="example_title">Titel</string>
+    <string name="example_date">Erstellungsdatum</string>
+    <string name="example_text">Inhalt... Inhalt... Inhalt... Inhalt... Inhalt... Inhalt... Inhalt... Inhalt... Inhalt... Inhalt... Inhalt... </string>
+
+
+    <string name="action_settings">Einstellungen</string>
+    <string name="action_estimate">Bewerten Schnurrbart</string>
+    <string name="action_sort">Sort</string>
+    <string name="action_exit">Ausgang</string>
+    <string name="action_search">Suche</string>
+    <string name="action_alarm">Wecker stellen</string>
+    <string name="action_delete">Löschen</string>
+    <string name="action_share">Aktie</string>
+    <string name="action_budget">Startseite Budget</string>
+    <string name="action_phonebook">Adressbuch</string>
+
+    <string name="title_activity_note">NoteActivity</string>
+    <string name="title_activity_settings">Einstellungen</string>
+    <string name="seek_font_size">Schriftgröße:</string>
+    <string name="seek_brightness">Helligkeit:</string>
+
+    <string name="chooser_title_share">Aktie</string>
+    <string name="empty_list">Leer</string>
+
+    <string name="voice_direction">Sprechen</string>
+    <string name="reminder_toolbar_title">Mahnung</string>
+    <string name = "repeat_1_hour"> 1 Stunde </string>
+    <string name = "repeat_3_hour"> 3 Stunden </string>
+    <string name = "repeat_6_hour"> 6 Stunden </string>
+    <string name = "repeat_12_hour"> 12 Stunden </string>
+    <string name = "repeat_1_day"> 1 Tag </string>
+    <string name = "repeat_2_day"> 2 Tage </string>
+    <string name = "repeat_3_day"> 3 Tage </string>
+    <string name = "repeat_10_day"> 10 Tage </string>
+    <string name = "repeat_1_week"> 1 Woche </string>
+    <string name = "repeat_2_week"> 2 Wochen </string>
+    <string name = "repeat_3_week"> 3 Wochen </string>
+    <string name = "repeat_4_week"> 4 Wochen </string>
+    <string name = "repeat_1_month"> 1 Monat </string>
+    <string name = "repeat_3_month"> 3 Monate </string>
+    <string name = "repeat_6_month"> 6 Monate </string>
+    <string name = "repeat_year"> Jahr </string>
+    <string name="repeat_none">Nicht wiederholen</string>
+
+    <string name="rington_default">Standard</string>
+    <string name="rington_1">Klingelton 1</string>
+    <string name="rington_2">Klingelton 2</string>
+    <string name="rington_3">Klingelton 3</string>
+    <string name="rington_4">Klingelton 4</string>
+    <string name="rington_5">Klingelton 5</string>
+    <string name="rington_6">Klingelton 6</string>
+
+    <string name="new_note_hint_title">Titel</string>
+    <string name="new_note_hint_text">Lassen Sie uns schreiben Sie Ihre Idee</string>
+
+    <string name="registration_dialog_title">Registrierung</string>
+    <string name="login_dialog_title">Anmeldung</string>
+     <string name="registration_btn_ok">OK</string>
+    <string name="registration_btn_register">Registrierung</string>
+    <string name="registration_btn_cancel">Stornieren</string>
+    <string name="hint_login">Email</string>
+    <string name="error">Fehler!</string>
+    <string name="error_network">Fehler! Prüfen Netzwerk.</string>
+    <string name="hint_password">Passwort</string>
+    <string name="hint_password_repeat">Passwort wiederholen</string>
+
+    <string name="registration_btn_forgot_password">Passwort vergessen</string>
+    <string name="registration_btn_change_password">Passwort ändern</string>
+    <string name="tost_send_password_to_email">Neues Passwort wurde verschickt</string>
+    <string name="tost_error_3020">Nutzer können nicht mit der angegebenen Login zu finden</string>
+    <string name="tost_error_3003">Ungültiger Anmeldename oder Passwort</string>
+
+    <string name="hint_search">Suche nach Stichwort</string>
+    <string name="search_dialog_title">Stichwort</string>
+    <string name="menu_search">Suchergebnisse</string>
+
+    <string name="banner_ad_unit_id">ca-app-pub-6973932400636393/3338064660</string>
+    <string name="banner_inner_ad_unit_id">ca-app-pub-6973932400636393/4278244269</string>
+
+
+</resources>

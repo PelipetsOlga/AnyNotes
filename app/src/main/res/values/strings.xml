@@ -11,6 +11,10 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
+    <string name="example_title">Note\'s title</string>
+    <string name="example_date">Create date</string>
+    <string name="example_text">There is a note content... There is a note content... There is a note content... There is a note content... There is a note content... There is a note content... There is a note content... There is a note content... There is a note content... There is a note content...</string>
+
     <string name="action_settings">Settings</string>
     <string name="action_estimate">Rate us</string>
     <string name="action_sort">Sort</string>
@@ -26,9 +30,6 @@
     <string name="title_activity_settings">Settings</string>
     <string name="seek_font_size">Font size:</string>
     <string name="seek_brightness">Brightness:</string>
-    <string name="example_title">Note title</string>
-    <string name="example_date">Note saving date</string>
-    <string name="example_text">There is a note content... There is a note content... There is a note content... There is a note content... There is a note content...</string>
 
     <string name="chooser_title_share">Share note</string>
     <string name="empty_list">No notes yet. Add new note.</string>
@@ -61,13 +62,13 @@
     <string name="rington_5">Ringtone 5</string>
     <string name="rington_6">Ringtone 6</string>
 
-    <string name="new_note_hint_title">Note title</string>
+    <string name="new_note_hint_title">Note\'s title</string>
     <string name="new_note_hint_text">Let\'s write your idea</string>
 
     <string name="registration_dialog_title">Registration</string>
     <string name="login_dialog_title">Login</string>
      <string name="registration_btn_ok">Ok</string>
-    <string name="registration_btn_register">Register</string>
+    <string name="registration_btn_register">Registration</string>
     <string name="registration_btn_cancel">Cancel</string>
     <string name="hint_login">E-mail</string>
     <string name="error">Error!</string>
