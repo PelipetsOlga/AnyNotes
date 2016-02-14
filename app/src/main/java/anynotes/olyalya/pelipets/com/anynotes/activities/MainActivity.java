@@ -435,6 +435,10 @@ public class MainActivity extends AppCompatActivity
                                         Backendless.Persistence.save(note, new AsyncCallback<Note>() {
                                             public void handleResponse(Note response) {
                                                 repository.writeObjectIdAndOwnerId(response);
+                                                DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+                                                if (drawer.isDrawerOpen(GravityCompat.START)) {
+                                                    drawer.closeDrawer(GravityCompat.START);
+                                                }
                                             }
 
                                             public void handleFault(BackendlessFault fault) {
