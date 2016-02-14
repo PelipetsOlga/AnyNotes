@@ -51,11 +51,14 @@ public class NoteUtils {
     }
 
     public static boolean isConnected(Context ctx) {
+        boolean isMobileConn=false;
         ConnectivityManager manager = (ConnectivityManager) ctx.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfoWiFi = manager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
         NetworkInfo networkInfoMob = manager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
         boolean isWifiConn = networkInfoWiFi.isConnected();
-        boolean isMobileConn = networkInfoMob.isConnected();
+        if (networkInfoMob != null) {
+            isMobileConn = networkInfoMob.isConnected();
+        }
         log("Wifi connected: " + isWifiConn);
         log("Mobile connected: " + isMobileConn);
         return (isWifiConn || isMobileConn);

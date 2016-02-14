@@ -56,10 +56,8 @@ public class TimeNotification extends BroadcastReceiver {
         NoteUtils.log(" PendingIntent " + pi);
 
         builder.setContentIntent(pi);
-        Notification notification = null;
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN) {
-            notification = builder.build();
-        }
+        Notification notification =  builder.build();
+
         if (notification != null) {
             if (vibro) {
                 long[] vibrate = {500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500};
