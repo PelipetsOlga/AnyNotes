@@ -1,0 +1,93 @@
+<resources>
+    <string name="app_name">Cuaderno</string>
+
+    <string name = "menu_all">Todas las notas</string>
+    <string name = "menu_actual">Notas reales</string>
+    <string name = "menu_important">Notas importantes</string>
+    <string name = "menu_drafts">Borradores</string>
+    <string name = "menu_deleted">Notas eliminadas</string>
+    <string name="menu_alarms">Observa con alarma</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="example_title">Título de la nota</string>
+    <string name="example_date">Fecha de Creación</string>
+    <string name="example_text">Texto ... Texto ... Texto ... Texto ... Texto ... Texto ... Texto ... Texto ... Texto ... Texto ... Texto ... Texto ...</string>
+
+    <string name="action_settings">Ajustes</string>
+    <string name="action_estimate">Nos clasificaría</string>
+    <string name="action_sort">Ordenar</string>
+    <string name="action_exit">Salida</string>
+    <string name="action_search">Buscar</string>
+    <string name="action_alarm">Ajustar alarma</string>
+    <string name="action_delete">Borrar</string>
+    <string name="action_share">Compartir</string>
+    <string name="action_budget">Home Budget</string>
+    <string name="action_phonebook">Directorio</string>
+
+    <string name="title_activity_note">NoteActivity</string>
+    <string name="title_activity_settings">Ajustes</string>
+    <string name="seek_font_size">Tamaño de fuente:</string>
+    <string name="seek_brightness">Brillo:</string>
+
+    <string name="chooser_title_share">Compartir nota</string>
+    <string name="empty_list">Vacío</string>
+
+    <string name="voice_direction">Hablar</string>
+    <string name="reminder_toolbar_title">Recordatorio</string>
+    <string name = "repeat_1_hour">1 hora</string>
+    <string name = "repeat_3_hour">3 horas</string>
+    <string name = "repeat_6_hour">6 horas</string>
+    <string name = "repeat_12_hour">12 horas</string>
+    <string name = "repeat_1_day">1 día</string>
+    <string name = "repeat_2_day">2 días</string>
+    <string name = "repeat_3_day">3 días</string>
+    <string name = "repeat_10_day">10 días</string>
+    <string name = "repeat_1_week">1 sem</string>
+    <string name = "repeat_2_week">2 sem</string>
+    <string name = "repeat_3_week">3 sem</string>
+    <string name = "repeat_4_week">4 sem</string>
+    <string name = "repeat_1_month">1 mes</string>
+    <string name = "repeat_3_month">3 meses</string>
+    <string name = "repeat_6_month">6 meses</string>
+    <string name = "repeat_year">año</string>
+    <string name="repeat_none">No repetir</string>
+
+    <string name="rington_default">Standart</string>
+    <string name="rington_1">Tono 1</string>
+    <string name="rington_2">Tono 2</string>
+    <string name="rington_3">Tono 3</string>
+    <string name="rington_4">Tono 4</string>
+    <string name="rington_5">Tono 5</string>
+    <string name="rington_6">Tono 6</string>
+
+    <string name="new_note_hint_title">Título de la nota</string>
+    <string name="new_note_hint_text">Vamos a escribir su idea</string>
+
+    <string name="registration_dialog_title">Registro</string>
+    <string name="login_dialog_title">Iniciar sesión</string>
+     <string name="registration_btn_ok">Okay</string>
+    <string name="registration_btn_register">Registro</string>
+    <string name="registration_btn_cancel">Cancelar</string>
+    <string name="hint_login">Email</string>
+    <string name="error">¡Error!</string>
+    <string name="error_network">¡Error! Verificar red.</string>
+    <string name="hint_password">Contraseña</string>
+    <string name="hint_password_repeat">Repite la contraseña</string>
+
+    <string name="registration_btn_forgot_password">Se te olvidó tu contraseña</string>
+    <string name="registration_btn_change_password">Cambia la contraseña</string>
+    <string name="tost_send_password_to_email">La nueva contraseña se ha enviado a</string>
+    <string name="tost_error_3020">No se puede encontrar el usuario con el nombre de usuario especificado</string>
+    <string name="tost_error_3003">Clave o usuario inválido</string>
+
+    <string name="hint_search">Buscar la palabra clave</string>
+    <string name="search_dialog_title">Buscar la palabra clave</string>
+    <string name="menu_search">Resultados de la búsqueda</string>
+
+    <string name="banner_ad_unit_id">ca-app-pub-6973932400636393/3338064660</string>
+    <string name="banner_inner_ad_unit_id">ca-app-pub-6973932400636393/4278244269</string>
+
+
+</resources>

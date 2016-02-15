@@ -1,0 +1,93 @@
+<resources>
+    <string name="app_name">Defter</string>
+
+    <string name="menu_all">Tüm notlar</string>
+    <string name="menu_actual">Gerçek notlar</string>
+    <string name="menu_important">Önemli notlar</string>
+    <string name="menu_drafts">Taslaklar</string>
+    <string name="menu_deleted">Silinen notları</string>
+    <string name="menu_alarms">Alarm ile notlar</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="example_title">Notun başlığı</string>
+    <string name="example_date">Tarih oluşturma</string>
+    <string name="example_text">Metin... Metin... Metin... Metin... Metin... Metin... Metin... Metin... Metin... Metin... Metin... Metin... </string>
+
+    <string name="action_settings">Ayarlar</string>
+    <string name="action_estimate">Bizi değerlendirin</string>
+    <string name="action_sort">çeşit</string>
+    <string name="action_exit">çıkış</string>
+    <string name="action_search">Arama</string>
+    <string name="action_alarm">Alarm kurmak</string>
+    <string name="action_delete">Silmek</string>
+    <string name="action_share">Pay</string>
+    <string name="action_budget">Home Budget</string>
+    <string name="action_phonebook">AddressPhoneBook</string>
+
+    <string name="title_activity_note">NoteActivity</string>
+    <string name="title_activity_settings">Ayarlar</string>
+    <string name="seek_font_size">Yazı Boyutu:</string>
+    <string name="seek_brightness">Parlaklık:</string>
+
+    <string name="chooser_title_share">Hisse notu</string>
+    <string name="empty_list">Boş</string>
+
+    <string name="voice_direction">Konuşmak</string>
+    <string name="reminder_toolbar_title">Hatırlatma</string>
+    <string name = "repeat_1_hour">1 saat</string>
+    <string name = "repeat_3_hour">3 saat</string>
+    <string name = "repeat_6_hour">6 saat</string>
+    <string name = "repeat_12_hour">12 saat</string>
+    <string name = "repeat_1_day">1 gün</string>
+    <string name = "repeat_2_day">2 gün</string>
+    <string name = "repeat_3_day">3 gün</string>
+    <string name = "repeat_10_day">10 gün</string>
+    <string name = "repeat_1_week">1 hafta</string>
+    <string name = "repeat_2_week">2 hafta</string>
+    <string name = "repeat_3_week">3 hafta</string>
+    <string name = "repeat_4_week">4 hafta</string>
+    <string name = "repeat_1_month">1 ay</string>
+    <string name = "repeat_3_month">3 ay</string>
+    <string name = "repeat_6_month">6 ay</string>
+    <string name = "repeat_year">yıl</string>
+     <string name="repeat_none">Yinelenen değil</string>
+
+    <string name="rington_default">Default</string>
+    <string name="rington_1">Zil sesi 1</string>
+    <string name="rington_2">Zil sesi 2</string>
+    <string name="rington_3">Zil sesi 3</string>
+    <string name="rington_4">Zil sesi 4</string>
+    <string name="rington_5">Zil sesi 5</string>
+    <string name="rington_6">Zil sesi 6</string>
+
+    <string name="new_note_hint_title">Notun başlığı</string>
+    <string name="new_note_hint_text">Senin fikrin yazalım</string>
+
+    <string name="registration_dialog_title">Kayıt</string>
+    <string name="login_dialog_title">Oturum aç</string>
+     <string name="registration_btn_ok">Tamam</string>
+    <string name="registration_btn_register">Kayıt</string>
+    <string name="registration_btn_cancel">İptal</string>
+    <string name="hint_login">E-posta</string>
+    <string name="error">Hata!</string>
+    <string name="error_network">Hata! ağ kontrol edin.</string>
+    <string name="hint_password">Parola</string>
+    <string name="hint_password_repeat">Şifreyi tekrar girin</string>
+
+    <string name="registration_btn_forgot_password">Parolanızı mı unuttunuz</string>
+    <string name="registration_btn_change_password">Şifre değiştir</string>
+    <string name="tost_send_password_to_email">Yeni şifre gönderdi</string>
+    <string name="tost_error_3020">Belirtilen giriş kullanıcıya bulunamıyor</string>
+    <string name="tost_error_3003">Geçersiz giriş yada şifre</string>
+
+    <string name="hint_search">Anahtarkelime Ara</string>
+    <string name="search_dialog_title">Anahtarkelime Ara</string>
+    <string name="menu_search">Araştırma sonuçları</string>
+
+    <string name="banner_ad_unit_id">ca-app-pub-6973932400636393/3338064660</string>
+    <string name="banner_inner_ad_unit_id">ca-app-pub-6973932400636393/4278244269</string>
+
+
+</resources>
