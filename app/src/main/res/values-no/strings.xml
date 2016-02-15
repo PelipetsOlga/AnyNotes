@@ -1,0 +1,91 @@
+<resources>
+    <string name="app_name">Bærbare</string>
+
+    <string name="menu_all">Alle notater</string>
+    <string name="menu_actual">Aktuelle notater</string>
+    <string name="menu_important">Viktige merknader</string>
+    <string name="menu_drafts">Utkast</string>
+    <string name="menu_deleted">Slettede notater</string>
+    <string name="menu_alarms">Notater med alarm</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="example_title">Tittel på merknad</string>
+    <string name="example_date">Opprett dato</string>
+    <string name="example_text">Tekst... Tekst... Tekst... Tekst... Tekst... Tekst... Tekst... Tekst... Tekst... Tekst... Tekst... </string>
+
+    <string name = "action_settings">Innstillinger</string>
+    <string name = "action_estimate">Rate oss</string>
+    <string name = "action_sort">Sorter</string>
+    <string name = "action_exit">Exit</string>
+    <string name = "action_search">Søk</string>
+    <string name = "action_alarm">Angi alarm</string>
+    <string name = "action_delete">Slett</string>
+    <string name = "action_share">Del</string>
+
+    <string name="action_budget">Home Budget</string>
+    <string name="action_phonebook">AddressPhoneBook</string>
+
+    <string name="title_activity_note">NoteActivity</string>
+    <string name = "title_activity_settings">Innstillinger</string>
+    <string name = "seek_font_size">Bokstavstørrelse:</string>
+    <string name = "seek_brightness">Lysstyrke:</string>
+    <string name = "chooser_title_share">Del notat</string>
+    <string name="empty_list">Tømme</string>
+
+    <string name="voice_direction">Snakke</string>
+    <string name="reminder_toolbar_title">Påminnelse</string>
+
+    <string name = "repeat_1_hour">1 time</string>
+    <string name = "repeat_3_hour">3 timer</string>
+    <string name = "repeat_6_hour">6 timer</string>
+    <string name = "repeat_12_hour">12 timer</string>
+    <string name = "repeat_1_day">1 day</string>
+    <string name = "repeat_2_day">2 dager</string>
+    <string name = "repeat_3_day">3 dager</string>
+    <string name = "repeat_10_day">10 dager</string>
+    <string name = "repeat_1_week">en uke</string>
+    <string name = "repeat_2_week">2 uker</string>
+    <string name = "repeat_3_week">3 uker</string>
+    <string name = "repeat_4_week">4 uker</string>
+    <string name = "repeat_1_month">1 måned</string>
+    <string name = "repeat_3_month">3 måneder</string>
+    <string name = "repeat_6_month">6 måneder</string>
+    <string name = "repeat_year">år</string>
+    <string name="repeat_none">Ikke gjenta</string>
+
+    <string name="rington_default">Standart</string>
+    <string name="rington_1">Ringtone 1</string>
+    <string name="rington_2">Ringtone 2</string>
+    <string name="rington_3">Ringtone 3</string>
+    <string name="rington_4">Ringtone 4</string>
+    <string name="rington_5">Ringtone 5</string>
+    <string name="rington_6">Ringtone 6</string>
+
+    <string name="new_note_hint_title">Tittel på merknad</string>
+    <string name="new_note_hint_text">La oss skrive din idé</string>
+
+    <string name = "registration_dialog_title">Registrering</string>
+    <string name = "login_dialog_title">Login</string>
+    <string name = "registration_btn_ok">OK</string>
+    <string name = "registration_btn_register">Registrering</string>
+    <string name = "registration_btn_cancel">Avbryt</string>
+    <string name = "hint_login">E-post</string>
+    <string name = "error">Feil!</string>
+    <string name = "error_network">Feil! Sjekk nettverk.</string>
+    <string name = "hint_password">Passord</string>
+    <string name = "hint_password_repeat">Gjenta passord</string>
+    <string name = "registration_btn_forgot_password">Glemt passord</string>
+    <string name = "registration_btn_change_password">Endre passord</string>
+    <string name = "tost_send_password_to_email">Nytt passord sendt til</string>
+    <string name = "tost_error_3020">for å finne bruker med den angitte login</string>
+    <string name ="tost_error_3003">Ugyldig brukernavn eller passord</string>
+    <string name = "hint_search">Søkeord</string>
+    <string name = "search_dialog_title">Søkeord</string>
+    <string name="menu_search">Søkeresultater</string>
+
+    <string name="banner_ad_unit_id">ca-app-pub-6973932400636393/3338064660</string>
+    <string name="banner_inner_ad_unit_id">ca-app-pub-6973932400636393/4278244269</string>
+
+</resources>
