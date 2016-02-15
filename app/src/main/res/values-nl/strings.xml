@@ -1,0 +1,98 @@
+<resources>
+    <string name="app_name">Notitieboekje</string>
+
+    <string name="menu_all">Alle noten</string>
+    <string name="menu_actual">Actueel notes</string>
+    <string name="menu_important">Belangrijke opmerkingen</string>
+    <string name="menu_drafts">Concepten</string>
+    <string name="menu_deleted">Verwijderde notities</string>
+    <string name="menu_alarms">Neemt met alarm</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="example_title">Titel van de nota</string>
+    <string name="example_date">Date te creëren</string>
+    <string name="example_text">Tekst... Tekst... Tekst... Tekst... Tekst... Tekst... Tekst... Tekst... Tekst... Tekst... </string>
+
+    <string name = "action_settings">Instellingen</string>
+    <string name = "action_estimate">Beoordeel ons</string>
+    <string name = "action_sort">Volgorde</string>
+    <string name = "action_exit">Exit</string>
+    <string name = "action_search">Zoeken</string>
+    <string name = "action_alarm">Alarm instellen</string>
+    <string name = "action_delete">Verwijderen</string>
+    <string name = "action_share">Delen</string>
+
+    <string name="action_budget">Home Budget</string>
+    <string name="action_phonebook">AddressPhoneBook</string>
+
+    <string name="title_activity_note">NoteActivity</string>
+
+    <string name = "title_activity_settings">Instellingen</string>
+    <string name = "seek_font_size">Lettergrootte:</string>
+    <string name = "seek_brightness">Helderheid:</string>
+
+    <string name = "chooser_title_share">Share note</string>
+    <string name = "empty_list">Leeg</string>
+
+    <string name = "voice_direction">Speak</string>
+    <string name = "reminder_toolbar_title">Herinnering</string>
+
+    <string name = "repeat_1_hour">1 uur</string>
+    <string name = "repeat_3_hour">3 uur</string>
+    <string name = "repeat_6_hour">6 uur</string>
+    <string name = "repeat_12_hour">12 uur</string>
+    <string name = "repeat_1_day">1 dag</string>
+    <string name = "repeat_2_day">2 dagen</string>
+    <string name = "repeat_3_day">3 dagen</string>
+    <string name = "repeat_10_day">10 dagen</string>
+    <string name = "repeat_1_week">1 week</string>
+    <string name = "repeat_2_week">2 weken</string>
+    <string name = "repeat_3_week">3 weken</string>
+    <string name = "repeat_4_week">4 weken</string>
+    <string name = "repeat_1_month">1 maand</string>
+    <string name = "repeat_3_month">3 maanden</string>
+    <string name = "repeat_6_month">6 maanden</string>
+    <string name = "repeat_year">jaar</string>
+    <string name="repeat_none">Niet herhalen</string>
+
+    <string name="rington_default">Standart</string>
+    <string name="rington_1">Ringtone 1</string>
+    <string name="rington_2">Ringtone 2</string>
+    <string name="rington_3">Ringtone 3</string>
+    <string name="rington_4">Ringtone 4</string>
+    <string name="rington_5">Ringtone 5</string>
+    <string name="rington_6">Ringtone 6</string>
+
+    <string name="new_note_hint_title">Titel van de nota</string>
+    <string name = "new_note_hint_text">Laat schrijf uw idee</string>
+
+    <string name = "registration_dialog_title">Registratie</string>
+    <string name = "login_dialog_title">Inloggen</string>
+    <string name = "registration_btn_ok">Ok</string>
+    <string name = "registration_btn_register">Registratie</string>
+    <string name = "registration_btn_cancel">Annuleren</string>
+    <string name = "hint_login">E-mail</string>
+
+    <string name = "error">Fout!</string>
+    <string name = "error_network">Fout! Controleer netwerk.</string>
+
+    <string name = "hint_password">Wachtwoord</string>
+    <string name = "hint_password_repeat">Herhaal wachtwoord</string>
+    <string name = "registration_btn_forgot_password">Wachtwoord vergeten</string>
+    <string name = "registration_btn_change_password">Wachtwoord wijzigen</string>
+
+    <string name = "tost_send_password_to_email">Nieuw wachtwoord is verzonden naar</string>
+    <string name = "tost_error_3020">Kan gebruiker met de opgegeven login</string>
+    <string name = "tost_error_3003">Ongeldige login of wachtwoord</string>
+
+    <string name = "hint_search">Zoeken trefwoord</string>
+    <string name = "search_dialog_title">Zoeken trefwoord</string>
+    <string name = "menu_search">Zoekresultaten</string>
+
+    <string name="banner_ad_unit_id">ca-app-pub-6973932400636393/3338064660</string>
+    <string name="banner_inner_ad_unit_id">ca-app-pub-6973932400636393/4278244269</string>
+
+
+</resources>
