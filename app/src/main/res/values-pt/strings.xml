@@ -1,0 +1,92 @@
+<resources>
+    <string name="app_name">Сaderno</string>
+
+    <string name="menu_all"> Todas as notas</string>
+    <string name="menu_actual">Notas reais</string>
+    <string name="menu_important">Notas importantes</string>
+    <string name="menu_drafts">Rascunhos </string>
+    <string name="menu_deleted">Notas excluídos</string>
+    <string name="menu_alarms">Notas com alarme</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="example_title">Título de nota</string>
+    <string name="example_date">Criar Data</string>
+    <string name="example_text">Texto... Texto... Texto... Texto... Texto... Texto... Texto... Texto... Texto... Texto... Texto... Texto... </string>
+
+    <string name="action_settings">Configurações</string>
+    <string name="action_estimate">Avalie-nos</string>
+    <string name="action_sort">Sort</string>
+    <string name="action_exit">Exit</string>
+    <string name="action_search">Procurar</string>
+    <string name="action_alarm">Definir alarme</string>
+    <string name="action_delete">Excluir</string>
+    <string name="action_share">Share</string>
+
+    <string name="action_budget">Home Budget</string>
+    <string name="action_phonebook">Livro de Endereços</string>
+
+    <string name="title_activity_note">NoteActivity</string>
+    <string name="title_activity_settings">Configurações</string>
+    <string name="seek_font_size">Tamanho da fonte:</string>
+    <string name="seek_brightness">Brilho:</string>
+    <string name="chooser_title_share">Share nota</string>
+
+    <string name="empty_list">Vazio</string>
+
+    <string name="voice_direction">Falar</string>
+    <string name="reminder_toolbar_title">Lembrete</string>
+    <string name="repeat_1_hour">1 hora</string>
+    <string name="repeat_3_hour">3 horas</string>
+    <string name="repeat_6_hour">6 horas</string>
+    <string name="repeat_12_hour">12 horas</string>
+    <string name="repeat_1_day">um dia</string>
+    <string name="repeat_2_day">2 dias</string>
+    <string name="repeat_3_day">3 dias</string>
+    <string name="repeat_10_day">10 dias</string>
+    <string name="repeat_1_week">uma semana</string>
+    <string name="repeat_2_week">2 semanas</string>
+    <string name="repeat_3_week">3 semanas</string>
+    <string name="repeat_4_week">4 semanas</string>
+    <string name="repeat_1_month">1 mês</string>
+    <string name="repeat_3_month">3 meses</string>
+    <string name="repeat_6_month">6 meses</string>
+    <string name="repeat_year">ano</string>
+    <string name="repeat_none">Não repetir</string>
+    <string name="rington_default">Padrão </string>
+
+    <string name="rington_1">Toque 1</string>
+    <string name="rington_2">Toque 2</string>
+    <string name="rington_3">Toque 3</string>
+    <string name="rington_4">Toque 4</string>
+    <string name="rington_5">Toque 5</string>
+    <string name="rington_6">Toque 6</string>
+
+    <string name="new_note_hint_title">Título de nota</string>
+    <string name="new_note_hint_text">Vamos escrever a sua ideia</string>
+
+    <string name="registration_dialog_title">Registro</string>
+    <string name="login_dialog_title">Entrar</string>
+    <string name="registration_btn_ok">Ok</string>
+    <string name="registration_btn_register">Registro</string>
+    <string name="registration_btn_cancel">Cancelar</string>
+    <string name="hint_login">E-mail</string>
+    <string name="error">Erro!</string>
+    <string name="error_network">Erro! Verifique rede.</string>
+    <string name="hint_password">Senha</string>
+    <string name="hint_password_repeat">Repetir a senha</string>
+    <string name="registration_btn_forgot_password">Esqueceu a senha</string>
+    <string name="registration_btn_change_password">Alterar senha</string>
+    <string name="tost_send_password_to_email">Nova senha foi enviada para</string>
+    <string name="tost_error_3020">Não foi possível encontrar usuário com o login especificado</string>
+    < string name="tost_error_3003">Login ou senha inválida</string>
+    <string name="hint_search">Pesquisa palavra-chave</string>
+    <string name="search_dialog_title">Pesquisa palavra-chave</string>
+    <string name="menu_search">resultados da pesquisa</string>
+
+    <string name="banner_ad_unit_id">ca-app-pub-6973932400636393/3338064660</string>
+    <string name="banner_inner_ad_unit_id">ca-app-pub-6973932400636393/4278244269</string>
+
+
+</resources>
