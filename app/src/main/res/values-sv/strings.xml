@@ -1,0 +1,92 @@
+<resources>
+    <string name="app_name">Anteckningsbok</string>
+
+    <string name="menu_all">Alla anteckningar</string>
+    <string name="menu_actual">Faktiska anteckningar</string>
+    <string name="menu_important">Viktigt</string>
+    <string name="menu_drafts">Utkast</string>
+    <string name="menu_deleted">Borttagna anteckningar</string>
+    <string name="menu_alarms">Anteckningar med larm</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="example_title">Titeln på not</string>
+    <string name="example_date">Skapa datum</string>
+    <string name="example_text">Text... Text... Text... Text... Text... Text... Text... Text... Text... Text... Text... Text... </string>
+
+    <string name="action_settings">Inställningar</string>
+    <string name="action_estimate">Betyg oss</string>
+    <string name="action_sort">Sortera</string>
+    <string name="action_exit">Avsluta</string>
+    <string name="action_search">Sök</string>
+    <string name="action_alarm">Ställ in alarm</string>
+    <string name="action_delete">Ta bort</string>
+    <string name="action_share">Dela</string>
+
+    <string name="action_budget">Home Budget</string>
+    <string name="action_phonebook">AddressPhoneBook</string>
+
+    <string name="title_activity_note">NoteActivity</string>
+
+    <string name="title_activity_settings">Inställningar</string>
+    <string name="seek_font_size">Teckenstorlek:</string>
+    <string name="seek_brightness">Ljusstyrka:</string>
+    <string name="chooser_title_share">Dela anteckning</string>
+    <string name="empty_list">Tömma</string>
+    <string name="voice_direction">Tala</string>
+    <string name="reminder_toolbar_title">Påminnelse</string>
+
+    <string name="repeat_1_hour">1 timme</string>
+    <string name="repeat_3_hour">3 timmar</string>
+    <string name="repeat_6_hour">6 timmar</string>
+    <string name="repeat_12_hour">12 timmar</string>
+    <string name="repeat_1_day">1 dag</string>
+    <string name="repeat_2_day">2 dagar</string>
+    <string name="repeat_3_day">3 dagar</string>
+    <string name="repeat_10_day">10 dagar</string>
+    <string name="repeat_1_week">1 vecka</string>
+    <string name="repeat_2_week">2 veckor</string>
+    <string name="repeat_3_week">3 veckor</string>
+    <string name="repeat_4_week">4 veckor</string>
+    <string name="repeat_1_month">1 månad</string>
+    <string name="repeat_3_month">3 månader</string>
+    <string name="repeat_6_month">6 månader</string>
+    <string name="repeat_year">år</string>
+    <string name="repeat_none">inte upprepa</string>
+
+    <string name="rington_default">Standard</string>
+    <string name="rington_1">Ringsignal 1</string>
+    <string name="rington_2">Ringsignal 2</string>
+    <string name="rington_3">Ringsignal 3</string>
+    <string name="rington_4">Ringsignal 4</string>
+    <string name="rington_5">Ringsignal 5</string>
+    <string name="rington_6">Ringsignal 6</string>
+
+    <string name="new_note_hint_title">Titeln på not</string>
+    <string name="new_note_hint_text">Låt oss skriva din idé</string>
+
+    <string name="registration_dialog_title">Registrering</string>
+    <string name="login_dialog_title">Logga in</string>
+    <string name="registration_btn_ok">Ok</string>
+    <string name="registration_btn_register">Registrering</string>
+    <string name="registration_btn_cancel">Avbryt</string>
+    <string name="hint_login">E-post</string>
+    <string name="error">Fel!</string>
+    <string name="error_network">Fel! Kontrollera nätverk.</string>
+    <string name="hint_password">Lösenord</string>
+    <string name="hint_password_repeat">Upprepa lösenord</string>
+    <string name="registration_btn_forgot_password">Glömt lösenord</string>
+    <string name="registration_btn_change_password">Ändra lösenord</string>
+    <string name="tost_send_password_to_email">Har Nytt lösenord skickas till</string>
+    <string name="tost_error_3020">Det går inte att hitta användaren med angiven inloggning</string>
+    < string name="tost_error_3003">Ogiltig inloggning eller lösenord</string>
+    <string name="hint_search">Sökord</string>
+    <string name="search_dialog_title">Sökord</string>
+    <string name="menu_search">Sökresultat</string>
+
+    <string name="banner_ad_unit_id">ca-app-pub-6973932400636393/3338064660</string>
+    <string name="banner_inner_ad_unit_id">ca-app-pub-6973932400636393/4278244269</string>
+
+
+</resources>

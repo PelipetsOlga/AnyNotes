@@ -80,7 +80,7 @@
     <string name="registration_btn_change_password">Alterar senha</string>
     <string name="tost_send_password_to_email">Nova senha foi enviada para</string>
     <string name="tost_error_3020">Não foi possível encontrar usuário com o login especificado</string>
-    < string name="tost_error_3003">Login ou senha inválida</string>
+    <string name="tost_error_3003">Login ou senha inválida</string>
     <string name="hint_search">Pesquisa palavra-chave</string>
     <string name="search_dialog_title">Pesquisa palavra-chave</string>
     <string name="menu_search">resultados da pesquisa</string>
