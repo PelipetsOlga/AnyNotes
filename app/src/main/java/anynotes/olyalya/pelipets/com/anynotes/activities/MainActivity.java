@@ -147,7 +147,6 @@ public class MainActivity extends AppCompatActivity
     private void saveUserToPreferenceAndUpdateViews(String login, String password, String userObjectId) {
         SharedPreferences.Editor ed = mPref.edit();
         ed.putBoolean(Constants.PREF_IS_LOGINED, true);
-        //ed.putString(Constants.PREF_LOGIN, backendlessUser.getEmail());
         ed.putString(Constants.PREF_LOGIN, login);
         ed.putString(Constants.PREF_PASSWORD, password);
         ed.putString(Constants.PREF_USER_OBJECT_ID, userObjectId);

@@ -80,7 +80,7 @@
     <string name="registration_btn_change_password">Ändra lösenord</string>
     <string name="tost_send_password_to_email">Har Nytt lösenord skickas till</string>
     <string name="tost_error_3020">Det går inte att hitta användaren med angiven inloggning</string>
-    < string name="tost_error_3003">Ogiltig inloggning eller lösenord</string>
+    <string name="tost_error_3003">Ogiltig inloggning eller lösenord</string>
     <string name="hint_search">Sökord</string>
     <string name="search_dialog_title">Sökord</string>
     <string name="menu_search">Sökresultat</string>
