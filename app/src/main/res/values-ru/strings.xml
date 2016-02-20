@@ -6,7 +6,7 @@
     <string name="menu_important">Важные заметки</string>
     <string name="menu_drafts">Черновики</string>
     <string name="menu_deleted">Удаленные заметки</string>
-    <string name="menu_alarms">Заметки с напоминанием</string>
+    <string name="menu_alarms">Будильники</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>

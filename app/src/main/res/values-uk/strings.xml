@@ -6,7 +6,7 @@
     <string name="menu_important">Важливі нотатки</string>
     <string name="menu_drafts">Чернетки</string>
     <string name="menu_deleted">Видалені нотатки</string>
-    <string name="menu_alarms">Нотатки з нагадуванням</string>
+    <string name="menu_alarms">Будильники</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>

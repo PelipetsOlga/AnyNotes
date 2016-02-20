@@ -696,7 +696,7 @@ public class MainActivity extends AppCompatActivity
 
             Calendar calendar = Calendar.getInstance();
             calendar.setTimeInMillis(note.getCreating());
-            holder.tvCreating.setText(DateFormat.format("yyyy-MM-dd HH:mm", calendar));
+            holder.tvCreating.setText(DateFormat.format(Constants.FORMAT_DATE_CREATING, calendar));
             int status = note.getStatus();
             switch (status) {
                 case Constants.STATUS_ACTUAL:

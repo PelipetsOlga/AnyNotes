@@ -88,10 +88,14 @@ public class NotesRepository {
         am.cancel(pendingIntent);
         try {
             Date date = dateFormat.parse(note.getAlarm());
-            if (date.after(new Date())
-                    && Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                NoteUtils.log("set not repeat Alarm creating=" + note.getCreating() + ", time=" + note.getAlarm());
-                am.setExact(AlarmManager.RTC_WAKEUP, date.getTime(), pendingIntent);
+            if (date.after(new Date())) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                    NoteUtils.log("set not repeat Alarm creating=" + note.getCreating() + ", time=" + note.getAlarm());
+                    am.setExact(AlarmManager.RTC_WAKEUP, date.getTime(), pendingIntent);
+                } else {
+                    NoteUtils.log("set not repeat Alarm creating=" + note.getCreating() + ", time=" + note.getAlarm());
+                    am.set(AlarmManager.RTC_WAKEUP, date.getTime(), pendingIntent);
+                }
             }
         } catch (ParseException e) {
             e.printStackTrace();
@@ -219,9 +223,9 @@ public class NotesRepository {
                 selections = DBSchema.STATUS + "=" + Constants.STATUS_DELETED;
                 break;
             case Constants.MODE_SORT_SEARCH:
-                SharedPreferences preferences=context.getSharedPreferences(Constants.PREFS_NAME, Context.MODE_PRIVATE);
-                String keyword=preferences.getString(Constants.PREF_SEARCH, "");
-                selections=DBSchema.TEXT+" like \"%"+keyword+"%\" OR "+DBSchema.TITLE+" like \"%"+keyword+"%\"";
+                SharedPreferences preferences = context.getSharedPreferences(Constants.PREFS_NAME, Context.MODE_PRIVATE);
+                String keyword = preferences.getString(Constants.PREF_SEARCH, "");
+                selections = DBSchema.TEXT + " like \"%" + keyword + "%\" OR " + DBSchema.TITLE + " like \"%" + keyword + "%\"";
                 break;
         }
 

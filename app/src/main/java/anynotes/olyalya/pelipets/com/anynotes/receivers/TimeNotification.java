@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 
@@ -28,6 +29,8 @@ public class TimeNotification extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
+        NoteUtils.log("TimeNotification onReceive");
+
         loadSettings(context);
 
         NotesRepository repository = ((NotesApplication) context.getApplicationContext()).getDaoSession().getRepository();
@@ -39,7 +42,7 @@ public class TimeNotification extends BroadcastReceiver {
             repository.reSetAlarm(note);
         }
 
-        Notification.Builder builder = new Notification.Builder(context);
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(context);
         builder.setSmallIcon(R.mipmap.anynotes_origin1);
         builder.setContentTitle(note.getTitle());
         builder.setContentText(note.getText());

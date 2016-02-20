@@ -30,7 +30,7 @@ public class Constants {
     public static final int MODE_ORDERED_SORT_DATE_ASC = 4;
     public static final int MODE_ORDERED_SORT_DATE_DESC = 5;
 
-    public static final String TEST_DEVICE_A = "B605DFC1B0C341FC81584E6AED7DE278";//7562
+    public static final String TEST_DEVICE_A = "4028FDD84874526BA9EC2EDDF86BD389";//7562
     public static final String TEST_DEVICE_B = "EC974FC89B02C966F878083846A7AE5B"; //5110
     public static final String TEST_DEVICE_C = "8ABA2DDDFF7842874E9FBAC5B668DDBC"; //M700
     public static final String TEST_DEVICE_D = "C47B0844075E4129BF541BE3792DCD3D";//lenovo tab2
@@ -64,5 +64,6 @@ public class Constants {
     public static final int SIZE_FONT = 18;
     public static final int LENGTH_TEXT = 300;
     public static final int TITLE_LENGTH = 80;
-    public static final String FORMAT_ALARM = "dd/MM/yyyy, HH:mm";
+    public static final String FORMAT_ALARM = "dd/MM/yyyy, kk:mm";
+    public static final String FORMAT_DATE_CREATING = "yyyy-MM-dd kk:mm";
 }
