@@ -23,7 +23,7 @@
     <string name="action_phonebook">Адресная книга</string>
 
     <string name="title_activity_note">Заметка</string>
-    <string name="title_activity_settings">Настроки</string>
+    <string name="title_activity_settings">Настройки</string>
     <string name="seek_font_size">Размер шрифта:</string>
     <string name="seek_brightness">Яркость:</string>
     <string name="example_title">Название заметки</string>
