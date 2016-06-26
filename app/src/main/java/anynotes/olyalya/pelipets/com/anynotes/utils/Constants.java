@@ -63,7 +63,7 @@ public class Constants {
     public static final int BRIGHTNESS = 200;
     public static final int SIZE_FONT = 18;
     public static final int LENGTH_TEXT = 300;
-    public static final int TITLE_LENGTH = 80;
+    public static final int TITLE_LENGTH = 40;
     public static final String FORMAT_ALARM = "dd/MM/yyyy, kk:mm";
     public static final String FORMAT_DATE_CREATING = "yyyy-MM-dd kk:mm";
 }
