@@ -4,29 +4,29 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/all_notes"
-            android:icon="@mipmap/fa_sticky_note"
+            android:icon="@drawable/v_ic_note_color_24dp"
             android:title="@string/menu_all" />
         <item
             android:id="@+id/important_notes"
-            android:icon="@mipmap/oi_star"
+            android:icon="@drawable/v_ic_star_drawer_24dp"
             android:title="@string/menu_important" />
         <item
             android:id="@+id/actual_notes"
-            android:icon="@mipmap/pe_star"
+            android:icon="@drawable/v_ic_star_border_drawer_24dp"
             android:title="@string/menu_actual" />
 
         <item
             android:id="@+id/drafts"
-            android:icon="@mipmap/fa_sticky_note_o_0_f33976_none"
+            android:icon="@drawable/v_ic_draft_color_24dp"
             android:title="@string/menu_drafts" />
         <item
             android:id="@+id/deleted"
-            android:icon="@mipmap/ion_android_delete"
+            android:icon="@drawable/v_delete_color_24"
             android:title="@string/menu_deleted" />
 
         <item
             android:id="@+id/alarms"
-            android:icon="@mipmap/icomoon_alarm"
+            android:icon="@drawable/v_alarm_color_24"
             android:title="@string/menu_alarms" />
     </group>
 

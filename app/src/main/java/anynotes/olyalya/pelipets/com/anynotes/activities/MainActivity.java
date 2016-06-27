@@ -700,19 +700,19 @@ public class MainActivity extends AppCompatActivity
             int status = note.getStatus();
             switch (status) {
                 case Constants.STATUS_ACTUAL:
-                    holder.ivIcon.setImageResource(R.mipmap.pe_7s_star_ffffff_none);
+                    holder.ivIcon.setImageResource(R.drawable.v_ic_star_border_color_24dp);
                     break;
                 case Constants.STATUS_IMPORTANT:
-                    holder.ivIcon.setImageResource(R.mipmap.oi_star_ffffff_none);
+                    holder.ivIcon.setImageResource(R.drawable.v_ic_star_color_24dp);
                     break;
                 case Constants.STATUS_DELETED:
                     holder.ivIcon.setImageResource(R.drawable.v_delete_white_24);
                     break;
                 case Constants.STATUS_DRAFT:
-                    holder.ivIcon.setImageResource(R.mipmap.draft_white);
+                    holder.ivIcon.setImageResource(R.drawable.v_ic_draft_white_24dp);
                     break;
                 case Constants.STATUS_DRAFT_DELETED:
-                    holder.ivIcon.setImageResource(R.mipmap.fa_sticky_note);
+                    holder.ivIcon.setImageResource(R.drawable.v_ic_draft_deleted_white_24dp);
                     break;
             }
         }
