@@ -706,7 +706,7 @@ public class MainActivity extends AppCompatActivity
                     holder.ivIcon.setImageResource(R.mipmap.oi_star_ffffff_none);
                     break;
                 case Constants.STATUS_DELETED:
-                    holder.ivIcon.setImageResource(R.mipmap.delete_white);
+                    holder.ivIcon.setImageResource(R.drawable.v_delete_white_24);
                     break;
                 case Constants.STATUS_DRAFT:
                     holder.ivIcon.setImageResource(R.mipmap.draft_white);
