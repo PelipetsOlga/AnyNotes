@@ -73,7 +73,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom|left"
                     android:paddingRight="16dp"
-                    android:src="@mipmap/icomoon_font_size" />
+                    android:src="@drawable/v_font_size_color_48" />
 
                 <org.adw.library.widgets.discreteseekbar.DiscreteSeekBar
 
@@ -105,7 +105,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom|left"
                     android:paddingRight="16dp"
-                    android:src="@mipmap/lsf_brightness" />
+                    android:src="@drawable/v_bright_color_48" />
 
                 <org.adw.library.widgets.discreteseekbar.DiscreteSeekBar
 
@@ -139,7 +139,7 @@
                     android:layout_gravity="top|left"
                     android:paddingRight="16dp"
                     android:paddingTop="8dp"
-                    android:src="@mipmap/mfglabs_ringbell" />
+                    android:src="@drawable/v_ringtone_color_48" />
 
                 <RadioGroup
                     android:id="@+id/rg_ringtones"
@@ -203,7 +203,7 @@
                     android:layout_gravity="center_vertical|left"
                     android:paddingRight="32dp"
                     android:paddingTop="8dp"
-                    android:src="@mipmap/ion_radio_waves" />
+                    android:src="@drawable/v_vibro_color_48" />
 
                 <Switch
                     android:id="@+id/switch_vibro"

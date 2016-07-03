@@ -119,7 +119,7 @@ public class NoteActivity extends AppCompatActivity implements
             fab.setImageResource(R.mipmap.ic_check_white_24dp);
             if (hasMicrophone) {
                 ivMicrophone.setVisibility(View.VISIBLE);
-                ivMicrophone.setImageResource(R.mipmap.fa_microphone);
+                ivMicrophone.setImageResource(R.drawable.v_microphone_color_48);
                 ivMicrophone.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -136,7 +136,7 @@ public class NoteActivity extends AppCompatActivity implements
             inputMethodManager.showSoftInput(etText, InputMethodManager.SHOW_IMPLICIT);
         } else if (type_operation == Constants.EXTRA_ACTION_EDIT_NOTE) {
             modeFab = MODE_FAB_EDIT;
-            ivMicrophone.setImageResource(R.mipmap.fa_volume_up);
+            ivMicrophone.setImageResource(R.drawable.v_volume_color_24dp);
             ivMicrophone.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -158,7 +158,7 @@ public class NoteActivity extends AppCompatActivity implements
                 if (modeFab == MODE_FAB_EDIT) {
                     modeFab = MODE_FAB_SAVE;
                     ivMicrophone.setVisibility(View.VISIBLE);
-                    ivMicrophone.setImageResource(R.mipmap.fa_microphone);
+                    ivMicrophone.setImageResource(R.drawable.v_microphone_color_48);
                     ivMicrophone.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -213,7 +213,7 @@ public class NoteActivity extends AppCompatActivity implements
 
     private void startVoiceRecognitionActivity() {
         if (hasMicrophone) {
-            ivMicrophone.setImageResource(R.mipmap.fa_microphone_84816d_none);
+            ivMicrophone.setImageResource(R.drawable.v_microphone_gray_48);
             Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
             intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
                     RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
@@ -226,7 +226,7 @@ public class NoteActivity extends AppCompatActivity implements
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_CODE_VOICE) {
-            ivMicrophone.setImageResource(R.mipmap.fa_microphone);
+            ivMicrophone.setImageResource(R.drawable.v_microphone_color_48);
             if (resultCode == RESULT_OK) {
                 ArrayList<String> matches = data.getStringArrayListExtra(
                         RecognizerIntent.EXTRA_RESULTS);

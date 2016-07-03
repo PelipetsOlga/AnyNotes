@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:drawable="@mipmap/mfglabs_ringbell_84816d_none" android:state_checked="false" />
-    <item android:drawable="@mipmap/mfglabs_ringbell" android:state_checked="true" />
-    <item android:drawable="@mipmap/mfglabs_ringbell_84816d_none" />
+    <item android:drawable="@drawable/v_ringtone_gray_48" android:state_checked="false" />
+    <item android:drawable="@drawable/v_ringtone_color_48" android:state_checked="true" />
+    <item android:drawable="@drawable/v_ringtone_gray_48" />
 </selector>

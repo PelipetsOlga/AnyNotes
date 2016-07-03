@@ -26,7 +26,7 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:layout_margin="24dp"
-        android:src="@mipmap/fa_microphone"/>
+        android:src="@drawable/v_microphone_color_48"/>
 
     <EditText
         android:id="@+id/et_title"

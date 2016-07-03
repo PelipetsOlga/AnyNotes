@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:drawable="@mipmap/feather_repeat_84816d_none" android:state_checked="false" />
-    <item android:drawable="@mipmap/feather_repeat" android:state_checked="true" />
-    <item android:drawable="@mipmap/feather_repeat_84816d_none" />
+    <item android:drawable="@drawable/v_repeat_gray_24dp" android:state_checked="false" />
+    <item android:drawable="@drawable/v_repeat_color_24dp" android:state_checked="true" />
+    <item android:drawable="@drawable/v_repeat_gray_24dp" />
 </selector>

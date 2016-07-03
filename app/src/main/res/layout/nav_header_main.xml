@@ -24,7 +24,7 @@
         android:layout_alignParentRight="true"
         android:layout_margin="@dimen/activity_vertical_margin"
         android:clickable="true"
-        android:src="@mipmap/typcn_arrow_sync_0_ffffff_none" />
+        android:src="@drawable/v_repeat_white_24dp" />
 
 
     <TextView
