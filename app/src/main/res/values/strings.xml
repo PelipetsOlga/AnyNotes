@@ -67,7 +67,7 @@
 
     <string name="registration_dialog_title">Registration</string>
     <string name="login_dialog_title">Login</string>
-     <string name="registration_btn_ok">Ok</string>
+    <string name="registration_btn_ok">Ok</string>
     <string name="registration_btn_register">Registration</string>
     <string name="registration_btn_cancel">Cancel</string>
     <string name="hint_login">E-mail</string>

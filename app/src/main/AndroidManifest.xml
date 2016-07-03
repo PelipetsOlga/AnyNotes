@@ -17,9 +17,9 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".activities.MainActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/app_name"
             android:launchMode="singleTask"
-            android:configChanges="keyboardHidden|orientation|screenSize"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -32,7 +32,6 @@
             android:label="@string/title_activity_note"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustResize">
-
             <category android:name="android.intent.category.LAUNCHER" />
         </activity>
         <activity
@@ -61,9 +60,7 @@
             android:name=".service.NotesService"
             android:enabled="true"
             android:exported="true" />
-
         <service android:name="com.backendless.AndroidService" />
-
         <service android:name=".service.SynchNotesIntentService" />
 
         <receiver android:name=".receivers.NoteBootReceiver">
@@ -73,6 +70,9 @@
             </intent-filter>
         </receiver>
 
+        <activity
+            android:name=".activities.ColorPickerActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
