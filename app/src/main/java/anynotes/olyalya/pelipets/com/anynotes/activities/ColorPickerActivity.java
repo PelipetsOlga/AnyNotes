@@ -18,6 +18,7 @@ import android.widget.LinearLayout;
 import java.util.List;
 
 import anynotes.olyalya.pelipets.com.anynotes.R;
+import anynotes.olyalya.pelipets.com.anynotes.interfaces.Restartable;
 import anynotes.olyalya.pelipets.com.anynotes.models.ColorMaterial;
 import anynotes.olyalya.pelipets.com.anynotes.models.ColorPallete;
 import anynotes.olyalya.pelipets.com.anynotes.models.ThemeMaterial;
@@ -34,6 +35,7 @@ public class ColorPickerActivity extends AppCompatActivity {
     private ImageView btnHome;
     private ThemeMaterial theme;
     private LinearLayout toolbarColor;
+    private Restartable restartable;
 
     enum State {NOT_CHANGED, PRIMARY_CHANGED, ACCENT_CHANGED}
 
@@ -43,7 +45,9 @@ public class ColorPickerActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_color_scheme);
+
         pallete = new ColorPallete(this);
+        restartable = (Restartable) getIntent().getSerializableExtra(Constants.EXTRA_RESTARTABLE);
 
         loadSettings();
         initViews();
@@ -62,7 +66,7 @@ public class ColorPickerActivity extends AppCompatActivity {
 
     private void initViews() {
         fab = (FloatingActionButton) findViewById(R.id.fab_color);
-        toolbarColor= (LinearLayout) findViewById(R.id.toolbar_color);
+        toolbarColor = (LinearLayout) findViewById(R.id.toolbar_color);
         btnHome = (ImageView) findViewById(R.id.btn_color_home);
         btnHome.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -104,7 +108,15 @@ public class ColorPickerActivity extends AppCompatActivity {
     }
 
     private void saveNewTheme() {
-        //// TODO: 03.07.2016
+        SharedPreferences sPref = getSharedPreferences(Constants.PREFS_NAME, AppCompatActivity.MODE_PRIVATE);
+        SharedPreferences.Editor ed = sPref.edit();
+        ed.putInt(Constants.PREF_PRIMARY_COLOR, theme.getPrimary());
+        ed.putInt(Constants.PREF_ACCENT_COLOR, theme.getAccent());
+        ed.commit();
+
+        if (restartable != null) {
+            restartable.restart();
+        }
     }
 
     class PalleteAdapter extends ArrayAdapter<ColorMaterial> {

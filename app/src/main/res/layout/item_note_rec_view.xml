@@ -66,7 +66,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="right"
                                 android:text="lastsaving"
-                                android:textColor="@color/colorAccent"
+                                android:textColor="?colorAccent"
                                 android:textStyle="italic" />
                         </LinearLayout>
 
@@ -111,12 +111,8 @@
                             android:layout_height="wrap_content"
                             android:src="@drawable/v_alarm_color_24" />
                     </LinearLayout>
-
                 </LinearLayout>
-
-
             </LinearLayout>
-
         </RelativeLayout>
     </android.support.v7.widget.CardView>
 </LinearLayout>

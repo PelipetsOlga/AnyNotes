@@ -18,12 +18,14 @@ import android.widget.TextView;
 
 import org.adw.library.widgets.discreteseekbar.DiscreteSeekBar;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import anynotes.olyalya.pelipets.com.anynotes.R;
+import anynotes.olyalya.pelipets.com.anynotes.interfaces.Restartable;
 import anynotes.olyalya.pelipets.com.anynotes.utils.Constants;
 import anynotes.olyalya.pelipets.com.anynotes.utils.NoteUtils;
 
@@ -43,11 +45,14 @@ public class SettingsActivity extends AppCompatActivity {
     private boolean prefVibro;
     private List<MediaPlayer> listPlayers = new ArrayList<>();
     private Switch switchVibro;
+    private Restartable restartable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
+
+        restartable= (Restartable) getIntent().getSerializableExtra(Constants.EXTRA_RESTARTABLE);
 
         loadSettings();
         initViews();
@@ -142,6 +147,7 @@ public class SettingsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent colorIntent = new Intent(SettingsActivity.this, ColorPickerActivity.class);
+                colorIntent.putExtra(Constants.EXTRA_RESTARTABLE, (Serializable) restartable);
                 startActivity(colorIntent);
                 SettingsActivity.this.finish();
             }

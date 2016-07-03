@@ -49,7 +49,7 @@ public class SearchDialogFragment extends DialogFragment implements View.OnClick
         SharedPreferences pref = getActivity().getSharedPreferences(Constants.PREFS_NAME, Context.MODE_PRIVATE);
         String oldKeyword = pref.getString(Constants.PREF_SEARCH, "");
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.AppCompatAlertDialogStyle);
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.AppTheme);
         builder.setTitle(resources.getString(R.string.search_dialog_title));
 
         LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);

@@ -12,7 +12,7 @@
         android:id="@+id/toolbar_color"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:background="@color/colorPrimary"
+        android:background="?colorPrimary"
         android:orientation="horizontal"
         android:paddingLeft="16dp"
         android:paddingRight="16dp">
@@ -65,7 +65,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/colorPrimary" />
+        android:background="?colorPrimary" />
 
     <GridView
         android:id="@+id/pallete"

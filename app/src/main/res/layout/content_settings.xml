@@ -31,7 +31,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
                 android:text="@string/example_date"
-                android:textColor="@color/colorAccent"
+                android:textColor="?colorAccent"
                 android:textStyle="italic" />
 
             <TextView
@@ -47,7 +47,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/colorPrimary" />
+        android:background="?colorPrimary" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -83,11 +83,11 @@
                     android:layout_weight="2"
 
                     android:paddingTop="46dp"
-                    app:dsb_indicatorColor="@color/colorPrimary"
+                    app:dsb_indicatorColor="?colorPrimary"
                     app:dsb_max="40"
                     app:dsb_min="10"
-                    app:dsb_progressColor="@color/colorPrimary"
-                    app:dsb_trackColor="@color/colorAccent" />
+                    app:dsb_progressColor="?colorPrimary"
+                    app:dsb_trackColor="?colorAccent" />
             </LinearLayout>
 
             <LinearLayout
@@ -114,17 +114,17 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:paddingTop="56dp"
-                    app:dsb_indicatorColor="@color/colorPrimary"
+                    app:dsb_indicatorColor="?colorPrimary"
                     app:dsb_max="255"
                     app:dsb_min="1"
-                    app:dsb_progressColor="@color/colorPrimary"
-                    app:dsb_trackColor="@color/colorAccent" />
+                    app:dsb_progressColor="?colorPrimary"
+                    app:dsb_trackColor="?colorAccent" />
             </LinearLayout>
 
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/colorPrimary" />
+                android:background="?colorPrimary" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -188,7 +188,7 @@
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/colorPrimary" />
+                android:background="?colorPrimary" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -216,7 +216,7 @@
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/colorPrimary" />
+                android:background="?colorPrimary" />
 
             <LinearLayout
                 android:layout_width="match_parent"

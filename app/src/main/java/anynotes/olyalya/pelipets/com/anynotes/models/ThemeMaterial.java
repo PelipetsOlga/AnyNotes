@@ -38,4 +38,12 @@ public class ThemeMaterial {
     public void setAccent(ColorMaterial accent) {
         this.accent = accent.getColorAccent();
     }
+
+    public int getPrimary() {
+        return primary;
+    }
+
+    public int getAccent() {
+        return accent;
+    }
 }

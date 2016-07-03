@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.util.TypedValue;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
@@ -38,6 +39,7 @@ public class ReminderActivity extends AppCompatActivity {
     private SimpleDateFormat dateFormat = new SimpleDateFormat(Constants.FORMAT_ALARM);
     private String alarmNote;
     private long repeatAlarm = 0;
+    private int colorPrimary;
 
     private class RepeatTumbler {
         boolean isChecked;
@@ -56,6 +58,10 @@ public class ReminderActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reminder);
 
+        TypedValue typedValue = new TypedValue();
+        getTheme().resolveAttribute(R.attr.colorPrimary, typedValue, true);
+        colorPrimary = typedValue.data;
+
         loadSettings();
         initViews();
 
@@ -66,14 +72,14 @@ public class ReminderActivity extends AppCompatActivity {
         if (alarmNote != null && !TextUtils.isEmpty(alarmNote)) {
             tvClock.setText(alarmNote);
             checkClock.setChecked(true);
-            tvClock.setTextColor(getResources().getColor(R.color.colorPrimary));
+            tvClock.setTextColor(getResources().getColor(colorPrimary));
             if (repeatAlarm!=0){
                 checkRepeat.setChecked(true);
-                tvRepeat.setTextColor(getResources().getColor(R.color.colorPrimary));
+                tvRepeat.setTextColor(getResources().getColor(colorPrimary));
                 gridRepeat.setVisibility(View.VISIBLE);
                 TextView savedRepeat=search(repeatAlarm);
                 if (savedRepeat!=null){
-                    savedRepeat.setTextColor(getResources().getColor(R.color.colorPrimary));
+                    savedRepeat.setTextColor(getResources().getColor(colorPrimary));
                     savedRepeat.setBackgroundDrawable(getResources().getDrawable(R.drawable.big_circle_active));
                     lastRepeat=savedRepeat;
                     tvRepeat.setText(savedRepeat.getText());
@@ -88,7 +94,7 @@ public class ReminderActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    tvClock.setTextColor(getResources().getColor(R.color.colorPrimary));
+                    tvClock.setTextColor(getResources().getColor(colorPrimary));
                     Intent pickerIntent = new Intent(ReminderActivity.this, TimeDatePickerActivity.class);
                     if (alarmNote != null) {
                         pickerIntent.putExtra(Constants.EXTRA_TIME_DATE, alarmNote);
@@ -104,7 +110,7 @@ public class ReminderActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    tvRepeat.setTextColor(getResources().getColor(R.color.colorPrimary));
+                    tvRepeat.setTextColor(getResources().getColor(colorPrimary));
                     gridRepeat.setVisibility(View.VISIBLE);
                 } else {
                     tvRepeat.setTextColor(getResources().getColor(R.color.grayInactive));
@@ -227,7 +233,7 @@ public class ReminderActivity extends AppCompatActivity {
             } else {
                 tumbler.isChecked = true;
                 tv.setBackgroundDrawable(ReminderActivity.this.getResources().getDrawable(R.drawable.big_circle_active));
-                tv.setTextColor(ReminderActivity.this.getResources().getColor(R.color.colorPrimary));
+                tv.setTextColor(ReminderActivity.this.getResources().getColor(colorPrimary));
                 tvRepeat.setText(tumbler.repeatText);
                 if (lastRepeat != null) {
                     lastRepeat.setBackgroundDrawable(ReminderActivity.this.getResources().getDrawable(R.drawable.big_circle_inactive));

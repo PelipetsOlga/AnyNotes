@@ -49,7 +49,8 @@ public class LogInFragment extends DialogFragment implements View.OnClickListene
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         resources = getActivity().getResources();
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.AppCompatAlertDialogStyle);
+       // AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.AppCompatAlertDialogStyle);
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.AppTheme);
         builder.setTitle(resources.getString(R.string.login_dialog_title));
 
         LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
