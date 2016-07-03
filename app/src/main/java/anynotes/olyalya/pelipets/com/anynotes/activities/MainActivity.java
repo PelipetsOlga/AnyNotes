@@ -226,7 +226,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setTheme();
+        NoteUtils.setTheme(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         instance = this;
@@ -316,32 +316,6 @@ public class MainActivity extends AppCompatActivity
 
         bindService(new Intent(this, NotesService.class), serviceConnection, BIND_AUTO_CREATE);
     }
-
-    private void setTheme() {
-        mPref = getSharedPreferences(Constants.PREFS_NAME, MODE_PRIVATE);
-        String primaryColor = mPref.getString(Constants.PREF_PRIMARY_COLOR, "pink");
-        String accentColor = mPref.getString(Constants.PREF_ACCENT_COLOR, "cyan");
-
-        if (primaryColor.equals("red") && accentColor.equals("red")) {
-            setTheme(R.style.Theme_Red_Red);
-        } else if (primaryColor.equals("red") && accentColor.equals("pink")) {
-            setTheme(R.style.Theme_Red_Pink);
-        } else if (primaryColor.equals("red") && accentColor.equals("purple")) {
-            setTheme(R.style.Theme_Red_Purple);
-        } else if (primaryColor.equals("red") && accentColor.equals("deep_purple")) {
-            setTheme(R.style.Theme_Red_Deep_Purple);
-        } else if (primaryColor.equals("red") && accentColor.equals("indigo")) {
-            setTheme(R.style.Theme_Red_Indigo);
-        } else {
-            setTheme(R.style.Theme_Red_Purple);
-        }
-        //restart();
-    }
-
-    private int idColor(String colorName) {
-        return this.getResources().getIdentifier(colorName, "color", this.getPackageName());
-    }
-
 
     public void loadSettings() {
         mPref = getSharedPreferences(Constants.PREFS_NAME, MODE_PRIVATE);

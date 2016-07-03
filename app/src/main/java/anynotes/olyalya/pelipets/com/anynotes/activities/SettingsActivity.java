@@ -47,10 +47,9 @@ public class SettingsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        NoteUtils.setTheme(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
-
-       // restartable= (Restartable) getIntent().getSerializableExtra(Constants.EXTRA_RESTARTABLE);
 
         loadSettings();
         initViews();

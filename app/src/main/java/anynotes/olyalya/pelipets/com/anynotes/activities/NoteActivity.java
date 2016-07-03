@@ -67,6 +67,7 @@ public class NoteActivity extends AppCompatActivity implements
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        NoteUtils.setTheme(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_note);
 

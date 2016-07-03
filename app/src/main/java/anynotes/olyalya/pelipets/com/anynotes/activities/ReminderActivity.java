@@ -55,6 +55,7 @@ public class ReminderActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        NoteUtils.setTheme(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reminder);
 
@@ -75,11 +76,11 @@ public class ReminderActivity extends AppCompatActivity {
             tvClock.setTextColor(getResources().getColor(colorPrimary));
             if (repeatAlarm!=0){
                 checkRepeat.setChecked(true);
-                tvRepeat.setTextColor(getResources().getColor(colorPrimary));
+                tvRepeat.setTextColor(colorPrimary);
                 gridRepeat.setVisibility(View.VISIBLE);
                 TextView savedRepeat=search(repeatAlarm);
                 if (savedRepeat!=null){
-                    savedRepeat.setTextColor(getResources().getColor(colorPrimary));
+                    savedRepeat.setTextColor(colorPrimary);
                     savedRepeat.setBackgroundDrawable(getResources().getDrawable(R.drawable.big_circle_active));
                     lastRepeat=savedRepeat;
                     tvRepeat.setText(savedRepeat.getText());
@@ -94,7 +95,7 @@ public class ReminderActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    tvClock.setTextColor(getResources().getColor(colorPrimary));
+                    tvClock.setTextColor(colorPrimary);
                     Intent pickerIntent = new Intent(ReminderActivity.this, TimeDatePickerActivity.class);
                     if (alarmNote != null) {
                         pickerIntent.putExtra(Constants.EXTRA_TIME_DATE, alarmNote);
@@ -110,7 +111,7 @@ public class ReminderActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    tvRepeat.setTextColor(getResources().getColor(colorPrimary));
+                    tvRepeat.setTextColor(colorPrimary);
                     gridRepeat.setVisibility(View.VISIBLE);
                 } else {
                     tvRepeat.setTextColor(getResources().getColor(R.color.grayInactive));
@@ -233,7 +234,7 @@ public class ReminderActivity extends AppCompatActivity {
             } else {
                 tumbler.isChecked = true;
                 tv.setBackgroundDrawable(ReminderActivity.this.getResources().getDrawable(R.drawable.big_circle_active));
-                tv.setTextColor(ReminderActivity.this.getResources().getColor(colorPrimary));
+                tv.setTextColor(colorPrimary);
                 tvRepeat.setText(tumbler.repeatText);
                 if (lastRepeat != null) {
                     lastRepeat.setBackgroundDrawable(ReminderActivity.this.getResources().getDrawable(R.drawable.big_circle_inactive));

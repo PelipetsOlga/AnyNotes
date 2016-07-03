@@ -1,6 +1,7 @@
 package anynotes.olyalya.pelipets.com.anynotes.utils;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -66,6 +67,52 @@ public class NoteUtils {
 
     public static void showNotNetErrorMessage(Context ctx) {
         Toast.makeText(ctx, ctx.getResources().getString(R.string.error_network), Toast.LENGTH_SHORT).show();
+    }
+
+    public static void setTheme(AppCompatActivity activity){
+        SharedPreferences mPref = activity.getSharedPreferences(Constants.PREFS_NAME, activity.MODE_PRIVATE);
+        String primaryColor = mPref.getString(Constants.PREF_PRIMARY_COLOR, "pink");
+        String accentColor = mPref.getString(Constants.PREF_ACCENT_COLOR, "cyan");
+
+        if (primaryColor.equals("red") && accentColor.equals("red")) {
+            activity.setTheme(R.style.Theme_Red_Red);
+        } else if (primaryColor.equals("red") && accentColor.equals("pink")) {
+            activity.setTheme(R.style.Theme_Red_Pink);
+        } else if (primaryColor.equals("red") && accentColor.equals("purple")) {
+            activity.setTheme(R.style.Theme_Red_Purple);
+        } else if (primaryColor.equals("red") && accentColor.equals("deep_purple")) {
+            activity.setTheme(R.style.Theme_Red_Deep_Purple);
+        } else if (primaryColor.equals("red") && accentColor.equals("indigo")) {
+            activity.setTheme(R.style.Theme_Red_Indigo);
+        }else if (primaryColor.equals("red") && accentColor.equals("blue")) {
+            activity.setTheme(R.style.Theme_Red_Blue);
+        }else if (primaryColor.equals("red") && accentColor.equals("light_blue")) {
+            activity.setTheme(R.style.Theme_Red_Light_Blue);
+        }else if (primaryColor.equals("red") && accentColor.equals("cyan")) {
+            activity.setTheme(R.style.Theme_Red_Cyan);
+        }else if (primaryColor.equals("red") && accentColor.equals("teal")) {
+            activity.setTheme(R.style.Theme_Red_Teal);
+        }else if (primaryColor.equals("red") && accentColor.equals("green")) {
+            activity.setTheme(R.style.Theme_Red_Green);
+        }else if (primaryColor.equals("red") && accentColor.equals("light_green")) {
+            activity.setTheme(R.style.Theme_Red_Light_Green);
+        }else if (primaryColor.equals("red") && accentColor.equals("lime")) {
+            activity.setTheme(R.style.Theme_Red_Lime);
+        }else if (primaryColor.equals("red") && accentColor.equals("yellow")) {
+            activity.setTheme(R.style.Theme_Red_Yellow);
+        }else if (primaryColor.equals("red") && accentColor.equals("amber")) {
+            activity.setTheme(R.style.Theme_Red_Amber);
+        }else if (primaryColor.equals("red") && accentColor.equals("orange")) {
+            activity.setTheme(R.style.Theme_Red_Orange);
+        }else if (primaryColor.equals("red") && accentColor.equals("deep_orange")) {
+            activity.setTheme(R.style.Theme_Red_Deep_Orange);
+        }else if (primaryColor.equals("red") && accentColor.equals("brown")) {
+            activity.setTheme(R.style.Theme_Red_Brown);
+        }else if (primaryColor.equals("red") && accentColor.equals("grey")) {
+            activity.setTheme(R.style.Theme_Red_Grey);
+        }else if (primaryColor.equals("red") && accentColor.equals("blue_grey")) {
+            activity.setTheme(R.style.Theme_Red_Blue_Grey);
+        }
     }
 
 }

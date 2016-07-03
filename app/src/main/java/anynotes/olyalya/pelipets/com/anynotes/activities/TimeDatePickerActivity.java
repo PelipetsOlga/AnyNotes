@@ -25,6 +25,7 @@ public class TimeDatePickerActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        NoteUtils.setTheme(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_time_date_picker);
         loadSettings();
