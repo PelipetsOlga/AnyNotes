@@ -59,6 +59,10 @@ public class Constants {
     public static final int PREF_SORT_AL_DESC = 102;
     public static final int PREF_SORT_NUM_ASC = 103;
     public static final int PREF_SORT_NUM_DESC = 104;
+    public static final String PREF_PRIMARY_COLOR = "primary_color";
+    public static final String PREF_PRIMARY_DARK_COLOR = "primary_color_dark";
+    public static final String PREF_ACCENT_COLOR = "accent_color";
+
 
     public static final int BRIGHTNESS = 200;
     public static final int SIZE_FONT = 18;
