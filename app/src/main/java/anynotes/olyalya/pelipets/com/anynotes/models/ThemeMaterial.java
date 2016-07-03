@@ -3,47 +3,39 @@ package anynotes.olyalya.pelipets.com.anynotes.models;
 import android.content.Context;
 
 public class ThemeMaterial {
-    private int primary;
-    private int accent;
+    private ColorMaterial primary;
+    private ColorMaterial accent;
     private Context ctx;
 
     public  ThemeMaterial(Context ctx){
         this.ctx=ctx;
     }
 
-    public ThemeMaterial(Context ctx, int c1, int c2){
+    public ThemeMaterial(Context ctx, ColorMaterial c1, ColorMaterial c2){
         primary=c1;
         accent=c2;
         this.ctx=ctx;
     }
 
-    public ThemeMaterial(Context ctx, ColorMaterial c1, ColorMaterial c2){
-        primary=c1.getColorPrimary();
-        accent=c2.getColorAccent();
+    public ThemeMaterial(Context ctx, String c1, String c2){
+        primary=new ColorMaterial(c1);
+        accent=new ColorMaterial(c2);
         this.ctx=ctx;
     }
 
-    public void setPrimary(int primary) {
-        this.primary = primary;
-    }
-
-    public void setAccent(int accent) {
-        this.accent = accent;
-    }
-
-    public void setPrimary(ColorMaterial primary) {
-        this.primary = primary.getColorPrimary();
-    }
-
-    public void setAccent(ColorMaterial accent) {
-        this.accent = accent.getColorAccent();
-    }
-
-    public int getPrimary() {
+    public ColorMaterial getPrimary() {
         return primary;
     }
 
-    public int getAccent() {
+    public void setPrimary(ColorMaterial primary) {
+        this.primary = primary;
+    }
+
+    public ColorMaterial getAccent() {
         return accent;
+    }
+
+    public void setAccent(ColorMaterial accent) {
+        this.accent = accent;
     }
 }

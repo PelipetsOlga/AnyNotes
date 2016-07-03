@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity
         RegistrationListener, LoginListener, SearchListener {
 
 
-        private static final int NOTE_REQUEST_CODE = 100;
+    private static final int NOTE_REQUEST_CODE = 100;
     private static final int SETTINGS_REQUEST_CODE = 200;
     private final String ERROR_WRONG_LOGIN_OR_PASSWORD = "3003";
 
@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity
     private static MainActivity instance;
 
     public static void reStart() {
-        if (instance!=null)
+        if (instance != null)
             instance.recreate();
     }
 
@@ -229,7 +229,7 @@ public class MainActivity extends AppCompatActivity
         setTheme();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        instance= this;
+        instance = this;
 
         mTTS = new TextToSpeech(this, this);
         loadSettings();
@@ -319,17 +319,27 @@ public class MainActivity extends AppCompatActivity
 
     private void setTheme() {
         mPref = getSharedPreferences(Constants.PREFS_NAME, MODE_PRIVATE);
-        int primaryColor = mPref.getInt(Constants.PREF_PRIMARY_COLOR, R.color.pink);
-        int accentColor = mPref.getInt(Constants.PREF_ACCENT_COLOR, R.color.cyan_accent);
+        String primaryColor = mPref.getString(Constants.PREF_PRIMARY_COLOR, "pink");
+        String accentColor = mPref.getString(Constants.PREF_ACCENT_COLOR, "cyan");
 
-        if (primaryColor == R.color.red && accentColor == R.color.red) {
+        if (primaryColor.equals("red") && accentColor.equals("red")) {
             setTheme(R.style.Theme_Red_Red);
-        } else if (primaryColor == R.color.red && accentColor == R.color.pink) {
+        } else if (primaryColor.equals("red") && accentColor.equals("pink")) {
             setTheme(R.style.Theme_Red_Pink);
+        } else if (primaryColor.equals("red") && accentColor.equals("purple")) {
+            setTheme(R.style.Theme_Red_Purple);
+        } else if (primaryColor.equals("red") && accentColor.equals("deep_purple")) {
+            setTheme(R.style.Theme_Red_Deep_Purple);
+        } else if (primaryColor.equals("red") && accentColor.equals("indigo")) {
+            setTheme(R.style.Theme_Red_Indigo);
         } else {
             setTheme(R.style.Theme_Red_Purple);
         }
         //restart();
+    }
+
+    private int idColor(String colorName) {
+        return this.getResources().getIdentifier(colorName, "color", this.getPackageName());
     }
 
 

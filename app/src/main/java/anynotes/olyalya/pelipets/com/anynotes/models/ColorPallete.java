@@ -13,7 +13,7 @@ public class ColorPallete {
     private List<ColorMaterial> pallete;
     private Context ctx;
     private Resources res;
-    private ColorMaterial materialRed;
+ /*   private ColorMaterial materialRed;
     private ColorMaterial materialPink;
     private ColorMaterial materialPurple;
     private ColorMaterial materialDeepPurple;
@@ -31,7 +31,7 @@ public class ColorPallete {
     private ColorMaterial materialDeepOrange;
     private ColorMaterial materialBrown;
     private ColorMaterial materialGrey;
-    private ColorMaterial materialBlueGrey;
+    private ColorMaterial materialBlueGrey;*/
 
 
     public List<ColorMaterial> getPallete() {
@@ -46,7 +46,7 @@ public class ColorPallete {
         return res;
     }
 
-    public ColorMaterial getMaterialRed() {
+ /*   public ColorMaterial getMaterialRed() {
         return materialRed;
     }
 
@@ -120,13 +120,34 @@ public class ColorPallete {
 
     public ColorMaterial getMaterialBlueGrey() {
         return materialBlueGrey;
-    }
+    }*/
 
     public ColorPallete(Context ctx) {
         this.ctx = ctx;
         res = this.ctx.getResources();
         pallete = new ArrayList<>();
-        pallete.add(materialRed = new ColorMaterial(res.getColor(R.color.red), res.getColor(R.color.red_dark), res.getColor(R.color.red_accent)));
+
+        pallete.add(new ColorMaterial("red"));
+        pallete.add(new ColorMaterial("pink"));
+        pallete.add(new ColorMaterial("purple"));
+        pallete.add(new ColorMaterial("deep_purple"));
+        pallete.add(new ColorMaterial("indigo"));
+        pallete.add(new ColorMaterial("blue"));
+        pallete.add(new ColorMaterial("light_blue"));
+        pallete.add(new ColorMaterial("cyan"));
+        pallete.add(new ColorMaterial("teal"));
+        pallete.add(new ColorMaterial("green"));
+        pallete.add(new ColorMaterial("light_green"));
+        pallete.add(new ColorMaterial("lime"));
+        pallete.add(new ColorMaterial("yellow"));
+        pallete.add(new ColorMaterial("amber"));
+        pallete.add(new ColorMaterial("orange"));
+        pallete.add(new ColorMaterial("deep_orange"));
+        pallete.add(new ColorMaterial("brown"));
+        pallete.add(new ColorMaterial("grey"));
+        pallete.add(new ColorMaterial("blue_grey"));
+
+        /*pallete.add(materialRed = new ColorMaterial(res.getColor(R.color.red), res.getColor(R.color.red_dark), res.getColor(R.color.red_accent)));
         pallete.add(materialPink=new ColorMaterial(res.getColor(R.color.pink), res.getColor(R.color.pink_dark), res.getColor(R.color.pink_accent)));
         pallete.add(materialPurple=new ColorMaterial(res.getColor(R.color.purple), res.getColor(R.color.purple_dark), res.getColor(R.color.purple_accent)));
         pallete.add(materialDeepPurple=new ColorMaterial(res.getColor(R.color.deep_purple), res.getColor(R.color.deep_purple_dark), res.getColor(R.color.deep_purple_accent)));
@@ -144,7 +165,7 @@ public class ColorPallete {
         pallete.add(materialDeepOrange=new ColorMaterial(res.getColor(R.color.deep_orange), res.getColor(R.color.deep_orange_dark), res.getColor(R.color.deep_orange_accent)));
         pallete.add(materialBrown=new ColorMaterial(res.getColor(R.color.brown), res.getColor(R.color.brown_dark), res.getColor(R.color.brown_accent)));
         pallete.add(materialGrey=new ColorMaterial(res.getColor(R.color.grey), res.getColor(R.color.grey_dark), res.getColor(R.color.grey_accent)));
-        pallete.add(materialBlueGrey=new ColorMaterial(res.getColor(R.color.blue_grey), res.getColor(R.color.blue_grey_dark), res.getColor(R.color.blue_grey_accent)));
+        pallete.add(materialBlueGrey=new ColorMaterial(res.getColor(R.color.blue_grey), res.getColor(R.color.blue_grey_dark), res.getColor(R.color.blue_grey_accent)));*/
     }
 
 

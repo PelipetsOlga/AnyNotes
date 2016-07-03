@@ -3,6 +3,7 @@ package anynotes.olyalya.pelipets.com.anynotes.activities;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -57,8 +58,8 @@ public class ColorPickerActivity extends AppCompatActivity {
         NoteUtils.setBrightness(bright, this);
 
         theme = new ThemeMaterial(ColorPickerActivity.this,
-                sPref.getInt(Constants.PREF_PRIMARY_COLOR, R.color.pink),
-                sPref.getInt(Constants.PREF_ACCENT_COLOR, R.color.cyan_accent));
+                sPref.getString(Constants.PREF_PRIMARY_COLOR, "pink"),
+                sPref.getString(Constants.PREF_ACCENT_COLOR, "cyan"));
     }
 
     private void initViews() {
@@ -82,15 +83,15 @@ public class ColorPickerActivity extends AppCompatActivity {
                 if (state == State.NOT_CHANGED) {
                     state = State.PRIMARY_CHANGED;
                     theme.setPrimary(colorSelected);
-                    toolbarColor.setBackgroundColor(colorSelected.getColorPrimary());
+                    toolbarColor.setBackgroundColor(getColor(colorSelected.getTag()));
                 } else if (state == State.PRIMARY_CHANGED) {
                     state = State.ACCENT_CHANGED;
                     theme.setAccent(colorSelected);
-                    fab.setBackgroundTintList(ColorStateList.valueOf(colorSelected.getColorAccent()));
+                    fab.setBackgroundTintList(ColorStateList.valueOf(getColor(colorSelected.getTag())));
                 } else if (state == State.ACCENT_CHANGED) {
                     state = State.PRIMARY_CHANGED;
                     theme.setPrimary(colorSelected);
-                    toolbarColor.setBackgroundColor(colorSelected.getColorPrimary());
+                    toolbarColor.setBackgroundColor(getColor(colorSelected.getTag()));
                 }
             }
         });
@@ -107,8 +108,8 @@ public class ColorPickerActivity extends AppCompatActivity {
     private void saveNewTheme() {
         SharedPreferences sPref = getSharedPreferences(Constants.PREFS_NAME, AppCompatActivity.MODE_PRIVATE);
         SharedPreferences.Editor ed = sPref.edit();
-        ed.putInt(Constants.PREF_PRIMARY_COLOR, theme.getPrimary());
-        ed.putInt(Constants.PREF_ACCENT_COLOR, theme.getAccent());
+        ed.putString(Constants.PREF_PRIMARY_COLOR, theme.getPrimary().getTag());
+        ed.putString(Constants.PREF_ACCENT_COLOR, theme.getAccent().getTag());
         ed.commit();
 
         MainActivity.reStart();
@@ -146,9 +147,13 @@ public class ColorPickerActivity extends AppCompatActivity {
             }
             ImageView view = (ImageView) convertView;
             ColorMaterial colorMaterial = items.get(position);
-            int color = colorMaterial.getColorPrimary();
-            view.setBackgroundColor(color);
+            view.setBackgroundColor(getColor(colorMaterial.getTag()));
             return view;
         }
+    }
+
+    private int getColor(String colorTitle) {
+        int colorId = getResources().getIdentifier(colorTitle, "color", getPackageName());
+        return getResources().getColor(colorId);
     }
 }
