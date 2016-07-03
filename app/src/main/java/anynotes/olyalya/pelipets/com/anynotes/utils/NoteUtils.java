@@ -17,9 +17,6 @@ import android.widget.Toast;
 
 import anynotes.olyalya.pelipets.com.anynotes.R;
 
-/**
- * Created by Olga on 27.12.2015.
- */
 public class NoteUtils {
 
     public static final String RED = "red";
@@ -170,6 +167,120 @@ public class NoteUtils {
             activity.setTheme(R.style.Theme_Pink_Grey);
         }else if (primaryColor.equals("pink") && accentColor.equals(BLUE_GREY)) {
             activity.setTheme(R.style.Theme_Pink_Blue_Grey);
+        }else if (primaryColor.equals(PURPLE) && accentColor.equals(RED)) {
+            activity.setTheme(R.style.Theme_Purple_Red);
+        }else if (primaryColor.equals(PURPLE) && accentColor.equals(PINK)) {
+            activity.setTheme(R.style.Theme_Purple_Pink);
+        }else if (primaryColor.equals(PURPLE) && accentColor.equals(PURPLE)) {
+            activity.setTheme(R.style.Theme_Purple_Purple);
+        }else if (primaryColor.equals(PURPLE) && accentColor.equals(DEEP_PURPLE)) {
+            activity.setTheme(R.style.Theme_Purple_Deep_Purple);
+        }else if (primaryColor.equals(PURPLE) && accentColor.equals(INDIGO)) {
+            activity.setTheme(R.style.Theme_Purple_Indigo);
+        }else if (primaryColor.equals(PURPLE) && accentColor.equals(BLUE)) {
+            activity.setTheme(R.style.Theme_Purple_Blue);
+        }else if (primaryColor.equals(PURPLE) && accentColor.equals(LIGHT_BLUE)) {
+            activity.setTheme(R.style.Theme_Purple_Light_Blue);
+        }else if (primaryColor.equals(PURPLE) && accentColor.equals(CYAN)) {
+            activity.setTheme(R.style.Theme_Purple_Cyan);
+        }else if (primaryColor.equals(PURPLE) && accentColor.equals(TEAL)) {
+            activity.setTheme(R.style.Theme_Purple_Teal);
+        }else if (primaryColor.equals(PURPLE) && accentColor.equals(GREEN)) {
+            activity.setTheme(R.style.Theme_Purple_Green);
+        }else if (primaryColor.equals(PURPLE) && accentColor.equals(LIGHT_GREEN)) {
+            activity.setTheme(R.style.Theme_Purple_Light_Green);
+        }else if (primaryColor.equals(PURPLE) && accentColor.equals(LIME)) {
+            activity.setTheme(R.style.Theme_Purple_Lime);
+        }else if (primaryColor.equals(PURPLE) && accentColor.equals(YELLOW)) {
+            activity.setTheme(R.style.Theme_Purple_Yellow);
+        }else if (primaryColor.equals(PURPLE) && accentColor.equals(AMBER)) {
+            activity.setTheme(R.style.Theme_Purple_Amber);
+        }else if (primaryColor.equals(PURPLE) && accentColor.equals(ORANGE)) {
+            activity.setTheme(R.style.Theme_Purple_Orange);
+        }else if (primaryColor.equals(PURPLE) && accentColor.equals(DEEP_ORANGE)) {
+            activity.setTheme(R.style.Theme_Purple_Deep_Orange);
+        }else if (primaryColor.equals(PURPLE) && accentColor.equals(BROWN)) {
+            activity.setTheme(R.style.Theme_Purple_Brown);
+        }else if (primaryColor.equals(PURPLE) && accentColor.equals(GREY)) {
+            activity.setTheme(R.style.Theme_Purple_Grey);
+        }else if (primaryColor.equals(PURPLE) && accentColor.equals(BLUE_GREY)) {
+            activity.setTheme(R.style.Theme_Purple_Blue_Grey);
+        }else if (primaryColor.equals(DEEP_PURPLE) && accentColor.equals(RED)) {
+            activity.setTheme(R.style.Theme_Deep_Purple_Red);
+        }else if (primaryColor.equals(DEEP_PURPLE) && accentColor.equals(PINK)) {
+            activity.setTheme(R.style.Theme_Deep_Purple_Pink);
+        }else if (primaryColor.equals(DEEP_PURPLE) && accentColor.equals(PURPLE)) {
+            activity.setTheme(R.style.Theme_Deep_Purple_Purple);
+        }else if (primaryColor.equals(DEEP_PURPLE) && accentColor.equals(DEEP_PURPLE)) {
+            activity.setTheme(R.style.Theme_Deep_Purple_Deep_Purple);
+        }else if (primaryColor.equals(DEEP_PURPLE) && accentColor.equals(INDIGO)) {
+            activity.setTheme(R.style.Theme_Deep_Purple_Indigo);
+        }else if (primaryColor.equals(DEEP_PURPLE) && accentColor.equals(BLUE)) {
+            activity.setTheme(R.style.Theme_Deep_Purple_Blue);
+        }else if (primaryColor.equals(DEEP_PURPLE) && accentColor.equals(LIGHT_BLUE)) {
+            activity.setTheme(R.style.Theme_Deep_Purple_Light_Blue);
+        }else if (primaryColor.equals(DEEP_PURPLE) && accentColor.equals(CYAN)) {
+            activity.setTheme(R.style.Theme_Deep_Purple_Cyan);
+        }else if (primaryColor.equals(DEEP_PURPLE) && accentColor.equals(TEAL)) {
+            activity.setTheme(R.style.Theme_Deep_Purple_Teal);
+        }else if (primaryColor.equals(DEEP_PURPLE) && accentColor.equals(GREEN)) {
+            activity.setTheme(R.style.Theme_Deep_Purple_Green);
+        }else if (primaryColor.equals(DEEP_PURPLE) && accentColor.equals(LIGHT_GREEN)) {
+            activity.setTheme(R.style.Theme_Deep_Purple_Light_Green);
+        }else if (primaryColor.equals(DEEP_PURPLE) && accentColor.equals(LIME)) {
+            activity.setTheme(R.style.Theme_Deep_Purple_Lime);
+        }else if (primaryColor.equals(DEEP_PURPLE) && accentColor.equals(YELLOW)) {
+            activity.setTheme(R.style.Theme_Deep_Purple_Yellow);
+        }else if (primaryColor.equals(DEEP_PURPLE) && accentColor.equals(AMBER)) {
+            activity.setTheme(R.style.Theme_Deep_Purple_Amber);
+        }else if (primaryColor.equals(DEEP_PURPLE) && accentColor.equals(ORANGE)) {
+            activity.setTheme(R.style.Theme_Deep_Purple_Orange);
+        }else if (primaryColor.equals(DEEP_PURPLE) && accentColor.equals(DEEP_ORANGE)) {
+            activity.setTheme(R.style.Theme_Deep_Purple_Deep_Orange);
+        }else if (primaryColor.equals(DEEP_PURPLE) && accentColor.equals(BROWN)) {
+            activity.setTheme(R.style.Theme_Deep_Purple_Brown);
+        }else if (primaryColor.equals(DEEP_PURPLE) && accentColor.equals(GREY)) {
+            activity.setTheme(R.style.Theme_Deep_Purple_Grey);
+        }else if (primaryColor.equals(DEEP_PURPLE) && accentColor.equals(BLUE_GREY)) {
+            activity.setTheme(R.style.Theme_Deep_Purple_Blue_Grey);
+        }else if (primaryColor.equals(INDIGO) && accentColor.equals(RED)) {
+            activity.setTheme(R.style.Theme_Indigo_Red);
+        }else if (primaryColor.equals(INDIGO) && accentColor.equals(PINK)) {
+            activity.setTheme(R.style.Theme_Indigo_Pink);
+        }else if (primaryColor.equals(INDIGO) && accentColor.equals(PURPLE)) {
+            activity.setTheme(R.style.Theme_Indigo_Purple);
+        }else if (primaryColor.equals(INDIGO) && accentColor.equals(DEEP_PURPLE)) {
+            activity.setTheme(R.style.Theme_Indigo_Deep_Purple);
+        }else if (primaryColor.equals(INDIGO) && accentColor.equals(INDIGO)) {
+            activity.setTheme(R.style.Theme_Indigo_Indigo);
+        }else if (primaryColor.equals(INDIGO) && accentColor.equals(BLUE)) {
+            activity.setTheme(R.style.Theme_Indigo_Blue);
+        }else if (primaryColor.equals(INDIGO) && accentColor.equals(LIGHT_BLUE)) {
+            activity.setTheme(R.style.Theme_Indigo_Light_Blue);
+        }else if (primaryColor.equals(INDIGO) && accentColor.equals(CYAN)) {
+            activity.setTheme(R.style.Theme_Indigo_Cyan);
+        }else if (primaryColor.equals(INDIGO) && accentColor.equals(TEAL)) {
+            activity.setTheme(R.style.Theme_Indigo_Teal);
+        }else if (primaryColor.equals(INDIGO) && accentColor.equals(GREEN)) {
+            activity.setTheme(R.style.Theme_Indigo_Green);
+        }else if (primaryColor.equals(INDIGO) && accentColor.equals(LIGHT_GREEN)) {
+            activity.setTheme(R.style.Theme_Indigo_Light_Green);
+        }else if (primaryColor.equals(INDIGO) && accentColor.equals(LIME)) {
+            activity.setTheme(R.style.Theme_Indigo_Lime);
+        }else if (primaryColor.equals(INDIGO) && accentColor.equals(YELLOW)) {
+            activity.setTheme(R.style.Theme_Indigo_Yellow);
+        }else if (primaryColor.equals(INDIGO) && accentColor.equals(AMBER)) {
+            activity.setTheme(R.style.Theme_Indigo_Amber);
+        }else if (primaryColor.equals(INDIGO) && accentColor.equals(ORANGE)) {
+            activity.setTheme(R.style.Theme_Indigo_Orange);
+        }else if (primaryColor.equals(INDIGO) && accentColor.equals(DEEP_ORANGE)) {
+            activity.setTheme(R.style.Theme_Indigo_Deep_Orange);
+        }else if (primaryColor.equals(INDIGO) && accentColor.equals(BROWN)) {
+            activity.setTheme(R.style.Theme_Indigo_Brown);
+        }else if (primaryColor.equals(INDIGO) && accentColor.equals(GREY)) {
+            activity.setTheme(R.style.Theme_Indigo_Grey);
+        }else if (primaryColor.equals(INDIGO) && accentColor.equals(BLUE_GREY)) {
+            activity.setTheme(R.style.Theme_Indigo_Blue_Grey);
         }
     }
 
