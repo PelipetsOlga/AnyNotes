@@ -22,6 +22,26 @@ import anynotes.olyalya.pelipets.com.anynotes.R;
  */
 public class NoteUtils {
 
+    public static final String RED = "red";
+    public static final String PINK = "pink";
+    public static final String PURPLE = "purple";
+    public static final String DEEP_PURPLE = "deep_purple";
+    public static final String INDIGO = "indigo";
+    public static final String BLUE = "blue";
+    public static final String LIGHT_BLUE = "light_blue";
+    public static final String CYAN = "cyan";
+    public static final String TEAL = "teal";
+    public static final String GREEN = "green";
+    public static final String LIGHT_GREEN = "light_green";
+    public static final String LIME = "lime";
+    public static final String YELLOW = "yellow";
+    public static final String AMBER = "amber";
+    public static final String ORANGE = "orange";
+    public static final String DEEP_ORANGE = "deep_orange";
+    public static final String BROWN = "brown";
+    public static final String GREY = "grey";
+    public static final String BLUE_GREY = "blue_grey";
+
     public static void log(String msg) {
         Log.d(Constants.TAG, msg);
     }
@@ -74,44 +94,82 @@ public class NoteUtils {
         String primaryColor = mPref.getString(Constants.PREF_PRIMARY_COLOR, "pink");
         String accentColor = mPref.getString(Constants.PREF_ACCENT_COLOR, "cyan");
 
-        if (primaryColor.equals("red") && accentColor.equals("red")) {
+        if (primaryColor.equals("red") && accentColor.equals(RED)) {
             activity.setTheme(R.style.Theme_Red_Red);
-        } else if (primaryColor.equals("red") && accentColor.equals("pink")) {
+        } else if (primaryColor.equals("red") && accentColor.equals(PINK)) {
             activity.setTheme(R.style.Theme_Red_Pink);
-        } else if (primaryColor.equals("red") && accentColor.equals("purple")) {
+        } else if (primaryColor.equals("red") && accentColor.equals(PURPLE)) {
             activity.setTheme(R.style.Theme_Red_Purple);
-        } else if (primaryColor.equals("red") && accentColor.equals("deep_purple")) {
+        } else if (primaryColor.equals("red") && accentColor.equals(DEEP_PURPLE)) {
             activity.setTheme(R.style.Theme_Red_Deep_Purple);
-        } else if (primaryColor.equals("red") && accentColor.equals("indigo")) {
+        } else if (primaryColor.equals("red") && accentColor.equals(INDIGO)) {
             activity.setTheme(R.style.Theme_Red_Indigo);
-        }else if (primaryColor.equals("red") && accentColor.equals("blue")) {
+        }else if (primaryColor.equals("red") && accentColor.equals(BLUE)) {
             activity.setTheme(R.style.Theme_Red_Blue);
-        }else if (primaryColor.equals("red") && accentColor.equals("light_blue")) {
+        }else if (primaryColor.equals("red") && accentColor.equals(LIGHT_BLUE)) {
             activity.setTheme(R.style.Theme_Red_Light_Blue);
-        }else if (primaryColor.equals("red") && accentColor.equals("cyan")) {
+        }else if (primaryColor.equals("red") && accentColor.equals(CYAN)) {
             activity.setTheme(R.style.Theme_Red_Cyan);
-        }else if (primaryColor.equals("red") && accentColor.equals("teal")) {
+        }else if (primaryColor.equals("red") && accentColor.equals(TEAL)) {
             activity.setTheme(R.style.Theme_Red_Teal);
-        }else if (primaryColor.equals("red") && accentColor.equals("green")) {
+        }else if (primaryColor.equals("red") && accentColor.equals(GREEN)) {
             activity.setTheme(R.style.Theme_Red_Green);
-        }else if (primaryColor.equals("red") && accentColor.equals("light_green")) {
+        }else if (primaryColor.equals("red") && accentColor.equals(LIGHT_GREEN)) {
             activity.setTheme(R.style.Theme_Red_Light_Green);
-        }else if (primaryColor.equals("red") && accentColor.equals("lime")) {
+        }else if (primaryColor.equals("red") && accentColor.equals(LIME)) {
             activity.setTheme(R.style.Theme_Red_Lime);
-        }else if (primaryColor.equals("red") && accentColor.equals("yellow")) {
+        }else if (primaryColor.equals("red") && accentColor.equals(YELLOW)) {
             activity.setTheme(R.style.Theme_Red_Yellow);
-        }else if (primaryColor.equals("red") && accentColor.equals("amber")) {
+        }else if (primaryColor.equals("red") && accentColor.equals(AMBER)) {
             activity.setTheme(R.style.Theme_Red_Amber);
-        }else if (primaryColor.equals("red") && accentColor.equals("orange")) {
+        }else if (primaryColor.equals("red") && accentColor.equals(ORANGE)) {
             activity.setTheme(R.style.Theme_Red_Orange);
-        }else if (primaryColor.equals("red") && accentColor.equals("deep_orange")) {
+        }else if (primaryColor.equals("red") && accentColor.equals(DEEP_ORANGE)) {
             activity.setTheme(R.style.Theme_Red_Deep_Orange);
-        }else if (primaryColor.equals("red") && accentColor.equals("brown")) {
+        }else if (primaryColor.equals("red") && accentColor.equals(BROWN)) {
             activity.setTheme(R.style.Theme_Red_Brown);
-        }else if (primaryColor.equals("red") && accentColor.equals("grey")) {
+        }else if (primaryColor.equals("red") && accentColor.equals(GREY)) {
             activity.setTheme(R.style.Theme_Red_Grey);
-        }else if (primaryColor.equals("red") && accentColor.equals("blue_grey")) {
+        }else if (primaryColor.equals("red") && accentColor.equals(BLUE_GREY)) {
             activity.setTheme(R.style.Theme_Red_Blue_Grey);
+        }else if (primaryColor.equals("pink") && accentColor.equals(RED)) {
+            activity.setTheme(R.style.Theme_Pink_Red);
+        }else if (primaryColor.equals("pink") && accentColor.equals(PINK)) {
+            activity.setTheme(R.style.Theme_Pink_Pink);
+        }else if (primaryColor.equals("pink") && accentColor.equals(PURPLE)) {
+            activity.setTheme(R.style.Theme_Pink_Purple);
+        }else if (primaryColor.equals("pink") && accentColor.equals(DEEP_PURPLE)) {
+            activity.setTheme(R.style.Theme_Pink_Deep_Purple);
+        }else if (primaryColor.equals("pink") && accentColor.equals(INDIGO)) {
+            activity.setTheme(R.style.Theme_Pink_Indigo);
+        }else if (primaryColor.equals("pink") && accentColor.equals(BLUE)) {
+            activity.setTheme(R.style.Theme_Pink_Blue);
+        }else if (primaryColor.equals("pink") && accentColor.equals(LIGHT_BLUE)) {
+            activity.setTheme(R.style.Theme_Pink_Light_Blue);
+        }else if (primaryColor.equals("pink") && accentColor.equals(CYAN)) {
+            activity.setTheme(R.style.Theme_Pink_Cyan);
+        }else if (primaryColor.equals("pink") && accentColor.equals(TEAL)) {
+            activity.setTheme(R.style.Theme_Pink_Teal);
+        }else if (primaryColor.equals("pink") && accentColor.equals(GREEN)) {
+            activity.setTheme(R.style.Theme_Pink_Green);
+        }else if (primaryColor.equals("pink") && accentColor.equals(LIGHT_GREEN)) {
+            activity.setTheme(R.style.Theme_Pink_Light_Green);
+        }else if (primaryColor.equals("pink") && accentColor.equals(LIME)) {
+            activity.setTheme(R.style.Theme_Pink_Lime);
+        }else if (primaryColor.equals("pink") && accentColor.equals(YELLOW)) {
+            activity.setTheme(R.style.Theme_Pink_Yellow);
+        }else if (primaryColor.equals("pink") && accentColor.equals(AMBER)) {
+            activity.setTheme(R.style.Theme_Pink_Amber);
+        }else if (primaryColor.equals("pink") && accentColor.equals(ORANGE)) {
+            activity.setTheme(R.style.Theme_Pink_Orange);
+        }else if (primaryColor.equals("pink") && accentColor.equals(DEEP_ORANGE)) {
+            activity.setTheme(R.style.Theme_Pink_Deep_Orange);
+        }else if (primaryColor.equals("pink") && accentColor.equals(BROWN)) {
+            activity.setTheme(R.style.Theme_Pink_Brown);
+        }else if (primaryColor.equals("pink") && accentColor.equals(GREY)) {
+            activity.setTheme(R.style.Theme_Pink_Grey);
+        }else if (primaryColor.equals("pink") && accentColor.equals(BLUE_GREY)) {
+            activity.setTheme(R.style.Theme_Pink_Blue_Grey);
         }
     }
 

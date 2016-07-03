@@ -73,7 +73,7 @@ public class ReminderActivity extends AppCompatActivity {
         if (alarmNote != null && !TextUtils.isEmpty(alarmNote)) {
             tvClock.setText(alarmNote);
             checkClock.setChecked(true);
-            tvClock.setTextColor(getResources().getColor(colorPrimary));
+            tvClock.setTextColor(colorPrimary);
             if (repeatAlarm!=0){
                 checkRepeat.setChecked(true);
                 tvRepeat.setTextColor(colorPrimary);
