@@ -18,7 +18,6 @@ import android.widget.LinearLayout;
 import java.util.List;
 
 import anynotes.olyalya.pelipets.com.anynotes.R;
-import anynotes.olyalya.pelipets.com.anynotes.interfaces.Restartable;
 import anynotes.olyalya.pelipets.com.anynotes.models.ColorMaterial;
 import anynotes.olyalya.pelipets.com.anynotes.models.ColorPallete;
 import anynotes.olyalya.pelipets.com.anynotes.models.ThemeMaterial;
@@ -35,7 +34,6 @@ public class ColorPickerActivity extends AppCompatActivity {
     private ImageView btnHome;
     private ThemeMaterial theme;
     private LinearLayout toolbarColor;
-    private Restartable restartable;
 
     enum State {NOT_CHANGED, PRIMARY_CHANGED, ACCENT_CHANGED}
 
@@ -47,7 +45,6 @@ public class ColorPickerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_color_scheme);
 
         pallete = new ColorPallete(this);
-        restartable = (Restartable) getIntent().getSerializableExtra(Constants.EXTRA_RESTARTABLE);
 
         loadSettings();
         initViews();
@@ -114,9 +111,7 @@ public class ColorPickerActivity extends AppCompatActivity {
         ed.putInt(Constants.PREF_ACCENT_COLOR, theme.getAccent());
         ed.commit();
 
-        if (restartable != null) {
-            restartable.restart();
-        }
+        MainActivity.reStart();
     }
 
     class PalleteAdapter extends ArrayAdapter<ColorMaterial> {

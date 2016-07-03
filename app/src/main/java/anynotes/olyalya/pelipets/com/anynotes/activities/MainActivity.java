@@ -44,7 +44,6 @@ import com.backendless.persistence.BackendlessDataQuery;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -59,10 +58,8 @@ import anynotes.olyalya.pelipets.com.anynotes.interfaces.LoadNotesListener;
 import anynotes.olyalya.pelipets.com.anynotes.interfaces.LoginListener;
 import anynotes.olyalya.pelipets.com.anynotes.interfaces.RefreshListListener;
 import anynotes.olyalya.pelipets.com.anynotes.interfaces.RegistrationListener;
-import anynotes.olyalya.pelipets.com.anynotes.interfaces.Restartable;
 import anynotes.olyalya.pelipets.com.anynotes.interfaces.SearchListener;
 import anynotes.olyalya.pelipets.com.anynotes.models.Note;
-import anynotes.olyalya.pelipets.com.anynotes.models.ThemeMaterial;
 import anynotes.olyalya.pelipets.com.anynotes.service.NotesService;
 import anynotes.olyalya.pelipets.com.anynotes.service.SynchNotesIntentService;
 import anynotes.olyalya.pelipets.com.anynotes.storage.NotesRepository;
@@ -73,14 +70,10 @@ import anynotes.olyalya.pelipets.com.anynotes.views.RecyclerViewEmptySupport;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
         RefreshListListener, TextToSpeech.OnInitListener,
-        RegistrationListener, LoginListener, SearchListener, Restartable, Serializable {
+        RegistrationListener, LoginListener, SearchListener {
 
-    @Override
-    public void restart() {
-        MainActivity.this.recreate();
-    }
 
-    private static final int NOTE_REQUEST_CODE = 100;
+        private static final int NOTE_REQUEST_CODE = 100;
     private static final int SETTINGS_REQUEST_CODE = 200;
     private final String ERROR_WRONG_LOGIN_OR_PASSWORD = "3003";
 
@@ -105,7 +98,12 @@ public class MainActivity extends AppCompatActivity
     private boolean isLogined = false;
     private String login;
     private String password;
-    private Restartable restartableListener;
+    private static MainActivity instance;
+
+    public static void reStart() {
+        if (instance!=null)
+            instance.recreate();
+    }
 
     private ServiceConnection serviceConnection = new ServiceConnection() {
         @Override
@@ -231,7 +229,7 @@ public class MainActivity extends AppCompatActivity
         setTheme();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        restartableListener = this;
+        instance= this;
 
         mTTS = new TextToSpeech(this, this);
         loadSettings();
@@ -565,7 +563,6 @@ public class MainActivity extends AppCompatActivity
                 return true;
             case R.id.action_settings:
                 Intent settings = new Intent(this, SettingsActivity.class);
-                settings.putExtra(Constants.EXTRA_RESTARTABLE, (Serializable) restartableListener);
                 startActivityForResult(settings, SETTINGS_REQUEST_CODE);
                 return true;
             case R.id.action_estimate:
@@ -674,7 +671,7 @@ public class MainActivity extends AppCompatActivity
         adapter.notifyDataSetChanged();
     }
 
-    private static class NotesAdapter extends RecyclerView.Adapter<NoteViewHolder> implements Serializable{
+    private static class NotesAdapter extends RecyclerView.Adapter<NoteViewHolder> {
         private RefreshListListener listener;
         private TextToSpeech mTTS;
         private boolean canSpeech = false;
@@ -752,7 +749,7 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-    private static class NoteViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, Serializable {
+    private static class NoteViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private RefreshListListener listener;
         private final Context context;
         private final TextView tvTitle;
