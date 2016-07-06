@@ -1195,6 +1195,805 @@
         <item name="colorAccent">@color/blue_grey_accent</item>
     </style>
 
+    <style name="Theme_Light_Green_Red" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/light_green</item>
+        <item name="colorPrimaryDark">@color/light_green_dark</item>
+        <item name="colorAccent">@color/red_accent</item>
+    </style>
+
+    <style name="Theme_Light_Green_Pink" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/light_green</item>
+        <item name="colorPrimaryDark">@color/light_green_dark</item>
+        <item name="colorAccent">@color/pink_accent</item>
+    </style>
+
+    <style name="Theme_Light_Green_Purple" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/light_green</item>
+        <item name="colorPrimaryDark">@color/light_green_dark</item>
+        <item name="colorAccent">@color/purple_accent</item>
+    </style>
+
+    <style name="Theme_Light_Green_Deep_Purple" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/light_green</item>
+        <item name="colorPrimaryDark">@color/light_green_dark</item>
+        <item name="colorAccent">@color/deep_purple_accent</item>
+    </style>
+
+    <style name="Theme_Light_Green_Indigo" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/light_green</item>
+        <item name="colorPrimaryDark">@color/light_green_dark</item>
+        <item name="colorAccent">@color/indigo_accent</item>
+    </style>
+
+    <style name="Theme_Light_Green_Blue" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/light_green</item>
+        <item name="colorPrimaryDark">@color/light_green_dark</item>
+        <item name="colorAccent">@color/blue_accent</item>
+    </style>
+
+    <style name="Theme_Light_Green_Light_Blue" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/light_green</item>
+        <item name="colorPrimaryDark">@color/light_green_dark</item>
+        <item name="colorAccent">@color/light_blue_accent</item>
+    </style>
+
+    <style name="Theme_Light_Green_Cyan" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/light_green</item>
+        <item name="colorPrimaryDark">@color/light_green_dark</item>
+        <item name="colorAccent">@color/cyan_accent</item>
+    </style>
+
+    <style name="Theme_Light_Green_Teal" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/light_green</item>
+        <item name="colorPrimaryDark">@color/light_green_dark</item>
+        <item name="colorAccent">@color/teal_accent</item>
+    </style>
+
+    <style name="Theme_Light_Green_Green" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/light_green</item>
+        <item name="colorPrimaryDark">@color/light_green_dark</item>
+        <item name="colorAccent">@color/green_accent</item>
+    </style>
+
+    <style name="Theme_Light_Green_Light_Green" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/light_green</item>
+        <item name="colorPrimaryDark">@color/light_green_dark</item>
+        <item name="colorAccent">@color/light_green_accent</item>
+    </style>
+
+    <style name="Theme_Light_Green_Lime" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/light_green</item>
+        <item name="colorPrimaryDark">@color/light_green_dark</item>
+        <item name="colorAccent">@color/lime_accent</item>
+    </style>
+
+    <style name="Theme_Light_Green_Yellow" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/light_green</item>
+        <item name="colorPrimaryDark">@color/light_green_dark</item>
+        <item name="colorAccent">@color/yellow_accent</item>
+    </style>
+
+    <style name="Theme_Light_Green_Amber" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/light_green</item>
+        <item name="colorPrimaryDark">@color/light_green_dark</item>
+        <item name="colorAccent">@color/amber_accent</item>
+    </style>
+
+    <style name="Theme_Light_Green_Orange" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/light_green</item>
+        <item name="colorPrimaryDark">@color/light_green_dark</item>
+        <item name="colorAccent">@color/orange_accent</item>
+    </style>
+
+    <style name="Theme_Light_Green_Deep_Orange" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/light_green</item>
+        <item name="colorPrimaryDark">@color/light_green_dark</item>
+        <item name="colorAccent">@color/deep_orange_accent</item>
+    </style>
+
+    <style name="Theme_Light_Green_Brown" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/light_green</item>
+        <item name="colorPrimaryDark">@color/light_green_dark</item>
+        <item name="colorAccent">@color/brown_accent</item>
+    </style>
+
+    <style name="Theme_Light_Green_Grey" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/light_green</item>
+        <item name="colorPrimaryDark">@color/light_green_dark</item>
+        <item name="colorAccent">@color/grey_accent</item>
+    </style>
+
+    <style name="Theme_Light_Green_Blue_Grey" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/light_green</item>
+        <item name="colorPrimaryDark">@color/light_green_dark</item>
+        <item name="colorAccent">@color/blue_grey_accent</item>
+    </style>
+
+    <style name="Theme_Lime_Red" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/lime</item>
+        <item name="colorPrimaryDark">@color/lime_dark</item>
+        <item name="colorAccent">@color/red_accent</item>
+    </style>
+
+    <style name="Theme_Lime_Pink" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/lime</item>
+        <item name="colorPrimaryDark">@color/lime_dark</item>
+        <item name="colorAccent">@color/pink_accent</item>
+    </style>
+
+    <style name="Theme_Lime_Purple" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/lime</item>
+        <item name="colorPrimaryDark">@color/lime_dark</item>
+        <item name="colorAccent">@color/purple_accent</item>
+    </style>
+
+    <style name="Theme_Lime_Deep_Purple" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/lime</item>
+        <item name="colorPrimaryDark">@color/lime_dark</item>
+        <item name="colorAccent">@color/deep_purple_accent</item>
+    </style>
+
+    <style name="Theme_Lime_Indigo" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/lime</item>
+        <item name="colorPrimaryDark">@color/lime_dark</item>
+        <item name="colorAccent">@color/indigo_accent</item>
+    </style>
+
+    <style name="Theme_Lime_Blue" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/lime</item>
+        <item name="colorPrimaryDark">@color/lime_dark</item>
+        <item name="colorAccent">@color/blue_accent</item>
+    </style>
+
+    <style name="Theme_Lime_Light_Blue" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/lime</item>
+        <item name="colorPrimaryDark">@color/lime_dark</item>
+        <item name="colorAccent">@color/light_blue_accent</item>
+    </style>
+
+    <style name="Theme_Lime_Cyan" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/lime</item>
+        <item name="colorPrimaryDark">@color/lime_dark</item>
+        <item name="colorAccent">@color/cyan_accent</item>
+    </style>
+
+    <style name="Theme_Lime_Teal" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/lime</item>
+        <item name="colorPrimaryDark">@color/lime_dark</item>
+        <item name="colorAccent">@color/teal_accent</item>
+    </style>
+
+    <style name="Theme_Lime_Green" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/lime</item>
+        <item name="colorPrimaryDark">@color/lime_dark</item>
+        <item name="colorAccent">@color/green_accent</item>
+    </style>
+
+    <style name="Theme_Lime_Light_Green" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/lime</item>
+        <item name="colorPrimaryDark">@color/lime_dark</item>
+        <item name="colorAccent">@color/light_green_accent</item>
+    </style>
+
+    <style name="Theme_Lime_Lime" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/lime</item>
+        <item name="colorPrimaryDark">@color/lime_dark</item>
+        <item name="colorAccent">@color/lime_accent</item>
+    </style>
+
+    <style name="Theme_Lime_Yellow" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/lime</item>
+        <item name="colorPrimaryDark">@color/lime_dark</item>
+        <item name="colorAccent">@color/yellow_accent</item>
+    </style>
+
+    <style name="Theme_Lime_Amber" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/lime</item>
+        <item name="colorPrimaryDark">@color/lime_dark</item>
+        <item name="colorAccent">@color/amber_accent</item>
+    </style>
+
+    <style name="Theme_Lime_Orange" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/lime</item>
+        <item name="colorPrimaryDark">@color/lime_dark</item>
+        <item name="colorAccent">@color/orange_accent</item>
+    </style>
+
+    <style name="Theme_Lime_Deep_Orange" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/lime</item>
+        <item name="colorPrimaryDark">@color/lime_dark</item>
+        <item name="colorAccent">@color/deep_orange_accent</item>
+    </style>
+
+    <style name="Theme_Lime_Brown" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/lime</item>
+        <item name="colorPrimaryDark">@color/lime_dark</item>
+        <item name="colorAccent">@color/brown_accent</item>
+    </style>
+
+    <style name="Theme_Lime_Grey" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/lime</item>
+        <item name="colorPrimaryDark">@color/lime_dark</item>
+        <item name="colorAccent">@color/grey_accent</item>
+    </style>
+
+    <style name="Theme_Lime_Blue_Grey" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/lime</item>
+        <item name="colorPrimaryDark">@color/lime_dark</item>
+        <item name="colorAccent">@color/blue_grey_accent</item>
+    </style>
+
+    <style name="Theme_Yellow_Red" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/yellow</item>
+        <item name="colorPrimaryDark">@color/yellow_dark</item>
+        <item name="colorAccent">@color/red_accent</item>
+    </style>
+
+    <style name="Theme_Yellow_Pink" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/yellow</item>
+        <item name="colorPrimaryDark">@color/yellow_dark</item>
+        <item name="colorAccent">@color/pink_accent</item>
+    </style>
+
+    <style name="Theme_Yellow_Purple" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/yellow</item>
+        <item name="colorPrimaryDark">@color/yellow_dark</item>
+        <item name="colorAccent">@color/purple_accent</item>
+    </style>
+
+    <style name="Theme_Yellow_Deep_Purple" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/yellow</item>
+        <item name="colorPrimaryDark">@color/yellow_dark</item>
+        <item name="colorAccent">@color/deep_purple_accent</item>
+    </style>
+
+    <style name="Theme_Yellow_Indigo" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/yellow</item>
+        <item name="colorPrimaryDark">@color/yellow_dark</item>
+        <item name="colorAccent">@color/indigo_accent</item>
+    </style>
+
+    <style name="Theme_Yellow_Blue" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/yellow</item>
+        <item name="colorPrimaryDark">@color/yellow_dark</item>
+        <item name="colorAccent">@color/blue_accent</item>
+    </style>
+
+    <style name="Theme_Yellow_Light_Blue" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/yellow</item>
+        <item name="colorPrimaryDark">@color/yellow_dark</item>
+        <item name="colorAccent">@color/light_blue_accent</item>
+    </style>
+
+    <style name="Theme_Yellow_Cyan" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/yellow</item>
+        <item name="colorPrimaryDark">@color/yellow_dark</item>
+        <item name="colorAccent">@color/cyan_accent</item>
+    </style>
+
+    <style name="Theme_Yellow_Teal" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/yellow</item>
+        <item name="colorPrimaryDark">@color/yellow_dark</item>
+        <item name="colorAccent">@color/teal_accent</item>
+    </style>
+
+    <style name="Theme_Yellow_Green" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/yellow</item>
+        <item name="colorPrimaryDark">@color/yellow_dark</item>
+        <item name="colorAccent">@color/green_accent</item>
+    </style>
+
+    <style name="Theme_Yellow_Light_Green" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/yellow</item>
+        <item name="colorPrimaryDark">@color/yellow_dark</item>
+        <item name="colorAccent">@color/light_green_accent</item>
+    </style>
+
+    <style name="Theme_Yellow_Lime" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/yellow</item>
+        <item name="colorPrimaryDark">@color/yellow_dark</item>
+        <item name="colorAccent">@color/lime_accent</item>
+    </style>
+
+    <style name="Theme_Yellow_Yellow" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/yellow</item>
+        <item name="colorPrimaryDark">@color/yellow_dark</item>
+        <item name="colorAccent">@color/yellow_accent</item>
+    </style>
+
+    <style name="Theme_Yellow_Amber" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/yellow</item>
+        <item name="colorPrimaryDark">@color/yellow_dark</item>
+        <item name="colorAccent">@color/amber_accent</item>
+    </style>
+
+    <style name="Theme_Yellow_Orange" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/yellow</item>
+        <item name="colorPrimaryDark">@color/yellow_dark</item>
+        <item name="colorAccent">@color/orange_accent</item>
+    </style>
+
+    <style name="Theme_Yellow_Deep_Orange" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/yellow</item>
+        <item name="colorPrimaryDark">@color/yellow_dark</item>
+        <item name="colorAccent">@color/deep_orange_accent</item>
+    </style>
+
+    <style name="Theme_Yellow_Brown" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/yellow</item>
+        <item name="colorPrimaryDark">@color/yellow_dark</item>
+        <item name="colorAccent">@color/brown_accent</item>
+    </style>
+
+    <style name="Theme_Yellow_Grey" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/yellow</item>
+        <item name="colorPrimaryDark">@color/yellow_dark</item>
+        <item name="colorAccent">@color/grey_accent</item>
+    </style>
+
+    <style name="Theme_Yellow_Blue_Grey" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/yellow</item>
+        <item name="colorPrimaryDark">@color/yellow_dark</item>
+        <item name="colorAccent">@color/blue_grey_accent</item>
+    </style>
+
+    <style name="Theme_Amber_Red" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/amber</item>
+        <item name="colorPrimaryDark">@color/amber_dark</item>
+        <item name="colorAccent">@color/red_accent</item>
+    </style>
+
+    <style name="Theme_Amber_Pink" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/amber</item>
+        <item name="colorPrimaryDark">@color/amber_dark</item>
+        <item name="colorAccent">@color/pink_accent</item>
+    </style>
+
+    <style name="Theme_Amber_Purple" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/amber</item>
+        <item name="colorPrimaryDark">@color/amber_dark</item>
+        <item name="colorAccent">@color/purple_accent</item>
+    </style>
+
+    <style name="Theme_Amber_Deep_Purple" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/amber</item>
+        <item name="colorPrimaryDark">@color/amber_dark</item>
+        <item name="colorAccent">@color/deep_purple_accent</item>
+    </style>
+
+    <style name="Theme_Amber_Indigo" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/amber</item>
+        <item name="colorPrimaryDark">@color/amber_dark</item>
+        <item name="colorAccent">@color/indigo_accent</item>
+    </style>
+
+    <style name="Theme_Amber_Blue" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/amber</item>
+        <item name="colorPrimaryDark">@color/amber_dark</item>
+        <item name="colorAccent">@color/blue_accent</item>
+    </style>
+
+    <style name="Theme_Amber_Light_Blue" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/amber</item>
+        <item name="colorPrimaryDark">@color/amber_dark</item>
+        <item name="colorAccent">@color/light_blue_accent</item>
+    </style>
+
+    <style name="Theme_Amber_Cyan" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/amber</item>
+        <item name="colorPrimaryDark">@color/amber_dark</item>
+        <item name="colorAccent">@color/cyan_accent</item>
+    </style>
+
+    <style name="Theme_Amber_Teal" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/amber</item>
+        <item name="colorPrimaryDark">@color/amber_dark</item>
+        <item name="colorAccent">@color/teal_accent</item>
+    </style>
+
+    <style name="Theme_Amber_Green" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/amber</item>
+        <item name="colorPrimaryDark">@color/amber_dark</item>
+        <item name="colorAccent">@color/green_accent</item>
+    </style>
+
+    <style name="Theme_Amber_Light_Green" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/amber</item>
+        <item name="colorPrimaryDark">@color/amber_dark</item>
+        <item name="colorAccent">@color/light_green_accent</item>
+    </style>
+
+    <style name="Theme_Amber_Lime" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/amber</item>
+        <item name="colorPrimaryDark">@color/amber_dark</item>
+        <item name="colorAccent">@color/lime_accent</item>
+    </style>
+
+    <style name="Theme_Amber_Yellow" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/amber</item>
+        <item name="colorPrimaryDark">@color/amber_dark</item>
+        <item name="colorAccent">@color/yellow_accent</item>
+    </style>
+
+    <style name="Theme_Amber_Amber" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/amber</item>
+        <item name="colorPrimaryDark">@color/amber_dark</item>
+        <item name="colorAccent">@color/amber_accent</item>
+    </style>
+
+    <style name="Theme_Amber_Orange" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/amber</item>
+        <item name="colorPrimaryDark">@color/amber_dark</item>
+        <item name="colorAccent">@color/orange_accent</item>
+    </style>
+
+    <style name="Theme_Amber_Deep_Orange" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/amber</item>
+        <item name="colorPrimaryDark">@color/amber_dark</item>
+        <item name="colorAccent">@color/deep_orange_accent</item>
+    </style>
+
+    <style name="Theme_Amber_Brown" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/amber</item>
+        <item name="colorPrimaryDark">@color/amber_dark</item>
+        <item name="colorAccent">@color/brown_accent</item>
+    </style>
+
+    <style name="Theme_Amber_Grey" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/amber</item>
+        <item name="colorPrimaryDark">@color/amber_dark</item>
+        <item name="colorAccent">@color/grey_accent</item>
+    </style>
+
+    <style name="Theme_Amber_Blue_Grey" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/amber</item>
+        <item name="colorPrimaryDark">@color/amber_dark</item>
+        <item name="colorAccent">@color/blue_grey_accent</item>
+    </style>
+
+    <style name="Theme_Orange_Red" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/orange</item>
+        <item name="colorPrimaryDark">@color/orange_dark</item>
+        <item name="colorAccent">@color/red_accent</item>
+    </style>
+
+    <style name="Theme_Orange_Pink" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/orange</item>
+        <item name="colorPrimaryDark">@color/orange_dark</item>
+        <item name="colorAccent">@color/pink_accent</item>
+    </style>
+
+    <style name="Theme_Orange_Purple" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/orange</item>
+        <item name="colorPrimaryDark">@color/orange_dark</item>
+        <item name="colorAccent">@color/purple_accent</item>
+    </style>
+
+    <style name="Theme_Orange_Deep_Purple" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/orange</item>
+        <item name="colorPrimaryDark">@color/orange_dark</item>
+        <item name="colorAccent">@color/deep_purple_accent</item>
+    </style>
+
+    <style name="Theme_Orange_Indigo" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/orange</item>
+        <item name="colorPrimaryDark">@color/orange_dark</item>
+        <item name="colorAccent">@color/indigo_accent</item>
+    </style>
+
+    <style name="Theme_Orange_Blue" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/orange</item>
+        <item name="colorPrimaryDark">@color/orange_dark</item>
+        <item name="colorAccent">@color/blue_accent</item>
+    </style>
+
+    <style name="Theme_Orange_Light_Blue" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/orange</item>
+        <item name="colorPrimaryDark">@color/orange_dark</item>
+        <item name="colorAccent">@color/light_blue_accent</item>
+    </style>
+
+    <style name="Theme_Orange_Cyan" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/orange</item>
+        <item name="colorPrimaryDark">@color/orange_dark</item>
+        <item name="colorAccent">@color/cyan_accent</item>
+    </style>
+
+    <style name="Theme_Orange_Teal" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/orange</item>
+        <item name="colorPrimaryDark">@color/orange_dark</item>
+        <item name="colorAccent">@color/teal_accent</item>
+    </style>
+
+    <style name="Theme_Orange_Green" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/orange</item>
+        <item name="colorPrimaryDark">@color/orange_dark</item>
+        <item name="colorAccent">@color/green_accent</item>
+    </style>
+
+    <style name="Theme_Orange_Light_Green" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/orange</item>
+        <item name="colorPrimaryDark">@color/orange_dark</item>
+        <item name="colorAccent">@color/light_green_accent</item>
+    </style>
+
+    <style name="Theme_Orange_Lime" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/orange</item>
+        <item name="colorPrimaryDark">@color/orange_dark</item>
+        <item name="colorAccent">@color/lime_accent</item>
+    </style>
+
+    <style name="Theme_Orange_Yellow" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/orange</item>
+        <item name="colorPrimaryDark">@color/orange_dark</item>
+        <item name="colorAccent">@color/yellow_accent</item>
+    </style>
+
+    <style name="Theme_Orange_Amber" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/orange</item>
+        <item name="colorPrimaryDark">@color/orange_dark</item>
+        <item name="colorAccent">@color/amber_accent</item>
+    </style>
+
+    <style name="Theme_Orange_Orange" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/orange</item>
+        <item name="colorPrimaryDark">@color/orange_dark</item>
+        <item name="colorAccent">@color/orange_accent</item>
+    </style>
+
+    <style name="Theme_Orange_Deep_Orange" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/orange</item>
+        <item name="colorPrimaryDark">@color/orange_dark</item>
+        <item name="colorAccent">@color/deep_orange_accent</item>
+    </style>
+
+    <style name="Theme_Orange_Brown" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/orange</item>
+        <item name="colorPrimaryDark">@color/orange_dark</item>
+        <item name="colorAccent">@color/brown_accent</item>
+    </style>
+
+    <style name="Theme_Orange_Grey" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/orange</item>
+        <item name="colorPrimaryDark">@color/orange_dark</item>
+        <item name="colorAccent">@color/grey_accent</item>
+    </style>
+
+    <style name="Theme_Orange_Blue_Grey" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/orange</item>
+        <item name="colorPrimaryDark">@color/orange_dark</item>
+        <item name="colorAccent">@color/blue_grey_accent</item>
+    </style>
+
+    <style name="Theme_Deep_Orange_Red" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/deep_orange</item>
+        <item name="colorPrimaryDark">@color/deep_orange_dark</item>
+        <item name="colorAccent">@color/red_accent</item>
+    </style>
+
+    <style name="Theme_Deep_Orange_Pink" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/deep_orange</item>
+        <item name="colorPrimaryDark">@color/deep_orange_dark</item>
+        <item name="colorAccent">@color/pink_accent</item>
+    </style>
+
+    <style name="Theme_Deep_Orange_Purple" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/deep_orange</item>
+        <item name="colorPrimaryDark">@color/deep_orange_dark</item>
+        <item name="colorAccent">@color/purple_accent</item>
+    </style>
+
+    <style name="Theme_Deep_Orange_Deep_Purple" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/deep_orange</item>
+        <item name="colorPrimaryDark">@color/deep_orange_dark</item>
+        <item name="colorAccent">@color/deep_purple_accent</item>
+    </style>
+
+    <style name="Theme_Deep_Orange_Indigo" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/deep_orange</item>
+        <item name="colorPrimaryDark">@color/deep_orange_dark</item>
+        <item name="colorAccent">@color/indigo_accent</item>
+    </style>
+
+    <style name="Theme_Deep_Orange_Blue" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/deep_orange</item>
+        <item name="colorPrimaryDark">@color/deep_orange_dark</item>
+        <item name="colorAccent">@color/blue_accent</item>
+    </style>
+
+    <style name="Theme_Deep_Orange_Light_Blue" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/deep_orange</item>
+        <item name="colorPrimaryDark">@color/deep_orange_dark</item>
+        <item name="colorAccent">@color/light_blue_accent</item>
+    </style>
+
+    <style name="Theme_Deep_Orange_Cyan" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/deep_orange</item>
+        <item name="colorPrimaryDark">@color/deep_orange_dark</item>
+        <item name="colorAccent">@color/cyan_accent</item>
+    </style>
+
+    <style name="Theme_Deep_Orange_Teal" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/deep_orange</item>
+        <item name="colorPrimaryDark">@color/deep_orange_dark</item>
+        <item name="colorAccent">@color/teal_accent</item>
+    </style>
+
+    <style name="Theme_Deep_Orange_Green" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/deep_orange</item>
+        <item name="colorPrimaryDark">@color/deep_orange_dark</item>
+        <item name="colorAccent">@color/green_accent</item>
+    </style>
+
+    <style name="Theme_Deep_Orange_Light_Green" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/deep_orange</item>
+        <item name="colorPrimaryDark">@color/deep_orange_dark</item>
+        <item name="colorAccent">@color/light_green_accent</item>
+    </style>
+
+    <style name="Theme_Deep_Orange_Lime" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/deep_orange</item>
+        <item name="colorPrimaryDark">@color/deep_orange_dark</item>
+        <item name="colorAccent">@color/lime_accent</item>
+    </style>
+
+    <style name="Theme_Deep_Orange_Yellow" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/deep_orange</item>
+        <item name="colorPrimaryDark">@color/deep_orange_dark</item>
+        <item name="colorAccent">@color/yellow_accent</item>
+    </style>
+
+    <style name="Theme_Deep_Orange_Amber" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/deep_orange</item>
+        <item name="colorPrimaryDark">@color/deep_orange_dark</item>
+        <item name="colorAccent">@color/amber_accent</item>
+    </style>
+
+    <style name="Theme_Deep_Orange_Orange" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/deep_orange</item>
+        <item name="colorPrimaryDark">@color/deep_orange_dark</item>
+        <item name="colorAccent">@color/orange_accent</item>
+    </style>
+
+    <style name="Theme_Deep_Orange_Deep_Orange" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/deep_orange</item>
+        <item name="colorPrimaryDark">@color/deep_orange_dark</item>
+        <item name="colorAccent">@color/deep_orange_accent</item>
+    </style>
+
+    <style name="Theme_Deep_Orange_Brown" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/deep_orange</item>
+        <item name="colorPrimaryDark">@color/deep_orange_dark</item>
+        <item name="colorAccent">@color/brown_accent</item>
+    </style>
+
+    <style name="Theme_Deep_Orange_Grey" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/deep_orange</item>
+        <item name="colorPrimaryDark">@color/deep_orange_dark</item>
+        <item name="colorAccent">@color/grey_accent</item>
+    </style>
+
+    <style name="Theme_Deep_Orange_Blue_Grey" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/deep_orange</item>
+        <item name="colorPrimaryDark">@color/deep_orange_dark</item>
+        <item name="colorAccent">@color/blue_grey_accent</item>
+    </style>
+
+    <style name="Theme_Brown_Red" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/brown</item>
+        <item name="colorPrimaryDark">@color/brown_dark</item>
+        <item name="colorAccent">@color/red_accent</item>
+    </style>
+
+    <style name="Theme_Brown_Pink" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/brown</item>
+        <item name="colorPrimaryDark">@color/brown_dark</item>
+        <item name="colorAccent">@color/pink_accent</item>
+    </style>
+
+    <style name="Theme_Brown_Purple" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/brown</item>
+        <item name="colorPrimaryDark">@color/brown_dark</item>
+        <item name="colorAccent">@color/purple_accent</item>
+    </style>
+
+    <style name="Theme_Brown_Deep_Purple" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/brown</item>
+        <item name="colorPrimaryDark">@color/brown_dark</item>
+        <item name="colorAccent">@color/deep_purple_accent</item>
+    </style>
+
+    <style name="Theme_Brown_Indigo" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/brown</item>
+        <item name="colorPrimaryDark">@color/brown_dark</item>
+        <item name="colorAccent">@color/indigo_accent</item>
+    </style>
+
+    <style name="Theme_Brown_Blue" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/brown</item>
+        <item name="colorPrimaryDark">@color/brown_dark</item>
+        <item name="colorAccent">@color/blue_accent</item>
+    </style>
+
+    <style name="Theme_Brown_Light_Blue" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/brown</item>
+        <item name="colorPrimaryDark">@color/brown_dark</item>
+        <item name="colorAccent">@color/light_blue_accent</item>
+    </style>
+
+    <style name="Theme_Brown_Cyan" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/brown</item>
+        <item name="colorPrimaryDark">@color/brown_dark</item>
+        <item name="colorAccent">@color/cyan_accent</item>
+    </style>
+
+    <style name="Theme_Brown_Teal" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/brown</item>
+        <item name="colorPrimaryDark">@color/brown_dark</item>
+        <item name="colorAccent">@color/teal_accent</item>
+    </style>
+
+    <style name="Theme_Brown_Green" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/brown</item>
+        <item name="colorPrimaryDark">@color/brown_dark</item>
+        <item name="colorAccent">@color/green_accent</item>
+    </style>
+
+    <style name="Theme_Brown_Light_Green" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/brown</item>
+        <item name="colorPrimaryDark">@color/brown_dark</item>
+        <item name="colorAccent">@color/light_green_accent</item>
+    </style>
+
+    <style name="Theme_Brown_Lime" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/brown</item>
+        <item name="colorPrimaryDark">@color/brown_dark</item>
+        <item name="colorAccent">@color/lime_accent</item>
+    </style>
+
+    <style name="Theme_Brown_Yellow" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/brown</item>
+        <item name="colorPrimaryDark">@color/brown_dark</item>
+        <item name="colorAccent">@color/yellow_accent</item>
+    </style>
+
+    <style name="Theme_Brown_Amber" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/brown</item>
+        <item name="colorPrimaryDark">@color/brown_dark</item>
+        <item name="colorAccent">@color/amber_accent</item>
+    </style>
+
+    <style name="Theme_Brown_Orange" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/brown</item>
+        <item name="colorPrimaryDark">@color/brown_dark</item>
+        <item name="colorAccent">@color/orange_accent</item>
+    </style>
+
+    <style name="Theme_Brown_Deep_Orange" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/brown</item>
+        <item name="colorPrimaryDark">@color/brown_dark</item>
+        <item name="colorAccent">@color/deep_orange_accent</item>
+    </style>
+
+    <style name="Theme_Brown_Brown" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/brown</item>
+        <item name="colorPrimaryDark">@color/brown_dark</item>
+        <item name="colorAccent">@color/brown_accent</item>
+    </style>
+
+    <style name="Theme_Brown_Grey" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/brown</item>
+        <item name="colorPrimaryDark">@color/brown_dark</item>
+        <item name="colorAccent">@color/grey_accent</item>
+    </style>
+
+    <style name="Theme_Brown_Blue_Grey" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/brown</item>
+        <item name="colorPrimaryDark">@color/brown_dark</item>
+        <item name="colorAccent">@color/blue_grey_accent</item>
+    </style>
+
+
 
 
 </resources>

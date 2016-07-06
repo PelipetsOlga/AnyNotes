@@ -433,6 +433,44 @@ public class NoteUtils {
             activity.setTheme(R.style.Theme_Teal_Grey);
         }else if (primaryColor.equals(TEAL) && accentColor.equals(BLUE_GREY)) {
             activity.setTheme(R.style.Theme_Teal_Blue_Grey);
+        }else if (primaryColor.equals(GREEN) && accentColor.equals(RED)) {
+            activity.setTheme(R.style.Theme_Green_Red);
+        }else if (primaryColor.equals(GREEN) && accentColor.equals(PINK)) {
+            activity.setTheme(R.style.Theme_Green_Pink);
+        }else if (primaryColor.equals(GREEN) && accentColor.equals(PURPLE)) {
+            activity.setTheme(R.style.Theme_Green_Purple);
+        }else if (primaryColor.equals(GREEN) && accentColor.equals(DEEP_PURPLE)) {
+            activity.setTheme(R.style.Theme_Green_Deep_Purple);
+        }else if (primaryColor.equals(GREEN) && accentColor.equals(INDIGO)) {
+            activity.setTheme(R.style.Theme_Green_Indigo);
+        }else if (primaryColor.equals(GREEN) && accentColor.equals(BLUE)) {
+            activity.setTheme(R.style.Theme_Green_Blue);
+        }else if (primaryColor.equals(GREEN) && accentColor.equals(LIGHT_BLUE)) {
+            activity.setTheme(R.style.Theme_Green_Light_Blue);
+        }else if (primaryColor.equals(GREEN) && accentColor.equals(CYAN)) {
+            activity.setTheme(R.style.Theme_Green_Cyan);
+        }else if (primaryColor.equals(GREEN) && accentColor.equals(TEAL)) {
+            activity.setTheme(R.style.Theme_Green_Teal);
+        }else if (primaryColor.equals(GREEN) && accentColor.equals(GREEN)) {
+            activity.setTheme(R.style.Theme_Green_Green);
+        }else if (primaryColor.equals(GREEN) && accentColor.equals(LIGHT_GREEN)) {
+            activity.setTheme(R.style.Theme_Green_Light_Green);
+        }else if (primaryColor.equals(GREEN) && accentColor.equals(LIME)) {
+            activity.setTheme(R.style.Theme_Green_Lime);
+        }else if (primaryColor.equals(GREEN) && accentColor.equals(YELLOW)) {
+            activity.setTheme(R.style.Theme_Green_Yellow);
+        }else if (primaryColor.equals(GREEN) && accentColor.equals(AMBER)) {
+            activity.setTheme(R.style.Theme_Green_Amber);
+        }else if (primaryColor.equals(GREEN) && accentColor.equals(ORANGE)) {
+            activity.setTheme(R.style.Theme_Green_Orange);
+        }else if (primaryColor.equals(GREEN) && accentColor.equals(DEEP_ORANGE)) {
+            activity.setTheme(R.style.Theme_Green_Deep_Orange);
+        }else if (primaryColor.equals(GREEN) && accentColor.equals(BROWN)) {
+            activity.setTheme(R.style.Theme_Green_Brown);
+        }else if (primaryColor.equals(GREEN) && accentColor.equals(GREY)) {
+            activity.setTheme(R.style.Theme_Green_Grey);
+        }else if (primaryColor.equals(GREEN) && accentColor.equals(BLUE_GREY)) {
+            activity.setTheme(R.style.Theme_Green_Blue_Grey);
         }
     }
 
