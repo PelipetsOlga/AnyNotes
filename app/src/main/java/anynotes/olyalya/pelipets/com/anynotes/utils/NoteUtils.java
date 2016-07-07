@@ -69,7 +69,7 @@ public class NoteUtils {
     }
 
     public static boolean isConnected(Context ctx) {
-        boolean isMobileConn=false;
+        boolean isMobileConn = false;
         ConnectivityManager manager = (ConnectivityManager) ctx.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfoWiFi = manager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
         NetworkInfo networkInfoMob = manager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
@@ -86,7 +86,7 @@ public class NoteUtils {
         Toast.makeText(ctx, ctx.getResources().getString(R.string.error_network), Toast.LENGTH_SHORT).show();
     }
 
-    public static void setTheme(AppCompatActivity activity){
+    public static void setTheme(AppCompatActivity activity) {
         SharedPreferences mPref = activity.getSharedPreferences(Constants.PREFS_NAME, activity.MODE_PRIVATE);
         String primaryColor = mPref.getString(Constants.PREF_PRIMARY_COLOR, "pink");
         String accentColor = mPref.getString(Constants.PREF_ACCENT_COLOR, "cyan");
@@ -101,528 +101,718 @@ public class NoteUtils {
             activity.setTheme(R.style.Theme_Red_Deep_Purple);
         } else if (primaryColor.equals("red") && accentColor.equals(INDIGO)) {
             activity.setTheme(R.style.Theme_Red_Indigo);
-        }else if (primaryColor.equals("red") && accentColor.equals(BLUE)) {
+        } else if (primaryColor.equals("red") && accentColor.equals(BLUE)) {
             activity.setTheme(R.style.Theme_Red_Blue);
-        }else if (primaryColor.equals("red") && accentColor.equals(LIGHT_BLUE)) {
+        } else if (primaryColor.equals("red") && accentColor.equals(LIGHT_BLUE)) {
             activity.setTheme(R.style.Theme_Red_Light_Blue);
-        }else if (primaryColor.equals("red") && accentColor.equals(CYAN)) {
+        } else if (primaryColor.equals("red") && accentColor.equals(CYAN)) {
             activity.setTheme(R.style.Theme_Red_Cyan);
-        }else if (primaryColor.equals("red") && accentColor.equals(TEAL)) {
+        } else if (primaryColor.equals("red") && accentColor.equals(TEAL)) {
             activity.setTheme(R.style.Theme_Red_Teal);
-        }else if (primaryColor.equals("red") && accentColor.equals(GREEN)) {
+        } else if (primaryColor.equals("red") && accentColor.equals(GREEN)) {
             activity.setTheme(R.style.Theme_Red_Green);
-        }else if (primaryColor.equals("red") && accentColor.equals(LIGHT_GREEN)) {
+        } else if (primaryColor.equals("red") && accentColor.equals(LIGHT_GREEN)) {
             activity.setTheme(R.style.Theme_Red_Light_Green);
-        }else if (primaryColor.equals("red") && accentColor.equals(LIME)) {
+        } else if (primaryColor.equals("red") && accentColor.equals(LIME)) {
             activity.setTheme(R.style.Theme_Red_Lime);
-        }else if (primaryColor.equals("red") && accentColor.equals(YELLOW)) {
+        } else if (primaryColor.equals("red") && accentColor.equals(YELLOW)) {
             activity.setTheme(R.style.Theme_Red_Yellow);
-        }else if (primaryColor.equals("red") && accentColor.equals(AMBER)) {
+        } else if (primaryColor.equals("red") && accentColor.equals(AMBER)) {
             activity.setTheme(R.style.Theme_Red_Amber);
-        }else if (primaryColor.equals("red") && accentColor.equals(ORANGE)) {
+        } else if (primaryColor.equals("red") && accentColor.equals(ORANGE)) {
             activity.setTheme(R.style.Theme_Red_Orange);
-        }else if (primaryColor.equals("red") && accentColor.equals(DEEP_ORANGE)) {
+        } else if (primaryColor.equals("red") && accentColor.equals(DEEP_ORANGE)) {
             activity.setTheme(R.style.Theme_Red_Deep_Orange);
-        }else if (primaryColor.equals("red") && accentColor.equals(BROWN)) {
+        } else if (primaryColor.equals("red") && accentColor.equals(BROWN)) {
             activity.setTheme(R.style.Theme_Red_Brown);
-        }else if (primaryColor.equals("red") && accentColor.equals(GREY)) {
+        } else if (primaryColor.equals("red") && accentColor.equals(GREY)) {
             activity.setTheme(R.style.Theme_Red_Grey);
-        }else if (primaryColor.equals("red") && accentColor.equals(BLUE_GREY)) {
+        } else if (primaryColor.equals("red") && accentColor.equals(BLUE_GREY)) {
             activity.setTheme(R.style.Theme_Red_Blue_Grey);
-        }else if (primaryColor.equals("pink") && accentColor.equals(RED)) {
+        } else if (primaryColor.equals("pink") && accentColor.equals(RED)) {
             activity.setTheme(R.style.Theme_Pink_Red);
-        }else if (primaryColor.equals("pink") && accentColor.equals(PINK)) {
+        } else if (primaryColor.equals("pink") && accentColor.equals(PINK)) {
             activity.setTheme(R.style.Theme_Pink_Pink);
-        }else if (primaryColor.equals("pink") && accentColor.equals(PURPLE)) {
+        } else if (primaryColor.equals("pink") && accentColor.equals(PURPLE)) {
             activity.setTheme(R.style.Theme_Pink_Purple);
-        }else if (primaryColor.equals("pink") && accentColor.equals(DEEP_PURPLE)) {
+        } else if (primaryColor.equals("pink") && accentColor.equals(DEEP_PURPLE)) {
             activity.setTheme(R.style.Theme_Pink_Deep_Purple);
-        }else if (primaryColor.equals("pink") && accentColor.equals(INDIGO)) {
+        } else if (primaryColor.equals("pink") && accentColor.equals(INDIGO)) {
             activity.setTheme(R.style.Theme_Pink_Indigo);
-        }else if (primaryColor.equals("pink") && accentColor.equals(BLUE)) {
+        } else if (primaryColor.equals("pink") && accentColor.equals(BLUE)) {
             activity.setTheme(R.style.Theme_Pink_Blue);
-        }else if (primaryColor.equals("pink") && accentColor.equals(LIGHT_BLUE)) {
+        } else if (primaryColor.equals("pink") && accentColor.equals(LIGHT_BLUE)) {
             activity.setTheme(R.style.Theme_Pink_Light_Blue);
-        }else if (primaryColor.equals("pink") && accentColor.equals(CYAN)) {
+        } else if (primaryColor.equals("pink") && accentColor.equals(CYAN)) {
             activity.setTheme(R.style.Theme_Pink_Cyan);
-        }else if (primaryColor.equals("pink") && accentColor.equals(TEAL)) {
+        } else if (primaryColor.equals("pink") && accentColor.equals(TEAL)) {
             activity.setTheme(R.style.Theme_Pink_Teal);
-        }else if (primaryColor.equals("pink") && accentColor.equals(GREEN)) {
+        } else if (primaryColor.equals("pink") && accentColor.equals(GREEN)) {
             activity.setTheme(R.style.Theme_Pink_Green);
-        }else if (primaryColor.equals("pink") && accentColor.equals(LIGHT_GREEN)) {
+        } else if (primaryColor.equals("pink") && accentColor.equals(LIGHT_GREEN)) {
             activity.setTheme(R.style.Theme_Pink_Light_Green);
-        }else if (primaryColor.equals("pink") && accentColor.equals(LIME)) {
+        } else if (primaryColor.equals("pink") && accentColor.equals(LIME)) {
             activity.setTheme(R.style.Theme_Pink_Lime);
-        }else if (primaryColor.equals("pink") && accentColor.equals(YELLOW)) {
+        } else if (primaryColor.equals("pink") && accentColor.equals(YELLOW)) {
             activity.setTheme(R.style.Theme_Pink_Yellow);
-        }else if (primaryColor.equals("pink") && accentColor.equals(AMBER)) {
+        } else if (primaryColor.equals("pink") && accentColor.equals(AMBER)) {
             activity.setTheme(R.style.Theme_Pink_Amber);
-        }else if (primaryColor.equals("pink") && accentColor.equals(ORANGE)) {
+        } else if (primaryColor.equals("pink") && accentColor.equals(ORANGE)) {
             activity.setTheme(R.style.Theme_Pink_Orange);
-        }else if (primaryColor.equals("pink") && accentColor.equals(DEEP_ORANGE)) {
+        } else if (primaryColor.equals("pink") && accentColor.equals(DEEP_ORANGE)) {
             activity.setTheme(R.style.Theme_Pink_Deep_Orange);
-        }else if (primaryColor.equals("pink") && accentColor.equals(BROWN)) {
+        } else if (primaryColor.equals("pink") && accentColor.equals(BROWN)) {
             activity.setTheme(R.style.Theme_Pink_Brown);
-        }else if (primaryColor.equals("pink") && accentColor.equals(GREY)) {
+        } else if (primaryColor.equals("pink") && accentColor.equals(GREY)) {
             activity.setTheme(R.style.Theme_Pink_Grey);
-        }else if (primaryColor.equals("pink") && accentColor.equals(BLUE_GREY)) {
+        } else if (primaryColor.equals("pink") && accentColor.equals(BLUE_GREY)) {
             activity.setTheme(R.style.Theme_Pink_Blue_Grey);
-        }else if (primaryColor.equals(PURPLE) && accentColor.equals(RED)) {
+        } else if (primaryColor.equals(PURPLE) && accentColor.equals(RED)) {
             activity.setTheme(R.style.Theme_Purple_Red);
-        }else if (primaryColor.equals(PURPLE) && accentColor.equals(PINK)) {
+        } else if (primaryColor.equals(PURPLE) && accentColor.equals(PINK)) {
             activity.setTheme(R.style.Theme_Purple_Pink);
-        }else if (primaryColor.equals(PURPLE) && accentColor.equals(PURPLE)) {
+        } else if (primaryColor.equals(PURPLE) && accentColor.equals(PURPLE)) {
             activity.setTheme(R.style.Theme_Purple_Purple);
-        }else if (primaryColor.equals(PURPLE) && accentColor.equals(DEEP_PURPLE)) {
+        } else if (primaryColor.equals(PURPLE) && accentColor.equals(DEEP_PURPLE)) {
             activity.setTheme(R.style.Theme_Purple_Deep_Purple);
-        }else if (primaryColor.equals(PURPLE) && accentColor.equals(INDIGO)) {
+        } else if (primaryColor.equals(PURPLE) && accentColor.equals(INDIGO)) {
             activity.setTheme(R.style.Theme_Purple_Indigo);
-        }else if (primaryColor.equals(PURPLE) && accentColor.equals(BLUE)) {
+        } else if (primaryColor.equals(PURPLE) && accentColor.equals(BLUE)) {
             activity.setTheme(R.style.Theme_Purple_Blue);
-        }else if (primaryColor.equals(PURPLE) && accentColor.equals(LIGHT_BLUE)) {
+        } else if (primaryColor.equals(PURPLE) && accentColor.equals(LIGHT_BLUE)) {
             activity.setTheme(R.style.Theme_Purple_Light_Blue);
-        }else if (primaryColor.equals(PURPLE) && accentColor.equals(CYAN)) {
+        } else if (primaryColor.equals(PURPLE) && accentColor.equals(CYAN)) {
             activity.setTheme(R.style.Theme_Purple_Cyan);
-        }else if (primaryColor.equals(PURPLE) && accentColor.equals(TEAL)) {
+        } else if (primaryColor.equals(PURPLE) && accentColor.equals(TEAL)) {
             activity.setTheme(R.style.Theme_Purple_Teal);
-        }else if (primaryColor.equals(PURPLE) && accentColor.equals(GREEN)) {
+        } else if (primaryColor.equals(PURPLE) && accentColor.equals(GREEN)) {
             activity.setTheme(R.style.Theme_Purple_Green);
-        }else if (primaryColor.equals(PURPLE) && accentColor.equals(LIGHT_GREEN)) {
+        } else if (primaryColor.equals(PURPLE) && accentColor.equals(LIGHT_GREEN)) {
             activity.setTheme(R.style.Theme_Purple_Light_Green);
-        }else if (primaryColor.equals(PURPLE) && accentColor.equals(LIME)) {
+        } else if (primaryColor.equals(PURPLE) && accentColor.equals(LIME)) {
             activity.setTheme(R.style.Theme_Purple_Lime);
-        }else if (primaryColor.equals(PURPLE) && accentColor.equals(YELLOW)) {
+        } else if (primaryColor.equals(PURPLE) && accentColor.equals(YELLOW)) {
             activity.setTheme(R.style.Theme_Purple_Yellow);
-        }else if (primaryColor.equals(PURPLE) && accentColor.equals(AMBER)) {
+        } else if (primaryColor.equals(PURPLE) && accentColor.equals(AMBER)) {
             activity.setTheme(R.style.Theme_Purple_Amber);
-        }else if (primaryColor.equals(PURPLE) && accentColor.equals(ORANGE)) {
+        } else if (primaryColor.equals(PURPLE) && accentColor.equals(ORANGE)) {
             activity.setTheme(R.style.Theme_Purple_Orange);
-        }else if (primaryColor.equals(PURPLE) && accentColor.equals(DEEP_ORANGE)) {
+        } else if (primaryColor.equals(PURPLE) && accentColor.equals(DEEP_ORANGE)) {
             activity.setTheme(R.style.Theme_Purple_Deep_Orange);
-        }else if (primaryColor.equals(PURPLE) && accentColor.equals(BROWN)) {
+        } else if (primaryColor.equals(PURPLE) && accentColor.equals(BROWN)) {
             activity.setTheme(R.style.Theme_Purple_Brown);
-        }else if (primaryColor.equals(PURPLE) && accentColor.equals(GREY)) {
+        } else if (primaryColor.equals(PURPLE) && accentColor.equals(GREY)) {
             activity.setTheme(R.style.Theme_Purple_Grey);
-        }else if (primaryColor.equals(PURPLE) && accentColor.equals(BLUE_GREY)) {
+        } else if (primaryColor.equals(PURPLE) && accentColor.equals(BLUE_GREY)) {
             activity.setTheme(R.style.Theme_Purple_Blue_Grey);
-        }else if (primaryColor.equals(DEEP_PURPLE) && accentColor.equals(RED)) {
+        } else if (primaryColor.equals(DEEP_PURPLE) && accentColor.equals(RED)) {
             activity.setTheme(R.style.Theme_Deep_Purple_Red);
-        }else if (primaryColor.equals(DEEP_PURPLE) && accentColor.equals(PINK)) {
+        } else if (primaryColor.equals(DEEP_PURPLE) && accentColor.equals(PINK)) {
             activity.setTheme(R.style.Theme_Deep_Purple_Pink);
-        }else if (primaryColor.equals(DEEP_PURPLE) && accentColor.equals(PURPLE)) {
+        } else if (primaryColor.equals(DEEP_PURPLE) && accentColor.equals(PURPLE)) {
             activity.setTheme(R.style.Theme_Deep_Purple_Purple);
-        }else if (primaryColor.equals(DEEP_PURPLE) && accentColor.equals(DEEP_PURPLE)) {
+        } else if (primaryColor.equals(DEEP_PURPLE) && accentColor.equals(DEEP_PURPLE)) {
             activity.setTheme(R.style.Theme_Deep_Purple_Deep_Purple);
-        }else if (primaryColor.equals(DEEP_PURPLE) && accentColor.equals(INDIGO)) {
+        } else if (primaryColor.equals(DEEP_PURPLE) && accentColor.equals(INDIGO)) {
             activity.setTheme(R.style.Theme_Deep_Purple_Indigo);
-        }else if (primaryColor.equals(DEEP_PURPLE) && accentColor.equals(BLUE)) {
+        } else if (primaryColor.equals(DEEP_PURPLE) && accentColor.equals(BLUE)) {
             activity.setTheme(R.style.Theme_Deep_Purple_Blue);
-        }else if (primaryColor.equals(DEEP_PURPLE) && accentColor.equals(LIGHT_BLUE)) {
+        } else if (primaryColor.equals(DEEP_PURPLE) && accentColor.equals(LIGHT_BLUE)) {
             activity.setTheme(R.style.Theme_Deep_Purple_Light_Blue);
-        }else if (primaryColor.equals(DEEP_PURPLE) && accentColor.equals(CYAN)) {
+        } else if (primaryColor.equals(DEEP_PURPLE) && accentColor.equals(CYAN)) {
             activity.setTheme(R.style.Theme_Deep_Purple_Cyan);
-        }else if (primaryColor.equals(DEEP_PURPLE) && accentColor.equals(TEAL)) {
+        } else if (primaryColor.equals(DEEP_PURPLE) && accentColor.equals(TEAL)) {
             activity.setTheme(R.style.Theme_Deep_Purple_Teal);
-        }else if (primaryColor.equals(DEEP_PURPLE) && accentColor.equals(GREEN)) {
+        } else if (primaryColor.equals(DEEP_PURPLE) && accentColor.equals(GREEN)) {
             activity.setTheme(R.style.Theme_Deep_Purple_Green);
-        }else if (primaryColor.equals(DEEP_PURPLE) && accentColor.equals(LIGHT_GREEN)) {
+        } else if (primaryColor.equals(DEEP_PURPLE) && accentColor.equals(LIGHT_GREEN)) {
             activity.setTheme(R.style.Theme_Deep_Purple_Light_Green);
-        }else if (primaryColor.equals(DEEP_PURPLE) && accentColor.equals(LIME)) {
+        } else if (primaryColor.equals(DEEP_PURPLE) && accentColor.equals(LIME)) {
             activity.setTheme(R.style.Theme_Deep_Purple_Lime);
-        }else if (primaryColor.equals(DEEP_PURPLE) && accentColor.equals(YELLOW)) {
+        } else if (primaryColor.equals(DEEP_PURPLE) && accentColor.equals(YELLOW)) {
             activity.setTheme(R.style.Theme_Deep_Purple_Yellow);
-        }else if (primaryColor.equals(DEEP_PURPLE) && accentColor.equals(AMBER)) {
+        } else if (primaryColor.equals(DEEP_PURPLE) && accentColor.equals(AMBER)) {
             activity.setTheme(R.style.Theme_Deep_Purple_Amber);
-        }else if (primaryColor.equals(DEEP_PURPLE) && accentColor.equals(ORANGE)) {
+        } else if (primaryColor.equals(DEEP_PURPLE) && accentColor.equals(ORANGE)) {
             activity.setTheme(R.style.Theme_Deep_Purple_Orange);
-        }else if (primaryColor.equals(DEEP_PURPLE) && accentColor.equals(DEEP_ORANGE)) {
+        } else if (primaryColor.equals(DEEP_PURPLE) && accentColor.equals(DEEP_ORANGE)) {
             activity.setTheme(R.style.Theme_Deep_Purple_Deep_Orange);
-        }else if (primaryColor.equals(DEEP_PURPLE) && accentColor.equals(BROWN)) {
+        } else if (primaryColor.equals(DEEP_PURPLE) && accentColor.equals(BROWN)) {
             activity.setTheme(R.style.Theme_Deep_Purple_Brown);
-        }else if (primaryColor.equals(DEEP_PURPLE) && accentColor.equals(GREY)) {
+        } else if (primaryColor.equals(DEEP_PURPLE) && accentColor.equals(GREY)) {
             activity.setTheme(R.style.Theme_Deep_Purple_Grey);
-        }else if (primaryColor.equals(DEEP_PURPLE) && accentColor.equals(BLUE_GREY)) {
+        } else if (primaryColor.equals(DEEP_PURPLE) && accentColor.equals(BLUE_GREY)) {
             activity.setTheme(R.style.Theme_Deep_Purple_Blue_Grey);
-        }else if (primaryColor.equals(INDIGO) && accentColor.equals(RED)) {
+        } else if (primaryColor.equals(INDIGO) && accentColor.equals(RED)) {
             activity.setTheme(R.style.Theme_Indigo_Red);
-        }else if (primaryColor.equals(INDIGO) && accentColor.equals(PINK)) {
+        } else if (primaryColor.equals(INDIGO) && accentColor.equals(PINK)) {
             activity.setTheme(R.style.Theme_Indigo_Pink);
-        }else if (primaryColor.equals(INDIGO) && accentColor.equals(PURPLE)) {
+        } else if (primaryColor.equals(INDIGO) && accentColor.equals(PURPLE)) {
             activity.setTheme(R.style.Theme_Indigo_Purple);
-        }else if (primaryColor.equals(INDIGO) && accentColor.equals(DEEP_PURPLE)) {
+        } else if (primaryColor.equals(INDIGO) && accentColor.equals(DEEP_PURPLE)) {
             activity.setTheme(R.style.Theme_Indigo_Deep_Purple);
-        }else if (primaryColor.equals(INDIGO) && accentColor.equals(INDIGO)) {
+        } else if (primaryColor.equals(INDIGO) && accentColor.equals(INDIGO)) {
             activity.setTheme(R.style.Theme_Indigo_Indigo);
-        }else if (primaryColor.equals(INDIGO) && accentColor.equals(BLUE)) {
+        } else if (primaryColor.equals(INDIGO) && accentColor.equals(BLUE)) {
             activity.setTheme(R.style.Theme_Indigo_Blue);
-        }else if (primaryColor.equals(INDIGO) && accentColor.equals(LIGHT_BLUE)) {
+        } else if (primaryColor.equals(INDIGO) && accentColor.equals(LIGHT_BLUE)) {
             activity.setTheme(R.style.Theme_Indigo_Light_Blue);
-        }else if (primaryColor.equals(INDIGO) && accentColor.equals(CYAN)) {
+        } else if (primaryColor.equals(INDIGO) && accentColor.equals(CYAN)) {
             activity.setTheme(R.style.Theme_Indigo_Cyan);
-        }else if (primaryColor.equals(INDIGO) && accentColor.equals(TEAL)) {
+        } else if (primaryColor.equals(INDIGO) && accentColor.equals(TEAL)) {
             activity.setTheme(R.style.Theme_Indigo_Teal);
-        }else if (primaryColor.equals(INDIGO) && accentColor.equals(GREEN)) {
+        } else if (primaryColor.equals(INDIGO) && accentColor.equals(GREEN)) {
             activity.setTheme(R.style.Theme_Indigo_Green);
-        }else if (primaryColor.equals(INDIGO) && accentColor.equals(LIGHT_GREEN)) {
+        } else if (primaryColor.equals(INDIGO) && accentColor.equals(LIGHT_GREEN)) {
             activity.setTheme(R.style.Theme_Indigo_Light_Green);
-        }else if (primaryColor.equals(INDIGO) && accentColor.equals(LIME)) {
+        } else if (primaryColor.equals(INDIGO) && accentColor.equals(LIME)) {
             activity.setTheme(R.style.Theme_Indigo_Lime);
-        }else if (primaryColor.equals(INDIGO) && accentColor.equals(YELLOW)) {
+        } else if (primaryColor.equals(INDIGO) && accentColor.equals(YELLOW)) {
             activity.setTheme(R.style.Theme_Indigo_Yellow);
-        }else if (primaryColor.equals(INDIGO) && accentColor.equals(AMBER)) {
+        } else if (primaryColor.equals(INDIGO) && accentColor.equals(AMBER)) {
             activity.setTheme(R.style.Theme_Indigo_Amber);
-        }else if (primaryColor.equals(INDIGO) && accentColor.equals(ORANGE)) {
+        } else if (primaryColor.equals(INDIGO) && accentColor.equals(ORANGE)) {
             activity.setTheme(R.style.Theme_Indigo_Orange);
-        }else if (primaryColor.equals(INDIGO) && accentColor.equals(DEEP_ORANGE)) {
+        } else if (primaryColor.equals(INDIGO) && accentColor.equals(DEEP_ORANGE)) {
             activity.setTheme(R.style.Theme_Indigo_Deep_Orange);
-        }else if (primaryColor.equals(INDIGO) && accentColor.equals(BROWN)) {
+        } else if (primaryColor.equals(INDIGO) && accentColor.equals(BROWN)) {
             activity.setTheme(R.style.Theme_Indigo_Brown);
-        }else if (primaryColor.equals(INDIGO) && accentColor.equals(GREY)) {
+        } else if (primaryColor.equals(INDIGO) && accentColor.equals(GREY)) {
             activity.setTheme(R.style.Theme_Indigo_Grey);
-        }else if (primaryColor.equals(INDIGO) && accentColor.equals(BLUE_GREY)) {
+        } else if (primaryColor.equals(INDIGO) && accentColor.equals(BLUE_GREY)) {
             activity.setTheme(R.style.Theme_Indigo_Blue_Grey);
-        }else if (primaryColor.equals(BLUE) && accentColor.equals(RED)) {
+        } else if (primaryColor.equals(BLUE) && accentColor.equals(RED)) {
             activity.setTheme(R.style.Theme_Blue_Red);
-        }else if (primaryColor.equals(BLUE) && accentColor.equals(PINK)) {
+        } else if (primaryColor.equals(BLUE) && accentColor.equals(PINK)) {
             activity.setTheme(R.style.Theme_Blue_Pink);
-        }else if (primaryColor.equals(BLUE) && accentColor.equals(PURPLE)) {
+        } else if (primaryColor.equals(BLUE) && accentColor.equals(PURPLE)) {
             activity.setTheme(R.style.Theme_Blue_Purple);
-        }else if (primaryColor.equals(BLUE) && accentColor.equals(DEEP_PURPLE)) {
+        } else if (primaryColor.equals(BLUE) && accentColor.equals(DEEP_PURPLE)) {
             activity.setTheme(R.style.Theme_Blue_Deep_Purple);
-        }else if (primaryColor.equals(BLUE) && accentColor.equals(INDIGO)) {
+        } else if (primaryColor.equals(BLUE) && accentColor.equals(INDIGO)) {
             activity.setTheme(R.style.Theme_Blue_Indigo);
-        }else if (primaryColor.equals(BLUE) && accentColor.equals(BLUE)) {
+        } else if (primaryColor.equals(BLUE) && accentColor.equals(BLUE)) {
             activity.setTheme(R.style.Theme_Blue_Blue);
-        }else if (primaryColor.equals(BLUE) && accentColor.equals(LIGHT_BLUE)) {
+        } else if (primaryColor.equals(BLUE) && accentColor.equals(LIGHT_BLUE)) {
             activity.setTheme(R.style.Theme_Blue_Light_Blue);
-        }else if (primaryColor.equals(BLUE) && accentColor.equals(CYAN)) {
+        } else if (primaryColor.equals(BLUE) && accentColor.equals(CYAN)) {
             activity.setTheme(R.style.Theme_Blue_Cyan);
-        }else if (primaryColor.equals(BLUE) && accentColor.equals(TEAL)) {
+        } else if (primaryColor.equals(BLUE) && accentColor.equals(TEAL)) {
             activity.setTheme(R.style.Theme_Blue_Teal);
-        }else if (primaryColor.equals(BLUE) && accentColor.equals(GREEN)) {
+        } else if (primaryColor.equals(BLUE) && accentColor.equals(GREEN)) {
             activity.setTheme(R.style.Theme_Blue_Green);
-        }else if (primaryColor.equals(BLUE) && accentColor.equals(LIGHT_GREEN)) {
+        } else if (primaryColor.equals(BLUE) && accentColor.equals(LIGHT_GREEN)) {
             activity.setTheme(R.style.Theme_Blue_Light_Green);
-        }else if (primaryColor.equals(BLUE) && accentColor.equals(LIME)) {
+        } else if (primaryColor.equals(BLUE) && accentColor.equals(LIME)) {
             activity.setTheme(R.style.Theme_Blue_Lime);
-        }else if (primaryColor.equals(BLUE) && accentColor.equals(YELLOW)) {
+        } else if (primaryColor.equals(BLUE) && accentColor.equals(YELLOW)) {
             activity.setTheme(R.style.Theme_Blue_Yellow);
-        }else if (primaryColor.equals(BLUE) && accentColor.equals(AMBER)) {
+        } else if (primaryColor.equals(BLUE) && accentColor.equals(AMBER)) {
             activity.setTheme(R.style.Theme_Blue_Amber);
-        }else if (primaryColor.equals(BLUE) && accentColor.equals(ORANGE)) {
+        } else if (primaryColor.equals(BLUE) && accentColor.equals(ORANGE)) {
             activity.setTheme(R.style.Theme_Blue_Orange);
-        }else if (primaryColor.equals(BLUE) && accentColor.equals(DEEP_ORANGE)) {
+        } else if (primaryColor.equals(BLUE) && accentColor.equals(DEEP_ORANGE)) {
             activity.setTheme(R.style.Theme_Blue_Deep_Orange);
-        }else if (primaryColor.equals(BLUE) && accentColor.equals(BROWN)) {
+        } else if (primaryColor.equals(BLUE) && accentColor.equals(BROWN)) {
             activity.setTheme(R.style.Theme_Blue_Brown);
-        }else if (primaryColor.equals(BLUE) && accentColor.equals(GREY)) {
+        } else if (primaryColor.equals(BLUE) && accentColor.equals(GREY)) {
             activity.setTheme(R.style.Theme_Blue_Grey);
-        }else if (primaryColor.equals(BLUE) && accentColor.equals(BLUE_GREY)) {
+        } else if (primaryColor.equals(BLUE) && accentColor.equals(BLUE_GREY)) {
             activity.setTheme(R.style.Theme_Blue_Blue_Grey);
-        }else if (primaryColor.equals(LIGHT_BLUE) && accentColor.equals(RED)) {
+        } else if (primaryColor.equals(LIGHT_BLUE) && accentColor.equals(RED)) {
             activity.setTheme(R.style.Theme_Light_Blue_Red);
-        }else if (primaryColor.equals(LIGHT_BLUE) && accentColor.equals(PINK)) {
+        } else if (primaryColor.equals(LIGHT_BLUE) && accentColor.equals(PINK)) {
             activity.setTheme(R.style.Theme_Light_Blue_Pink);
-        }else if (primaryColor.equals(LIGHT_BLUE) && accentColor.equals(PURPLE)) {
+        } else if (primaryColor.equals(LIGHT_BLUE) && accentColor.equals(PURPLE)) {
             activity.setTheme(R.style.Theme_Light_Blue_Purple);
-        }else if (primaryColor.equals(LIGHT_BLUE) && accentColor.equals(DEEP_PURPLE)) {
+        } else if (primaryColor.equals(LIGHT_BLUE) && accentColor.equals(DEEP_PURPLE)) {
             activity.setTheme(R.style.Theme_Light_Blue_Deep_Purple);
-        }else if (primaryColor.equals(LIGHT_BLUE) && accentColor.equals(INDIGO)) {
+        } else if (primaryColor.equals(LIGHT_BLUE) && accentColor.equals(INDIGO)) {
             activity.setTheme(R.style.Theme_Light_Blue_Indigo);
-        }else if (primaryColor.equals(LIGHT_BLUE) && accentColor.equals(BLUE)) {
+        } else if (primaryColor.equals(LIGHT_BLUE) && accentColor.equals(BLUE)) {
             activity.setTheme(R.style.Theme_Light_Blue_Blue);
-        }else if (primaryColor.equals(LIGHT_BLUE) && accentColor.equals(LIGHT_BLUE)) {
+        } else if (primaryColor.equals(LIGHT_BLUE) && accentColor.equals(LIGHT_BLUE)) {
             activity.setTheme(R.style.Theme_Light_Blue_Light_Blue);
-        }else if (primaryColor.equals(LIGHT_BLUE) && accentColor.equals(CYAN)) {
+        } else if (primaryColor.equals(LIGHT_BLUE) && accentColor.equals(CYAN)) {
             activity.setTheme(R.style.Theme_Light_Blue_Cyan);
-        }else if (primaryColor.equals(LIGHT_BLUE) && accentColor.equals(TEAL)) {
+        } else if (primaryColor.equals(LIGHT_BLUE) && accentColor.equals(TEAL)) {
             activity.setTheme(R.style.Theme_Light_Blue_Teal);
-        }else if (primaryColor.equals(LIGHT_BLUE) && accentColor.equals(GREEN)) {
+        } else if (primaryColor.equals(LIGHT_BLUE) && accentColor.equals(GREEN)) {
             activity.setTheme(R.style.Theme_Light_Blue_Green);
-        }else if (primaryColor.equals(LIGHT_BLUE) && accentColor.equals(LIGHT_GREEN)) {
+        } else if (primaryColor.equals(LIGHT_BLUE) && accentColor.equals(LIGHT_GREEN)) {
             activity.setTheme(R.style.Theme_Light_Blue_Light_Green);
-        }else if (primaryColor.equals(LIGHT_BLUE) && accentColor.equals(LIME)) {
+        } else if (primaryColor.equals(LIGHT_BLUE) && accentColor.equals(LIME)) {
             activity.setTheme(R.style.Theme_Light_Blue_Lime);
-        }else if (primaryColor.equals(LIGHT_BLUE) && accentColor.equals(YELLOW)) {
+        } else if (primaryColor.equals(LIGHT_BLUE) && accentColor.equals(YELLOW)) {
             activity.setTheme(R.style.Theme_Light_Blue_Yellow);
-        }else if (primaryColor.equals(LIGHT_BLUE) && accentColor.equals(AMBER)) {
+        } else if (primaryColor.equals(LIGHT_BLUE) && accentColor.equals(AMBER)) {
             activity.setTheme(R.style.Theme_Light_Blue_Amber);
-        }else if (primaryColor.equals(LIGHT_BLUE) && accentColor.equals(ORANGE)) {
+        } else if (primaryColor.equals(LIGHT_BLUE) && accentColor.equals(ORANGE)) {
             activity.setTheme(R.style.Theme_Light_Blue_Orange);
-        }else if (primaryColor.equals(LIGHT_BLUE) && accentColor.equals(DEEP_ORANGE)) {
+        } else if (primaryColor.equals(LIGHT_BLUE) && accentColor.equals(DEEP_ORANGE)) {
             activity.setTheme(R.style.Theme_Light_Blue_Deep_Orange);
-        }else if (primaryColor.equals(LIGHT_BLUE) && accentColor.equals(BROWN)) {
+        } else if (primaryColor.equals(LIGHT_BLUE) && accentColor.equals(BROWN)) {
             activity.setTheme(R.style.Theme_Light_Blue_Brown);
-        }else if (primaryColor.equals(LIGHT_BLUE) && accentColor.equals(GREY)) {
+        } else if (primaryColor.equals(LIGHT_BLUE) && accentColor.equals(GREY)) {
             activity.setTheme(R.style.Theme_Light_Blue_Grey);
-        }else if (primaryColor.equals(LIGHT_BLUE) && accentColor.equals(BLUE_GREY)) {
+        } else if (primaryColor.equals(LIGHT_BLUE) && accentColor.equals(BLUE_GREY)) {
             activity.setTheme(R.style.Theme_Light_Blue_Blue_Grey);
-        }else if (primaryColor.equals(CYAN) && accentColor.equals(RED)) {
+        } else if (primaryColor.equals(CYAN) && accentColor.equals(RED)) {
             activity.setTheme(R.style.Theme_Cyan_Red);
-        }else if (primaryColor.equals(CYAN) && accentColor.equals(PINK)) {
+        } else if (primaryColor.equals(CYAN) && accentColor.equals(PINK)) {
             activity.setTheme(R.style.Theme_Cyan_Pink);
-        }else if (primaryColor.equals(CYAN) && accentColor.equals(PURPLE)) {
+        } else if (primaryColor.equals(CYAN) && accentColor.equals(PURPLE)) {
             activity.setTheme(R.style.Theme_Cyan_Purple);
-        }else if (primaryColor.equals(CYAN) && accentColor.equals(DEEP_PURPLE)) {
+        } else if (primaryColor.equals(CYAN) && accentColor.equals(DEEP_PURPLE)) {
             activity.setTheme(R.style.Theme_Cyan_Deep_Purple);
-        }else if (primaryColor.equals(CYAN) && accentColor.equals(INDIGO)) {
+        } else if (primaryColor.equals(CYAN) && accentColor.equals(INDIGO)) {
             activity.setTheme(R.style.Theme_Cyan_Indigo);
-        }else if (primaryColor.equals(CYAN) && accentColor.equals(BLUE)) {
+        } else if (primaryColor.equals(CYAN) && accentColor.equals(BLUE)) {
             activity.setTheme(R.style.Theme_Cyan_Blue);
-        }else if (primaryColor.equals(CYAN) && accentColor.equals(LIGHT_BLUE)) {
+        } else if (primaryColor.equals(CYAN) && accentColor.equals(LIGHT_BLUE)) {
             activity.setTheme(R.style.Theme_Cyan_Light_Blue);
-        }else if (primaryColor.equals(CYAN) && accentColor.equals(CYAN)) {
+        } else if (primaryColor.equals(CYAN) && accentColor.equals(CYAN)) {
             activity.setTheme(R.style.Theme_Cyan_Cyan);
-        }else if (primaryColor.equals(CYAN) && accentColor.equals(TEAL)) {
+        } else if (primaryColor.equals(CYAN) && accentColor.equals(TEAL)) {
             activity.setTheme(R.style.Theme_Cyan_Teal);
-        }else if (primaryColor.equals(CYAN) && accentColor.equals(GREEN)) {
+        } else if (primaryColor.equals(CYAN) && accentColor.equals(GREEN)) {
             activity.setTheme(R.style.Theme_Cyan_Green);
-        }else if (primaryColor.equals(CYAN) && accentColor.equals(LIGHT_GREEN)) {
+        } else if (primaryColor.equals(CYAN) && accentColor.equals(LIGHT_GREEN)) {
             activity.setTheme(R.style.Theme_Cyan_Light_Green);
-        }else if (primaryColor.equals(CYAN) && accentColor.equals(LIME)) {
+        } else if (primaryColor.equals(CYAN) && accentColor.equals(LIME)) {
             activity.setTheme(R.style.Theme_Cyan_Lime);
-        }else if (primaryColor.equals(CYAN) && accentColor.equals(YELLOW)) {
+        } else if (primaryColor.equals(CYAN) && accentColor.equals(YELLOW)) {
             activity.setTheme(R.style.Theme_Cyan_Yellow);
-        }else if (primaryColor.equals(CYAN) && accentColor.equals(AMBER)) {
+        } else if (primaryColor.equals(CYAN) && accentColor.equals(AMBER)) {
             activity.setTheme(R.style.Theme_Cyan_Amber);
-        }else if (primaryColor.equals(CYAN) && accentColor.equals(ORANGE)) {
+        } else if (primaryColor.equals(CYAN) && accentColor.equals(ORANGE)) {
             activity.setTheme(R.style.Theme_Cyan_Orange);
-        }else if (primaryColor.equals(CYAN) && accentColor.equals(DEEP_ORANGE)) {
+        } else if (primaryColor.equals(CYAN) && accentColor.equals(DEEP_ORANGE)) {
             activity.setTheme(R.style.Theme_Cyan_Deep_Orange);
-        }else if (primaryColor.equals(CYAN) && accentColor.equals(BROWN)) {
+        } else if (primaryColor.equals(CYAN) && accentColor.equals(BROWN)) {
             activity.setTheme(R.style.Theme_Cyan_Brown);
-        }else if (primaryColor.equals(CYAN) && accentColor.equals(GREY)) {
+        } else if (primaryColor.equals(CYAN) && accentColor.equals(GREY)) {
             activity.setTheme(R.style.Theme_Cyan_Grey);
-        }else if (primaryColor.equals(CYAN) && accentColor.equals(BLUE_GREY)) {
+        } else if (primaryColor.equals(CYAN) && accentColor.equals(BLUE_GREY)) {
             activity.setTheme(R.style.Theme_Cyan_Blue_Grey);
-        }else if (primaryColor.equals(TEAL) && accentColor.equals(RED)) {
+        } else if (primaryColor.equals(TEAL) && accentColor.equals(RED)) {
             activity.setTheme(R.style.Theme_Teal_Red);
-        }else if (primaryColor.equals(TEAL) && accentColor.equals(PINK)) {
+        } else if (primaryColor.equals(TEAL) && accentColor.equals(PINK)) {
             activity.setTheme(R.style.Theme_Teal_Pink);
-        }else if (primaryColor.equals(TEAL) && accentColor.equals(PURPLE)) {
+        } else if (primaryColor.equals(TEAL) && accentColor.equals(PURPLE)) {
             activity.setTheme(R.style.Theme_Teal_Purple);
-        }else if (primaryColor.equals(TEAL) && accentColor.equals(DEEP_PURPLE)) {
+        } else if (primaryColor.equals(TEAL) && accentColor.equals(DEEP_PURPLE)) {
             activity.setTheme(R.style.Theme_Teal_Deep_Purple);
-        }else if (primaryColor.equals(TEAL) && accentColor.equals(INDIGO)) {
+        } else if (primaryColor.equals(TEAL) && accentColor.equals(INDIGO)) {
             activity.setTheme(R.style.Theme_Teal_Indigo);
-        }else if (primaryColor.equals(TEAL) && accentColor.equals(BLUE)) {
+        } else if (primaryColor.equals(TEAL) && accentColor.equals(BLUE)) {
             activity.setTheme(R.style.Theme_Teal_Blue);
-        }else if (primaryColor.equals(TEAL) && accentColor.equals(LIGHT_BLUE)) {
+        } else if (primaryColor.equals(TEAL) && accentColor.equals(LIGHT_BLUE)) {
             activity.setTheme(R.style.Theme_Teal_Light_Blue);
-        }else if (primaryColor.equals(TEAL) && accentColor.equals(CYAN)) {
+        } else if (primaryColor.equals(TEAL) && accentColor.equals(CYAN)) {
             activity.setTheme(R.style.Theme_Teal_Cyan);
-        }else if (primaryColor.equals(TEAL) && accentColor.equals(TEAL)) {
+        } else if (primaryColor.equals(TEAL) && accentColor.equals(TEAL)) {
             activity.setTheme(R.style.Theme_Teal_Teal);
-        }else if (primaryColor.equals(TEAL) && accentColor.equals(GREEN)) {
+        } else if (primaryColor.equals(TEAL) && accentColor.equals(GREEN)) {
             activity.setTheme(R.style.Theme_Teal_Green);
-        }else if (primaryColor.equals(TEAL) && accentColor.equals(LIGHT_GREEN)) {
+        } else if (primaryColor.equals(TEAL) && accentColor.equals(LIGHT_GREEN)) {
             activity.setTheme(R.style.Theme_Teal_Light_Green);
-        }else if (primaryColor.equals(TEAL) && accentColor.equals(LIME)) {
+        } else if (primaryColor.equals(TEAL) && accentColor.equals(LIME)) {
             activity.setTheme(R.style.Theme_Teal_Lime);
-        }else if (primaryColor.equals(TEAL) && accentColor.equals(YELLOW)) {
+        } else if (primaryColor.equals(TEAL) && accentColor.equals(YELLOW)) {
             activity.setTheme(R.style.Theme_Teal_Yellow);
-        }else if (primaryColor.equals(TEAL) && accentColor.equals(AMBER)) {
+        } else if (primaryColor.equals(TEAL) && accentColor.equals(AMBER)) {
             activity.setTheme(R.style.Theme_Teal_Amber);
-        }else if (primaryColor.equals(TEAL) && accentColor.equals(ORANGE)) {
+        } else if (primaryColor.equals(TEAL) && accentColor.equals(ORANGE)) {
             activity.setTheme(R.style.Theme_Teal_Orange);
-        }else if (primaryColor.equals(TEAL) && accentColor.equals(DEEP_ORANGE)) {
+        } else if (primaryColor.equals(TEAL) && accentColor.equals(DEEP_ORANGE)) {
             activity.setTheme(R.style.Theme_Teal_Deep_Orange);
-        }else if (primaryColor.equals(TEAL) && accentColor.equals(BROWN)) {
+        } else if (primaryColor.equals(TEAL) && accentColor.equals(BROWN)) {
             activity.setTheme(R.style.Theme_Teal_Brown);
-        }else if (primaryColor.equals(TEAL) && accentColor.equals(GREY)) {
+        } else if (primaryColor.equals(TEAL) && accentColor.equals(GREY)) {
             activity.setTheme(R.style.Theme_Teal_Grey);
-        }else if (primaryColor.equals(TEAL) && accentColor.equals(BLUE_GREY)) {
+        } else if (primaryColor.equals(TEAL) && accentColor.equals(BLUE_GREY)) {
             activity.setTheme(R.style.Theme_Teal_Blue_Grey);
-        }else if (primaryColor.equals(GREEN) && accentColor.equals(RED)) {
+        } else if (primaryColor.equals(GREEN) && accentColor.equals(RED)) {
             activity.setTheme(R.style.Theme_Green_Red);
-        }else if (primaryColor.equals(GREEN) && accentColor.equals(PINK)) {
+        } else if (primaryColor.equals(GREEN) && accentColor.equals(PINK)) {
             activity.setTheme(R.style.Theme_Green_Pink);
-        }else if (primaryColor.equals(GREEN) && accentColor.equals(PURPLE)) {
+        } else if (primaryColor.equals(GREEN) && accentColor.equals(PURPLE)) {
             activity.setTheme(R.style.Theme_Green_Purple);
-        }else if (primaryColor.equals(GREEN) && accentColor.equals(DEEP_PURPLE)) {
+        } else if (primaryColor.equals(GREEN) && accentColor.equals(DEEP_PURPLE)) {
             activity.setTheme(R.style.Theme_Green_Deep_Purple);
-        }else if (primaryColor.equals(GREEN) && accentColor.equals(INDIGO)) {
+        } else if (primaryColor.equals(GREEN) && accentColor.equals(INDIGO)) {
             activity.setTheme(R.style.Theme_Green_Indigo);
-        }else if (primaryColor.equals(GREEN) && accentColor.equals(BLUE)) {
+        } else if (primaryColor.equals(GREEN) && accentColor.equals(BLUE)) {
             activity.setTheme(R.style.Theme_Green_Blue);
-        }else if (primaryColor.equals(GREEN) && accentColor.equals(LIGHT_BLUE)) {
+        } else if (primaryColor.equals(GREEN) && accentColor.equals(LIGHT_BLUE)) {
             activity.setTheme(R.style.Theme_Green_Light_Blue);
-        }else if (primaryColor.equals(GREEN) && accentColor.equals(CYAN)) {
+        } else if (primaryColor.equals(GREEN) && accentColor.equals(CYAN)) {
             activity.setTheme(R.style.Theme_Green_Cyan);
-        }else if (primaryColor.equals(GREEN) && accentColor.equals(TEAL)) {
+        } else if (primaryColor.equals(GREEN) && accentColor.equals(TEAL)) {
             activity.setTheme(R.style.Theme_Green_Teal);
-        }else if (primaryColor.equals(GREEN) && accentColor.equals(GREEN)) {
+        } else if (primaryColor.equals(GREEN) && accentColor.equals(GREEN)) {
             activity.setTheme(R.style.Theme_Green_Green);
-        }else if (primaryColor.equals(GREEN) && accentColor.equals(LIGHT_GREEN)) {
+        } else if (primaryColor.equals(GREEN) && accentColor.equals(LIGHT_GREEN)) {
             activity.setTheme(R.style.Theme_Green_Light_Green);
-        }else if (primaryColor.equals(GREEN) && accentColor.equals(LIME)) {
+        } else if (primaryColor.equals(GREEN) && accentColor.equals(LIME)) {
             activity.setTheme(R.style.Theme_Green_Lime);
-        }else if (primaryColor.equals(GREEN) && accentColor.equals(YELLOW)) {
+        } else if (primaryColor.equals(GREEN) && accentColor.equals(YELLOW)) {
             activity.setTheme(R.style.Theme_Green_Yellow);
-        }else if (primaryColor.equals(GREEN) && accentColor.equals(AMBER)) {
+        } else if (primaryColor.equals(GREEN) && accentColor.equals(AMBER)) {
             activity.setTheme(R.style.Theme_Green_Amber);
-        }else if (primaryColor.equals(GREEN) && accentColor.equals(ORANGE)) {
+        } else if (primaryColor.equals(GREEN) && accentColor.equals(ORANGE)) {
             activity.setTheme(R.style.Theme_Green_Orange);
-        }else if (primaryColor.equals(GREEN) && accentColor.equals(DEEP_ORANGE)) {
+        } else if (primaryColor.equals(GREEN) && accentColor.equals(DEEP_ORANGE)) {
             activity.setTheme(R.style.Theme_Green_Deep_Orange);
-        }else if (primaryColor.equals(GREEN) && accentColor.equals(BROWN)) {
+        } else if (primaryColor.equals(GREEN) && accentColor.equals(BROWN)) {
             activity.setTheme(R.style.Theme_Green_Brown);
-        }else if (primaryColor.equals(GREEN) && accentColor.equals(GREY)) {
+        } else if (primaryColor.equals(GREEN) && accentColor.equals(GREY)) {
             activity.setTheme(R.style.Theme_Green_Grey);
-        }else if (primaryColor.equals(GREEN) && accentColor.equals(BLUE_GREY)) {
+        } else if (primaryColor.equals(GREEN) && accentColor.equals(BLUE_GREY)) {
             activity.setTheme(R.style.Theme_Green_Blue_Grey);
-        }else if (primaryColor.equals(LIGHT_GREEN) && accentColor.equals(RED)) {
+        } else if (primaryColor.equals(LIGHT_GREEN) && accentColor.equals(RED)) {
             activity.setTheme(R.style.Theme_Light_Green_Red);
-        }else if (primaryColor.equals(LIGHT_GREEN) && accentColor.equals(PINK)) {
+        } else if (primaryColor.equals(LIGHT_GREEN) && accentColor.equals(PINK)) {
             activity.setTheme(R.style.Theme_Light_Green_Pink);
-        }else if (primaryColor.equals(LIGHT_GREEN) && accentColor.equals(PURPLE)) {
+        } else if (primaryColor.equals(LIGHT_GREEN) && accentColor.equals(PURPLE)) {
             activity.setTheme(R.style.Theme_Light_Green_Purple);
-        }else if (primaryColor.equals(LIGHT_GREEN) && accentColor.equals(DEEP_PURPLE)) {
+        } else if (primaryColor.equals(LIGHT_GREEN) && accentColor.equals(DEEP_PURPLE)) {
             activity.setTheme(R.style.Theme_Light_Green_Deep_Purple);
-        }else if (primaryColor.equals(LIGHT_GREEN) && accentColor.equals(INDIGO)) {
+        } else if (primaryColor.equals(LIGHT_GREEN) && accentColor.equals(INDIGO)) {
             activity.setTheme(R.style.Theme_Light_Green_Indigo);
-        }else if (primaryColor.equals(LIGHT_GREEN) && accentColor.equals(BLUE)) {
+        } else if (primaryColor.equals(LIGHT_GREEN) && accentColor.equals(BLUE)) {
             activity.setTheme(R.style.Theme_Light_Green_Blue);
-        }else if (primaryColor.equals(LIGHT_GREEN) && accentColor.equals(LIGHT_BLUE)) {
+        } else if (primaryColor.equals(LIGHT_GREEN) && accentColor.equals(LIGHT_BLUE)) {
             activity.setTheme(R.style.Theme_Light_Green_Light_Blue);
-        }else if (primaryColor.equals(LIGHT_GREEN) && accentColor.equals(CYAN)) {
+        } else if (primaryColor.equals(LIGHT_GREEN) && accentColor.equals(CYAN)) {
             activity.setTheme(R.style.Theme_Light_Green_Cyan);
-        }else if (primaryColor.equals(LIGHT_GREEN) && accentColor.equals(TEAL)) {
+        } else if (primaryColor.equals(LIGHT_GREEN) && accentColor.equals(TEAL)) {
             activity.setTheme(R.style.Theme_Light_Green_Teal);
-        }else if (primaryColor.equals(LIGHT_GREEN) && accentColor.equals(GREEN)) {
+        } else if (primaryColor.equals(LIGHT_GREEN) && accentColor.equals(GREEN)) {
             activity.setTheme(R.style.Theme_Light_Green_Green);
-        }else if (primaryColor.equals(LIGHT_GREEN) && accentColor.equals(LIGHT_GREEN)) {
+        } else if (primaryColor.equals(LIGHT_GREEN) && accentColor.equals(LIGHT_GREEN)) {
             activity.setTheme(R.style.Theme_Light_Green_Light_Green);
-        }else if (primaryColor.equals(LIGHT_GREEN) && accentColor.equals(LIME)) {
+        } else if (primaryColor.equals(LIGHT_GREEN) && accentColor.equals(LIME)) {
             activity.setTheme(R.style.Theme_Light_Green_Lime);
-        }else if (primaryColor.equals(LIGHT_GREEN) && accentColor.equals(YELLOW)) {
+        } else if (primaryColor.equals(LIGHT_GREEN) && accentColor.equals(YELLOW)) {
             activity.setTheme(R.style.Theme_Light_Green_Yellow);
-        }else if (primaryColor.equals(LIGHT_GREEN) && accentColor.equals(AMBER)) {
+        } else if (primaryColor.equals(LIGHT_GREEN) && accentColor.equals(AMBER)) {
             activity.setTheme(R.style.Theme_Light_Green_Amber);
-        }else if (primaryColor.equals(LIGHT_GREEN) && accentColor.equals(ORANGE)) {
+        } else if (primaryColor.equals(LIGHT_GREEN) && accentColor.equals(ORANGE)) {
             activity.setTheme(R.style.Theme_Light_Green_Orange);
-        }else if (primaryColor.equals(LIGHT_GREEN) && accentColor.equals(DEEP_ORANGE)) {
+        } else if (primaryColor.equals(LIGHT_GREEN) && accentColor.equals(DEEP_ORANGE)) {
             activity.setTheme(R.style.Theme_Light_Green_Deep_Orange);
-        }else if (primaryColor.equals(LIGHT_GREEN) && accentColor.equals(BROWN)) {
+        } else if (primaryColor.equals(LIGHT_GREEN) && accentColor.equals(BROWN)) {
             activity.setTheme(R.style.Theme_Light_Green_Brown);
-        }else if (primaryColor.equals(LIGHT_GREEN) && accentColor.equals(GREY)) {
+        } else if (primaryColor.equals(LIGHT_GREEN) && accentColor.equals(GREY)) {
             activity.setTheme(R.style.Theme_Light_Green_Grey);
-        }else if (primaryColor.equals(LIGHT_GREEN) && accentColor.equals(BLUE_GREY)) {
+        } else if (primaryColor.equals(LIGHT_GREEN) && accentColor.equals(BLUE_GREY)) {
             activity.setTheme(R.style.Theme_Light_Green_Blue_Grey);
-        }else if (primaryColor.equals(LIME) && accentColor.equals(RED)) {
+        } else if (primaryColor.equals(LIME) && accentColor.equals(RED)) {
             activity.setTheme(R.style.Theme_Lime_Red);
-        }else if (primaryColor.equals(LIME) && accentColor.equals(PINK)) {
+        } else if (primaryColor.equals(LIME) && accentColor.equals(PINK)) {
             activity.setTheme(R.style.Theme_Lime_Pink);
-        }else if (primaryColor.equals(LIME) && accentColor.equals(PURPLE)) {
+        } else if (primaryColor.equals(LIME) && accentColor.equals(PURPLE)) {
             activity.setTheme(R.style.Theme_Lime_Purple);
-        }else if (primaryColor.equals(LIME) && accentColor.equals(DEEP_PURPLE)) {
+        } else if (primaryColor.equals(LIME) && accentColor.equals(DEEP_PURPLE)) {
             activity.setTheme(R.style.Theme_Lime_Deep_Purple);
-        }else if (primaryColor.equals(LIME) && accentColor.equals(INDIGO)) {
+        } else if (primaryColor.equals(LIME) && accentColor.equals(INDIGO)) {
             activity.setTheme(R.style.Theme_Lime_Indigo);
-        }else if (primaryColor.equals(LIME) && accentColor.equals(BLUE)) {
+        } else if (primaryColor.equals(LIME) && accentColor.equals(BLUE)) {
             activity.setTheme(R.style.Theme_Lime_Blue);
-        }else if (primaryColor.equals(LIME) && accentColor.equals(LIGHT_BLUE)) {
+        } else if (primaryColor.equals(LIME) && accentColor.equals(LIGHT_BLUE)) {
             activity.setTheme(R.style.Theme_Lime_Light_Blue);
-        }else if (primaryColor.equals(LIME) && accentColor.equals(CYAN)) {
+        } else if (primaryColor.equals(LIME) && accentColor.equals(CYAN)) {
             activity.setTheme(R.style.Theme_Lime_Cyan);
-        }else if (primaryColor.equals(LIME) && accentColor.equals(TEAL)) {
+        } else if (primaryColor.equals(LIME) && accentColor.equals(TEAL)) {
             activity.setTheme(R.style.Theme_Lime_Teal);
-        }else if (primaryColor.equals(LIME) && accentColor.equals(GREEN)) {
+        } else if (primaryColor.equals(LIME) && accentColor.equals(GREEN)) {
             activity.setTheme(R.style.Theme_Lime_Green);
-        }else if (primaryColor.equals(LIME) && accentColor.equals(LIGHT_GREEN)) {
+        } else if (primaryColor.equals(LIME) && accentColor.equals(LIGHT_GREEN)) {
             activity.setTheme(R.style.Theme_Lime_Light_Green);
-        }else if (primaryColor.equals(LIME) && accentColor.equals(YELLOW)) {
+        } else if (primaryColor.equals(LIME) && accentColor.equals(YELLOW)) {
             activity.setTheme(R.style.Theme_Lime_Yellow);
-        }else if (primaryColor.equals(LIME) && accentColor.equals(AMBER)) {
+        } else if (primaryColor.equals(LIME) && accentColor.equals(AMBER)) {
             activity.setTheme(R.style.Theme_Lime_Amber);
-        }else if (primaryColor.equals(LIME) && accentColor.equals(LIME)) {
+        } else if (primaryColor.equals(LIME) && accentColor.equals(LIME)) {
             activity.setTheme(R.style.Theme_Lime_Lime);
-        }else if (primaryColor.equals(LIME) && accentColor.equals(ORANGE)) {
+        } else if (primaryColor.equals(LIME) && accentColor.equals(ORANGE)) {
             activity.setTheme(R.style.Theme_Lime_Orange);
-        }else if (primaryColor.equals(LIME) && accentColor.equals(DEEP_ORANGE)) {
+        } else if (primaryColor.equals(LIME) && accentColor.equals(DEEP_ORANGE)) {
             activity.setTheme(R.style.Theme_Lime_Deep_Orange);
-        }else if (primaryColor.equals(LIME) && accentColor.equals(BROWN)) {
+        } else if (primaryColor.equals(LIME) && accentColor.equals(BROWN)) {
             activity.setTheme(R.style.Theme_Lime_Brown);
-        }else if (primaryColor.equals(LIME) && accentColor.equals(GREY)) {
+        } else if (primaryColor.equals(LIME) && accentColor.equals(GREY)) {
             activity.setTheme(R.style.Theme_Lime_Grey);
-        }else if (primaryColor.equals(LIME) && accentColor.equals(BLUE_GREY)) {
+        } else if (primaryColor.equals(LIME) && accentColor.equals(BLUE_GREY)) {
             activity.setTheme(R.style.Theme_Lime_Blue_Grey);
-        }else if (primaryColor.equals(YELLOW) && accentColor.equals(RED)) {
+        } else if (primaryColor.equals(YELLOW) && accentColor.equals(RED)) {
             activity.setTheme(R.style.Theme_Yellow_Red);
-        }else if (primaryColor.equals(YELLOW) && accentColor.equals(PINK)) {
+        } else if (primaryColor.equals(YELLOW) && accentColor.equals(PINK)) {
             activity.setTheme(R.style.Theme_Yellow_Pink);
-        }else if (primaryColor.equals(YELLOW) && accentColor.equals(PURPLE)) {
+        } else if (primaryColor.equals(YELLOW) && accentColor.equals(PURPLE)) {
             activity.setTheme(R.style.Theme_Yellow_Purple);
-        }else if (primaryColor.equals(YELLOW) && accentColor.equals(DEEP_PURPLE)) {
+        } else if (primaryColor.equals(YELLOW) && accentColor.equals(DEEP_PURPLE)) {
             activity.setTheme(R.style.Theme_Yellow_Deep_Purple);
-        }else if (primaryColor.equals(YELLOW) && accentColor.equals(INDIGO)) {
+        } else if (primaryColor.equals(YELLOW) && accentColor.equals(INDIGO)) {
             activity.setTheme(R.style.Theme_Yellow_Indigo);
-        }else if (primaryColor.equals(YELLOW) && accentColor.equals(BLUE)) {
+        } else if (primaryColor.equals(YELLOW) && accentColor.equals(BLUE)) {
             activity.setTheme(R.style.Theme_Yellow_Blue);
-        }else if (primaryColor.equals(YELLOW) && accentColor.equals(LIGHT_BLUE)) {
+        } else if (primaryColor.equals(YELLOW) && accentColor.equals(LIGHT_BLUE)) {
             activity.setTheme(R.style.Theme_Yellow_Light_Blue);
-        }else if (primaryColor.equals(YELLOW) && accentColor.equals(CYAN)) {
+        } else if (primaryColor.equals(YELLOW) && accentColor.equals(CYAN)) {
             activity.setTheme(R.style.Theme_Yellow_Cyan);
-        }else if (primaryColor.equals(YELLOW) && accentColor.equals(TEAL)) {
+        } else if (primaryColor.equals(YELLOW) && accentColor.equals(TEAL)) {
             activity.setTheme(R.style.Theme_Yellow_Teal);
-        }else if (primaryColor.equals(YELLOW) && accentColor.equals(GREEN)) {
+        } else if (primaryColor.equals(YELLOW) && accentColor.equals(GREEN)) {
             activity.setTheme(R.style.Theme_Yellow_Green);
-        }else if (primaryColor.equals(YELLOW) && accentColor.equals(LIGHT_GREEN)) {
+        } else if (primaryColor.equals(YELLOW) && accentColor.equals(LIGHT_GREEN)) {
             activity.setTheme(R.style.Theme_Yellow_Light_Green);
-        }else if (primaryColor.equals(YELLOW) && accentColor.equals(LIME)) {
+        } else if (primaryColor.equals(YELLOW) && accentColor.equals(LIME)) {
             activity.setTheme(R.style.Theme_Yellow_Lime);
-        }else if (primaryColor.equals(YELLOW) && accentColor.equals(YELLOW)) {
+        } else if (primaryColor.equals(YELLOW) && accentColor.equals(YELLOW)) {
             activity.setTheme(R.style.Theme_Yellow_Yellow);
-        }else if (primaryColor.equals(YELLOW) && accentColor.equals(AMBER)) {
+        } else if (primaryColor.equals(YELLOW) && accentColor.equals(AMBER)) {
             activity.setTheme(R.style.Theme_Yellow_Amber);
-        }else if (primaryColor.equals(YELLOW) && accentColor.equals(ORANGE)) {
+        } else if (primaryColor.equals(YELLOW) && accentColor.equals(ORANGE)) {
             activity.setTheme(R.style.Theme_Yellow_Orange);
-        }else if (primaryColor.equals(YELLOW) && accentColor.equals(DEEP_ORANGE)) {
+        } else if (primaryColor.equals(YELLOW) && accentColor.equals(DEEP_ORANGE)) {
             activity.setTheme(R.style.Theme_Yellow_Deep_Orange);
-        }else if (primaryColor.equals(YELLOW) && accentColor.equals(BROWN)) {
+        } else if (primaryColor.equals(YELLOW) && accentColor.equals(BROWN)) {
             activity.setTheme(R.style.Theme_Yellow_Brown);
-        }else if (primaryColor.equals(YELLOW) && accentColor.equals(GREY)) {
+        } else if (primaryColor.equals(YELLOW) && accentColor.equals(GREY)) {
             activity.setTheme(R.style.Theme_Yellow_Grey);
-        }else if (primaryColor.equals(YELLOW) && accentColor.equals(BLUE_GREY)) {
+        } else if (primaryColor.equals(YELLOW) && accentColor.equals(BLUE_GREY)) {
             activity.setTheme(R.style.Theme_Yellow_Blue_Grey);
-        }else if (primaryColor.equals(AMBER) && accentColor.equals(RED)) {
+        } else if (primaryColor.equals(AMBER) && accentColor.equals(RED)) {
             activity.setTheme(R.style.Theme_Amber_Red);
-        }else if (primaryColor.equals(AMBER) && accentColor.equals(PINK)) {
+        } else if (primaryColor.equals(AMBER) && accentColor.equals(PINK)) {
             activity.setTheme(R.style.Theme_Amber_Pink);
-        }else if (primaryColor.equals(AMBER) && accentColor.equals(PURPLE)) {
+        } else if (primaryColor.equals(AMBER) && accentColor.equals(PURPLE)) {
             activity.setTheme(R.style.Theme_Amber_Purple);
-        }else if (primaryColor.equals(AMBER) && accentColor.equals(DEEP_PURPLE)) {
+        } else if (primaryColor.equals(AMBER) && accentColor.equals(DEEP_PURPLE)) {
             activity.setTheme(R.style.Theme_Amber_Deep_Purple);
-        }else if (primaryColor.equals(AMBER) && accentColor.equals(INDIGO)) {
+        } else if (primaryColor.equals(AMBER) && accentColor.equals(INDIGO)) {
             activity.setTheme(R.style.Theme_Amber_Indigo);
-        }else if (primaryColor.equals(AMBER) && accentColor.equals(BLUE)) {
+        } else if (primaryColor.equals(AMBER) && accentColor.equals(BLUE)) {
             activity.setTheme(R.style.Theme_Amber_Blue);
-        }else if (primaryColor.equals(AMBER) && accentColor.equals(LIGHT_BLUE)) {
+        } else if (primaryColor.equals(AMBER) && accentColor.equals(LIGHT_BLUE)) {
             activity.setTheme(R.style.Theme_Amber_Light_Blue);
-        }else if (primaryColor.equals(AMBER) && accentColor.equals(CYAN)) {
+        } else if (primaryColor.equals(AMBER) && accentColor.equals(CYAN)) {
             activity.setTheme(R.style.Theme_Amber_Cyan);
-        }else if (primaryColor.equals(AMBER) && accentColor.equals(TEAL)) {
+        } else if (primaryColor.equals(AMBER) && accentColor.equals(TEAL)) {
             activity.setTheme(R.style.Theme_Amber_Teal);
-        }else if (primaryColor.equals(AMBER) && accentColor.equals(GREEN)) {
+        } else if (primaryColor.equals(AMBER) && accentColor.equals(GREEN)) {
             activity.setTheme(R.style.Theme_Amber_Green);
-        }else if (primaryColor.equals(AMBER) && accentColor.equals(LIGHT_GREEN)) {
+        } else if (primaryColor.equals(AMBER) && accentColor.equals(LIGHT_GREEN)) {
             activity.setTheme(R.style.Theme_Amber_Light_Green);
-        }else if (primaryColor.equals(AMBER) && accentColor.equals(LIME)) {
+        } else if (primaryColor.equals(AMBER) && accentColor.equals(LIME)) {
             activity.setTheme(R.style.Theme_Amber_Lime);
-        }else if (primaryColor.equals(AMBER) && accentColor.equals(YELLOW)) {
+        } else if (primaryColor.equals(AMBER) && accentColor.equals(YELLOW)) {
             activity.setTheme(R.style.Theme_Amber_Yellow);
-        }else if (primaryColor.equals(AMBER) && accentColor.equals(AMBER)) {
+        } else if (primaryColor.equals(AMBER) && accentColor.equals(AMBER)) {
             activity.setTheme(R.style.Theme_Amber_Amber);
-        }else if (primaryColor.equals(AMBER) && accentColor.equals(ORANGE)) {
+        } else if (primaryColor.equals(AMBER) && accentColor.equals(ORANGE)) {
             activity.setTheme(R.style.Theme_Amber_Orange);
-        }else if (primaryColor.equals(AMBER) && accentColor.equals(DEEP_ORANGE)) {
+        } else if (primaryColor.equals(AMBER) && accentColor.equals(DEEP_ORANGE)) {
             activity.setTheme(R.style.Theme_Amber_Deep_Orange);
-        }else if (primaryColor.equals(AMBER) && accentColor.equals(BROWN)) {
+        } else if (primaryColor.equals(AMBER) && accentColor.equals(BROWN)) {
             activity.setTheme(R.style.Theme_Amber_Brown);
-        }else if (primaryColor.equals(AMBER) && accentColor.equals(GREY)) {
+        } else if (primaryColor.equals(AMBER) && accentColor.equals(GREY)) {
             activity.setTheme(R.style.Theme_Amber_Grey);
-        }else if (primaryColor.equals(AMBER) && accentColor.equals(BLUE_GREY)) {
+        } else if (primaryColor.equals(AMBER) && accentColor.equals(BLUE_GREY)) {
             activity.setTheme(R.style.Theme_Amber_Blue_Grey);
+        } else if (primaryColor.equals(ORANGE) && accentColor.equals(RED)) {
+            activity.setTheme(R.style.Theme_Orange_Red);
+        }else if (primaryColor.equals(ORANGE) && accentColor.equals(PINK)) {
+            activity.setTheme(R.style.Theme_Orange_Pink);
+        }else if (primaryColor.equals(ORANGE) && accentColor.equals(PURPLE)) {
+            activity.setTheme(R.style.Theme_Orange_Purple);
+        }else if (primaryColor.equals(ORANGE) && accentColor.equals(DEEP_PURPLE)) {
+            activity.setTheme(R.style.Theme_Orange_Deep_Purple);
+        }else if (primaryColor.equals(ORANGE) && accentColor.equals(INDIGO)) {
+            activity.setTheme(R.style.Theme_Orange_Indigo);
+        }else if (primaryColor.equals(ORANGE) && accentColor.equals(BLUE)) {
+            activity.setTheme(R.style.Theme_Orange_Blue);
+        }else if (primaryColor.equals(ORANGE) && accentColor.equals(LIGHT_BLUE)) {
+            activity.setTheme(R.style.Theme_Orange_Light_Blue);
+        }else if (primaryColor.equals(ORANGE) && accentColor.equals(CYAN)) {
+            activity.setTheme(R.style.Theme_Orange_Cyan);
+        }else if (primaryColor.equals(ORANGE) && accentColor.equals(TEAL)) {
+            activity.setTheme(R.style.Theme_Orange_Teal);
+        }else if (primaryColor.equals(ORANGE) && accentColor.equals(GREEN)) {
+            activity.setTheme(R.style.Theme_Orange_Green);
+        }else if (primaryColor.equals(ORANGE) && accentColor.equals(LIGHT_GREEN)) {
+            activity.setTheme(R.style.Theme_Orange_Light_Green);
+        }else if (primaryColor.equals(ORANGE) && accentColor.equals(LIME)) {
+            activity.setTheme(R.style.Theme_Orange_Lime);
+        }else if (primaryColor.equals(ORANGE) && accentColor.equals(YELLOW)) {
+            activity.setTheme(R.style.Theme_Orange_Yellow);
+        }else if (primaryColor.equals(ORANGE) && accentColor.equals(AMBER)) {
+            activity.setTheme(R.style.Theme_Orange_Amber);
+        }else if (primaryColor.equals(ORANGE) && accentColor.equals(ORANGE)) {
+            activity.setTheme(R.style.Theme_Orange_Orange);
+        }else if (primaryColor.equals(ORANGE) && accentColor.equals(DEEP_ORANGE)) {
+            activity.setTheme(R.style.Theme_Orange_Deep_Orange);
+        }else if (primaryColor.equals(ORANGE) && accentColor.equals(BROWN)) {
+            activity.setTheme(R.style.Theme_Orange_Brown);
+        }else if (primaryColor.equals(ORANGE) && accentColor.equals(GREY)) {
+            activity.setTheme(R.style.Theme_Orange_Grey);
+        }else if (primaryColor.equals(ORANGE) && accentColor.equals(BLUE_GREY)) {
+            activity.setTheme(R.style.Theme_Orange_Blue_Grey);
+        }else if (primaryColor.equals(DEEP_ORANGE) && accentColor.equals(RED)) {
+            activity.setTheme(R.style.Theme_Deep_Orange_Red);
+        }else if (primaryColor.equals(DEEP_ORANGE) && accentColor.equals(PINK)) {
+            activity.setTheme(R.style.Theme_Deep_Orange_Pink);
+        }else if (primaryColor.equals(DEEP_ORANGE) && accentColor.equals(PURPLE)) {
+            activity.setTheme(R.style.Theme_Deep_Orange_Purple);
+        }else if (primaryColor.equals(DEEP_ORANGE) && accentColor.equals(DEEP_PURPLE)) {
+            activity.setTheme(R.style.Theme_Deep_Orange_Deep_Purple);
+        }else if (primaryColor.equals(DEEP_ORANGE) && accentColor.equals(INDIGO)) {
+            activity.setTheme(R.style.Theme_Deep_Orange_Indigo);
+        }else if (primaryColor.equals(DEEP_ORANGE) && accentColor.equals(BLUE)) {
+            activity.setTheme(R.style.Theme_Deep_Orange_Blue);
+        }else if (primaryColor.equals(DEEP_ORANGE) && accentColor.equals(LIGHT_BLUE)) {
+            activity.setTheme(R.style.Theme_Deep_Orange_Light_Blue);
+        }else if (primaryColor.equals(DEEP_ORANGE) && accentColor.equals(CYAN)) {
+            activity.setTheme(R.style.Theme_Deep_Orange_Cyan);
+        }else if (primaryColor.equals(DEEP_ORANGE) && accentColor.equals(TEAL)) {
+            activity.setTheme(R.style.Theme_Deep_Orange_Teal);
+        }else if (primaryColor.equals(DEEP_ORANGE) && accentColor.equals(GREEN)) {
+            activity.setTheme(R.style.Theme_Deep_Orange_Green);
+        }else if (primaryColor.equals(DEEP_ORANGE) && accentColor.equals(LIGHT_GREEN)) {
+            activity.setTheme(R.style.Theme_Deep_Orange_Light_Green);
+        }else if (primaryColor.equals(DEEP_ORANGE) && accentColor.equals(LIME)) {
+            activity.setTheme(R.style.Theme_Deep_Orange_Lime);
+        }else if (primaryColor.equals(DEEP_ORANGE) && accentColor.equals(YELLOW)) {
+            activity.setTheme(R.style.Theme_Deep_Orange_Yellow);
+        }else if (primaryColor.equals(DEEP_ORANGE) && accentColor.equals(AMBER)) {
+            activity.setTheme(R.style.Theme_Deep_Orange_Amber);
+        }else if (primaryColor.equals(DEEP_ORANGE) && accentColor.equals(ORANGE)) {
+            activity.setTheme(R.style.Theme_Deep_Orange_Orange);
+        }else if (primaryColor.equals(DEEP_ORANGE) && accentColor.equals(DEEP_ORANGE)) {
+            activity.setTheme(R.style.Theme_Deep_Orange_Deep_Orange);
+        }else if (primaryColor.equals(DEEP_ORANGE) && accentColor.equals(BROWN)) {
+            activity.setTheme(R.style.Theme_Deep_Orange_Brown);
+        }else if (primaryColor.equals(DEEP_ORANGE) && accentColor.equals(GREY)) {
+            activity.setTheme(R.style.Theme_Deep_Orange_Grey);
+        }else if (primaryColor.equals(DEEP_ORANGE) && accentColor.equals(BLUE_GREY)) {
+            activity.setTheme(R.style.Theme_Deep_Orange_Blue_Grey);
+        }else if (primaryColor.equals(BROWN) && accentColor.equals(RED)) {
+            activity.setTheme(R.style.Theme_Brown_Red);
+        }else if (primaryColor.equals(BROWN) && accentColor.equals(PINK)) {
+            activity.setTheme(R.style.Theme_Brown_Pink);
+        }else if (primaryColor.equals(BROWN) && accentColor.equals(PURPLE)) {
+            activity.setTheme(R.style.Theme_Brown_Purple);
+        }else if (primaryColor.equals(BROWN) && accentColor.equals(DEEP_PURPLE)) {
+            activity.setTheme(R.style.Theme_Brown_Deep_Purple);
+        }else if (primaryColor.equals(BROWN) && accentColor.equals(INDIGO)) {
+            activity.setTheme(R.style.Theme_Brown_Indigo);
+        }else if (primaryColor.equals(BROWN) && accentColor.equals(BLUE)) {
+            activity.setTheme(R.style.Theme_Brown_Blue);
+        }else if (primaryColor.equals(BROWN) && accentColor.equals(LIGHT_BLUE)) {
+            activity.setTheme(R.style.Theme_Brown_Light_Blue);
+        }else if (primaryColor.equals(BROWN) && accentColor.equals(CYAN)) {
+            activity.setTheme(R.style.Theme_Brown_Cyan);
+        }else if (primaryColor.equals(BROWN) && accentColor.equals(TEAL)) {
+            activity.setTheme(R.style.Theme_Brown_Teal);
+        }else if (primaryColor.equals(BROWN) && accentColor.equals(GREEN)) {
+            activity.setTheme(R.style.Theme_Brown_Green);
+        }else if (primaryColor.equals(BROWN) && accentColor.equals(LIGHT_GREEN)) {
+            activity.setTheme(R.style.Theme_Brown_Light_Green);
+        }else if (primaryColor.equals(BROWN) && accentColor.equals(LIME)) {
+            activity.setTheme(R.style.Theme_Brown_Yellow);
+        }else if (primaryColor.equals(BROWN) && accentColor.equals(AMBER)) {
+            activity.setTheme(R.style.Theme_Brown_Amber);
+        }else if (primaryColor.equals(BROWN) && accentColor.equals(ORANGE)) {
+            activity.setTheme(R.style.Theme_Brown_Orange);
+        }else if (primaryColor.equals(BROWN) && accentColor.equals(DEEP_ORANGE)) {
+            activity.setTheme(R.style.Theme_Brown_Deep_Orange);
+        }else if (primaryColor.equals(BROWN) && accentColor.equals(BROWN)) {
+            activity.setTheme(R.style.Theme_Brown_Brown);
+        }else if (primaryColor.equals(BROWN) && accentColor.equals(YELLOW)) {
+            activity.setTheme(R.style.Theme_Brown_Yellow);
+        }else if (primaryColor.equals(BROWN) && accentColor.equals(GREY)) {
+            activity.setTheme(R.style.Theme_Brown_Grey);
+        }else if (primaryColor.equals(BROWN) && accentColor.equals(BLUE_GREY)) {
+            activity.setTheme(R.style.Theme_Brown_Blue_Grey);
+        }else if (primaryColor.equals(GREY) && accentColor.equals(RED)) {
+            activity.setTheme(R.style.Theme_Grey_Red);
+        }else if (primaryColor.equals(GREY) && accentColor.equals(PINK)) {
+            activity.setTheme(R.style.Theme_Grey_Pink);
+        }else if (primaryColor.equals(GREY) && accentColor.equals(PURPLE)) {
+            activity.setTheme(R.style.Theme_Grey_Purple);
+        }else if (primaryColor.equals(GREY) && accentColor.equals(DEEP_PURPLE)) {
+            activity.setTheme(R.style.Theme_Grey_Deep_Purple);
+        }else if (primaryColor.equals(GREY) && accentColor.equals(INDIGO)) {
+            activity.setTheme(R.style.Theme_Grey_Indigo);
+        }else if (primaryColor.equals(GREY) && accentColor.equals(BLUE)) {
+            activity.setTheme(R.style.Theme_Grey_Blue);
+        }else if (primaryColor.equals(GREY) && accentColor.equals(LIGHT_BLUE)) {
+            activity.setTheme(R.style.Theme_Grey_Light_Blue);
+        }else if (primaryColor.equals(GREY) && accentColor.equals(CYAN)) {
+            activity.setTheme(R.style.Theme_Grey_Cyan);
+        }else if (primaryColor.equals(GREY) && accentColor.equals(TEAL)) {
+            activity.setTheme(R.style.Theme_Grey_Teal);
+        }else if (primaryColor.equals(GREY) && accentColor.equals(GREEN)) {
+            activity.setTheme(R.style.Theme_Grey_Green);
+        }else if (primaryColor.equals(GREY) && accentColor.equals(LIGHT_GREEN)) {
+            activity.setTheme(R.style.Theme_Grey_Light_Green);
+        }else if (primaryColor.equals(GREY) && accentColor.equals(LIME)) {
+            activity.setTheme(R.style.Theme_Grey_Lime);
+        }else if (primaryColor.equals(GREY) && accentColor.equals(YELLOW)) {
+            activity.setTheme(R.style.Theme_Grey_Yellow);
+        }else if (primaryColor.equals(GREY) && accentColor.equals(AMBER)) {
+            activity.setTheme(R.style.Theme_Grey_Amber);
+        }else if (primaryColor.equals(GREY) && accentColor.equals(ORANGE)) {
+            activity.setTheme(R.style.Theme_Grey_Orange);
+        }else if (primaryColor.equals(GREY) && accentColor.equals(DEEP_ORANGE)) {
+            activity.setTheme(R.style.Theme_Grey_Deep_Orange);
+        }else if (primaryColor.equals(GREY) && accentColor.equals(BROWN)) {
+            activity.setTheme(R.style.Theme_Grey_Brown);
+        }else if (primaryColor.equals(GREY) && accentColor.equals(GREY)) {
+            activity.setTheme(R.style.Theme_Grey_Grey);
+        }else if (primaryColor.equals(GREY) && accentColor.equals(BLUE_GREY)) {
+            activity.setTheme(R.style.Theme_Grey_Blue_Grey);
+        }else if (primaryColor.equals(BLUE_GREY) && accentColor.equals(RED)) {
+            activity.setTheme(R.style.Theme_Blue_Grey_Red);
+        }else if (primaryColor.equals(BLUE_GREY) && accentColor.equals(PINK)) {
+            activity.setTheme(R.style.Theme_Blue_Grey_Pink);
+        }else if (primaryColor.equals(BLUE_GREY) && accentColor.equals(PURPLE)) {
+            activity.setTheme(R.style.Theme_Blue_Grey_Purple);
+        }else if (primaryColor.equals(BLUE_GREY) && accentColor.equals(DEEP_PURPLE)) {
+            activity.setTheme(R.style.Theme_Blue_Grey_Deep_Purple);
+        }else if (primaryColor.equals(BLUE_GREY) && accentColor.equals(INDIGO)) {
+            activity.setTheme(R.style.Theme_Blue_Grey_Indigo);
+        }else if (primaryColor.equals(BLUE_GREY) && accentColor.equals(BLUE)) {
+            activity.setTheme(R.style.Theme_Blue_Grey_Blue);
+        }else if (primaryColor.equals(BLUE_GREY) && accentColor.equals(LIGHT_BLUE)) {
+            activity.setTheme(R.style.Theme_Blue_Grey_Light_Blue);
+        }else if (primaryColor.equals(BLUE_GREY) && accentColor.equals(CYAN)) {
+            activity.setTheme(R.style.Theme_Blue_Grey_Cyan);
+        }else if (primaryColor.equals(BLUE_GREY) && accentColor.equals(TEAL)) {
+            activity.setTheme(R.style.Theme_Blue_Grey_Teal);
+        }else if (primaryColor.equals(BLUE_GREY) && accentColor.equals(GREEN)) {
+            activity.setTheme(R.style.Theme_Blue_Grey_Green);
+        }else if (primaryColor.equals(BLUE_GREY) && accentColor.equals(LIGHT_GREEN)) {
+            activity.setTheme(R.style.Theme_Blue_Grey_Light_Green);
+        }else if (primaryColor.equals(BLUE_GREY) && accentColor.equals(LIME)) {
+            activity.setTheme(R.style.Theme_Blue_Grey_Lime);
+        }else if (primaryColor.equals(BLUE_GREY) && accentColor.equals(YELLOW)) {
+            activity.setTheme(R.style.Theme_Blue_Grey_Yellow);
+        }else if (primaryColor.equals(BLUE_GREY) && accentColor.equals(AMBER)) {
+            activity.setTheme(R.style.Theme_Blue_Grey_Amber);
+        }else if (primaryColor.equals(BLUE_GREY) && accentColor.equals(ORANGE)) {
+            activity.setTheme(R.style.Theme_Blue_Grey_Orange);
+        }else if (primaryColor.equals(BLUE_GREY) && accentColor.equals(DEEP_ORANGE)) {
+            activity.setTheme(R.style.Theme_Blue_Grey_Deep_Orange);
+        }else if (primaryColor.equals(BLUE_GREY) && accentColor.equals(BROWN)) {
+            activity.setTheme(R.style.Theme_Blue_Grey_Brown);
+        }else if (primaryColor.equals(BLUE_GREY) && accentColor.equals(GREY)) {
+            activity.setTheme(R.style.Theme_Blue_Grey_Grey);
+        }else if (primaryColor.equals(BLUE_GREY) && accentColor.equals(BLUE_GREY)) {
+            activity.setTheme(R.style.Theme_Blue_Grey_Blue_Grey);
         }
     }
 
