@@ -43,7 +43,7 @@ public class RegistrationFragment extends DialogFragment implements View.OnClick
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         resources = getActivity().getResources();
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.AppTheme);
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.AppCompatAlertDialogStyle);
         builder.setTitle(resources.getString(R.string.registration_dialog_title));
 
         LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);

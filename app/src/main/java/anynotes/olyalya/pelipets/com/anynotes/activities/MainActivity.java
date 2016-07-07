@@ -51,6 +51,7 @@ import java.util.Locale;
 
 import anynotes.olyalya.pelipets.com.anynotes.R;
 import anynotes.olyalya.pelipets.com.anynotes.application.NotesApplication;
+import anynotes.olyalya.pelipets.com.anynotes.fragments.ColorNewsDialogActivity;
 import anynotes.olyalya.pelipets.com.anynotes.fragments.LogInFragment;
 import anynotes.olyalya.pelipets.com.anynotes.fragments.SearchDialogFragment;
 import anynotes.olyalya.pelipets.com.anynotes.fragments.SortDialogFragment;

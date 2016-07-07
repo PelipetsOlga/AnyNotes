@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentTop="true"
+    android:layout_marginTop="?attr/actionBarSize"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:paddingBottom="16dp"
+        android:text="@string/color"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="?colorPrimary" />
+
+    <GridLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:columnCount="5"
+        android:orientation="horizontal">
+
+        <ImageView
+            style="@style/color_news_style"
+            android:background="@color/red" />
+
+        <ImageView
+            style="@style/color_news_style"
+            android:background="@color/pink" />
+
+        <ImageView
+            style="@style/color_news_style"
+            android:background="@color/purple" />
+
+        <ImageView
+            style="@style/color_news_style"
+            android:background="@color/deep_purple" />
+
+        <ImageView
+            style="@style/color_news_style"
+            android:background="@color/indigo" />
+
+        <ImageView
+            style="@style/color_news_style"
+            android:background="@color/blue" />
+
+        <ImageView
+            style="@style/color_news_style"
+            android:background="@color/light_blue" />
+
+        <ImageView
+            style="@style/color_news_style"
+            android:background="@color/cyan" />
+
+        <ImageView
+            style="@style/color_news_style"
+            android:background="@color/teal" />
+
+        <ImageView
+            style="@style/color_news_style"
+            android:background="@color/green" />
+
+        <ImageView
+            style="@style/color_news_style"
+            android:background="@color/light_green" />
+
+        <ImageView
+            style="@style/color_news_style"
+            android:background="@color/lime" />
+
+        <ImageView
+            style="@style/color_news_style"
+            android:background="@color/yellow" />
+
+        <ImageView
+            style="@style/color_news_style"
+            android:background="@color/amber" />
+
+        <ImageView
+            style="@style/color_news_style"
+            android:background="@color/orange" />
+
+        <ImageView
+            style="@style/color_news_style"
+            android:background="@color/deep_orange" />
+
+        <ImageView
+            style="@style/color_news_style"
+            android:background="@color/brown" />
+
+        <ImageView
+            style="@style/color_news_style"
+            android:background="@color/grey" />
+
+        <ImageView
+            style="@style/color_news_style"
+            android:background="@color/blue_grey" />
+    </GridLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="16dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_ok"
+            style="@style/Base.Widget.AppCompat.ButtonBar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/registration_btn_ok" />
+
+        <Button
+            android:id="@+id/btn_cancel"
+            style="@style/Base.Widget.AppCompat.ButtonBar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/registration_btn_cancel" />
+    </LinearLayout>
+</LinearLayout>

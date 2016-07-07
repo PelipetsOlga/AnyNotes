@@ -63,6 +63,8 @@ public class Constants {
     public static final String PREF_PRIMARY_COLOR = "primary_color";
     public static final String PREF_PRIMARY_DARK_COLOR = "primary_color_dark";
     public static final String PREF_ACCENT_COLOR = "accent_color";
+    public static final String PREF_FIRST_START_AFTER_UPDATE="first_start_after_udete";
+    public static final String PREF_FIRST_START_COUNTER="first_start_counter";
 
 
     public static final int BRIGHTNESS = 200;

@@ -1,6 +1,7 @@
 package anynotes.olyalya.pelipets.com.anynotes.activities;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
@@ -51,6 +52,8 @@ public class ColorPickerActivity extends AppCompatActivity {
         loadSettings();
         initViews();
     }
+
+
 
     public void loadSettings() {
         SharedPreferences sPref = getSharedPreferences(Constants.PREFS_NAME, AppCompatActivity.MODE_PRIVATE);
@@ -103,6 +106,7 @@ public class ColorPickerActivity extends AppCompatActivity {
         if (state != State.NOT_CHANGED) {
             saveNewTheme();
         }
+        startActivity(new Intent(this, MainActivity.class));
         super.onDestroy();
     }
 

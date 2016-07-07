@@ -51,9 +51,9 @@
         <item name="android:layout_margin">4dp</item>
     </style>
 
-    <!--  <style name="AppCompatAlertDialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
-          <item name="colorAccent">@color/colorAccent</item>
-      </style>-->
+     <style name="AppCompatAlertDialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
+
+      </style>
 
     <style name="Theme_Red_Red" parent="AppTheme.NoActionBar">
         <item name="colorPrimary">@color/red</item>
@@ -2219,5 +2219,12 @@
         <item name="colorPrimary">@color/blue_grey</item>
         <item name="colorPrimaryDark">@color/blue_grey_dark</item>
         <item name="colorAccent">@color/blue_grey_accent</item>
+    </style>
+
+    <style name="color_news_style">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">16dp</item>
+        <item name="android:src">@drawable/ic_plus_white</item>
     </style>
 </resources>

@@ -19,9 +19,6 @@ import anynotes.olyalya.pelipets.com.anynotes.storage.NotesRepository;
 import anynotes.olyalya.pelipets.com.anynotes.utils.Constants;
 import anynotes.olyalya.pelipets.com.anynotes.utils.NoteUtils;
 
-/**
- * Created by Olga on 02.01.2016.
- */
 public class SearchDialogFragment extends DialogFragment implements View.OnClickListener {
     private NotesRepository repository;
     private SharedPreferences sPref;
@@ -49,7 +46,7 @@ public class SearchDialogFragment extends DialogFragment implements View.OnClick
         SharedPreferences pref = getActivity().getSharedPreferences(Constants.PREFS_NAME, Context.MODE_PRIVATE);
         String oldKeyword = pref.getString(Constants.PREF_SEARCH, "");
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.AppTheme);
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.AppCompatAlertDialogStyle);
         builder.setTitle(resources.getString(R.string.search_dialog_title));
 
         LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);

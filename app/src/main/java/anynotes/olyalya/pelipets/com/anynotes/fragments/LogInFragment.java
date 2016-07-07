@@ -49,8 +49,7 @@ public class LogInFragment extends DialogFragment implements View.OnClickListene
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         resources = getActivity().getResources();
 
-       // AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.AppCompatAlertDialogStyle);
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.AppTheme);
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.AppCompatAlertDialogStyle);
         builder.setTitle(resources.getString(R.string.login_dialog_title));
 
         LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -116,14 +115,14 @@ public class LogInFragment extends DialogFragment implements View.OnClickListene
                     public void handleResponse(Void response) {
                         NoteUtils.log("send new password to " + email);
                         Toast.makeText(getActivity(), getActivity().getResources().
-                                getString(R.string.tost_send_password_to_email)+" " + email,
+                                        getString(R.string.tost_send_password_to_email) + " " + email,
                                 Toast.LENGTH_LONG).show();
                     }
 
                     public void handleFault(BackendlessFault fault) {
                         if (ERROR_NO_SUCH_USER.equals(fault.getCode())) {
                             Toast.makeText(getActivity(), getActivity().getResources().
-                                    getString(R.string.tost_error_3020),
+                                            getString(R.string.tost_error_3020),
                                     Toast.LENGTH_LONG).show();
                         } else {
                             NoteUtils.showErrorMessage(getActivity());
