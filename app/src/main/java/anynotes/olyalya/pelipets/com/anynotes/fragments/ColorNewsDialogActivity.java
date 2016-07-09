@@ -16,11 +16,19 @@ import anynotes.olyalya.pelipets.com.anynotes.utils.Constants;
 import anynotes.olyalya.pelipets.com.anynotes.utils.NoteUtils;
 
 public class ColorNewsDialogActivity extends AppCompatActivity {
+    private int currentapiVersion;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         NoteUtils.setTheme(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.color_news);
+
+        currentapiVersion = android.os.Build.VERSION.SDK_INT;
+        if (currentapiVersion < android.os.Build.VERSION_CODES.LOLLIPOP) {
+            startActivity(new Intent(ColorNewsDialogActivity.this, MainActivity.class));
+            this.finish();
+        }
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -76,6 +84,8 @@ public class ColorNewsDialogActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        doCancel();
+        if (currentapiVersion >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+            doCancel();
+        }
     }
 }

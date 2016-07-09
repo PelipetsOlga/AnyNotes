@@ -43,7 +43,6 @@ public class SettingsActivity extends AppCompatActivity {
     private boolean prefVibro;
     private List<MediaPlayer> listPlayers = new ArrayList<>();
     private Switch switchVibro;
-   // private Restartable restartable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +67,11 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     private void initViews() {
+        int currentapiVersion = android.os.Build.VERSION.SDK_INT;
+        if (currentapiVersion < android.os.Build.VERSION_CODES.LOLLIPOP) {
+            findViewById(R.id.color_layout).setVisibility(View.GONE);
+        }
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setHomeButtonEnabled(true);

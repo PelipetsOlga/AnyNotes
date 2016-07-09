@@ -54,7 +54,6 @@ public class ColorPickerActivity extends AppCompatActivity {
     }
 
 
-
     public void loadSettings() {
         SharedPreferences sPref = getSharedPreferences(Constants.PREFS_NAME, AppCompatActivity.MODE_PRIVATE);
         int bright = sPref.getInt(Constants.PREF_BRIGHTNESS, Constants.BRIGHTNESS);
@@ -103,10 +102,13 @@ public class ColorPickerActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
-        if (state != State.NOT_CHANGED) {
-            saveNewTheme();
+        int currentapiVersion = android.os.Build.VERSION.SDK_INT;
+        if (currentapiVersion >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+            if (state != State.NOT_CHANGED) {
+                saveNewTheme();
+            }
+            startActivity(new Intent(this, MainActivity.class));
         }
-        startActivity(new Intent(this, MainActivity.class));
         super.onDestroy();
     }
 
